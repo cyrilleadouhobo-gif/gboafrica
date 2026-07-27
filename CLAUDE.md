@@ -77,9 +77,15 @@ Une fois que je confirme, Claude met à jour le fichier en question et ajoute un
 │   ├── commands/
 │   │   ├── prime.md             # /prime pour démarrer une session
 │   │   ├── update.md            # /update pour mettre à jour le contexte
-│   │   └── morning.md           # /morning pour démarrer la journée
+│   │   ├── morning.md           # /morning pour démarrer la journée
+│   │   └── commit.md            # /commit pour sauvegarder le workspace avec git
 │   └── skills/
 │       └── recherche-actualites/ # Skill veille personnalisée
+├── livrables/
+│   ├── GBO-AFRICA-GROUP/        # Documents liés au rôle de COO
+│   └── formation-dev-web/       # Documents liés à la formation dev
+├── secrets/
+│   └── cles-api.env             # Clés API (jamais versionné dans git)
 └── module-installs/
     └── jarvis-install/          # Module d'installation initial
 ```
@@ -90,6 +96,8 @@ Une fois que je confirme, Claude met à jour le fichier en question et ajoute un
 | `context/import/` | Documents externes (PDFs, exports, notes) à analyser |
 | `.claude/commands/` | Commandes personnalisées de mon Jarvis |
 | `.claude/skills/` | Skills (super-pouvoirs) de mon Jarvis |
+| `livrables/` | Documents et productions rangés par projet actif |
+| `secrets/` | Clés API et autres secrets, exclus de git |
 | `module-installs/` | Modules d'installation (initial et futurs) |
 
 ---
@@ -116,6 +124,15 @@ Une fois que je confirme, Claude met à jour le fichier en question et ajoute un
 **Objectif :** Démarrer ma journée avec une veille personnalisée en 30 secondes.
 
 Claude va effectuer une veille des actualités du jour, filtrée selon mon contexte personnel (mes objectifs, mes projets), et me proposer un focus pour la journée. Cette commande utilise la skill `recherche-actualites-contextualisees`.
+
+### /commit
+
+**Objectif :** Sauvegarder l'état du workspace avec git.
+
+À utiliser après une session où des fichiers ont changé (contexte, livrables, etc.). Claude va :
+1. Vérifier ce qui a changé (`git status`)
+2. Me proposer un résumé et un message de commit
+3. Committer une fois que j'ai validé
 
 ---
 
