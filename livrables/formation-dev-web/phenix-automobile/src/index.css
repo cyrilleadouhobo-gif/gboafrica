@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #F5F5F5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: 'Inter', sans-serif;
+}
