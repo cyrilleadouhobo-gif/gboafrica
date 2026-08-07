@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { css } from '../../lib/css.js';
 import { useAppData } from '../../context/AppData.js';
+import Honeypot from '../../components/Honeypot.js';
 import { JOBS } from '../../data/content.js';
 
 const fieldStyle = css(
@@ -10,11 +12,30 @@ const fieldStyle = css(
 
 export default function CareersPage() {
   const { showToast } = useAppData();
+  const [submitting, setSubmitting] = useState(false);
 
-  const submitCareer = (e) => {
+  const submitCareer = async (e) => {
     e.preventDefault();
-    e.target.reset();
-    showToast('Candidature reçue. Merci de votre intérêt pour GBÔ.');
+    setSubmitting(true);
+    const f = new FormData(e.target);
+    try {
+      const res = await fetch('/api/careers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: f.get('nom'), tel: f.get('tel'), email: f.get('email'), spec: f.get('spec'), msg: f.get('msg'), website: f.get('website') }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        showToast(data.error || 'Une erreur est survenue, réessayez.');
+        return;
+      }
+      e.target.reset();
+      showToast('Candidature reçue. Merci de votre intérêt pour GBÔ.');
+    } catch {
+      showToast('Connexion impossible. Réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -72,8 +93,13 @@ export default function CareersPage() {
               <input name="spec" placeholder="Spécialité (ex. prénatal, senior…)" style={fieldStyle} />
               <textarea name="msg" rows={3} placeholder="Parlez-nous de vous" style={{ ...fieldStyle, gridColumn: '1/-1', resize: 'vertical' }} />
             </div>
-            <button type="submit" style={css('margin-top:20px;width:100%;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}>
-              Envoyer ma candidature
+            <Honeypot />
+            <button
+              type="submit"
+              disabled={submitting}
+              style={css(`margin-top:20px;width:100%;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
+            >
+              {submitting ? 'Envoi…' : 'Envoyer ma candidature'}
             </button>
           </form>
         </div>

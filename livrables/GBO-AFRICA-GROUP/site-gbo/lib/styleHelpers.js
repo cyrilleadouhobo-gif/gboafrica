@@ -1,13 +1,13 @@
-export function leadBadge(status) {
+export function leadBadge(statusCode) {
   const map = {
-    Nouveau: '#C6F202',
-    'À contacter': '#7dd3fc',
-    Qualifié: '#a78bfa',
-    'Coach attribué': '#fbbf24',
-    Client: '#34d399',
-    'Perdu / En pause': '#f87171',
+    NOUVEAU: '#C6F202',
+    A_CONTACTER: '#7dd3fc',
+    QUALIFIE: '#a78bfa',
+    COACH_ATTRIBUE: '#fbbf24',
+    CLIENT: '#34d399',
+    PERDU: '#f87171',
   };
-  const c = map[status] || '#8a8a8a';
+  const c = map[statusCode] || '#8a8a8a';
   return 'display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:700;background:' + c + '1f;color:' + c + ';border:1px solid ' + c + '55';
 }
 

@@ -1,27 +1,91 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { css } from '../../lib/css.js';
-import { leadBadge, tabStyle } from '../../lib/styleHelpers.js';
-import { useAppData, STATUSES } from '../../context/AppData.js';
+import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { css } from '../../../lib/css.js';
+import { leadBadge, tabStyle } from '../../../lib/styleHelpers.js';
+import { LEAD_STATUSES, LEAD_STATUS_LABELS, LEAD_TYPES, LEAD_TYPE_LABELS } from '../../../lib/constants.js';
 
-const FILTERS = ['Tous', 'Particulier', 'Entreprise', "Liste d'attente"];
+const FILTERS = ['Tous', ...LEAD_TYPES];
 
 export default function AdminPage() {
-  const { leads, coaches, advanceStatus, assignCoach } = useAppData();
+  const router = useRouter();
+  const [me, setMe] = useState(null);
   const [adminTab, setAdminTab] = useState('dashboard');
   const [selectedLeadId, setSelectedLeadId] = useState(null);
   const [adminFilter, setAdminFilter] = useState('Tous');
 
-  const cnt = (st) => leads.filter((l) => l.status === st).length;
-  const stats = {
-    total: leads.length,
-    nouveau: cnt('Nouveau') + cnt('À contacter'),
-    qualifie: cnt('Qualifié') + cnt('Coach attribué'),
-    client: cnt('Client'),
-    entreprise: leads.filter((l) => l.type === 'Entreprise').length,
-    waitlist: leads.filter((l) => l.type === "Liste d'attente").length,
+  const [leads, setLeads] = useState([]);
+  const [coaches, setCoaches] = useState([]);
+  const [stats, setStats] = useState(null);
+  const [funnel, setFunnel] = useState([]);
+  const [recentLeads, setRecentLeads] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadAll = useCallback(async () => {
+    const [meRes, leadsRes, coachesRes, statsRes] = await Promise.all([
+      fetch('/api/auth/me'),
+      fetch('/api/admin/leads'),
+      fetch('/api/admin/coaches'),
+      fetch('/api/admin/stats'),
+    ]);
+
+    if (meRes.status === 401) {
+      router.replace('/admin/login');
+      return;
+    }
+
+    const meData = await meRes.json();
+    const leadsData = await leadsRes.json();
+    const coachesData = await coachesRes.json();
+    const statsData = await statsRes.json();
+
+    setMe(meData.admin);
+    setLeads(leadsData.leads || []);
+    setCoaches(coachesData.coaches || []);
+    setStats(statsData.stats);
+    setFunnel(statsData.funnel || []);
+    setRecentLeads(statsData.recent || []);
+    setLoading(false);
+  }, [router]);
+
+  useEffect(() => {
+    loadAll();
+  }, [loadAll]);
+
+  const advanceStatus = async (id, direction) => {
+    const res = await fetch(`/api/admin/leads/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ direction }),
+    });
+    if (!res.ok) return;
+    const { lead } = await res.json();
+    setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
   };
+
+  const assignCoach = async (id, coachId) => {
+    const res = await fetch(`/api/admin/leads/${id}/coach`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ coachId: Number(coachId) }),
+    });
+    if (!res.ok) return;
+    const { lead } = await res.json();
+    setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
+  };
+
+  const logout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    router.replace('/admin/login');
+  };
+
+  if (loading) {
+    return (
+      <div style={{ padding: 'clamp(24px,4vw,40px)', textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Chargement…</div>
+    );
+  }
+
   const statCards = [
     { k: 'Prospects totaux', v: stats.total, s: 'toutes sources' },
     { k: 'À traiter', v: stats.nouveau, s: 'Nouveau + À contacter' },
@@ -31,18 +95,13 @@ export default function AdminPage() {
     { k: "Liste d'attente", v: stats.waitlist, s: 'pôles en pré-lancement' },
   ];
 
-  const funnel = useMemo(() => {
-    const f = STATUSES.slice(0, 5).map((label) => ({ label, n: leads.filter((l) => l.status === label).length }));
-    const mx = Math.max(1, ...f.map((x) => x.n));
-    return f.map((x) => ({ ...x, pct: Math.round((x.n / mx) * 100) + '%' }));
-  }, [leads]);
+  const funnelWithPct = (() => {
+    const mx = Math.max(1, ...funnel.map((f) => f.n));
+    return funnel.map((f) => ({ ...f, pct: Math.round((f.n / mx) * 100) + '%' }));
+  })();
 
-  const recentLeads = leads.slice(0, 4);
   const leadRows = leads.filter((l) => adminFilter === 'Tous' || l.type === adminFilter);
   const selectedLead = selectedLeadId ? leads.find((l) => l.id === selectedLeadId) : null;
-  const coachOptions = coaches.map((c) => c.name);
-
-  const getVehicleCoachLabel = (l) => l.coach || '—';
 
   return (
     <div style={{ padding: 'clamp(24px,4vw,40px) clamp(16px,4vw,48px) 90px' }}>
@@ -64,13 +123,16 @@ export default function AdminPage() {
             <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-top:6px')}>Pilotage prospects · coachs · exploitation</div>
           </div>
           <div style={css('display:flex;align-items:center;gap:10px')}>
-            <span style={css('width:34px;height:34px;border-radius:50%;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px')}>
-              SA
-            </span>
-            <div style={{ fontSize: 13 }}>
-              <div style={{ fontWeight: 700 }}>Super-admin</div>
-              <div style={css('color:var(--muted,#8a8a8a);font-size:11.5px')}>RBAC · MFA actif</div>
+            <div style={{ fontSize: 13, textAlign: 'right' }}>
+              <div style={{ fontWeight: 700 }}>{me?.email}</div>
+              <div style={css('color:var(--muted,#8a8a8a);font-size:11.5px')}>{me?.role}</div>
             </div>
+            <button
+              onClick={logout}
+              style={css('padding:9px 16px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));font-weight:700;font-size:13px;color:var(--fg,#fff)')}
+            >
+              Déconnexion
+            </button>
           </div>
         </div>
 
@@ -105,10 +167,10 @@ export default function AdminPage() {
               <div style={css('padding:24px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 18 }}>Entonnoir de conversion</div>
                 <div style={{ display: 'grid', gap: 12 }}>
-                  {funnel.map((f) => (
-                    <div key={f.label}>
+                  {funnelWithPct.map((f) => (
+                    <div key={f.status}>
                       <div style={css('display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px')}>
-                        <span style={{ fontWeight: 600 }}>{f.label}</span>
+                        <span style={{ fontWeight: 600 }}>{LEAD_STATUS_LABELS[f.status]}</span>
                         <span style={css('color:var(--muted,#8a8a8a);font-weight:700')}>{f.n}</span>
                       </div>
                       <div style={css('height:9px;border-radius:6px;background:var(--surface2,#1a1a1a);overflow:hidden')}>
@@ -136,9 +198,10 @@ export default function AdminPage() {
                         <div style={{ fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name}</div>
                         <div style={css('font-size:12px;color:var(--muted,#8a8a8a)')}>{l.objective}</div>
                       </div>
-                      <span style={css(leadBadge(l.status))}>{l.status}</span>
+                      <span style={css(leadBadge(l.status))}>{LEAD_STATUS_LABELS[l.status]}</span>
                     </button>
                   ))}
+                  {recentLeads.length === 0 && <div style={css('color:var(--muted,#8a8a8a);font-size:13px')}>Aucun prospect pour le moment.</div>}
                 </div>
               </div>
             </div>
@@ -158,7 +221,7 @@ export default function AdminPage() {
                     };color:${adminFilter === f ? 'var(--lime,#C6F202)' : 'var(--muted,#8a8a8a)'};background:${adminFilter === f ? 'rgba(198,242,2,.1)' : 'transparent'}`
                   )}
                 >
-                  {f}
+                  {f === 'Tous' ? 'Tous' : LEAD_TYPE_LABELS[f]}
                 </button>
               ))}
             </div>
@@ -187,7 +250,7 @@ export default function AdminPage() {
                   <span style={{ minWidth: 0 }}>
                     <span style={{ fontWeight: 600, fontSize: 14, display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name}</span>
                     <span style={css('font-size:12px;color:var(--muted,#8a8a8a)')}>
-                      {l.id} · {l.commune} · {l.date}
+                      {l.code} · {l.commune} · {new Date(l.createdAt).toLocaleDateString('fr-FR')}
                     </span>
                   </span>
                   <span data-col-hide="" style={{ fontSize: 13.5, minWidth: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -197,13 +260,14 @@ export default function AdminPage() {
                     {l.source}
                   </span>
                   <span data-col-hide="" style={css('font-size:12.5px;color:var(--muted,#8a8a8a)')}>
-                    {getVehicleCoachLabel(l)}
+                    {l.coach?.name || '—'}
                   </span>
                   <span>
-                    <span style={css(leadBadge(l.status))}>{l.status}</span>
+                    <span style={css(leadBadge(l.status))}>{LEAD_STATUS_LABELS[l.status]}</span>
                   </span>
                 </button>
               ))}
+              {leadRows.length === 0 && <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucun prospect dans ce filtre.</div>}
             </div>
           </div>
         )}
@@ -211,7 +275,7 @@ export default function AdminPage() {
         {adminTab === 'coaches' && (
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px')}>
             {coaches.map((c) => (
-              <div key={c.name} style={css('padding:24px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
+              <div key={c.id} style={css('padding:24px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
                 <div style={css('display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px')}>
                   <div style={css('display:flex;gap:12px;align-items:center')}>
                     <span
@@ -238,12 +302,12 @@ export default function AdminPage() {
                 <div style={{ marginTop: 14 }}>
                   <span
                     style={css(
-                      c.dispo === 'Disponible'
+                      c.dispo === 'DISPONIBLE'
                         ? 'display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.4)'
                         : 'display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:var(--surface2,#222);color:var(--muted,#8a8a8a);border:1px solid var(--border,rgba(255,255,255,.14))'
                     )}
                   >
-                    {c.dispo}
+                    {c.dispo === 'DISPONIBLE' ? 'Disponible' : 'Complet'}
                   </span>
                 </div>
               </div>
@@ -262,7 +326,7 @@ export default function AdminPage() {
             style={css('width:min(460px,100%);height:100%;background:var(--bg,#0a0a0a);border-left:1px solid var(--border,rgba(255,255,255,.14));padding:28px;overflow:auto;animation:slideIn .28s both')}
           >
             <div style={css('display:flex;justify-content:space-between;align-items:center;margin-bottom:22px')}>
-              <span style={css('font-size:12px;color:var(--muted,#8a8a8a);font-weight:700')}>{selectedLead.id}</span>
+              <span style={css('font-size:12px;color:var(--muted,#8a8a8a);font-weight:700')}>{selectedLead.code}</span>
               <button
                 onClick={() => setSelectedLeadId(null)}
                 style={css('width:34px;height:34px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));display:flex;align-items:center;justify-content:center')}
@@ -274,16 +338,18 @@ export default function AdminPage() {
             </div>
             <h2 style={css("font-family:'Space Grotesk';font-weight:700;font-size:26px;margin-bottom:8px")}>{selectedLead.name}</h2>
             <div style={{ marginBottom: 22 }}>
-              <span style={css(leadBadge(selectedLead.status))}>{selectedLead.status}</span>
+              <span style={css(leadBadge(selectedLead.status))}>{LEAD_STATUS_LABELS[selectedLead.status]}</span>
             </div>
             <div style={css('display:grid;gap:1px;background:var(--border,rgba(255,255,255,.08));border-radius:14px;overflow:hidden;margin-bottom:22px')}>
               {[
-                ['Type', selectedLead.type],
+                ['Type', LEAD_TYPE_LABELS[selectedLead.type]],
                 ['Objectif', selectedLead.objective],
                 ['Profil', selectedLead.profile],
                 ['Source', selectedLead.source],
                 ['Commune', selectedLead.commune],
-                ['Coach', selectedLead.coach || '—'],
+                ['E-mail', selectedLead.contactEmail || '—'],
+                ['Téléphone', selectedLead.contactPhone || '—'],
+                ['Coach', selectedLead.coach?.name || '—'],
               ].map(([k, v]) => (
                 <div key={k} style={css('display:flex;justify-content:space-between;padding:13px 16px;background:var(--surface,#0c0c0c);font-size:13.5px')}>
                   <span style={css('color:var(--muted,#8a8a8a)')}>{k}</span>
@@ -317,14 +383,14 @@ export default function AdminPage() {
               style={css('width:100%;padding:14px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:14px')}
             >
               <option value="">— Sélectionner un coach —</option>
-              {coachOptions.map((co) => (
-                <option key={co} value={co}>
-                  {co}
+              {coaches.map((co) => (
+                <option key={co.id} value={co.id}>
+                  {co.name}
                 </option>
               ))}
             </select>
             <div style={css('margin-top:18px;padding:14px;border-radius:12px;background:var(--glass,rgba(255,255,255,.03));font-size:12.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>
-              Chaque changement déclenche les automatisations : notification client, e-mail/WhatsApp, journal d&apos;audit.
+              Chaque changement est tracé dans le journal d&apos;audit (voir AuditLog).
             </div>
           </div>
         </div>

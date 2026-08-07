@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
-import { useAppData } from '../../context/AppData.js';
+import Honeypot from '../../components/Honeypot.js';
 import { CORPORATE_SOLUTIONS } from '../../data/content.js';
 
 const fieldStyle = css(
@@ -12,27 +12,42 @@ const fieldStyle = css(
 const labelStyle = css('font-size:13px;font-weight:600;color:var(--muted,#8a8a8a);display:block;margin-bottom:6px');
 
 export default function CorporatePage() {
-  const { addLead, leads } = useAppData();
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const submitCompany = (e) => {
+  const submitCompany = async (e) => {
     e.preventDefault();
+    setErrorMsg('');
+    setSubmitting(true);
     const f = new FormData(e.target);
-    const entrepriseCount = leads.filter((l) => l.type === 'Entreprise').length;
-    addLead({
-      id: 'C-' + (210 + entrepriseCount),
-      name: f.get('entreprise') || 'Entreprise',
-      type: 'Entreprise',
-      objective: f.get('besoin') || 'Solution corporate',
-      profile: '—',
-      source: 'Corporate',
-      status: 'Nouveau',
-      commune: '—',
-      date: new Date().toLocaleDateString('fr-FR'),
-      coach: null,
-      contact: f.get('contact') || '',
-    });
-    setDone(true);
+
+    try {
+      const res = await fetch('/api/leads/company', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          entreprise: f.get('entreprise'),
+          contact: f.get('contact'),
+          tel: f.get('tel'),
+          email: f.get('email'),
+          effectif: f.get('effectif'),
+          besoin: f.get('besoin'),
+          consent: f.get('consent') === 'on',
+          website: f.get('website'),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data.error || 'Une erreur est survenue, réessayez.');
+        return;
+      }
+      setDone(true);
+    } catch {
+      setErrorMsg('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -143,14 +158,23 @@ export default function CorporatePage() {
                 </label>
               </div>
               <label style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginTop: 18, cursor: 'pointer' }}>
-                <input required type="checkbox" style={{ marginTop: 3, width: 18, height: 18, accentColor: '#C6F202', flex: '0 0 auto' }} />
+                <input required name="consent" type="checkbox" style={{ marginTop: 3, width: 18, height: 18, accentColor: '#C6F202', flex: '0 0 auto' }} />
                 <span style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>J&apos;accepte que GBÔ traite ces données pour répondre à ma demande.</span>
               </label>
+              <Honeypot />
+              {errorMsg && (
+                <div style={css('margin-top:14px;padding:12px 16px;border-radius:10px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:#f87171;font-size:13.5px')}>
+                  {errorMsg}
+                </div>
+              )}
               <button
                 type="submit"
-                style={css('margin-top:24px;width:100%;padding:17px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
+                disabled={submitting}
+                style={css(
+                  `margin-top:24px;width:100%;padding:17px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`
+                )}
               >
-                Envoyer la demande
+                {submitting ? 'Envoi en cours…' : 'Envoyer la demande'}
               </button>
             </form>
           )}

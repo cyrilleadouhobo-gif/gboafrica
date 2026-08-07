@@ -2,3 +2,13 @@ node_modules
 .next
 out
 .DS_Store
+
+# Secrets — never commit
+.env
+.env.local
+.env*.local
+
+# Local SQLite database (contains real visitor data once running)
+prisma/dev.db
+prisma/dev.db-journal
+

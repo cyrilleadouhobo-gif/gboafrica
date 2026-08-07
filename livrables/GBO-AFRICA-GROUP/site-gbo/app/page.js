@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { css } from '../lib/css.js';
 import { useAppData } from '../context/AppData.js';
 import ImageSlot from '../components/ImageSlot.js';
+import Honeypot from '../components/Honeypot.js';
 import { POLES, badgeStyle } from '../data/poles.js';
 import { VALUES, METHOD_STEPS, TRANSFORMATIONS, TESTIMONIALS, PARTNERS, BLOG_PREVIEW } from '../data/content.js';
 
@@ -14,10 +15,25 @@ export default function HomePage() {
     document.querySelector('[data-anchor="mission"]')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const submitNewsletter = (e) => {
+  const submitNewsletter = async (e) => {
     e.preventDefault();
-    e.target.reset();
-    showToast("Presque terminé — confirmez via l'e-mail (double opt-in).");
+    const f = new FormData(e.target);
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: f.get('email'), website: f.get('website') }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        showToast(data.error || 'Une erreur est survenue, réessayez.');
+        return;
+      }
+      e.target.reset();
+      showToast("Presque terminé — confirmez via l'e-mail (double opt-in).");
+    } catch {
+      showToast('Connexion impossible. Réessayez.');
+    }
   };
 
   const poles = POLES.map((p) => ({ ...p, statusLabel: p.status === 'op' ? 'Disponible' : 'Bientôt' }));
@@ -294,6 +310,7 @@ export default function HomePage() {
             <button type="submit" style={css('padding:16px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px')}>
               S&apos;inscrire
             </button>
+            <Honeypot />
           </form>
         </div>
       </section>

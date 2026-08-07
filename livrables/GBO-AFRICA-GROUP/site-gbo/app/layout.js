@@ -1,3 +1,4 @@
+import { headers } from 'next/headers';
 import './globals.css';
 import { AppDataProvider } from '../context/AppData.js';
 import Header from '../components/Header.js';
@@ -11,14 +12,16 @@ export const metadata = {
 
 const THEME_INIT_SCRIPT = `
 try {
-  var saved = JSON.parse(localStorage.getItem('gbo_platform_v1') || '{}');
-  document.documentElement.setAttribute('data-theme', saved.theme === 'light' ? 'light' : 'dark');
+  var t = localStorage.getItem('gbo_theme');
+  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
 } catch (e) {
   document.documentElement.setAttribute('data-theme', 'dark');
 }
 `;
 
 export default function RootLayout({ children }) {
+  const nonce = headers().get('x-nonce') || undefined;
+
   return (
     <html lang="fr" data-theme="dark">
       <head>
@@ -28,7 +31,7 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body>
         <AppDataProvider>

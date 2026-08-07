@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { css } from '../../../lib/css.js';
 import { chip } from '../../../lib/styleHelpers.js';
-import { useAppData } from '../../../context/AppData.js';
+import Honeypot from '../../../components/Honeypot.js';
 import { PROFILE_CARDS, NUTRITION_OBJECTIVES, NEXT_STEPS, objectivesFor, profileLabel } from '../../../data/content.js';
 
 const fieldStyle = css(
@@ -13,7 +13,6 @@ const fieldStyle = css(
 const labelStyle = css('font-size:13px;font-weight:600;color:var(--muted,#8a8a8a);display:block;margin-bottom:6px');
 
 export default function TunnelPage() {
-  const { addLead, nextLeadId, leads } = useAppData();
   const [tStep, setTStep] = useState(1);
   const [profile, setProfile] = useState(null);
   const [objective, setObjective] = useState(null);
@@ -21,6 +20,7 @@ export default function TunnelPage() {
   const [nutrition, setNutrition] = useState(null);
   const [nutritionObj, setNutritionObj] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const goNext = () => {
     if (tStep === 1 && !profile) return setErrorMsg('Sélectionnez un profil pour continuer.');
@@ -49,26 +49,44 @@ export default function TunnelPage() {
     setErrorMsg('');
   };
 
-  const submitTunnel = (e) => {
+  const submitTunnel = async (e) => {
     e.preventDefault();
+    setErrorMsg('');
+    setSubmitting(true);
     const f = new FormData(e.target);
     const obj = objective === 'Autre' ? objOther || 'Autre' : objective;
-    const particuliersCount = leads.filter((l) => l.type === 'Particulier').length;
-    const lead = {
-      id: 'L-' + (1043 + particuliersCount),
-      name: `${f.get('prenom') || ''} ${f.get('nom') || ''}`.trim(),
-      type: 'Particulier',
-      objective: obj,
-      profile: profileLabel(profile),
-      source: 'Tunnel Particulier',
-      status: 'Nouveau',
-      commune: f.get('commune') || '—',
-      date: new Date().toLocaleDateString('fr-FR'),
-      coach: null,
-      nutrition: nutrition === 'oui',
-    };
-    addLead(lead);
-    setTStep(5);
+
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          profile,
+          objective: obj,
+          nutrition,
+          nutritionObj,
+          prenom: f.get('prenom'),
+          nom: f.get('nom'),
+          tel: f.get('tel'),
+          email: f.get('email'),
+          commune: f.get('commune'),
+          comment: f.get('comment'),
+          consent: f.get('consent') === 'on',
+          website: f.get('website'),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data.error || "Une erreur est survenue, réessayez.");
+        setSubmitting(false);
+        return;
+      }
+      setTStep(5);
+    } catch {
+      setErrorMsg('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const progressPct = Math.min(100, Math.round((tStep / 4) * 100)) + '%';
@@ -253,7 +271,7 @@ export default function TunnelPage() {
             </label>
           </div>
           <label style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginTop: 18, cursor: 'pointer' }}>
-            <input required type="checkbox" style={{ marginTop: 3, width: 18, height: 18, accentColor: '#C6F202', flex: '0 0 auto' }} />
+            <input required name="consent" type="checkbox" style={{ marginTop: 3, width: 18, height: 18, accentColor: '#C6F202', flex: '0 0 auto' }} />
             <span style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>
               J&apos;accepte que GBÔ AFRICA GROUP traite mes données personnelles afin de répondre à ma demande, conformément à la{' '}
               <Link href="/legal/privacy" style={{ color: 'var(--lime,#C6F202)' }}>
@@ -262,8 +280,15 @@ export default function TunnelPage() {
               .
             </span>
           </label>
-          <button type="submit" style={css('margin-top:26px;width:100%;padding:17px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}>
-            Envoyer ma demande
+          <Honeypot />
+          <button
+            type="submit"
+            disabled={submitting}
+            style={css(
+              `margin-top:26px;width:100%;padding:17px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`
+            )}
+          >
+            {submitting ? 'Envoi en cours…' : 'Envoyer ma demande'}
           </button>
         </form>
       )}

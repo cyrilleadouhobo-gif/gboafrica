@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { css } from '../../lib/css.js';
 import { useAppData } from '../../context/AppData.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import Honeypot from '../../components/Honeypot.js';
 
 const fieldStyle = css(
   "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
@@ -10,11 +12,30 @@ const fieldStyle = css(
 
 export default function ContactPage() {
   const { showToast } = useAppData();
+  const [submitting, setSubmitting] = useState(false);
 
-  const submitContact = (e) => {
+  const submitContact = async (e) => {
     e.preventDefault();
-    e.target.reset();
-    showToast('Message envoyé. Nous revenons vers vous rapidement.');
+    setSubmitting(true);
+    const f = new FormData(e.target);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: f.get('nom'), tel: f.get('tel'), email: f.get('email'), msg: f.get('msg'), website: f.get('website') }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        showToast(data.error || 'Une erreur est survenue, réessayez.');
+        return;
+      }
+      e.target.reset();
+      showToast('Message envoyé. Nous revenons vers vous rapidement.');
+    } catch {
+      showToast('Connexion impossible. Réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -33,8 +54,13 @@ export default function ContactPage() {
             </div>
             <input required name="email" type="email" placeholder="E-mail *" style={fieldStyle} />
             <textarea required name="msg" rows={4} placeholder="Votre message *" style={{ ...fieldStyle, resize: 'vertical' }} />
-            <button type="submit" style={css('padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}>
-              Envoyer
+            <Honeypot />
+            <button
+              type="submit"
+              disabled={submitting}
+              style={css(`padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
+            >
+              {submitting ? 'Envoi…' : 'Envoyer'}
             </button>
           </form>
         </div>

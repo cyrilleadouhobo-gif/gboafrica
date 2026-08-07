@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite has no native enum support — these are validated at the application layer
+// (see lib/constants.js): LeadType = PARTICULIER | ENTREPRISE | WAITLIST
+// LeadStatus = NOUVEAU | A_CONTACTER | QUALIFIE | COACH_ATTRIBUE | CLIENT | PERDU
+// CoachDispo = DISPONIBLE | COMPLET
+
+model Lead {
+  id            Int        @id @default(autoincrement())
+  code          String     @unique
+  type          String
+  name          String
+  objective     String
+  profile       String     @default("—")
+  source        String
+  status        String     @default("NOUVEAU")
+  commune       String     @default("—")
+  contactEmail  String?
+  contactPhone  String?
+  contactName   String?
+  poleName      String?
+  nutrition     Boolean    @default(false)
+  consentAt     DateTime?
+  coachId       Int?
+  coach         Coach?     @relation(fields: [coachId], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([type])
+  @@index([status])
+}
+
+// type: CONTACT | CAREER | PARTNER | NEWSLETTER
+model Message {
+  id           Int      @id @default(autoincrement())
+  type         String
+  name         String?
+  email        String
+  phone        String?
+  body         String?
+  read         Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([type])
+}
+
+model Coach {
+  id       Int        @id @default(autoincrement())
+  name     String     @unique
+  spec     String
+  zones    String
+  dispo    String     @default("DISPONIBLE")
+  clients  Int        @default(0)
+  leads    Lead[]
+  createdAt DateTime  @default(now())
+}
+
+model AdminUser {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  passwordHash  String
+  role          String    @default("admin")
+  createdAt     DateTime  @default(now())
+  lastLoginAt   DateTime?
+  sessions      Session[]
+  auditLogs     AuditLog[]
+}
+
+model Session {
+  id            String    @id
+  tokenHash     String    @unique
+  adminUserId   Int
+  adminUser     AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+  userAgent     String?
+  ipHash        String?
+  createdAt     DateTime  @default(now())
+  expiresAt     DateTime
+
+  @@index([adminUserId])
+}
+
+model AuditLog {
+  id            Int       @id @default(autoincrement())
+  adminUserId   Int?
+  adminUser     AdminUser? @relation(fields: [adminUserId], references: [id])
+  action        String
+  targetType    String
+  targetId      String
+  detail        String?
+  createdAt     DateTime  @default(now())
+}
+
+model RateLimitHit {
+  id         Int      @id @default(autoincrement())
+  bucketKey  String
+  createdAt  DateTime @default(now())
+
+  @@index([bucketKey, createdAt])
+}

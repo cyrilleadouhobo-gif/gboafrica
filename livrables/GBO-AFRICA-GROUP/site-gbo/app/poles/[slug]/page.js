@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { css } from '../../../lib/css.js';
-import { useAppData } from '../../../context/AppData.js';
+import Honeypot from '../../../components/Honeypot.js';
 import ImageSlot from '../../../components/ImageSlot.js';
 import { POLES, POLE_DETAIL } from '../../../data/poles.js';
 
@@ -12,28 +12,34 @@ export default function PolePage({ params }) {
   const detail = POLE_DETAIL[params.slug];
   if (!detail) notFound();
 
-  const { addLead, leads } = useAppData();
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const mono = (POLES.find((p) => p.key === params.slug) || {}).mono || 'G';
 
-  const submitWaitlist = (e) => {
+  const submitWaitlist = async (e) => {
     e.preventDefault();
+    setErrorMsg('');
+    setSubmitting(true);
     const f = new FormData(e.target);
-    const waitlistCount = leads.filter((l) => l.type === "Liste d'attente").length;
-    addLead({
-      id: 'W-' + (500 + waitlistCount),
-      name: f.get('email') || 'Inscrit',
-      type: "Liste d'attente",
-      objective: 'GBÔ ' + detail.name.replace('GBÔ ', ''),
-      profile: '—',
-      source: "Liste d'attente",
-      status: 'Nouveau',
-      commune: '—',
-      date: new Date().toLocaleDateString('fr-FR'),
-      coach: null,
-      pole: detail.name,
-    });
-    setDone(true);
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: f.get('email'), pole: detail.name.replace('GBÔ ', ''), website: f.get('website') }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data.error || 'Une erreur est survenue, réessayez.');
+        return;
+      }
+      setDone(true);
+    } catch {
+      setErrorMsg('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -151,10 +157,12 @@ export default function PolePage({ params }) {
                   placeholder="Votre e-mail"
                   style={css('flex:1;min-width:200px;padding:16px;border-radius:12px;border:1px solid rgba(0,0,0,.25);background:rgba(255,255,255,.6);color:#000;font-size:15px')}
                 />
-                <button type="submit" style={css('padding:16px 26px;border-radius:12px;background:#000;color:var(--lime,#C6F202);font-weight:700;font-size:15px')}>
-                  Rejoindre
+                <button type="submit" disabled={submitting} style={css(`padding:16px 26px;border-radius:12px;background:#000;color:var(--lime,#C6F202);font-weight:700;font-size:15px;opacity:${submitting ? 0.6 : 1}`)}>
+                  {submitting ? '…' : 'Rejoindre'}
                 </button>
               </div>
+              <Honeypot />
+              {errorMsg && <div style={{ fontSize: 13, marginTop: 12, textAlign: 'left', fontWeight: 600 }}>{errorMsg}</div>}
               <div style={{ fontSize: 12, opacity: 0.65, marginTop: 12, textAlign: 'left' }}>Aucune sollicitation commerciale non désirée. Désinscription à tout moment.</div>
             </form>
           )}
