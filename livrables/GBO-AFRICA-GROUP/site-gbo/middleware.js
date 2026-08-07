@@ -24,9 +24,17 @@ export function middleware(request) {
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
 
+  const isDev = process.env.NODE_ENV !== 'production';
+
+  // Next.js dev mode compiles with eval()-based source maps for Fast Refresh — blocking
+  // 'unsafe-eval' breaks hydration entirely in dev (not just HMR). This is a real gap
+  // between dev and prod CSP that's well documented for Next.js; the strict, eval-free
+  // policy below is what actually ships in production.
+  const scriptSrc = isDev ? `script-src 'self' 'unsafe-eval' 'nonce-${nonce}' 'strict-dynamic'` : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`;
+
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    scriptSrc,
     // Inline style attributes (style={{...}}) can't carry a nonce — CSP has no nonce
     // mechanism for style="" attributes, only for <style> elements. Allowing unsafe-inline
     // for styles only (not scripts) keeps the high-value XSS protection on script-src
@@ -34,7 +42,7 @@ export function middleware(request) {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data:",
     "font-src 'self' https://fonts.gstatic.com",
-    "connect-src 'self'",
+    isDev ? "connect-src 'self' ws:" : "connect-src 'self'", // ws: for the dev-mode HMR websocket
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",
