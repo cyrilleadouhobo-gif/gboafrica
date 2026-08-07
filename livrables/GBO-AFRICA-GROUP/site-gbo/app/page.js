@@ -5,6 +5,7 @@ import { css } from '../lib/css.js';
 import { useAppData } from '../context/AppData.js';
 import ImageSlot from '../components/ImageSlot.js';
 import Honeypot from '../components/Honeypot.js';
+import { stockPhoto } from '../lib/stockPhoto.js';
 import { POLES, badgeStyle } from '../data/poles.js';
 import { VALUES, METHOD_STEPS, TRANSFORMATIONS, TESTIMONIALS, PARTNERS, BLOG_PREVIEW } from '../data/content.js';
 
@@ -41,7 +42,7 @@ export default function HomePage() {
   return (
     <div>
       <section style={css('position:relative;min-height:calc(100vh - 68px);display:flex;align-items:flex-end;overflow:hidden;background:#050505')}>
-        <ImageSlot placeholder="Visuel hero — mouvement, énergie (plein écran)" />
+        <ImageSlot placeholder="Visuel hero — mouvement, énergie (plein écran)" src={stockPhoto('fitnessMen', 'home-hero', '1600x1000')} />
         <div
           style={css(
             'position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.9) 100%);pointer-events:none'
@@ -209,7 +210,7 @@ export default function HomePage() {
             {TRANSFORMATIONS.map((t) => (
               <div key={t.id} style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}>
                 <div style={{ aspectRatio: '3/4', position: 'relative' }}>
-                  <ImageSlot placeholder={t.ph} />
+                  <ImageSlot placeholder={t.ph} src={stockPhoto('portrait', t.id, '600x800')} />
                 </div>
                 <div style={{ padding: 14 }}>
                   <div style={{ fontWeight: 700, fontSize: 15 }}>{t.name}</div>
@@ -233,7 +234,7 @@ export default function HomePage() {
                 <p style={{ fontSize: 16, lineHeight: 1.55, margin: '14px 0 18px' }}>{t.quote}</p>
                 <div style={css('display:flex;align-items:center;gap:12px')}>
                   <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flex: '0 0 auto', position: 'relative' }}>
-                    <ImageSlot shape="circle" placeholder="Photo" />
+                    <ImageSlot shape="circle" placeholder="Photo" src={stockPhoto('portrait', t.id, '200x200')} />
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
@@ -276,7 +277,7 @@ export default function HomePage() {
                 style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09));cursor:pointer;transition:.2s;display:block')}
               >
                 <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-                  <ImageSlot placeholder="Visuel article" />
+                  <ImageSlot placeholder="Visuel article" src={stockPhoto('team', b.id, '600x375')} />
                 </div>
                 <div style={{ padding: 18 }}>
                   <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>

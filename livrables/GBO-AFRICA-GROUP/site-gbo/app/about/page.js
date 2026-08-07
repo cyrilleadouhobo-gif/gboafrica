@@ -1,5 +1,6 @@
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import { stockPhoto } from '../../lib/stockPhoto.js';
 import { VALUES } from '../../data/content.js';
 
 export const metadata = { title: 'À propos — GBÔ AFRICA GROUP' };
@@ -22,7 +23,7 @@ export default function AboutPage() {
 
       <section style={css('padding:0 clamp(20px,5vw,64px) clamp(48px,7vw,90px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto', aspectRatio: '21/9', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))', position: 'relative' }}>
-          <ImageSlot placeholder="Visuel équipe / communauté GBÔ" />
+          <ImageSlot placeholder="Visuel équipe / communauté GBÔ" src={stockPhoto('team', 'about-hero', '1600x700')} />
         </div>
       </section>
 

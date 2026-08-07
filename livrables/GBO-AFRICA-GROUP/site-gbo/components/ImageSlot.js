@@ -1,6 +1,25 @@
 import { css } from '../lib/css.js';
 
-export default function ImageSlot({ shape = 'rect', placeholder = 'Image à venir', style }) {
+export default function ImageSlot({ shape = 'rect', placeholder = 'Image à venir', src, style }) {
+  if (src) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={placeholder}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          borderRadius: shape === 'circle' ? '50%' : 0,
+          ...style,
+        }}
+      />
+    );
+  }
+
   return (
     <div
       style={{

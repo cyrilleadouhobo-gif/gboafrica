@@ -40,7 +40,9 @@ export function middleware(request) {
     // for styles only (not scripts) keeps the high-value XSS protection on script-src
     // while accepting the much lower risk profile of inline CSS.
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "img-src 'self' data:",
+    // TODO: drop images.unsplash.com once real GBÔ photography replaces the temporary
+    // stock images (see lib/stockPhoto.js) — no third-party image host should be needed then.
+    "img-src 'self' data: https://images.unsplash.com",
     "font-src 'self' https://fonts.gstatic.com",
     isDev ? "connect-src 'self' ws:" : "connect-src 'self'", // ws: for the dev-mode HMR websocket
     "frame-ancestors 'none'",
