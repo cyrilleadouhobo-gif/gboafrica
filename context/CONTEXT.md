@@ -59,8 +59,8 @@ Informaticien de formation, titulaire d'une licence en informatique. J'aime le d
 
 Liste des projets ou chantiers actifs sur lesquels je veux que Claude m'aide :
 
-- GBÔ AFRICA GROUP (rôle de COO) — priorité actuelle
-- Formation en développement web/application
+- GBÔ AFRICA GROUP (rôle de COO) — priorité actuelle, avec un chantier concret en cours : la plateforme digitale officielle de GBÔ (site vitrine + GBÔ Fitness opérationnel + back-office CRM), développée à partir d'un PRD complet et d'un prototype Claude Design, codée en Next.js dans `livrables/GBO-AFRICA-GROUP/site-gbo/`
+- Formation en développement web/application (premier projet : Phénix Automobile, site de vente/location de véhicules, dans `livrables/formation-dev-web/phenix-automobile/`)
 
 ### Projets en dormance (envisagés, pas encore démarrés faute de moyens)
 
@@ -91,4 +91,4 @@ Mener à bien ma responsabilité de COO au sein de GBÔ AFRICA GROUP.
 
 > Cette section se remplira au fil du temps avec les éléments de contexte qui émergent naturellement dans mes sessions avec Claude.
 
-[VIDE INITIALEMENT - SE REMPLIRA AU FIL DU TEMPS]
+- **Plateforme digitale GBÔ** : un PRD complet (cahier des charges fonctionnel et technique) existe pour la plateforme GBÔ, avec un pôle Fitness opérationnel (tunnel de conversion, page Entreprise) et 5 autres pôles en pré-lancement (Academy, Talent, Events, Shop, Security) avec liste d'attente. Le PRD et le prototype Claude Design sont dans `Documents/Document GBÔ/`. Le code du site est dans `livrables/GBO-AFRICA-GROUP/site-gbo/` (Next.js). Points restants avant une vraie mise en production : ajouter une authentification au back-office admin, brancher un vrai backend (paiement mobile money via CinetPay, WhatsApp Business API, CRM serveur), et fournir les vraies photos/visuels de marque.

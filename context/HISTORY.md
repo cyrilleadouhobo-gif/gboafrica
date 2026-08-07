@@ -7,6 +7,15 @@
 
 ---
 
+## 2026-08-07
+
+### Démarrage de la plateforme digitale GBÔ + premier projet de formation
+- Formation dev web : implémentation de Phénix Automobile, un site de vente/location de véhicules (React + Vite), à partir d'un prototype Claude Design généré depuis un prompt préparé ensemble. Dépôt GitHub privé créé et code poussé.
+- GBÔ AFRICA GROUP : lecture complète du PRD (cahier des charges fonctionnel et technique) et du prototype Claude Design de la plateforme digitale officielle GBÔ. Implémentation du prototype en Next.js dans `livrables/GBO-AFRICA-GROUP/site-gbo/` : accueil, GBÔ Fitness (sélecteur + tunnel de conversion en 4 étapes), page Entreprise, 5 pôles en pré-lancement avec liste d'attente, pages de contenu et légales, back-office admin avec CRM prospects et gestion des coachs.
+- Ce chantier GBÔ est le premier livrable concret du rôle de COO évoqué comme priorité — la suite logique sera de brancher un vrai backend (paiement mobile money, WhatsApp Business, base de données) et de sécuriser le back-office avant toute mise en ligne réelle.
+
+---
+
 ## 2026-07-06
 
 ### Installation initiale du Jarvis
