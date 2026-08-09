@@ -38,18 +38,34 @@ Le back-office est sur `/admin` (redirige vers `/admin/login` si non connecté).
   statut de prospect, attribution de coach.
 - **Secrets** : jamais en dur dans le code, jamais commités (`.env` est gitignored).
 
-## Point de vigilance : version de Next.js
+## Version de Next.js
 
-`npm audit` remonte des failles connues (DoS, cache poisoning, XSS sur les nonces CSP)
-sur la ligne Next.js 14 — nous sommes déjà sur la dernière version stable de la 14.x
-(14.2.35), donc aucun correctif ne peut venir d'une simple mise à jour mineure. Les
-corriger entièrement demande de passer à Next.js 15/16, ce qui change l'API de
-`cookies()`/`headers()` (passage en asynchrone) dans plusieurs fichiers (`lib/auth.js`,
-`app/layout.js`, `app/admin/(dashboard)/layout.js`) — une vraie migration, pas une
-mise à jour anodine, donc volontairement pas faite sans validation explicite. Beaucoup
-de ces failles visent des fonctionnalités non utilisées ici (Image Optimizer, i18n du
-Pages Router, serveur personnalisé, WebSocket) donc le risque réel est réduit, mais ce
-n'est pas nul. À planifier avant une mise en production sérieuse.
+Le projet tourne sur **Next.js 16.3.0 / React 19.2.8** (migré depuis la 14.2, `npm audit`
+à 0 vulnérabilité). Points à connaître pour qui reprend ce code :
+
+- `params`, `cookies()` et `headers()` sont désormais asynchrones (`await params`,
+  `await cookies()`) — voir `lib/auth.js`, `app/layout.js`, les routes API sous
+  `app/api/admin/leads/[id]/*` et les pages `app/legal/[slug]`, `app/poles/[slug]`
+  (cette dernière étant un composant client, l'unwrap se fait via `React.use(params)`).
+- Le fichier `middleware.js` a été renommé `proxy.js` (convention Next 16) ; la fonction
+  exportée s'appelle `proxy` au lieu de `middleware`.
+- `AGENTS.md` / `CLAUDE.md` à la racine du projet sont générés automatiquement par
+  `next dev` (convention officielle pour les agents IA) — ne pas les modifier à la main,
+  ils sont recréés à chaque démarrage du serveur de dev.
+
+## SEO technique & cookies
+
+- `app/sitemap.js` et `app/robots.js` génèrent `/sitemap.xml` et `/robots.txt`
+  automatiquement (routes statiques + `/poles/[slug]` + `/legal/[slug]`), `/admin` et
+  `/api` sont exclus du crawl.
+- Données structurées Schema.org (`Organization`) injectées dans `app/layout.js`.
+- Bandeau cookies (`components/CookieBanner.js`) : le site ne dépose aujourd'hui que le
+  cookie de session admin (strictement nécessaire, pas de consentement légalement requis),
+  le bandeau et le flag `localStorage` (`gbo_cookie_consent`) sont en place par
+  anticipation, pour pouvoir conditionner de futurs scripts d'audience/marketing.
+- Tout cela dépend de `SITE_URL` (voir `.env.example`) pour générer des URLs absolues
+  correctes — à renseigner avant le déploiement, sans quoi ça retombe sur
+  `http://localhost:5300`.
 
 ## Ce qui reste bloqué sur de vrais comptes externes (pas du code)
 
@@ -73,3 +89,4 @@ n'est pas nul. À planifier avant une mise en production sérieuse.
 4. Remplacer les visuels `ImageSlot` par les vraies photos GBÔ.
 5. Faire relire les pages légales (`data/legal.js`) par un avocat inscrit au barreau —
    plusieurs sections portent encore la mention `[À COMPLÉTER]` du PRD.
+6. Renseigner `SITE_URL` avec le nom de domaine réel (sitemap, robots.txt, Open Graph).

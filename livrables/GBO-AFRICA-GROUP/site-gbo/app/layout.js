@@ -4,10 +4,37 @@ import { AppDataProvider } from '../context/AppData.js';
 import Header from '../components/Header.js';
 import Footer from '../components/Footer.js';
 import Toast from '../components/Toast.js';
+import CookieBanner from '../components/CookieBanner.js';
+import { SITE_URL, SITE_NAME } from '../lib/site.js';
+
+const TITLE = 'GBÔ AFRICA GROUP — Plus qu\'une pratique, un style de vie.';
+const DESCRIPTION = "Sport, fitness et bien-être accessibles à tous. Coaching personnalisé, méthode propriétaire, communauté GBÔ. Abidjan, Côte d'Ivoire.";
 
 export const metadata = {
-  title: 'GBÔ AFRICA GROUP — Plus qu\'une pratique, un style de vie.',
-  description: "Sport, fitness et bien-être accessibles à tous. Coaching personnalisé, méthode propriétaire, communauté GBÔ. Abidjan, Côte d'Ivoire.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: 'fr_FR',
+    type: 'website',
+  },
+};
+
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: DESCRIPTION,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Abidjan',
+    addressCountry: 'CI',
+  },
 };
 
 const THEME_INIT_SCRIPT = `
@@ -33,6 +60,7 @@ export default async function RootLayout({ children }) {
           rel="stylesheet"
         />
         <script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script nonce={nonce} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }} />
       </head>
       <body>
         <AppDataProvider>
@@ -40,6 +68,7 @@ export default async function RootLayout({ children }) {
           <main style={{ minHeight: '60vh' }}>{children}</main>
           <Footer />
           <Toast />
+          <CookieBanner />
         </AppDataProvider>
       </body>
     </html>
