@@ -8,7 +8,7 @@ import { NextResponse } from 'next/server';
 
 const SESSION_COOKIE = 'gbo_session';
 
-export function middleware(request) {
+export function proxy(request) {
   const nonce = crypto.randomUUID().replace(/-/g, '');
   const { pathname } = request.nextUrl;
 

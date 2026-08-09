@@ -81,7 +81,7 @@ export function sessionCookieOptions(expiresAt) {
  * from every /api/admin/* route handler and from the protected admin layout.
  */
 export async function getCurrentAdmin() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const raw = cookieStore.get(SESSION_COOKIE)?.value;
   if (!raw) return null;
   return verifySessionCookie(raw);

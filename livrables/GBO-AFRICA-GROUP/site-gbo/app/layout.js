@@ -19,8 +19,9 @@ try {
 }
 `;
 
-export default function RootLayout({ children }) {
-  const nonce = headers().get('x-nonce') || undefined;
+export default async function RootLayout({ children }) {
+  const headerList = await headers();
+  const nonce = headerList.get('x-nonce') || undefined;
 
   return (
     <html lang="fr" data-theme="dark">

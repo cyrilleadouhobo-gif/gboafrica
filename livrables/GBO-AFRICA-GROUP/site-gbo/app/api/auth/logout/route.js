@@ -4,7 +4,8 @@ import { destroySessionCookie, getCurrentAdmin, logAudit, SESSION_COOKIE } from 
 
 export async function POST() {
   const admin = await getCurrentAdmin();
-  const raw = cookies().get(SESSION_COOKIE)?.value;
+  const cookieStore = await cookies();
+  const raw = cookieStore.get(SESSION_COOKIE)?.value;
   if (raw) await destroySessionCookie(raw);
   if (admin) await logAudit({ adminUserId: admin.id, action: 'logout', targetType: 'AdminUser', targetId: admin.id });
 

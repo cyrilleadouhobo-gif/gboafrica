@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { css } from '../../../lib/css.js';
@@ -10,13 +10,14 @@ import { stockPhoto } from '../../../lib/stockPhoto.js';
 import { POLES, POLE_DETAIL } from '../../../data/poles.js';
 
 export default function PolePage({ params }) {
-  const detail = POLE_DETAIL[params.slug];
+  const { slug } = use(params);
+  const detail = POLE_DETAIL[slug];
   if (!detail) notFound();
 
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const mono = (POLES.find((p) => p.key === params.slug) || {}).mono || 'G';
+  const mono = (POLES.find((p) => p.key === slug) || {}).mono || 'G';
 
   const submitWaitlist = async (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ export default function PolePage({ params }) {
     <div>
       <section style={css('position:relative;padding:clamp(80px,10vw,130px) clamp(20px,5vw,64px) clamp(48px,6vw,80px);overflow:hidden;background:#060606')}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.5 }}>
-          <ImageSlot placeholder="Illustration premium du pôle" src={stockPhoto('fitnessMen', params.slug, '1600x900')} />
+          <ImageSlot placeholder="Illustration premium du pôle" src={stockPhoto('fitnessMen', slug, '1600x900')} />
         </div>
         <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.9));pointer-events:none')} />
         <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>

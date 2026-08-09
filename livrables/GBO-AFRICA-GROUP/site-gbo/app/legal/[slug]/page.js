@@ -10,8 +10,9 @@ const TABS = [
   { key: 'privacy', label: 'Confidentialité' },
 ];
 
-export default function LegalPage({ params }) {
-  const legal = LEGAL[params.slug];
+export default async function LegalPage({ params }) {
+  const { slug } = await params;
+  const legal = LEGAL[slug];
   if (!legal) notFound();
 
   return (
@@ -23,8 +24,8 @@ export default function LegalPage({ params }) {
             href={`/legal/${t.key}`}
             style={css(
               `padding:8px 14px;border-radius:20px;border:1px solid ${
-                t.key === params.slug ? 'var(--lime,#C6F202)' : 'var(--border,rgba(255,255,255,.14))'
-              };font-size:13px;font-weight:600;cursor:pointer;color:${t.key === params.slug ? 'var(--lime,#C6F202)' : 'var(--muted,#8a8a8a)'}`
+                t.key === slug ? 'var(--lime,#C6F202)' : 'var(--border,rgba(255,255,255,.14))'
+              };font-size:13px;font-weight:600;cursor:pointer;color:${t.key === slug ? 'var(--lime,#C6F202)' : 'var(--muted,#8a8a8a)'}`
             )}
           >
             {t.label}

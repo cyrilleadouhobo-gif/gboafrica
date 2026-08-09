@@ -10,7 +10,8 @@ export async function PATCH(request, { params }) {
   const admin = await getCurrentAdmin();
   if (!admin) return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
 
-  const id = Number(params.id);
+  const { id: idParam } = await params;
+  const id = Number(idParam);
   if (!Number.isInteger(id)) return NextResponse.json({ error: 'Identifiant invalide.' }, { status: 400 });
 
   const body = await request.json().catch(() => null);
