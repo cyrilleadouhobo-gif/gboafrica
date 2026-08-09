@@ -72,6 +72,18 @@ export const newsletterSchema = z.object({
   website: honeypot,
 });
 
+export const reviewSchema = z.object({
+  authorName: shortText('Nom', 80),
+  context: optionalText(80),
+  rating: z.number().int().min(1, 'Note invalide').max(5, 'Note invalide'),
+  comment: shortText('Avis', 1000),
+  website: honeypot,
+});
+
+export const reviewStatusSchema = z.object({
+  status: z.enum(['APPROVED', 'REJECTED']),
+});
+
 export const loginSchema = z.object({
   email,
   password: z.string().min(8, 'Mot de passe invalide').max(200),

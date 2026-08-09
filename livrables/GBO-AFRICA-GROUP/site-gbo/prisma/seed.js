@@ -10,11 +10,24 @@ const COACHES = [
   { name: 'Coach Ibrahim', spec: 'Prise de masse, Perf', zones: 'Yopougon, Abobo', dispo: 'DISPONIBLE', clients: 9 },
 ];
 
+// Données de démo pour tester le flux de modération admin en local — volontairement
+// PENDING (jamais visibles publiquement tant qu'un admin ne les valide pas). À ne pas
+// reproduire sur la base de production : les vrais avis viennent du formulaire /avis.
+const DEMO_REVIEWS = [
+  { authorName: 'Aïcha B.', context: 'Membre · Yopougon', rating: 5, comment: "Coach au top, très à l'écoute. Je recommande vivement.", status: 'PENDING' },
+  { authorName: 'Kader T.', context: 'Membre · Marcory', rating: 4, comment: 'Bon accompagnement, les créneaux pourraient être un peu plus flexibles.', status: 'PENDING' },
+];
+
 async function main() {
   for (const coach of COACHES) {
     await prisma.coach.upsert({ where: { name: coach.name }, update: coach, create: coach });
   }
   console.log(`Coachs : ${COACHES.length} enregistrés.`);
+
+  if ((await prisma.review.count()) === 0) {
+    await prisma.review.createMany({ data: DEMO_REVIEWS });
+    console.log(`Avis de démo : ${DEMO_REVIEWS.length} créés (en attente de modération).`);
+  }
 
   const email = process.env.ADMIN_EMAIL;
   const password = process.env.ADMIN_PASSWORD;

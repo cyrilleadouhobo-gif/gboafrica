@@ -1,43 +1,11 @@
-'use client';
-
-import { useState } from 'react';
+import Link from 'next/link';
 import { css } from '../../lib/css.js';
-import { useAppData } from '../../context/AppData.js';
-import Honeypot from '../../components/Honeypot.js';
+import CoachApplicationForm from '../../components/CoachApplicationForm.js';
 import { JOBS } from '../../data/content.js';
 
-const fieldStyle = css(
-  "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
-);
+export const metadata = { title: 'Carrières — GBÔ AFRICA GROUP' };
 
 export default function CareersPage() {
-  const { showToast } = useAppData();
-  const [submitting, setSubmitting] = useState(false);
-
-  const submitCareer = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    const f = new FormData(e.target);
-    try {
-      const res = await fetch('/api/careers', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nom: f.get('nom'), tel: f.get('tel'), email: f.get('email'), spec: f.get('spec'), msg: f.get('msg'), website: f.get('website') }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        showToast(data.error || 'Une erreur est survenue, réessayez.');
-        return;
-      }
-      e.target.reset();
-      showToast('Candidature reçue. Merci de votre intérêt pour GBÔ.');
-    } catch {
-      showToast('Connexion impossible. Réessayez.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   return (
     <div>
       <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
@@ -84,24 +52,13 @@ export default function CareersPage() {
             Passerelle réseau
           </div>
           <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:6px")}>Devenir coach GBÔ</h2>
-          <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:24px;line-height:1.5')}>Candidature spontanée — rejoignez le référentiel qualité GBÔ.</p>
-          <form onSubmit={submitCareer}>
-            <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
-              <input required name="nom" placeholder="Nom complet *" style={fieldStyle} />
-              <input required name="tel" type="tel" placeholder="Téléphone *" style={fieldStyle} />
-              <input required name="email" type="email" placeholder="E-mail *" style={fieldStyle} />
-              <input name="spec" placeholder="Spécialité (ex. prénatal, senior…)" style={fieldStyle} />
-              <textarea name="msg" rows={3} placeholder="Parlez-nous de vous" style={{ ...fieldStyle, gridColumn: '1/-1', resize: 'vertical' }} />
-            </div>
-            <Honeypot />
-            <button
-              type="submit"
-              disabled={submitting}
-              style={css(`margin-top:20px;width:100%;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
-            >
-              {submitting ? 'Envoi…' : 'Envoyer ma candidature'}
-            </button>
-          </form>
+          <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:8px;line-height:1.5')}>Candidature spontanée — rejoignez le référentiel qualité GBÔ.</p>
+          <p style={css('font-size:13.5px;margin-bottom:24px')}>
+            <Link href="/devenir-coach" style={{ color: 'var(--lime,#C6F202)', fontWeight: 600 }}>
+              En savoir plus sur le réseau de coachs GBÔ →
+            </Link>
+          </p>
+          <CoachApplicationForm />
         </div>
       </section>
     </div>

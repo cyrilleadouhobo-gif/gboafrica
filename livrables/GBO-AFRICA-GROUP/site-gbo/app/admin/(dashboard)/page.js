@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import { leadBadge, tabStyle } from '../../../lib/styleHelpers.js';
-import { LEAD_STATUSES, LEAD_STATUS_LABELS, LEAD_TYPES, LEAD_TYPE_LABELS } from '../../../lib/constants.js';
+import { LEAD_STATUSES, LEAD_STATUS_LABELS, LEAD_TYPES, LEAD_TYPE_LABELS, REVIEW_STATUS_LABELS } from '../../../lib/constants.js';
 
 const FILTERS = ['Tous', ...LEAD_TYPES];
 
@@ -17,17 +17,19 @@ export default function AdminPage() {
 
   const [leads, setLeads] = useState([]);
   const [coaches, setCoaches] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [stats, setStats] = useState(null);
   const [funnel, setFunnel] = useState([]);
   const [recentLeads, setRecentLeads] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadAll = useCallback(async () => {
-    const [meRes, leadsRes, coachesRes, statsRes] = await Promise.all([
+    const [meRes, leadsRes, coachesRes, statsRes, reviewsRes] = await Promise.all([
       fetch('/api/auth/me'),
       fetch('/api/admin/leads'),
       fetch('/api/admin/coaches'),
       fetch('/api/admin/stats'),
+      fetch('/api/admin/reviews'),
     ]);
 
     if (meRes.status === 401) {
@@ -39,6 +41,7 @@ export default function AdminPage() {
     const leadsData = await leadsRes.json();
     const coachesData = await coachesRes.json();
     const statsData = await statsRes.json();
+    const reviewsData = await reviewsRes.json();
 
     setMe(meData.admin);
     setLeads(leadsData.leads || []);
@@ -46,6 +49,7 @@ export default function AdminPage() {
     setStats(statsData.stats);
     setFunnel(statsData.funnel || []);
     setRecentLeads(statsData.recent || []);
+    setReviews(reviewsData.reviews || []);
     setLoading(false);
   }, [router]);
 
@@ -75,6 +79,17 @@ export default function AdminPage() {
     setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
   };
 
+  const moderateReview = async (id, status) => {
+    const res = await fetch(`/api/admin/reviews/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    });
+    if (!res.ok) return;
+    const { review } = await res.json();
+    setReviews((prev) => prev.map((r) => (r.id === id ? review : r)));
+  };
+
   const logout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
     router.replace('/admin/login');
@@ -102,6 +117,7 @@ export default function AdminPage() {
 
   const leadRows = leads.filter((l) => adminFilter === 'Tous' || l.type === adminFilter);
   const selectedLead = selectedLeadId ? leads.find((l) => l.id === selectedLeadId) : null;
+  const pendingReviews = reviews.filter((r) => r.status === 'PENDING');
 
   return (
     <div style={{ padding: 'clamp(24px,4vw,40px) clamp(16px,4vw,48px) 90px' }}>
@@ -149,6 +165,9 @@ export default function AdminPage() {
           </button>
           <button onClick={() => setAdminTab('coaches')} style={css(tabStyle(adminTab === 'coaches'))}>
             Coachs
+          </button>
+          <button onClick={() => setAdminTab('reviews')} style={css(tabStyle(adminTab === 'reviews'))}>
+            Avis {pendingReviews.length > 0 && `(${pendingReviews.length})`}
           </button>
         </div>
 
@@ -309,6 +328,55 @@ export default function AdminPage() {
                   >
                     {c.dispo === 'DISPONIBLE' ? 'Disponible' : 'Complet'}
                   </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {adminTab === 'reviews' && (
+          <div style={{ display: 'grid', gap: 12 }}>
+            {reviews.length === 0 && <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucun avis pour le moment.</div>}
+            {reviews.map((r) => (
+              <div key={r.id} style={css('padding:20px 22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
+                <div style={css('display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap')}>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={css('display:flex;align-items:center;gap:8px')}>
+                      <span style={{ fontWeight: 700, fontSize: 15 }}>{r.authorName}</span>
+                      {r.context && <span style={css('font-size:12.5px;color:var(--muted,#8a8a8a)')}>· {r.context}</span>}
+                      <span style={css('color:var(--lime,#C6F202);font-size:13px')}>{'★'.repeat(r.rating)}</span>
+                    </div>
+                    <p style={css('font-size:13.5px;color:var(--muted,#8a8a8a);margin-top:6px;line-height:1.5;max-width:60ch')}>{r.comment}</p>
+                    <div style={css('font-size:11.5px;color:var(--muted,#8a8a8a);margin-top:6px')}>{new Date(r.createdAt).toLocaleDateString('fr-FR')}</div>
+                  </div>
+                  <div style={css('display:flex;align-items:center;gap:8px;flex:0 0 auto')}>
+                    {r.status === 'PENDING' ? (
+                      <>
+                        <button
+                          onClick={() => moderateReview(r.id, 'REJECTED')}
+                          style={css('padding:9px 14px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));font-weight:700;font-size:13px;color:var(--fg,#fff)')}
+                        >
+                          Rejeter
+                        </button>
+                        <button
+                          onClick={() => moderateReview(r.id, 'APPROVED')}
+                          style={css('padding:9px 14px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:13px')}
+                        >
+                          Publier
+                        </button>
+                      </>
+                    ) : (
+                      <span
+                        style={css(
+                          r.status === 'APPROVED'
+                            ? 'padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.4)'
+                            : 'padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;background:var(--surface2,#222);color:var(--muted,#8a8a8a);border:1px solid var(--border,rgba(255,255,255,.14))'
+                        )}
+                      >
+                        {REVIEW_STATUS_LABELS[r.status]}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

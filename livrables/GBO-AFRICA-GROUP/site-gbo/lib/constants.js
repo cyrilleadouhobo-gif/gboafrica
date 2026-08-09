@@ -19,6 +19,30 @@ export const LEAD_STATUS_LABELS = {
 
 export const COACH_DISPO = ['DISPONIBLE', 'COMPLET'];
 
+export const REVIEW_STATUSES = ['PENDING', 'APPROVED', 'REJECTED'];
+
+export const REVIEW_STATUS_LABELS = {
+  PENDING: 'En attente',
+  APPROVED: 'Publié',
+  REJECTED: 'Rejeté',
+};
+
+export const ABIDJAN_COMMUNES = [
+  'Abobo',
+  'Adjamé',
+  'Attécoubé',
+  'Cocody',
+  'Koumassi',
+  'Marcory',
+  'Plateau',
+  'Port-Bouët',
+  'Treichville',
+  'Yopougon',
+  'Bingerville',
+  'Anyama',
+  'Songon',
+];
+
 export function leadCode(type, seq) {
   const prefix = type === 'ENTREPRISE' ? 'C' : type === 'WAITLIST' ? 'W' : 'L';
   return `${prefix}-${seq}`;

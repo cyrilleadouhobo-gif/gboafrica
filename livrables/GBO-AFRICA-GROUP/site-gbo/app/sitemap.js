@@ -5,10 +5,13 @@ import { LEGAL } from '../data/legal.js';
 const STATIC_ROUTES = [
   { path: '/', priority: 1, changeFrequency: 'weekly' },
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/avis', priority: 0.6, changeFrequency: 'weekly' },
   { path: '/blog', priority: 0.6, changeFrequency: 'weekly' },
   { path: '/careers', priority: 0.5, changeFrequency: 'weekly' },
+  { path: '/coachs', priority: 0.7, changeFrequency: 'weekly' },
   { path: '/contact', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/corporate', priority: 0.6, changeFrequency: 'monthly' },
+  { path: '/devenir-coach', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/faq', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/fitness', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/fitness/tunnel', priority: 0.8, changeFrequency: 'monthly' },
