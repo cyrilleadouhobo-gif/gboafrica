@@ -89,4 +89,8 @@ Le projet tourne sur **Next.js 16.3.0 / React 19.2.8** (migré depuis la 14.2, `
 4. Remplacer les visuels `ImageSlot` par les vraies photos GBÔ.
 5. Faire relire les pages légales (`data/legal.js`) par un avocat inscrit au barreau —
    plusieurs sections portent encore la mention `[À COMPLÉTER]` du PRD.
-6. Renseigner `SITE_URL` avec le nom de domaine réel (sitemap, robots.txt, Open Graph).
+6. Domaine décidé : **gboafrica.com** (sans accent — `gbôafrica.com` nécessiterait un
+   encodage IDN/punycode mal supporté par certains clients mail/navigateurs, et le code
+   utilise déjà la forme sans accent pour les adresses e-mail). Reste à faire : enregistrer
+   le nom de domaine, puis définir `SITE_URL=https://www.gboafrica.com` en production
+   (déjà en exemple dans `.env.example`).
