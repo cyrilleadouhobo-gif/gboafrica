@@ -13,7 +13,7 @@ export default function Footer() {
           )}
         >
           <div style={{ gridColumn: 'span 1', minWidth: 200 }}>
-            <div style={css("font-family:'Space Grotesk';font-weight:700;font-size:28px;letter-spacing:-1px")}>
+            <div style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:28px;letter-spacing:-1px")}>
               GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
             </div>
             <p style={css('font-size:13px;color:var(--muted,#8a8a8a);margin:12px 0;line-height:1.5')}>

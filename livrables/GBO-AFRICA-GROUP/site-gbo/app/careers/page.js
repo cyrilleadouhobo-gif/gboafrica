@@ -43,7 +43,7 @@ export default function CareersPage() {
       <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Carrières</div>
-          <h1 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;max-width:16ch")}>
+          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;max-width:16ch")}>
             Construisez le mouvement avec nous.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:58ch;margin-top:20px;line-height:1.5')}>
@@ -83,7 +83,7 @@ export default function CareersPage() {
           <div style={css('display:inline-block;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:12px;font-weight:700;margin-bottom:14px')}>
             Passerelle réseau
           </div>
-          <h2 style={css("font-family:'Space Grotesk';font-weight:700;font-size:26px;margin-bottom:6px")}>Devenir coach GBÔ</h2>
+          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:6px")}>Devenir coach GBÔ</h2>
           <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:24px;line-height:1.5')}>Candidature spontanée — rejoignez le référentiel qualité GBÔ.</p>
           <form onSubmit={submitCareer}>
             <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>

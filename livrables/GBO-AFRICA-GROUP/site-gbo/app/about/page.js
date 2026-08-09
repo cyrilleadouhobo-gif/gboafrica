@@ -11,7 +11,7 @@ export default function AboutPage() {
       <section style={css('padding:clamp(80px,10vw,130px) clamp(20px,5vw,64px) clamp(40px,5vw,60px)')}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>À propos</div>
-          <h1 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(34px,6.5vw,68px);letter-spacing:-2px;line-height:1;max-width:18ch")}>
+          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(34px,6.5vw,68px);letter-spacing:-2px;line-height:1;max-width:18ch")}>
             Nous croyons que le sport change des vies.
           </h1>
           <p style={css('font-size:clamp(17px,2.4vw,22px);color:var(--muted,#8a8a8a);max-width:62ch;margin-top:22px;line-height:1.5')}>
@@ -45,11 +45,11 @@ export default function AboutPage() {
 
       <section style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>Nos valeurs</h2>
+          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>Nos valeurs</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px')}>
             {VALUES.map((v) => (
               <div key={v.n} style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
-                <div style={css("color:var(--lime,#C6F202);font-family:'Space Grotesk';font-weight:700;margin-bottom:8px")}>{v.n}</div>
+                <div style={css("color:var(--lime,#C6F202);font-family:'Big Shoulders Display';font-weight:700;margin-bottom:8px")}>{v.n}</div>
                 <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 5 }}>{v.title}</div>
                 <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>{v.desc}</div>
               </div>
@@ -65,19 +65,19 @@ export default function AboutPage() {
           )}
         >
           <div>
-            <div style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,5vw,48px)")}>6</div>
+            <div style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(30px,5vw,48px)")}>6</div>
             <div style={{ fontSize: 14, fontWeight: 600, opacity: 0.75 }}>pôles dans l&apos;écosystème</div>
           </div>
           <div>
-            <div style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,5vw,48px)")}>5</div>
+            <div style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(30px,5vw,48px)")}>5</div>
             <div style={{ fontSize: 14, fontWeight: 600, opacity: 0.75 }}>étapes de la Méthode GBÔ</div>
           </div>
           <div>
-            <div style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,5vw,48px)")}>Abidjan</div>
+            <div style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(30px,5vw,48px)")}>Abidjan</div>
             <div style={{ fontSize: 14, fontWeight: 600, opacity: 0.75 }}>Côte d&apos;Ivoire · UEMOA demain</div>
           </div>
           <div>
-            <div style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,5vw,48px)")}>2 000</div>
+            <div style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(30px,5vw,48px)")}>2 000</div>
             <div style={{ fontSize: 14, fontWeight: 600, opacity: 0.75 }}>FCFA/mois · Club Premium</div>
           </div>
         </div>

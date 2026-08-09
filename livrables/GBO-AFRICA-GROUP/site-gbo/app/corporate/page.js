@@ -60,7 +60,7 @@ export default function CorporatePage() {
           <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.2));font-size:12px;font-weight:700;margin-bottom:16px;color:var(--muted,#8a8a8a)')}>
             Solutions corporate
           </span>
-          <h1 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(32px,5.5vw,56px);letter-spacing:-1.5px;line-height:1.02;max-width:20ch")}>
+          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(32px,5.5vw,56px);letter-spacing:-1.5px;line-height:1.02;max-width:20ch")}>
             Le sport, moteur de performance de vos équipes.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:60ch;margin-top:20px;line-height:1.5')}>
@@ -72,7 +72,7 @@ export default function CorporatePage() {
 
       <section style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:30px")}>Nos solutions</h2>
+          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:30px")}>Nos solutions</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px')}>
             {CORPORATE_SOLUTIONS.map((c) => (
               <div
@@ -107,7 +107,7 @@ export default function CorporatePage() {
                   <path d="M5 12l5 5L20 6" />
                 </svg>
               </div>
-              <h3 style={css("font-family:'Space Grotesk';font-weight:700;font-size:26px;margin-bottom:10px")}>Demande envoyée !</h3>
+              <h3 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:10px")}>Demande envoyée !</h3>
               <p style={css('color:var(--muted,#8a8a8a);font-size:15.5px;line-height:1.6;max-width:44ch;margin:0 auto')}>
                 Un conseiller Entreprise GBÔ vous recontacte pour établir une proposition commerciale sur mesure. Confirmation par e-mail et WhatsApp.
               </p>
@@ -117,7 +117,7 @@ export default function CorporatePage() {
             </div>
           ) : (
             <form onSubmit={submitCompany}>
-              <h2 style={css("font-family:'Space Grotesk';font-weight:700;font-size:26px;margin-bottom:6px")}>Demander une proposition</h2>
+              <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:6px")}>Demander une proposition</h2>
               <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:24px')}>Réponse sous 48h ouvrées.</p>
               <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
                 <label style={{ display: 'block' }}>

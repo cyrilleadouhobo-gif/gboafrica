@@ -29,7 +29,7 @@ export default function Header() {
         )}
       >
         <Link href="/" onClick={closeAll} style={css('display:flex;align-items:center;gap:10px;cursor:pointer')}>
-          <span style={css("font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;letter-spacing:-1px;color:var(--fg,#fff)")}>
+          <span style={css("font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:26px;letter-spacing:-1px;color:var(--fg,#fff)")}>
             GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
           </span>
           <span style={css('width:1px;height:22px;background:var(--border,rgba(255,255,255,.18))')} />
@@ -123,7 +123,7 @@ export default function Header() {
               >
                 <div
                   style={css(
-                    "flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700"
+                    "flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Big Shoulders Display';font-weight:700"
                   )}
                 >
                   {p.mono}
@@ -148,7 +148,7 @@ export default function Header() {
           )}
         >
           <div style={css('display:flex;justify-content:space-between;align-items:center;margin-bottom:28px')}>
-            <span style={css("font-family:'Space Grotesk';font-weight:700;font-size:24px")}>
+            <span style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:24px")}>
               GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
             </span>
             <button

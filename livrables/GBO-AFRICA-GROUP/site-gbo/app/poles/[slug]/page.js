@@ -65,7 +65,7 @@ export default function PolePage({ params }) {
           >
             <span style={css('width:7px;height:7px;border-radius:50%;background:#fbbf24;animation:pulse 1.6s infinite')} /> Bientôt disponible
           </span>
-          <h1 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(36px,7vw,72px);letter-spacing:-2px;line-height:.98;color:#fff")}>{detail.name}</h1>
+          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(36px,7vw,72px);letter-spacing:-2px;line-height:.98;color:#fff")}>{detail.name}</h1>
           <p style={css('font-size:clamp(17px,2.4vw,22px);color:rgba(255,255,255,.85);max-width:56ch;margin-top:20px;line-height:1.45')}>{detail.tagline}</p>
           <button
             onClick={() => document.getElementById('waitlist-box')?.scrollIntoView({ behavior: 'smooth' })}
@@ -95,7 +95,7 @@ export default function PolePage({ params }) {
         )}
       >
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>Services à venir</h2>
+          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>Services à venir</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px')}>
             {detail.services.map((sv) => (
               <div key={sv} style={css('display:flex;gap:12px;align-items:center;padding:18px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
@@ -117,7 +117,7 @@ export default function PolePage({ params }) {
 
       <section style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:24px")}>Questions fréquentes</h2>
+          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:24px")}>Questions fréquentes</h2>
           <div style={{ display: 'grid', gap: 10 }}>
             {detail.faqs.map((f) => (
               <div key={f.q} style={css('padding:22px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}>
@@ -142,14 +142,14 @@ export default function PolePage({ params }) {
                   <path d="M5 12l5 5L20 6" />
                 </svg>
               </div>
-              <h3 style={css("font-family:'Space Grotesk';font-weight:700;font-size:24px;margin-bottom:8px")}>Vous êtes sur la liste !</h3>
+              <h3 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:24px;margin-bottom:8px")}>Vous êtes sur la liste !</h3>
               <p style={{ fontSize: 15, opacity: 0.8, lineHeight: 1.5 }}>
                 Vous serez notifié en priorité à l&apos;ouverture de {detail.name}. Un e-mail de confirmation vient de vous être envoyé.
               </p>
             </div>
           ) : (
             <form onSubmit={submitWaitlist}>
-              <h3 style={css("font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,3.5vw,30px);margin-bottom:8px")}>Soyez prévenu au lancement</h3>
+              <h3 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(22px,3.5vw,30px);margin-bottom:8px")}>Soyez prévenu au lancement</h3>
               <p style={{ fontSize: 15, opacity: 0.8, marginBottom: 22, lineHeight: 1.5 }}>Laissez votre e-mail — priorité absolue à la liste d&apos;attente {detail.name}.</p>
               <div style={css('display:flex;flex-wrap:wrap;gap:10px')}>
                 <input
