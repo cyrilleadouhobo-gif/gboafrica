@@ -3,7 +3,7 @@ export const LEGAL = {
     title: 'Mentions légales',
     updated: 'Édition 2026 · v1.0',
     sections: [
-      { h: 'Éditeur du site', p: "GBÔ AFRICA GROUP — SARL au capital social de 1 000 000 FCFA · RCCM CI-ABJ-03-2026-B12-04057 · DFE [À COMPLÉTER] · CC [À COMPLÉTER]. Siège social : Abidjan, Côte d'Ivoire." },
+      { h: 'Éditeur du site', p: "GBÔ AFRICA GROUP — SARL au capital social de 1 000 000 FCFA · RCCM CI-ABJ-03-2026-B12-04057 · Compte Contribuable 2604002Q. Siège social : Abidjan, Côte d'Ivoire." },
       { h: 'Directeur de la publication', p: 'Frédéric TIEMON, Gérant.' },
       { h: 'Hébergeur', p: "[À COMPLÉTER — dénomination, adresse et contact de l'hébergeur]." },
       { h: 'Propriété intellectuelle', p: "La marque GBÔ, le logotype, le slogan « Plus qu'une pratique, un style de vie » et l'ensemble des contenus sont protégés. Toute reproduction sans autorisation est interdite." },
