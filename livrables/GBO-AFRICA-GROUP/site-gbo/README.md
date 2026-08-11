@@ -92,8 +92,28 @@ Le projet tourne sur **Next.js 16.3.0 / React 19.2.8** (migré depuis la 14.2, `
 - **E-mails transactionnels** (`lib/email.js`) : sans `RESEND_API_KEY` + `EMAIL_FROM`,
   les e-mails sont journalisés côté serveur, pas envoyés. Créer un compte gratuit sur
   resend.com pour activer.
-- **WhatsApp Business** (`lib/whatsapp.js`) : nécessite une vérification d'entreprise
-  Meta et des templates de message approuvés. Non implémenté par nécessité.
+- **WhatsApp Business** (`lib/whatsapp.js`) : le code est prêt (API Cloud de Meta), mais
+  il faut d'abord, côté Meta (aucune de ces étapes ne peut être faite depuis le code) :
+  1. Un compte [Meta Business Suite](https://business.facebook.com) vérifié (documents
+     d'entreprise — RCCM, etc., déjà réunis pour les mentions légales, réutilisables ici).
+  2. Une app sur [developers.facebook.com](https://developers.facebook.com) avec le
+     produit **WhatsApp** ajouté, et un numéro de téléphone enregistré (peut être un
+     nouveau numéro dédié, ou un numéro existant s'il n'est pas déjà sur WhatsApp normal).
+  3. Récupérer `WHATSAPP_TOKEN` (jeton d'accès système, permanent — pas le jeton
+     temporaire de test 24h) et `WHATSAPP_PHONE_NUMBER_ID` (dans API Setup, **ce n'est
+     pas le numéro de téléphone lui-même**) dans Meta for Developers > WhatsApp > API Setup.
+  4. Soumettre ces deux templates à l'approbation (WhatsApp Manager > Message Templates,
+     catégorie **Utility**, langue **French**) — le code envoie exactement ces noms :
+     - `lead_confirmation` : *"Bonjour {{1}}, votre demande d'accompagnement GBÔ a bien
+       été enregistrée. Un conseiller vous contactera rapidement pour préparer votre
+       premier bilan."*
+     - `company_confirmation` : *"Bonjour, votre demande pour {{1}} a bien été reçue. Un
+       conseiller Entreprise GBÔ vous recontacte pour établir une proposition sur
+       mesure."*
+  
+     L'approbation Meta prend de quelques minutes à plusieurs jours. Une fois approuvés,
+     renseigner `WHATSAPP_TOKEN` + `WHATSAPP_PHONE_NUMBER_ID` dans `.env` — aucun
+     changement de code nécessaire.
 - **Paiement mobile money** (Club Premium, CinetPay ou équivalent) : nécessite un
   compte marchand. Pas encore construit — le parcours d'abonnement n'existe pas dans
   cette V1.
