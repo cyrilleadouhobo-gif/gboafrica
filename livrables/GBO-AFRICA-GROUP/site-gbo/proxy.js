@@ -18,6 +18,12 @@ export function proxy(request) {
   if (pathname.startsWith('/api/admin') && !request.cookies.get(SESSION_COOKIE)) {
     return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
   }
+  if (pathname.startsWith('/partenaires/nutrition') && pathname !== '/partenaires/nutrition/login' && !request.cookies.get(SESSION_COOKIE)) {
+    return NextResponse.redirect(new URL('/partenaires/nutrition/login', request.url));
+  }
+  if (pathname.startsWith('/api/partner') && !request.cookies.get(SESSION_COOKIE)) {
+    return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
+  }
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);

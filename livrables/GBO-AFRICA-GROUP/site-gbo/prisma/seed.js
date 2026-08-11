@@ -29,27 +29,47 @@ async function main() {
     console.log(`Avis de démo : ${DEMO_REVIEWS.length} créés (en attente de modération).`);
   }
 
-  const email = process.env.ADMIN_EMAIL;
-  const password = process.env.ADMIN_PASSWORD;
+  await seedAdminUser({
+    label: 'admin',
+    role: 'admin',
+    email: process.env.ADMIN_EMAIL,
+    password: process.env.ADMIN_PASSWORD,
+    emailVar: 'ADMIN_EMAIL',
+    passwordVar: 'ADMIN_PASSWORD',
+  });
 
+  // Le Centre Médico Nutrition : un seul compte partagé côté partenaire (décidé avec
+  // Cyrille — à eux de gérer en interne qui l'utilise), scope limité par role dans
+  // lib/auth.js (getCurrentNutritionPartner) à /partenaires/nutrition et /api/partner/*.
+  await seedAdminUser({
+    label: 'partenaire nutrition',
+    role: 'nutrition_partner',
+    email: process.env.NUTRITION_PARTNER_EMAIL,
+    password: process.env.NUTRITION_PARTNER_PASSWORD,
+    emailVar: 'NUTRITION_PARTNER_EMAIL',
+    passwordVar: 'NUTRITION_PARTNER_PASSWORD',
+  });
+}
+
+async function seedAdminUser({ label, role, email, password, emailVar, passwordVar }) {
   if (!email || !password) {
     console.warn(
-      "\n[seed] ADMIN_EMAIL / ADMIN_PASSWORD absents de l'environnement — aucun compte admin créé.\n" +
-        '        Ajoute-les à .env puis relance `npm run db:seed` pour créer le premier compte back-office.\n'
+      `\n[seed] ${emailVar} / ${passwordVar} absents de l'environnement — aucun compte ${label} créé.\n` +
+        `        Ajoute-les à .env puis relance \`npm run db:seed\` pour créer ce compte.\n`
     );
     return;
   }
   if (password.length < 12) {
-    throw new Error('[seed] ADMIN_PASSWORD doit faire au moins 12 caractères.');
+    throw new Error(`[seed] ${passwordVar} doit faire au moins 12 caractères.`);
   }
 
   const passwordHash = await bcrypt.hash(password, 12);
   await prisma.adminUser.upsert({
     where: { email },
-    update: { passwordHash },
-    create: { email, passwordHash, role: 'admin' },
+    update: { passwordHash, role },
+    create: { email, passwordHash, role },
   });
-  console.log(`Compte admin prêt : ${email}`);
+  console.log(`Compte ${label} prêt : ${email}`);
 }
 
 main()

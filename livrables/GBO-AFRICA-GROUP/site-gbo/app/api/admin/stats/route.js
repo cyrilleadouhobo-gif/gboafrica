@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../../lib/db.js';
-import { getCurrentAdmin } from '../../../../lib/auth.js';
+import { getCurrentStaffAdmin } from '../../../../lib/auth.js';
 import { LEAD_STATUSES } from '../../../../lib/constants.js';
 
 export async function GET() {
-  const admin = await getCurrentAdmin();
+  const admin = await getCurrentStaffAdmin();
   if (!admin) return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
 
   const [total, byStatus, byType, recent] = await Promise.all([

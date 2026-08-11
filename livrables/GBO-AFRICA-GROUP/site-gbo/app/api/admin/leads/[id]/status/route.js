@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../../../../lib/db.js';
-import { getCurrentAdmin, logAudit } from '../../../../../../lib/auth.js';
+import { getCurrentStaffAdmin, logAudit } from '../../../../../../lib/auth.js';
 import { isSameOrigin } from '../../../../../../lib/security.js';
 import { statusUpdateSchema, parseOrError } from '../../../../../../lib/validation.js';
 import { LEAD_STATUSES } from '../../../../../../lib/constants.js';
@@ -8,7 +8,7 @@ import { LEAD_STATUSES } from '../../../../../../lib/constants.js';
 export async function PATCH(request, { params }) {
   if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
 
-  const admin = await getCurrentAdmin();
+  const admin = await getCurrentStaffAdmin();
   if (!admin) return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
 
   const { id: idParam } = await params;

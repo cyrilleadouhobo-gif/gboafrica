@@ -27,6 +27,15 @@ export const REVIEW_STATUS_LABELS = {
   REJECTED: 'Rejeté',
 };
 
+export const NUTRITION_FOLLOWUP_STATUSES = ['NOUVEAU', 'EN_SUIVI', 'A_RELANCER', 'TERMINE'];
+
+export const NUTRITION_FOLLOWUP_STATUS_LABELS = {
+  NOUVEAU: 'Nouveau',
+  EN_SUIVI: 'En suivi',
+  A_RELANCER: 'À relancer',
+  TERMINE: 'Terminé',
+};
+
 export const ABIDJAN_COMMUNES = [
   'Abobo',
   'Adjamé',

@@ -79,6 +79,12 @@ export default function AdminPage() {
     setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
   };
 
+  const transmitToNutritionPartner = async (id) => {
+    const res = await fetch(`/api/admin/leads/${id}/nutrition-handoff`, { method: 'POST' });
+    if (!res.ok) return;
+    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, nutritionFollowUp: { status: 'NOUVEAU' } } : l)));
+  };
+
   const moderateReview = async (id, status) => {
     const res = await fetch(`/api/admin/reviews/${id}/status`, {
       method: 'PATCH',
@@ -267,7 +273,23 @@ export default function AdminPage() {
                   )}
                 >
                   <span style={{ minWidth: 0 }}>
-                    <span style={{ fontWeight: 600, fontSize: 14, display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name}</span>
+                    <span style={css('display:flex;align-items:center;gap:6px')}>
+                      <span style={{ fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{l.name}</span>
+                      {l.nutrition && (
+                        <span
+                          title={l.nutritionFollowUp ? 'Nutrition — transmis au partenaire' : 'Nutrition — à transmettre'}
+                          style={css(
+                            `flex:0 0 auto;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;${
+                              l.nutritionFollowUp
+                                ? 'background:rgba(52,211,153,.14);color:#34d399'
+                                : 'background:rgba(198,242,2,.14);color:var(--lime,#C6F202)'
+                            }`
+                          )}
+                        >
+                          Nutrition
+                        </span>
+                      )}
+                    </span>
                     <span style={css('font-size:12px;color:var(--muted,#8a8a8a)')}>
                       {l.code} · {l.commune} · {new Date(l.createdAt).toLocaleDateString('fr-FR')}
                     </span>
@@ -418,6 +440,7 @@ export default function AdminPage() {
                 ['E-mail', selectedLead.contactEmail || '—'],
                 ['Téléphone', selectedLead.contactPhone || '—'],
                 ['Coach', selectedLead.coach?.name || '—'],
+                ['Nutrition', selectedLead.nutrition ? selectedLead.nutritionObjective || 'Demandé' : 'Non demandé'],
               ].map(([k, v]) => (
                 <div key={k} style={css('display:flex;justify-content:space-between;padding:13px 16px;background:var(--surface,#0c0c0c);font-size:13.5px')}>
                   <span style={css('color:var(--muted,#8a8a8a)')}>{k}</span>
@@ -457,6 +480,27 @@ export default function AdminPage() {
                 </option>
               ))}
             </select>
+
+            {selectedLead.nutrition && (
+              <>
+                <div style={css('font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin:20px 0 10px')}>
+                  Suivi nutritionnel
+                </div>
+                {selectedLead.nutritionFollowUp ? (
+                  <div style={css('padding:14px;border-radius:12px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.35);color:#34d399;font-size:13.5px;font-weight:600')}>
+                    Déjà transmis au Centre Médico Nutrition
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => transmitToNutritionPartner(selectedLead.id)}
+                    style={css('width:100%;padding:14px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14px')}
+                  >
+                    Transmettre au Centre Médico Nutrition
+                  </button>
+                )}
+              </>
+            )}
+
             <div style={css('margin-top:18px;padding:14px;border-radius:12px;background:var(--glass,rgba(255,255,255,.03));font-size:12.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>
               Chaque changement est tracé dans le journal d&apos;audit (voir AuditLog).
             </div>

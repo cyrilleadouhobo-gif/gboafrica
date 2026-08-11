@@ -84,6 +84,11 @@ export const reviewStatusSchema = z.object({
   status: z.enum(['APPROVED', 'REJECTED']),
 });
 
+export const nutritionStatusSchema = z.object({
+  status: z.enum(['NOUVEAU', 'EN_SUIVI', 'A_RELANCER', 'TERMINE']),
+  notes: optionalText(2000),
+});
+
 export const loginSchema = z.object({
   email,
   password: z.string().min(8, 'Mot de passe invalide').max(200),

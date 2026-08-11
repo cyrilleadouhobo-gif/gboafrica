@@ -15,6 +15,26 @@ npm run dev
 
 Le back-office est sur `/admin` (redirige vers `/admin/login` si non connecté).
 
+## Espace partenaire nutrition
+
+Le Centre Médico Nutrition (partenaire externe pour le suivi nutritionnel) a son propre
+espace, cloisonné du back-office GBÔ :
+
+- `/partenaires/nutrition/login` puis `/partenaires/nutrition` — un seul compte partagé
+  (`NUTRITION_PARTNER_EMAIL` / `NUTRITION_PARTNER_PASSWORD` dans `.env`, créé par
+  `npm run db:seed`, décision prise avec Cyrille de ne pas gérer plusieurs comptes pour
+  l'instant).
+- Réutilise l'infrastructure d'authentification existante (`AdminUser`, sessions,
+  bcrypt) via un `role` (`admin` vs `nutrition_partner`) — voir `getCurrentStaffAdmin()`
+  et `getCurrentNutritionPartner()` dans `lib/auth.js`. **Toute route `/api/admin/*` doit
+  utiliser `getCurrentStaffAdmin()`, jamais `getCurrentAdmin()` seul**, sous peine de
+  laisser une session partenaire atteindre le CRM complet.
+- Le partenaire ne voit jamais les prospects `Lead` directement : un admin doit d'abord
+  transmettre explicitement (`POST /api/admin/leads/[id]/nutrition-handoff`, bouton
+  « Transmettre au Centre Médico Nutrition » dans le détail prospect), ce qui crée un
+  `NutritionFollowUp` — c'est cette table, pas `Lead`, que l'espace partenaire interroge.
+  Seuls nom, contact et objectif nutritionnel sont exposés (minimisation des données).
+
 ## Sécurité — ce qui est en place
 
 - **Authentification admin** : mot de passe hashé (bcrypt, coût 12), session signée

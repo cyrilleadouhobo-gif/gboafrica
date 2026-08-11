@@ -87,6 +87,23 @@ export async function getCurrentAdmin() {
   return verifySessionCookie(raw);
 }
 
+/**
+ * Role-scoped checks built on top of getCurrentAdmin(). AdminUser rows can hold either
+ * role: 'admin' (full GBÔ back-office) or 'nutrition_partner' (Centre Médico Nutrition —
+ * sees only /partenaires/nutrition and /api/partner/*). Every /api/admin/* route and the
+ * admin dashboard layout must use getCurrentStaffAdmin(), never the bare getCurrentAdmin(),
+ * or a nutrition_partner session would reach the full CRM.
+ */
+export async function getCurrentStaffAdmin() {
+  const admin = await getCurrentAdmin();
+  return admin && admin.role === 'admin' ? admin : null;
+}
+
+export async function getCurrentNutritionPartner() {
+  const admin = await getCurrentAdmin();
+  return admin && admin.role === 'nutrition_partner' ? admin : null;
+}
+
 export async function logAudit({ adminUserId, action, targetType, targetId, detail }) {
   await prisma.auditLog.create({
     data: { adminUserId: adminUserId ?? null, action, targetType, targetId: String(targetId), detail: detail ? JSON.stringify(detail) : null },

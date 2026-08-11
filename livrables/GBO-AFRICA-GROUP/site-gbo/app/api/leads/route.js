@@ -29,14 +29,12 @@ export async function POST(request) {
   if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 });
   const d = parsed.data;
 
-  const objective = d.objective === 'Autre' && d.nutritionObj ? d.objective : d.objective;
-
   const created = await prisma.lead.create({
     data: {
       code: 'TEMP',
       type: 'PARTICULIER',
       name: `${d.prenom} ${d.nom}`.trim(),
-      objective,
+      objective: d.objective,
       profile: PROFILE_LABELS[d.profile] || d.profile,
       source: 'Tunnel Particulier',
       status: 'NOUVEAU',
@@ -44,6 +42,7 @@ export async function POST(request) {
       contactEmail: d.email,
       contactPhone: d.tel,
       nutrition: d.nutrition === 'oui',
+      nutritionObjective: d.nutrition === 'oui' ? d.nutritionObj || null : null,
       consentAt: new Date(),
     },
   });
