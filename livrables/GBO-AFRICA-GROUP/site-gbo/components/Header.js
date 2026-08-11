@@ -198,6 +198,13 @@ export default function Header() {
             <Link href="/admin" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
               Back-office
             </Link>
+            <Link
+              href="/partenaires/nutrition/login"
+              onClick={closeAll}
+              style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}
+            >
+              Espace partenaire nutrition
+            </Link>
           </div>
           <Link
             href="/fitness"

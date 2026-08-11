@@ -64,6 +64,7 @@ export default function Footer() {
               <Link href="/faq">FAQ</Link>
               <Link href="/corporate">Entreprises</Link>
               <Link href="/admin">Back-office</Link>
+              <Link href="/partenaires/nutrition/login">Espace partenaire nutrition</Link>
             </div>
           </div>
           <div>
