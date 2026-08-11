@@ -15,7 +15,9 @@ export const particulierLeadSchema = z.object({
   profile: z.enum(['adulte', 'femme', 'enceinte', 'maman', 'senior']),
   objective: shortText('Objectif', 200),
   nutrition: z.enum(['oui', 'non']),
-  nutritionObj: optionalText(200),
+  // The tunnel sends this as JS `null` (its initial React state) whenever nutrition
+  // is 'non' — optionalText() alone only tolerates `undefined`/'' , not `null`.
+  nutritionObj: optionalText(200).nullable(),
   prenom: shortText('Prénom'),
   nom: shortText('Nom'),
   tel: phone,
