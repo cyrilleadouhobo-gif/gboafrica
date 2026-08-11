@@ -18,7 +18,7 @@
 
 ### Activité principale
 
-Pompiste dans une station-service TotalEnergies Côte d'Ivoire : vente de carburant aux automobilistes et encaissement. Travail physiquement et mentalement épuisant (flux continu de clients, 8h debout, pression du gérant). En parallèle, je suis actionnaire et COO de GBÔ AFRICA GROUP, une SARL au capital de 1 000 000 FCFA (dont 200 000 FCFA de ma part) co-fondée avec mon meilleur ami (actionnaire à 800 000 FCFA), une structure axée sur le sport et le bien-être.
+Pompiste dans une station-service TotalEnergies Côte d'Ivoire : vente de carburant aux automobilistes et encaissement. Travail physiquement et mentalement épuisant (flux continu de clients, 8h debout, pression du gérant). En parallèle, je suis actionnaire et COO de GBÔ AFRICA GROUP, une SARL au capital de 1 000 000 FCFA (dont 200 000 FCFA de ma part) co-fondée avec mon meilleur ami Frédéric TIEMON (actionnaire à 800 000 FCFA et Gérant de la SARL), une structure axée sur le sport et le bien-être.
 
 ### Détails selon le profil
 
@@ -31,7 +31,7 @@ Pompiste dans une station-service TotalEnergies Côte d'Ivoire : vente de carbur
 - Activité : GBÔ AFRICA GROUP, SARL axée sport et bien-être
 - Mon rôle : Actionnaire (200 000 FCFA) et COO
 - Modèle économique : En cours de lancement, pas encore d'activité génératrice de revenu
-- Associé : Mon meilleur ami, actionnaire à 800 000 FCFA
+- Associé : Frédéric TIEMON, mon meilleur ami, actionnaire à 800 000 FCFA et Gérant de la SARL
 
 ### Formation
 

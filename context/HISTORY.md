@@ -7,6 +7,14 @@
 
 ---
 
+## 2026-08-11
+
+### Avancement du site GBÔ + identité de l'associé
+- Site GBÔ : migration Next.js 16 / React 19 (failles npm audit corrigées), bandeau cookies et SEO technique (sitemap, robots.txt, données structurées), police BROAVEN en attente de licence (placeholder Big Shoulders Display en place), nouvelles fonctionnalités inspirées de deux concurrents étudiés (Mon Prof Chez Moi, Domicil'Gym) : profils de coachs publics avec filtre par commune, avis clients modérés par l'admin, page dédiée de recrutement coach. Mentions légales complétées (SARL, capital 1 000 000 FCFA, RCCM CI-ABJ-03-2026-B12-04057) ; DFE et CC encore en attente. Nom de domaine choisi : gboafrica.com (sans accent, pour compatibilité).
+- Identité précisée : l'associé et meilleur ami co-fondateur de GBÔ AFRICA GROUP s'appelle **Frédéric TIEMON**, actionnaire à 800 000 FCFA et Gérant de la SARL.
+
+---
+
 ## 2026-08-07
 
 ### Démarrage de la plateforme digitale GBÔ + premier projet de formation
