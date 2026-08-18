@@ -5,6 +5,7 @@ export function leadBadge(statusCode) {
     QUALIFIE: '#a78bfa',
     COACH_ATTRIBUE: '#fbbf24',
     CLIENT: '#34d399',
+    PARTENAIRE_ACTIF: '#34d399',
     PERDU: '#f87171',
   };
   const c = map[statusCode] || '#8a8a8a';

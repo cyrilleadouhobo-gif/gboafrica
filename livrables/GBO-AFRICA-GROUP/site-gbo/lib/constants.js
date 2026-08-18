@@ -17,6 +17,12 @@ export const LEAD_STATUS_LABELS = {
   PERDU: 'Perdu / En pause',
 };
 
+export const PRACTICE_LOCATION_LABELS = {
+  domicile: 'À domicile',
+  salle_partenaire: 'Salle partenaire',
+  exterieur: 'En extérieur',
+};
+
 export const COACH_DISPO = ['DISPONIBLE', 'COMPLET'];
 
 export const REVIEW_STATUSES = ['PENDING', 'APPROVED', 'REJECTED'];
@@ -35,6 +41,28 @@ export const NUTRITION_FOLLOWUP_STATUS_LABELS = {
   A_RELANCER: 'À relancer',
   TERMINE: 'Terminé',
 };
+
+export const GYM_PARTNER_STATUSES = ['NOUVEAU', 'A_CONTACTER', 'QUALIFIE', 'PARTENAIRE_ACTIF', 'PERDU'];
+
+export const GYM_PARTNER_STATUS_LABELS = {
+  NOUVEAU: 'Nouveau',
+  A_CONTACTER: 'À contacter',
+  QUALIFIE: 'Qualifié',
+  PARTENAIRE_ACTIF: 'Partenaire actif',
+  PERDU: 'Perdu / Refusé',
+};
+
+export const GYM_PARTNER_REASONS = [
+  'Digitaliser ma salle',
+  'Recevoir de nouveaux clients',
+  'Gagner en visibilité',
+  'Participer aux événements GBÔ',
+  'Plusieurs de ces avantages',
+];
+
+export function gymPartnerCode(seq) {
+  return `GP-${seq}`;
+}
 
 export const ABIDJAN_COMMUNES = [
   'Abobo',

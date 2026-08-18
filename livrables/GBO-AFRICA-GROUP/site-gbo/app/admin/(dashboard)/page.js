@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import { leadBadge, tabStyle } from '../../../lib/styleHelpers.js';
-import { LEAD_STATUSES, LEAD_STATUS_LABELS, LEAD_TYPES, LEAD_TYPE_LABELS, REVIEW_STATUS_LABELS } from '../../../lib/constants.js';
+import { LEAD_STATUSES, LEAD_STATUS_LABELS, LEAD_TYPES, LEAD_TYPE_LABELS, REVIEW_STATUS_LABELS, PRACTICE_LOCATION_LABELS, GYM_PARTNER_STATUS_LABELS } from '../../../lib/constants.js';
 
 const FILTERS = ['Tous', ...LEAD_TYPES];
 
@@ -18,18 +18,20 @@ export default function AdminPage() {
   const [leads, setLeads] = useState([]);
   const [coaches, setCoaches] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [gymPartners, setGymPartners] = useState([]);
   const [stats, setStats] = useState(null);
   const [funnel, setFunnel] = useState([]);
   const [recentLeads, setRecentLeads] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadAll = useCallback(async () => {
-    const [meRes, leadsRes, coachesRes, statsRes, reviewsRes] = await Promise.all([
+    const [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes] = await Promise.all([
       fetch('/api/auth/me'),
       fetch('/api/admin/leads'),
       fetch('/api/admin/coaches'),
       fetch('/api/admin/stats'),
       fetch('/api/admin/reviews'),
+      fetch('/api/admin/gym-partners'),
     ]);
 
     if (meRes.status === 401) {
@@ -42,6 +44,7 @@ export default function AdminPage() {
     const coachesData = await coachesRes.json();
     const statsData = await statsRes.json();
     const reviewsData = await reviewsRes.json();
+    const gymPartnersData = await gymPartnersRes.json();
 
     setMe(meData.admin);
     setLeads(leadsData.leads || []);
@@ -50,6 +53,7 @@ export default function AdminPage() {
     setFunnel(statsData.funnel || []);
     setRecentLeads(statsData.recent || []);
     setReviews(reviewsData.reviews || []);
+    setGymPartners(gymPartnersData.gymPartners || []);
     setLoading(false);
   }, [router]);
 
@@ -83,6 +87,17 @@ export default function AdminPage() {
     const res = await fetch(`/api/admin/leads/${id}/nutrition-handoff`, { method: 'POST' });
     if (!res.ok) return;
     setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, nutritionFollowUp: { status: 'NOUVEAU' } } : l)));
+  };
+
+  const advanceGymPartnerStatus = async (id, direction) => {
+    const res = await fetch(`/api/admin/gym-partners/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ direction }),
+    });
+    if (!res.ok) return;
+    const { gymPartner } = await res.json();
+    setGymPartners((prev) => prev.map((g) => (g.id === id ? gymPartner : g)));
   };
 
   const moderateReview = async (id, status) => {
@@ -171,6 +186,9 @@ export default function AdminPage() {
           </button>
           <button onClick={() => setAdminTab('coaches')} style={css(tabStyle(adminTab === 'coaches'))}>
             Coachs
+          </button>
+          <button onClick={() => setAdminTab('gym-partners')} style={css(tabStyle(adminTab === 'gym-partners'))}>
+            Salles partenaires
           </button>
           <button onClick={() => setAdminTab('reviews')} style={css(tabStyle(adminTab === 'reviews'))}>
             Avis {pendingReviews.length > 0 && `(${pendingReviews.length})`}
@@ -356,6 +374,60 @@ export default function AdminPage() {
           </div>
         )}
 
+        {adminTab === 'gym-partners' && (
+          <div style={{ display: 'grid', gap: 12 }}>
+            {gymPartners.length === 0 && <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucune candidature pour le moment.</div>}
+            {gymPartners.map((g) => (
+              <div key={g.id} style={css('padding:22px 24px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
+                <div style={css('display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px')}>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={css('display:flex;align-items:center;gap:8px')}>
+                      <span style={{ fontWeight: 700, fontSize: 16 }}>{g.gymName}</span>
+                      <span style={css('font-size:12px;color:var(--muted,#8a8a8a)')}>{g.code}</span>
+                    </div>
+                    <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);margin-top:2px')}>
+                      {g.managerName} · {g.commune} · {new Date(g.createdAt).toLocaleDateString('fr-FR')}
+                    </div>
+                  </div>
+                  <span style={css(leadBadge(g.status))}>{GYM_PARTNER_STATUS_LABELS[g.status]}</span>
+                </div>
+                <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;font-size:13px;color:var(--muted,#8a8a8a);margin-bottom:14px')}>
+                  <div>
+                    <strong style={{ color: 'var(--fg,#fff)', fontWeight: 600 }}>Contact :</strong> {g.phone} · {g.email}
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--fg,#fff)', fontWeight: 600 }}>Adresse :</strong> {g.address}
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--fg,#fff)', fontWeight: 600 }}>Adhérents :</strong> {g.memberCount || '—'}
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--fg,#fff)', fontWeight: 600 }}>Logiciel de gestion :</strong>{' '}
+                    {g.hasSoftware === null ? '—' : g.hasSoftware ? 'Oui' : 'Non'}
+                  </div>
+                  <div style={{ gridColumn: '1/-1' }}>
+                    <strong style={{ color: 'var(--fg,#fff)', fontWeight: 600 }}>Motivations :</strong> {g.reasons || '—'}
+                  </div>
+                </div>
+                <div style={css('display:flex;gap:10px')}>
+                  <button
+                    onClick={() => advanceGymPartnerStatus(g.id, -1)}
+                    style={css('flex:1;padding:11px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));font-weight:700;font-size:13.5px;color:var(--fg,#fff)')}
+                  >
+                    ‹ Reculer
+                  </button>
+                  <button
+                    onClick={() => advanceGymPartnerStatus(g.id, 1)}
+                    style={css('flex:1;padding:11px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:13.5px')}
+                  >
+                    Avancer ›
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         {adminTab === 'reviews' && (
           <div style={{ display: 'grid', gap: 12 }}>
             {reviews.length === 0 && <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucun avis pour le moment.</div>}
@@ -437,6 +509,7 @@ export default function AdminPage() {
                 ['Profil', selectedLead.profile],
                 ['Source', selectedLead.source],
                 ['Commune', selectedLead.commune],
+                ['Lieu de pratique', selectedLead.practiceLocation ? PRACTICE_LOCATION_LABELS[selectedLead.practiceLocation] || selectedLead.practiceLocation : '—'],
                 ['E-mail', selectedLead.contactEmail || '—'],
                 ['Téléphone', selectedLead.contactPhone || '—'],
                 ['Coach', selectedLead.coach?.name || '—'],

@@ -112,31 +112,78 @@ export default function Header() {
           )}
         >
           <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px')}>
-            {poles.map((p) => (
-              <Link
-                key={p.key}
-                href={p.key === 'fitness' ? '/fitness' : `/poles/${p.key}`}
-                onClick={closeAll}
-                style={css(
-                  "display:flex;gap:12px;padding:14px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.08));background:var(--glass,rgba(255,255,255,.03));cursor:pointer;transition:.18s"
-                )}
-              >
+            {poles.map((p) =>
+              p.key === 'fitness' ? (
                 <div
+                  key={p.key}
                   style={css(
-                    "flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Big Shoulders Display';font-weight:700"
+                    "padding:14px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.08));background:var(--glass,rgba(255,255,255,.03))"
                   )}
                 >
-                  {p.mono}
-                </div>
-                <div style={{ minWidth: 0 }}>
-                  <div style={css('display:flex;align-items:center;gap:8px')}>
-                    <span style={{ fontWeight: 700, fontSize: 15 }}>{p.name}</span>
+                  <div style={css('display:flex;gap:12px')}>
+                    <div
+                      style={css(
+                        "flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Big Shoulders Display';font-weight:700"
+                      )}
+                    >
+                      {p.mono}
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <span style={{ fontWeight: 700, fontSize: 15 }}>{p.name}</span>
+                      <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);margin-top:2px;line-height:1.35')}>{p.tagline}</div>
+                      <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
+                    </div>
                   </div>
-                  <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);margin-top:2px;line-height:1.35')}>{p.tagline}</div>
-                  <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
+                  <div style={css('display:grid;gap:6px;margin-top:12px')}>
+                    <Link
+                      href="/fitness"
+                      onClick={closeAll}
+                      style={css('padding:9px 11px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--fg,#ddd);border:1px solid var(--border,rgba(255,255,255,.08))')}
+                    >
+                      Particuliers
+                    </Link>
+                    <Link
+                      href="/corporate"
+                      onClick={closeAll}
+                      style={css('padding:9px 11px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--fg,#ddd);border:1px solid var(--border,rgba(255,255,255,.08))')}
+                    >
+                      Entreprises
+                    </Link>
+                    <Link
+                      href="/fitness/salles-partenaires"
+                      onClick={closeAll}
+                      style={css('padding:9px 11px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--fg,#ddd);border:1px solid var(--border,rgba(255,255,255,.08))')}
+                    >
+                      Salles partenaires
+                    </Link>
+                  </div>
                 </div>
-              </Link>
-            ))}
+              ) : (
+                <Link
+                  key={p.key}
+                  href={`/poles/${p.key}`}
+                  onClick={closeAll}
+                  style={css(
+                    "display:flex;gap:12px;padding:14px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.08));background:var(--glass,rgba(255,255,255,.03));cursor:pointer;transition:.18s"
+                  )}
+                >
+                  <div
+                    style={css(
+                      "flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Big Shoulders Display';font-weight:700"
+                    )}
+                  >
+                    {p.mono}
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={css('display:flex;align-items:center;gap:8px')}>
+                      <span style={{ fontWeight: 700, fontSize: 15 }}>{p.name}</span>
+                    </div>
+                    <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);margin-top:2px;line-height:1.35')}>{p.tagline}</div>
+                    <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
+                  </div>
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}
@@ -164,17 +211,37 @@ export default function Header() {
           </div>
           <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted,#8a8a8a);margin:6px 0 12px')}>Pôles</div>
           <div style={css('display:grid;gap:8px;margin-bottom:22px')}>
-            {poles.map((p) => (
-              <Link
-                key={p.key}
-                href={p.key === 'fitness' ? '/fitness' : `/poles/${p.key}`}
-                onClick={closeAll}
-                style={css('display:flex;align-items:center;justify-content:space-between;padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.1))')}
-              >
-                <span style={{ fontWeight: 700, fontSize: 17 }}>{p.name}</span>
-                <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
-              </Link>
-            ))}
+            {poles.map((p) =>
+              p.key === 'fitness' ? (
+                <div key={p.key} style={css('padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.1))')}>
+                  <div style={css('display:flex;align-items:center;justify-content:space-between;margin-bottom:10px')}>
+                    <span style={{ fontWeight: 700, fontSize: 17 }}>{p.name}</span>
+                    <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
+                  </div>
+                  <div style={css('display:grid;gap:6px')}>
+                    <Link href="/fitness" onClick={closeAll} style={css('padding:10px 4px;font-size:14.5px;font-weight:600;color:var(--muted,#c0c0c0)')}>
+                      Particuliers
+                    </Link>
+                    <Link href="/corporate" onClick={closeAll} style={css('padding:10px 4px;font-size:14.5px;font-weight:600;color:var(--muted,#c0c0c0)')}>
+                      Entreprises
+                    </Link>
+                    <Link href="/fitness/salles-partenaires" onClick={closeAll} style={css('padding:10px 4px;font-size:14.5px;font-weight:600;color:var(--muted,#c0c0c0)')}>
+                      Salles partenaires
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={p.key}
+                  href={`/poles/${p.key}`}
+                  onClick={closeAll}
+                  style={css('display:flex;align-items:center;justify-content:space-between;padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.1))')}
+                >
+                  <span style={{ fontWeight: 700, fontSize: 17 }}>{p.name}</span>
+                  <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
+                </Link>
+              )
+            )}
           </div>
           <div style={css('display:grid;gap:2px')}>
             <Link href="/about" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>

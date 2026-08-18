@@ -55,6 +55,21 @@ export const JOBS = [
   { t: 'Community manager', loc: 'Abidjan · Hybride', type: 'Temps plein' },
 ];
 
+export const GYM_ECOSYSTEM_ADVANTAGES = [
+  { icon: '💻', t: 'Digitalisation', d: 'Accédez à une offre préférentielle sur E-Gym, sous réserve des conditions négociées avec le partenaire.' },
+  { icon: '👥', t: 'Nouveaux clients', d: 'GBÔ peut orienter vers votre salle des personnes recherchant une solution de fitness dans votre zone.' },
+  { icon: '📍', t: 'Visibilité', d: 'Votre salle peut être référencée dans le réseau de partenaires GBÔ et être valorisée auprès de notre communauté.' },
+  { icon: '🤝', t: 'Opportunités commerciales', d: 'Participez aux campagnes, challenges et événements organisés par GBÔ.' },
+  { icon: '🏆', t: 'Communauté', d: "Intégrez un réseau de salles partageant une ambition commune autour du développement du fitness en Côte d'Ivoire." },
+];
+
+export const GYM_MANAGER_BENEFITS = [
+  { n: '1', t: 'Des prospects', d: 'Des clients recherchant une solution de fitness peuvent être orientés vers votre établissement.' },
+  { n: '2', t: 'Une solution de gestion', d: 'Bénéficiez de conditions préférentielles négociées sur E-Gym.' },
+  { n: '3', t: 'De la visibilité', d: 'Votre salle peut être intégrée au réseau GBÔ et présentée à notre communauté.' },
+  { n: '4', t: 'Des opportunités', d: 'Participez à des événements, challenges et opérations communes.' },
+];
+
 export const PARTNER_TYPES = [
   { t: 'Salles & espaces', d: 'Mettez vos infrastructures au service de la communauté GBÔ.' },
   { t: 'Marques & nutrition', d: 'Distribuez vos produits via le futur GBÔ Shop.' },

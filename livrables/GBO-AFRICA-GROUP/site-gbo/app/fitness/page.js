@@ -85,6 +85,22 @@ export default function FitnessPage() {
         </div>
       </section>
 
+      <section style={css('padding:0 clamp(20px,5vw,64px) clamp(40px,6vw,72px)')}>
+        <div
+          style={css(
+            'max-width:1000px;margin:0 auto;padding:22px 26px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between'
+          )}
+        >
+          <div>
+            <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>Vos séances, où vous voulez</div>
+            <div style={css('font-size:14px;color:var(--muted,#8a8a8a)')}>À domicile · En salle partenaire · En extérieur</div>
+          </div>
+          <Link href="/fitness/salles-partenaires" style={css('font-size:13.5px;font-weight:700;color:var(--lime,#C6F202);white-space:nowrap')}>
+            Accédez à un réseau de salles partenaires sélectionnées par GBÔ →
+          </Link>
+        </div>
+      </section>
+
       <section style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Actif de marque</div>

@@ -18,6 +18,7 @@ export const particulierLeadSchema = z.object({
   // The tunnel sends this as JS `null` (its initial React state) whenever nutrition
   // is 'non' — optionalText() alone only tolerates `undefined`/'' , not `null`.
   nutritionObj: optionalText(200).nullable(),
+  practiceLocation: z.enum(['domicile', 'salle_partenaire', 'exterieur']).optional().or(z.literal('')).nullable(),
   prenom: shortText('Prénom'),
   nom: shortText('Nom'),
   tel: phone,
@@ -67,6 +68,30 @@ export const partnerSchema = z.object({
   email,
   msg: optionalText(2000),
   website: honeypot,
+});
+
+export const gymPartnerSchema = z.object({
+  gymName: shortText('Nom de la salle', 150),
+  managerName: shortText('Nom du responsable', 150),
+  phone,
+  whatsapp: z
+    .string()
+    .trim()
+    .max(30)
+    .regex(/^[0-9+()\s.-]*$/, 'Numéro invalide')
+    .optional()
+    .or(z.literal('')),
+  email,
+  commune: shortText('Commune', 120),
+  address: shortText('Adresse', 300),
+  memberCount: optionalText(40),
+  hasSoftware: z.enum(['oui', 'non']),
+  reasons: z.array(z.string().max(120)).max(10).optional().default([]),
+  website: honeypot,
+});
+
+export const gymPartnerStatusSchema = z.object({
+  direction: z.union([z.literal(1), z.literal(-1)]),
 });
 
 export const newsletterSchema = z.object({

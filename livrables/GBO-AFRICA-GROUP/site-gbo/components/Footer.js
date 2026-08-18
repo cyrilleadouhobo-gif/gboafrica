@@ -55,6 +55,7 @@ export default function Footer() {
               <Link href="/devenir-coach">Devenir coach</Link>
               <Link href="/careers">Carrières</Link>
               <Link href="/partners">Partenaires</Link>
+              <Link href="/devenir-salle-partenaire">Salles partenaires</Link>
             </div>
           </div>
           <div>

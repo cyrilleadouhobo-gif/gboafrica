@@ -10,11 +10,13 @@ datasource db {
 // SQLite has no native enum support — these are validated at the application layer
 // (see lib/constants.js): LeadType = PARTICULIER | ENTREPRISE | WAITLIST
 // LeadStatus = NOUVEAU | A_CONTACTER | QUALIFIE | COACH_ATTRIBUE | CLIENT | PERDU
+// Lead.practiceLocation = domicile | salle_partenaire | exterieur (optionnel, tunnel Particulier)
 // CoachDispo = DISPONIBLE | COMPLET
 // ReviewStatus = PENDING | APPROVED | REJECTED
 // AdminUser.role = admin | nutrition_partner — nutrition_partner is scoped to /partenaires/nutrition
 // and /api/partner/* only, and must never pass the role check on /api/admin/* routes.
 // NutritionFollowUpStatus = NOUVEAU | EN_SUIVI | A_RELANCER | TERMINE
+// GymPartnerStatus = NOUVEAU | A_CONTACTER | QUALIFIE | PARTENAIRE_ACTIF | PERDU
 
 model Lead {
   id                 Int        @id @default(autoincrement())
@@ -30,6 +32,7 @@ model Lead {
   contactPhone       String?
   contactName        String?
   poleName           String?
+  practiceLocation   String?
   nutrition          Boolean    @default(false)
   nutritionObjective String?
   consentAt          DateTime?
@@ -40,6 +43,28 @@ model Lead {
   updatedAt          DateTime   @updatedAt
 
   @@index([type])
+  @@index([status])
+}
+
+// Demandes des gérants de salles de sport souhaitant rejoindre le réseau GBÔ Partner
+// Gym — pipeline CRM distinct de Lead (pas de coach, pas de tunnel particulier/entreprise).
+model GymPartner {
+  id            Int      @id @default(autoincrement())
+  code          String   @unique
+  gymName       String
+  managerName   String
+  phone         String
+  whatsapp      String?
+  email         String
+  commune       String
+  address       String
+  memberCount   String?
+  hasSoftware   Boolean?
+  reasons       String   @default("")
+  status        String   @default("NOUVEAU")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
   @@index([status])
 }
 

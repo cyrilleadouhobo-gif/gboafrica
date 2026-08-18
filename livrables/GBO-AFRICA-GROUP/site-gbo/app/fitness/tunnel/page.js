@@ -19,6 +19,7 @@ export default function TunnelPage() {
   const [objOther, setObjOther] = useState('');
   const [nutrition, setNutrition] = useState(null);
   const [nutritionObj, setNutritionObj] = useState(null);
+  const [practiceLocation, setPracticeLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -65,6 +66,7 @@ export default function TunnelPage() {
           objective: obj,
           nutrition,
           nutritionObj,
+          practiceLocation,
           prenom: f.get('prenom'),
           nom: f.get('nom'),
           tel: f.get('tel'),
@@ -244,6 +246,27 @@ export default function TunnelPage() {
         <form onSubmit={submitTunnel} style={{ animation: 'slideIn .35s both' }}>
           <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Vos informations</h1>
           <p style={css('color:var(--muted,#8a8a8a);font-size:15.5px;margin-bottom:26px')}>Dernière étape — un conseiller vous recontacte rapidement.</p>
+
+          <div style={{ marginBottom: 20 }}>
+            <span style={labelStyle}>Lieu de pratique souhaité</span>
+            <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:6px')}>
+              <button type="button" onClick={() => setPracticeLocation('domicile')} style={css(chip(practiceLocation === 'domicile'))}>
+                À domicile
+              </button>
+              <button type="button" onClick={() => setPracticeLocation('salle_partenaire')} style={css(chip(practiceLocation === 'salle_partenaire'))}>
+                Salle partenaire
+              </button>
+              <button type="button" onClick={() => setPracticeLocation('exterieur')} style={css(chip(practiceLocation === 'exterieur'))}>
+                En extérieur
+              </button>
+            </div>
+            {practiceLocation === 'salle_partenaire' && (
+              <p style={css('margin-top:10px;font-size:13px;color:var(--muted,#8a8a8a);line-height:1.5')}>
+                Un conseiller GBÔ vous attribuera la salle partenaire la plus proche de chez vous.
+              </p>
+            )}
+          </div>
+
           <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
             <label style={{ display: 'block' }}>
               <span style={labelStyle}>Prénom *</span>

@@ -39,6 +39,7 @@ export async function POST(request) {
       source: 'Tunnel Particulier',
       status: 'NOUVEAU',
       commune: d.commune || '—',
+      practiceLocation: d.practiceLocation || null,
       contactEmail: d.email,
       contactPhone: d.tel,
       nutrition: d.nutrition === 'oui',
