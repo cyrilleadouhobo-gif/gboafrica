@@ -70,6 +70,69 @@ export const GYM_MANAGER_BENEFITS = [
   { n: '4', t: 'Des opportunités', d: 'Participez à des événements, challenges et opérations communes.' },
 ];
 
+export const GYM_CHALLENGES = [
+  { t: 'Attirer', d: 'Générer de la visibilité et attirer de nouveaux prospects.' },
+  { t: 'Convertir', d: "Transformer l'intérêt en nouveaux adhérents." },
+  { t: 'Gérer', d: 'Structurer les adhérents, abonnements, paiements et activité.' },
+  { t: 'Fidéliser', d: 'Créer une expérience qui donne envie de rester.' },
+  { t: 'Renforcer', d: 'Disposer des bonnes compétences et ressources humaines.' },
+  { t: 'Développer', d: 'Créer de nouvelles opportunités de croissance.' },
+];
+
+export const GYM_PILLARS = [
+  {
+    n: '01',
+    lever: 'Gérer',
+    title: 'Pilotez votre salle avec plus de visibilité.',
+    product: 'E-Gym',
+    detail: 'Gestion des adhérents · Abonnements · Paiements · Dépenses · Stock · Statistiques',
+    cta: 'Découvrir E-Gym',
+    href: '/devenir-salle-partenaire',
+  },
+  {
+    n: '02',
+    lever: 'Renforcer',
+    title: 'Les bonnes ressources au bon moment.',
+    product: 'GBÔ Talent',
+    detail: 'Accédez à un réseau de coachs et de talents pour renforcer les capacités de votre salle.',
+    cta: 'Découvrir GBÔ Talent',
+    href: '/poles/talent',
+  },
+  {
+    n: '03',
+    lever: 'Développer',
+    title: 'Donnez plus de visibilité à votre salle.',
+    product: null,
+    detail: "Visibilité · Acquisition · Orientation de clients · Développement commercial — GBÔ vous aide à accroître votre visibilité, créer des opportunités d'acquisition et orienter des prospects vers les salles partenaires lorsque cela correspond à leur besoin.",
+    cta: 'Développer ma salle',
+    href: '/devenir-salle-partenaire',
+  },
+  {
+    n: '04',
+    lever: 'Animer',
+    title: "Créez une salle où l'on a envie de revenir.",
+    product: null,
+    detail: "Challenges · Événements · Animations · Communauté — Créez des expériences qui renforcent l'engagement de vos adhérents et donnent vie à votre communauté.",
+    cta: 'Découvrir GBÔ Events',
+    href: '/poles/events',
+  },
+];
+
+export const GYM_COMPLEMENTARY_SERVICES = [
+  { t: 'Formation', d: 'Développez les compétences de vos équipes.' },
+  { t: 'Marketing', d: 'Renforcez votre communication et votre visibilité.' },
+  { t: 'Nutrition', d: 'Ajoutez une dimension nutritionnelle à votre offre.' },
+  { t: 'Conseil', d: 'Bénéficiez d\'un accompagnement adapté à vos problématiques.' },
+  { t: 'Shop', d: 'Équipez votre salle et développez votre offre produits.' },
+];
+
+export const GYM_HOW_IT_WORKS = [
+  { n: '01', t: 'Vous nous parlez de votre besoin' },
+  { n: '02', t: 'Nous identifions les leviers à activer' },
+  { n: '03', t: 'Nous mobilisons les solutions GBÔ' },
+  { n: '04', t: 'Nous vous accompagnons dans leur mise en œuvre' },
+];
+
 export const PARTNER_TYPES = [
   { t: 'Salles & espaces', d: 'Mettez vos infrastructures au service de la communauté GBÔ.' },
   { t: 'Marques & nutrition', d: 'Distribuez vos produits via le futur GBÔ Shop.' },

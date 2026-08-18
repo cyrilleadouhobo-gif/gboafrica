@@ -50,6 +50,9 @@ export default function Header() {
               <path d="M6 9l6 6 6-6" />
             </svg>
           </button>
+          <Link href="/pour-les-salles" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer')}>
+            Pour les salles
+          </Link>
           <Link href="/about" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer')}>
             À propos
           </Link>
@@ -244,6 +247,9 @@ export default function Header() {
             )}
           </div>
           <div style={css('display:grid;gap:2px')}>
+            <Link href="/pour-les-salles" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
+              Pour les salles
+            </Link>
             <Link href="/about" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
               À propos
             </Link>
