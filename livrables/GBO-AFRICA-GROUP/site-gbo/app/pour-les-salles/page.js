@@ -15,7 +15,7 @@ export default function PourLesSallesPage() {
         <ImageSlot placeholder="Visuel — salle moderne" src={stockPhoto('gymInterior', 'pour-les-salles-hero', '1600x1000')} />
         <div
           style={css(
-            'position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.92) 100%);pointer-events:none'
+            'position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.25) 75%),linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.45) 40%,rgba(0,0,0,.95) 100%);pointer-events:none'
           )}
         />
         <div style={css('position:relative;max-width:1100px;margin:0 auto;width:100%;padding:clamp(90px,12vw,130px) clamp(20px,5vw,64px) clamp(56px,8vw,90px)')}>
@@ -36,7 +36,7 @@ export default function PourLesSallesPage() {
               Découvrir nos solutions
             </a>
             <Link
-              href="/devenir-salle-partenaire"
+              href="/contact"
               style={css('padding:16px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:15px')}
             >
               Parler à GBÔ
@@ -136,9 +136,6 @@ export default function PourLesSallesPage() {
               </div>
             ))}
           </div>
-          <p style={css('margin-top:30px;font-size:14.5px;color:var(--muted,#8a8a8a);line-height:1.6')}>
-            C&apos;est là que GBÔ passe du statut de prestataire à celui de partenaire de développement.
-          </p>
         </div>
       </section>
 
@@ -151,7 +148,7 @@ export default function PourLesSallesPage() {
             Parlons de vos objectifs et identifions ensemble les solutions adaptées.
           </p>
           <Link
-            href="/devenir-salle-partenaire"
+            href="/contact"
             style={css('display:inline-block;padding:18px 32px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
           >
             Échanger avec GBÔ →

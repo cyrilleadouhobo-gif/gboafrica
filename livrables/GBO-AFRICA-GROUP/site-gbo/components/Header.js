@@ -59,6 +59,9 @@ export default function Header() {
           <Link href="/blog" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer')}>
             Blog
           </Link>
+          <Link href="/contact" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer')}>
+            Contact
+          </Link>
         </nav>
 
         <div style={css('display:flex;align-items:center;gap:10px')}>

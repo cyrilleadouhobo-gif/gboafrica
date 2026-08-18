@@ -199,6 +199,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
+        <div
+          style={css(
+            'max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,64px);border-radius:28px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03));text-align:center'
+          )}
+        >
+          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:14px')}>
+            Vous êtes un professionnel du fitness ?
+          </div>
+          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(28px,5vw,48px);letter-spacing:-1px;margin-bottom:18px")}>
+            GBÔ vous accompagne aussi.
+          </h2>
+          <p style={css('font-size:15px;color:var(--muted,#8a8a8a);font-weight:600;letter-spacing:.5px;margin-bottom:30px')}>
+            Digitalisation · Talents · Acquisition · Animation
+          </p>
+          <Link
+            href="/pour-les-salles"
+            style={css('display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px')}
+          >
+            Découvrir les solutions pour les salles →
+          </Link>
+        </div>
+      </section>
+
       <section style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Preuves</div>

@@ -24,6 +24,8 @@ const BANK = {
   senior: ['photo-1590697442615-a381b5b557c7'],
   // Gym interior / equipment (modern, bright)
   gymInterior: ['photo-1534438327276-14e5300c3a48'],
+  // Group / network / community — several people together, team spirit
+  community: ['photo-1584365132623-e273491c69d2'],
   // General portrait / lifestyle (testimonials, avatars)
   portrait: ['photo-1634826225912-905141f688f3', 'photo-1572224384995-f9529873f379', 'photo-1603503363848-6952525df449'],
 };
