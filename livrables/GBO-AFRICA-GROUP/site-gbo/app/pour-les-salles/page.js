@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import { stockPhoto } from '../../lib/stockPhoto.js';
 import { GYM_CHALLENGES, GYM_PILLARS, GYM_COMPLEMENTARY_SERVICES, GYM_HOW_IT_WORKS } from '../../data/content.js';
 
 export const metadata = {
@@ -11,7 +12,7 @@ export default function PourLesSallesPage() {
   return (
     <div>
       <section style={css('position:relative;min-height:70vh;display:flex;align-items:flex-end;overflow:hidden;background:#050505;border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
-        <ImageSlot placeholder="Visuel — salle moderne, interface digitale, coach, communauté" />
+        <ImageSlot placeholder="Visuel — salle moderne" src={stockPhoto('gymInterior', 'pour-les-salles-hero', '1600x1000')} />
         <div
           style={css(
             'position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.92) 100%);pointer-events:none'
