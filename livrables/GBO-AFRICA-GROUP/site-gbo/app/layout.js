@@ -37,21 +37,12 @@ const ORGANIZATION_SCHEMA = {
   },
 };
 
-const THEME_INIT_SCRIPT = `
-try {
-  var t = localStorage.getItem('gbo_theme');
-  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
-} catch (e) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-}
-`;
-
 export default async function RootLayout({ children }) {
   const headerList = await headers();
   const nonce = headerList.get('x-nonce') || undefined;
 
   return (
-    <html lang="fr" data-theme="dark">
+    <html lang="fr">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -59,7 +50,6 @@ export default async function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <script nonce={nonce} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }} />
       </head>
       <body>
