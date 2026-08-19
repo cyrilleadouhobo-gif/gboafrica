@@ -13,7 +13,7 @@ const fieldStyle = css(
 // both post to the same /api/careers endpoint, which stores every submission as a
 // Message (type CAREER) for the admin to review. No dedicated Coach-application table:
 // a coach only becomes a Coach record once GBÔ actually onboards them.
-export default function CoachApplicationForm() {
+export default function CoachApplicationForm({ jobTitle }) {
   const { showToast } = useAppData();
   const [submitting, setSubmitting] = useState(false);
 
@@ -48,7 +48,13 @@ export default function CoachApplicationForm() {
         <input required name="tel" type="tel" placeholder="Téléphone *" style={fieldStyle} />
         <input required name="email" type="email" placeholder="E-mail *" style={fieldStyle} />
         <input name="spec" placeholder="Spécialité (ex. prénatal, senior…)" style={fieldStyle} />
-        <textarea name="msg" rows={3} placeholder="Parlez-nous de vous, vos certifications, vos zones" style={{ ...fieldStyle, gridColumn: '1/-1', resize: 'vertical' }} />
+        <textarea
+          name="msg"
+          rows={3}
+          placeholder="Parlez-nous de vous, vos certifications, vos zones"
+          defaultValue={jobTitle ? `Poste souhaité : ${jobTitle}\n` : undefined}
+          style={{ ...fieldStyle, gridColumn: '1/-1', resize: 'vertical' }}
+        />
       </div>
       <Honeypot />
       <button

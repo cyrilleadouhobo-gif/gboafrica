@@ -32,12 +32,12 @@ export default function CareersPage() {
                   {j.loc} · {j.type}
                 </div>
               </div>
-              <a
-                href="#apply"
+              <Link
+                href={`/careers/postuler?poste=${encodeURIComponent(j.t)}`}
                 style={css('padding:11px 20px;border-radius:11px;border:1px solid var(--border,rgba(255,255,255,.2));font-weight:700;font-size:14px;color:var(--fg,#fff)')}
               >
                 Postuler →
-              </a>
+              </Link>
             </div>
           ))}
         </div>
