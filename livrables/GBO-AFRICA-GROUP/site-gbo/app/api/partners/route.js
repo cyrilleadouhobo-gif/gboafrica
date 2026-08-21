@@ -3,6 +3,7 @@ import { prisma } from '../../../lib/db.js';
 import { partnerSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
 import { sendEmail } from '../../../lib/email.js';
+import { CONTACT_EMAIL } from '../../../lib/site.js';
 
 export async function POST(request) {
   if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
@@ -20,7 +21,7 @@ export async function POST(request) {
   const d = parsed.data;
 
   await prisma.message.create({ data: { type: 'PARTNER', name: d.org, email: d.email, body: d.msg || null } });
-  await sendEmail({ to: 'partenariats@gboafrica.com', subject: `Demande de partenariat — ${d.org}`, html: `<p>${d.msg || ''}</p><p>Contact : ${d.email}</p>` });
+  await sendEmail({ to: CONTACT_EMAIL, subject: `Demande de partenariat — ${d.org}`, html: `<p>${d.msg || ''}</p><p>Contact : ${d.email}</p>` });
 
   return NextResponse.json({ ok: true });
 }

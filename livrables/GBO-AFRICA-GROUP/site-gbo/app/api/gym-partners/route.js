@@ -4,6 +4,7 @@ import { gymPartnerSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
 import { gymPartnerCode } from '../../../lib/constants.js';
 import { sendEmail } from '../../../lib/email.js';
+import { CONTACT_EMAIL } from '../../../lib/site.js';
 
 export async function POST(request) {
   if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
@@ -38,7 +39,7 @@ export async function POST(request) {
   const gymPartner = await prisma.gymPartner.update({ where: { id: created.id }, data: { code: gymPartnerCode(created.id) } });
 
   await sendEmail({
-    to: 'partenariats@gboafrica.com',
+    to: CONTACT_EMAIL,
     subject: `GBÔ Partner Gym — Nouvelle candidature : ${d.gymName}`,
     html: `<p>Salle : ${d.gymName}</p><p>Responsable : ${d.managerName}</p><p>Contact : ${d.phone} · ${d.email}</p><p>Adresse : ${d.address}, ${d.commune}</p><p>Raisons : ${d.reasons.join(', ') || '—'}</p>`,
   });
