@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
+import ImageSlot from '../../components/ImageSlot.js';
+import { stockPhoto } from '../../lib/stockPhoto.js';
 import { METHOD_STEPS } from '../../data/content.js';
 
 export const metadata = {
@@ -9,9 +11,19 @@ export const metadata = {
 export default function FitnessPage() {
   return (
     <div>
-      <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-bottom:20px')}>
+      <section
+        style={css(
+          'position:relative;overflow:hidden;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
+        )}
+      >
+        <ImageSlot placeholder="Visuel — coaching GBÔ Fitness" src={stockPhoto('fitnessWomen', 'fitness-hero', '1600x900')} />
+        <div
+          style={css(
+            'position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.6) 45%,rgba(0,0,0,.3) 75%),linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.35) 45%,rgba(0,0,0,.85) 100%);pointer-events:none'
+          )}
+        />
+        <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
+          <div style={css('font-size:13px;color:var(--muted,#c8c8c8);margin-bottom:20px')}>
             <Link href="/">Accueil</Link> <span style={{ opacity: 0.5 }}>/</span> GBÔ Fitness
           </div>
           <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:12px;font-weight:700;margin-bottom:16px')}>
@@ -20,7 +32,7 @@ export default function FitnessPage() {
           <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;line-height:1;max-width:16ch")}>
             Un accompagnement sportif, pensé pour vous.
           </h1>
-          <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:56ch;margin-top:20px;line-height:1.5')}>
+          <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#c8c8c8);max-width:56ch;margin-top:20px;line-height:1.5')}>
             Choisissez le type d&apos;accompagnement recherché. Aucun compte n&apos;est requis pour démarrer.
           </p>
         </div>
