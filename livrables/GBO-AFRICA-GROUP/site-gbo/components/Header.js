@@ -3,10 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { css } from '../lib/css.js';
-import { useAppData } from '../context/AppData.js';
 
 export default function Header() {
-  const { showToast } = useAppData();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeAll = () => {
@@ -57,13 +55,6 @@ export default function Header() {
         </nav>
 
         <div style={css('display:flex;align-items:center;gap:10px')}>
-          <button
-            onClick={() => showToast('Espace membre — bientôt disponible.')}
-            data-desktoponly=""
-            style={css("padding:9px 14px;border-radius:10px;font-size:14px;font-weight:600;border:1px solid var(--border,rgba(255,255,255,.16));color:var(--fg,#fff)")}
-          >
-            Connexion
-          </button>
           <Link
             href="/fitness"
             onClick={closeAll}
