@@ -36,43 +36,59 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div
-      style={css(
-        "font-family:'Inter',sans-serif;background:linear-gradient(135deg,#D32F2F 0%,#1976D2 100%);min-height:calc(100vh - 68px);display:flex;align-items:center;justify-content:center;padding:24px"
-      )}
-    >
-      <div style={{ background: 'white', padding: 32, borderRadius: 8, boxShadow: '0 10px 40px rgba(0,0,0,0.2)', width: '100%', maxWidth: 400 }}>
-        <h1 style={css("font-family:'Poppins',sans-serif;text-align:center;color:#1A1A1A;margin:0 0 8px")}>Espace Admin GBÔ</h1>
-        <p style={{ textAlign: 'center', color: '#666', marginBottom: 24, fontSize: 13.5 }}>Accès réservé à l&apos;équipe GBÔ AFRICA GROUP.</p>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, background: 'var(--bg,#000)' }}>
+      <div
+        style={css(
+          'width:100%;max-width:400px;padding:36px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c)'
+        )}
+      >
+        <div style={css('display:flex;justify-content:center;margin-bottom:22px')}>
+          <span style={css("font-family:'Braven',sans-serif;font-weight:700;font-size:28px;letter-spacing:-1px;color:var(--fg,#fff)")}>
+            GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
+          </span>
+        </div>
+        <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px;text-align:center')}>
+          Back-office
+        </div>
+        <h1 style={css("font-family:'Braven';font-weight:700;font-size:26px;text-align:center;margin-bottom:6px")}>
+          Espace Admin GBÔ
+        </h1>
+        <p style={css('text-align:center;color:var(--muted,#8a8a8a);font-size:13.5px;margin-bottom:26px')}>
+          Accès réservé à l&apos;équipe GBÔ AFRICA GROUP.
+        </p>
 
-        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div>
-            <label style={{ display: 'block', fontWeight: 500, marginBottom: 8, color: '#1A1A1A' }}>E-mail</label>
-            <input
-              type="email"
-              required
-              autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={{ width: '100%', padding: 12, border: '1px solid #DDD', borderRadius: 4, boxSizing: 'border-box' }}
-            />
-          </div>
-          <div>
-            <label style={{ display: 'block', fontWeight: 500, marginBottom: 8, color: '#1A1A1A' }}>Mot de passe</label>
-            <input
-              type="password"
-              required
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{ width: '100%', padding: 12, border: '1px solid #DDD', borderRadius: 4, boxSizing: 'border-box' }}
-            />
-          </div>
-          {error && <div style={{ background: '#FFEBEE', color: '#C62828', padding: 12, borderRadius: 4, fontSize: 13.5 }}>{error}</div>}
+        <form onSubmit={handleLogin} style={{ display: 'grid', gap: 14 }}>
+          <input
+            type="email"
+            required
+            autoComplete="username"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={css(
+              "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
+            )}
+          />
+          <input
+            type="password"
+            required
+            autoComplete="current-password"
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={css(
+              "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
+            )}
+          />
+          {error && (
+            <div style={css('padding:12px;border-radius:10px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;font-size:13.5px')}>
+              {error}
+            </div>
+          )}
           <button
             type="submit"
             disabled={submitting}
-            style={{ padding: 12, background: submitting ? '#e57373' : '#D32F2F', color: 'white', border: 'none', borderRadius: 4, fontWeight: 600, cursor: 'pointer' }}
+            style={css(`padding:15px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px;opacity:${submitting ? 0.6 : 1}`)}
           >
             {submitting ? 'Connexion…' : 'Connexion'}
           </button>

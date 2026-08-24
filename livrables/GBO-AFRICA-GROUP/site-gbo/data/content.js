@@ -29,7 +29,12 @@ export const TESTIMONIALS = [
 ];
 
 export const PARTNERS = ['PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE'];
-export const SOCIALS = ['IG', 'FB', 'in', 'YT'];
+export const SOCIALS = [
+  { label: 'FB', name: 'Facebook', href: 'https://www.facebook.com/share/18FUm2fkS1/?mibextid=wwXIfr' },
+  { label: 'IG', name: 'Instagram', href: 'https://www.instagram.com/gbo_africa?igsi=MTE3YWMyeWI4c3V1aQ%3D%3D&utm_source=qr' },
+  { label: 'TT', name: 'TikTok', href: 'https://www.tiktok.com/@gbo.africa?_r=1&_t=ZS-999IW8QPldE' },
+  { label: 'in', name: 'LinkedIn', href: 'https://www.linkedin.com/company/gb%C3%B4-officiel/' },
+];
 
 export const ARTICLES = [
   { id: 'a1', cat: 'Nutrition', read: '5 min', title: 'Bien manger à Abidjan : 7 réflexes simples', excerpt: 'Des choix concrets, adaptés au marché local, pour soutenir vos objectifs.' },

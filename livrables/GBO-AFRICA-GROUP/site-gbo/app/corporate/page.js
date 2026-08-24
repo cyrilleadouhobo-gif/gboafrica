@@ -60,7 +60,7 @@ export default function CorporatePage() {
           <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.2));font-size:12px;font-weight:700;margin-bottom:16px;color:var(--muted,#8a8a8a)')}>
             Solutions corporate
           </span>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(32px,5.5vw,56px);letter-spacing:-1.5px;line-height:1.02;max-width:20ch")}>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(32px,5.5vw,56px);letter-spacing:-1.5px;line-height:1.02;max-width:20ch")}>
             Le sport, moteur de performance de vos équipes.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:60ch;margin-top:20px;line-height:1.5')}>

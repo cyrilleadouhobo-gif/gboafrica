@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'Braven';
+  src: url('/fonts/braven/BravenRegular.woff2') format('woff2'), url('/fonts/braven/BravenRegular.woff') format('woff');
+  /* Single static weight (no real bold cut) — declaring only 400 here (instead of a
+     400-900 range) means font-weight:700 elsewhere doesn't match this face exactly, so
+     the browser synthesizes (fake-bolds) it instead of silently rendering as regular. */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg: #000000;
   --bg2: #0a0a0a;
@@ -38,6 +49,15 @@ a {
 }
 a:hover {
   color: #c6f202;
+}
+
+.social-badge {
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+}
+.social-badge:hover {
+  border-color: #c6f202;
+  background: rgba(198, 242, 2, 0.1);
+  transform: translateY(-2px);
 }
 
 button {

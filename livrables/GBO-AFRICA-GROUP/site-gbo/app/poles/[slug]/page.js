@@ -65,7 +65,7 @@ export default function PolePage({ params }) {
           >
             <span style={css('width:7px;height:7px;border-radius:50%;background:#fbbf24;animation:pulse 1.6s infinite')} /> Bientôt disponible
           </span>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(36px,7vw,72px);letter-spacing:-2px;line-height:.98;color:#fff")}>{detail.name}</h1>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(36px,7vw,72px);letter-spacing:-2px;line-height:.98;color:#fff")}>{detail.name}</h1>
           <p style={css('font-size:clamp(17px,2.4vw,22px);color:rgba(255,255,255,.85);max-width:56ch;margin-top:20px;line-height:1.45')}>{detail.tagline}</p>
           <button
             onClick={() => document.getElementById('waitlist-box')?.scrollIntoView({ behavior: 'smooth' })}

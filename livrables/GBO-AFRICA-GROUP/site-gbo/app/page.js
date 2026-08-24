@@ -57,7 +57,7 @@ export default function HomePage() {
             >
               ● Abidjan · Côte d&apos;Ivoire
             </div>
-            <h1 style={css("font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:clamp(40px,7.5vw,80px);line-height:.98;letter-spacing:-2px;color:#fff;max-width:14ch;animation:fadeUp .7s .05s both")}>
+            <h1 style={css("font-family:'Braven',sans-serif;font-weight:700;font-size:clamp(40px,7.5vw,80px);line-height:.98;letter-spacing:-2px;color:#fff;max-width:14ch;animation:fadeUp .7s .05s both")}>
               Plus qu&apos;une pratique, un <span style={{ color: '#C6F202' }}>style de vie.</span>
             </h1>
             <p style={css("font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:52ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>

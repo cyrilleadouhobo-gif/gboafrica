@@ -22,7 +22,7 @@ export default function PourLesSallesPage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             Pour les salles
           </div>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(30px,5.5vw,52px);letter-spacing:-1.5px;line-height:1.05;max-width:20ch")}>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(30px,5.5vw,52px);letter-spacing:-1.5px;line-height:1.05;max-width:20ch")}>
             VOTRE SALLE A DES ENJEUX.
             <br />
             GBÔ APPORTE DES SOLUTIONS.

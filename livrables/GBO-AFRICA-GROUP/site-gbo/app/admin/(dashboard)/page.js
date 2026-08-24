@@ -146,7 +146,7 @@ export default function AdminPage() {
         <div style={css('display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px')}>
           <div>
             <div style={css('display:flex;align-items:center;gap:10px')}>
-              <span style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:22px")}>
+              <span style={css("font-family:'Braven';font-weight:700;font-size:22px")}>
                 GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
               </span>
               <span

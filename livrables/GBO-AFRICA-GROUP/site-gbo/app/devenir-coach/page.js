@@ -27,7 +27,7 @@ export default function DevenirCoachPage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>
             Réseau de coachs
           </div>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(34px,6.5vw,64px);letter-spacing:-2px;line-height:1;max-width:18ch;color:#fff")}>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6.5vw,64px);letter-spacing:-2px;line-height:1;max-width:18ch;color:#fff")}>
             Coachez selon vos règles. GBÔ apporte les clients.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:rgba(255,255,255,.85);max-width:56ch;margin-top:20px;line-height:1.5')}>

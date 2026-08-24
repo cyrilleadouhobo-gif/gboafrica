@@ -11,7 +11,7 @@ export default function AboutPage() {
       <section style={css('padding:clamp(80px,10vw,130px) clamp(20px,5vw,64px) clamp(40px,5vw,60px)')}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>À propos</div>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(34px,6.5vw,68px);letter-spacing:-2px;line-height:1;max-width:18ch")}>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6.5vw,68px);letter-spacing:-2px;line-height:1;max-width:18ch")}>
             Nous croyons que le sport change des vies.
           </h1>
           <p style={css('font-size:clamp(17px,2.4vw,22px);color:var(--muted,#8a8a8a);max-width:62ch;margin-top:22px;line-height:1.5')}>

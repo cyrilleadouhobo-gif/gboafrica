@@ -108,7 +108,7 @@ export default function TunnelPage() {
               <path d="M5 12l5 5L20 6" />
             </svg>
           </div>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(28px,5vw,40px);letter-spacing:-1px;margin-bottom:14px")}>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(28px,5vw,40px);letter-spacing:-1px;margin-bottom:14px")}>
             Merci ! Votre demande est enregistrée.
           </h1>
           <p style={css('font-size:16.5px;color:var(--muted,#8a8a8a);line-height:1.6;max-width:48ch;margin:0 auto 14px')}>
@@ -174,7 +174,7 @@ export default function TunnelPage() {
 
       {tStep === 1 && (
         <div style={{ animation: 'slideIn .35s both' }}>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Qui êtes-vous ?</h1>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Qui êtes-vous ?</h1>
           <p style={css('color:var(--muted,#8a8a8a);font-size:15.5px;margin-bottom:26px')}>Sélectionnez le profil qui vous correspond — la suite s&apos;adapte automatiquement.</p>
           <div style={css('display:grid;gap:12px')}>
             {PROFILE_CARDS.map((p) => (
@@ -189,7 +189,7 @@ export default function TunnelPage() {
 
       {tStep === 2 && (
         <div style={{ animation: 'slideIn .35s both' }}>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Quel est votre objectif ?</h1>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Quel est votre objectif ?</h1>
           <p style={css('color:var(--muted,#8a8a8a);font-size:15.5px;margin-bottom:26px')}>
             Les objectifs proposés s&apos;adaptent à votre profil : <strong style={{ color: 'var(--fg,#fff)' }}>{profileLabel(profile) || '—'}</strong>.
           </p>
@@ -215,7 +215,7 @@ export default function TunnelPage() {
 
       {tStep === 3 && (
         <div style={{ animation: 'slideIn .35s both' }}>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Renforcez votre accompagnement</h1>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Renforcez votre accompagnement</h1>
           <p style={css('color:var(--muted,#8a8a8a);font-size:15.5px;margin-bottom:26px')}>
             En complément de votre coaching sportif, bénéficiez d&apos;un suivi nutritionnel personnalisé assuré par un nutritionniste partenaire de GBÔ.
           </p>
@@ -244,7 +244,7 @@ export default function TunnelPage() {
 
       {tStep === 4 && (
         <form onSubmit={submitTunnel} style={{ animation: 'slideIn .35s both' }}>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Vos informations</h1>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(26px,4.5vw,36px);letter-spacing:-1px;margin-bottom:8px")}>Vos informations</h1>
           <p style={css('color:var(--muted,#8a8a8a);font-size:15.5px;margin-bottom:26px')}>Dernière étape — un conseiller vous recontacte rapidement.</p>
 
           <div style={{ marginBottom: 20 }}>

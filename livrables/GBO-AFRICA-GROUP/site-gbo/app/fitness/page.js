@@ -29,7 +29,7 @@ export default function FitnessPage() {
           <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:12px;font-weight:700;margin-bottom:16px')}>
             ● Disponible
           </span>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;line-height:1;max-width:16ch")}>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;line-height:1;max-width:16ch")}>
             Un accompagnement sportif, pensé pour vous.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#c8c8c8);max-width:56ch;margin-top:20px;line-height:1.5')}>

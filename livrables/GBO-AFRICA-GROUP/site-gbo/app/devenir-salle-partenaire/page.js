@@ -70,7 +70,7 @@ export default function DevenirSallePartenairePage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             GBÔ Partner Gym
           </div>
-          <h1 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(30px,5.5vw,52px);letter-spacing:-1.5px;max-width:18ch")}>
+          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(30px,5.5vw,52px);letter-spacing:-1.5px;max-width:18ch")}>
             Vous êtes gérant d&apos;une salle de sport ?
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:58ch;margin-top:20px;line-height:1.5')}>
