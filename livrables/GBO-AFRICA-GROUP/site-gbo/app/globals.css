@@ -1,11 +1,18 @@
 @font-face {
-  font-family: 'Braven';
-  src: url('/fonts/braven/BravenRegular.woff2') format('woff2'), url('/fonts/braven/BravenRegular.woff') format('woff');
-  /* Single static weight (no real bold cut) — declaring only 400 here (instead of a
-     400-900 range) means font-weight:700 elsewhere doesn't match this face exactly, so
-     the browser synthesizes (fake-bolds) it instead of silently rendering as regular. */
-  font-weight: 400;
+  font-family: 'Broaven';
+  src: url('/fonts/broaven/BroavenRegular.woff2') format('woff2');
+  /* Single static weight (no real bold cut) — declaring a 400-900 range makes every
+     font-weight:600/700/800 usage elsewhere in the site match this same face instead of
+     triggering the browser's synthetic (fake) bold, which looked bad on this typeface. */
+  font-weight: 400 900;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Broaven';
+  src: url('/fonts/broaven/BroavenOblique.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -37,7 +44,7 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Broaven', sans-serif;
   -webkit-font-smoothing: antialiased;
   transition: background 0.3s, color 0.3s;
   overflow-x: hidden;

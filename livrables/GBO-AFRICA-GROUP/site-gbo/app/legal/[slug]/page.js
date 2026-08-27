@@ -32,12 +32,12 @@ export default async function LegalPage({ params }) {
           </Link>
         ))}
       </div>
-      <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(30px,5vw,46px);letter-spacing:-1px;margin-bottom:6px")}>{legal.title}</h1>
+      <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,5vw,40px);letter-spacing:-1px;margin-bottom:6px")}>{legal.title}</h1>
       <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-bottom:34px')}>{legal.updated}</div>
       <div style={{ display: 'grid', gap: 26 }}>
         {legal.sections.map((sec) => (
           <div key={sec.h}>
-            <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:20px;margin-bottom:10px")}>{sec.h}</h2>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:20px;margin-bottom:10px")}>{sec.h}</h2>
             <p style={css('font-size:15px;color:var(--muted,#8a8a8a);line-height:1.65')}>{sec.p}</p>
           </div>
         ))}

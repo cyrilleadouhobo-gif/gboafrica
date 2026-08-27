@@ -22,7 +22,7 @@ export default function PourLesSallesPage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             Pour les salles
           </div>
-          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(30px,5.5vw,52px);letter-spacing:-1.5px;line-height:1.05;max-width:20ch")}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,5.5vw,46px);letter-spacing:-1.5px;line-height:1.05;max-width:20ch")}>
             VOTRE SALLE A DES ENJEUX.
             <br />
             GBÔ APPORTE DES SOLUTIONS.
@@ -74,10 +74,10 @@ export default function PourLesSallesPage() {
                 )}
               >
                 <div style={css('display:flex;align-items:center;gap:12px;margin-bottom:16px')}>
-                  <span style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:22px;color:var(--lime,#C6F202)")}>{p.n}</span>
+                  <span style={css("font-family:'Broaven';font-weight:700;font-size:22px;color:var(--lime,#C6F202)")}>{p.n}</span>
                   <span style={css('font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700')}>{p.lever}</span>
                 </div>
-                <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:24px;letter-spacing:-0.5px;margin-bottom:14px;line-height:1.15")}>
+                <h2 style={css("font-family:'Broaven';font-weight:700;font-size:24px;letter-spacing:-0.5px;margin-bottom:14px;line-height:1.15")}>
                   {p.title}
                 </h2>
                 {p.product && <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{p.product}</div>}
@@ -112,7 +112,7 @@ export default function PourLesSallesPage() {
 
       <section style={css('padding:clamp(56px,8vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:36px;line-height:1.2")}>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:36px;line-height:1.2")}>
             Vous avez un enjeu. Nous construisons la réponse.
           </h2>
           <div style={css('display:grid;gap:0')}>
@@ -121,7 +121,7 @@ export default function PourLesSallesPage() {
                 <div style={css('display:flex;align-items:center;gap:16px;padding:18px 0;text-align:left')}>
                   <span
                     style={css(
-                      "flex:0 0 auto;width:42px;height:42px;border-radius:50%;border:1px solid var(--lime,#C6F202);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;font-family:'Big Shoulders Display';font-weight:700;font-size:15px"
+                      "flex:0 0 auto;width:42px;height:42px;border-radius:50%;border:1px solid var(--lime,#C6F202);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700;font-size:15px"
                     )}
                   >
                     {s.n}
@@ -141,7 +141,7 @@ export default function PourLesSallesPage() {
 
       <section style={css('padding:clamp(64px,9vw,110px) clamp(20px,5vw,64px);background:#000;text-align:center')}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(28px,4.5vw,42px);letter-spacing:-1px;margin-bottom:16px;line-height:1.15")}>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,42px);letter-spacing:-1px;margin-bottom:16px;line-height:1.15")}>
             Prêt à faire évoluer votre salle ?
           </h2>
           <p style={css('font-size:16px;color:var(--muted,#8a8a8a);margin-bottom:30px;line-height:1.5')}>

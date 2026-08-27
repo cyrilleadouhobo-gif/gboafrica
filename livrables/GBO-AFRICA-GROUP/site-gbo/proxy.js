@@ -45,13 +45,12 @@ export function proxy(request) {
     // mechanism for style="" attributes, only for <style> elements. Allowing unsafe-inline
     // for styles only (not scripts) keeps the high-value XSS protection on script-src
     // while accepting the much lower risk profile of inline CSS.
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "style-src 'self' 'unsafe-inline'",
     // TODO: drop images.unsplash.com once real GBÔ photography replaces the temporary
     // stock images (see lib/stockPhoto.js) — no third-party image host should be needed then.
     "img-src 'self' data: https://images.unsplash.com",
-    // 'self' for Braven (public/fonts/braven, logo + H1 only), gstatic for the Google Fonts
-    // (Big Shoulders Display + Inter) used everywhere else.
-    "font-src 'self' https://fonts.gstatic.com",
+    // Broaven is self-hosted (public/fonts/broaven) — no external font host needed.
+    "font-src 'self'",
     isDev ? "connect-src 'self' ws:" : "connect-src 'self'", // ws: for the dev-mode HMR websocket
     "frame-ancestors 'none'",
     "base-uri 'self'",

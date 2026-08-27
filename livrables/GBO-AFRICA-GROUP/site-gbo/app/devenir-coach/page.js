@@ -27,7 +27,7 @@ export default function DevenirCoachPage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>
             Réseau de coachs
           </div>
-          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6.5vw,64px);letter-spacing:-2px;line-height:1;max-width:18ch;color:#fff")}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6.5vw,58px);letter-spacing:-2px;line-height:1;max-width:18ch;color:#fff")}>
             Coachez selon vos règles. GBÔ apporte les clients.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:rgba(255,255,255,.85);max-width:56ch;margin-top:20px;line-height:1.5')}>
@@ -44,7 +44,7 @@ export default function DevenirCoachPage() {
 
       <section style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>
             Pourquoi rejoindre le réseau GBÔ
           </h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px')}>
@@ -61,7 +61,7 @@ export default function DevenirCoachPage() {
       {coachTestimonial && (
         <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(56px,8vw,90px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
           <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-            <p style={css("font-family:'Big Shoulders Display';font-weight:600;font-size:clamp(20px,3vw,28px);line-height:1.3")}>{coachTestimonial.quote}</p>
+            <p style={css("font-family:'Broaven';font-weight:600;font-size:clamp(20px,3vw,28px);line-height:1.3")}>{coachTestimonial.quote}</p>
             <div style={css('margin-top:18px;font-size:14px;font-weight:700')}>{coachTestimonial.name}</div>
             <div style={css('font-size:13px;color:var(--muted,#8a8a8a)')}>{coachTestimonial.role}</div>
           </div>
@@ -74,7 +74,7 @@ export default function DevenirCoachPage() {
             'max-width:760px;margin:0 auto;padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c)'
           )}
         >
-          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:6px")}>Votre candidature</h2>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:6px")}>Votre candidature</h2>
           <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:24px;line-height:1.5')}>
             Indiquez votre spécialité et vos zones de préférence — un conseiller GBÔ vous recontacte pour la suite du processus.
           </p>

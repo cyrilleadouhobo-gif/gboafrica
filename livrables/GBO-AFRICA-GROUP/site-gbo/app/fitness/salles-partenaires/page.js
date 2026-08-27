@@ -30,7 +30,7 @@ export default function SallesPartenairesPage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             GBÔ Partner Gym
           </div>
-          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;max-width:18ch")}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;max-width:18ch")}>
             Rejoignez le réseau de salles partenaires GBÔ.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#c8c8c8);max-width:60ch;margin-top:20px;line-height:1.5')}>
@@ -68,7 +68,7 @@ export default function SallesPartenairesPage() {
             'max-width:900px;margin:0 auto;padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c);text-align:center'
           )}
         >
-          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:10px")}>Vous gérez une salle de sport ?</h2>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:10px")}>Vous gérez une salle de sport ?</h2>
           <p style={css('font-size:15px;color:var(--muted,#8a8a8a);max-width:56ch;margin:0 auto 22px;line-height:1.55')}>
             Découvrez comment votre établissement peut rejoindre l&apos;écosystème GBÔ et déposez votre candidature en quelques minutes.
           </p>

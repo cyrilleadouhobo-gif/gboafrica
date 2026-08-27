@@ -146,7 +146,7 @@ export default function AdminPage() {
         <div style={css('display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px')}>
           <div>
             <div style={css('display:flex;align-items:center;gap:10px')}>
-              <span style={css("font-family:'Braven';font-weight:700;font-size:22px")}>
+              <span style={css("font-family:'Broaven';font-weight:700;font-size:22px")}>
                 GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
               </span>
               <span
@@ -201,7 +201,7 @@ export default function AdminPage() {
               {statCards.map((c) => (
                 <div key={c.k} style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
                   <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);font-weight:600')}>{c.k}</div>
-                  <div style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:38px;line-height:1.1;margin:6px 0 2px")}>{c.v}</div>
+                  <div style={css("font-family:'Broaven';font-weight:700;font-size:38px;line-height:1.1;margin:6px 0 2px")}>{c.v}</div>
                   <div style={css('font-size:11.5px;color:var(--muted,#8a8a8a)')}>{c.s}</div>
                 </div>
               ))}
@@ -498,7 +498,7 @@ export default function AdminPage() {
                 </svg>
               </button>
             </div>
-            <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:8px")}>{selectedLead.name}</h2>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:8px")}>{selectedLead.name}</h2>
             <div style={{ marginBottom: 22 }}>
               <span style={css(leadBadge(selectedLead.status))}>{LEAD_STATUS_LABELS[selectedLead.status]}</span>
             </div>

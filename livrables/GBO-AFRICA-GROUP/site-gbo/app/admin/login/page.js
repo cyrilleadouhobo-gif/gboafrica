@@ -43,14 +43,14 @@ export default function AdminLoginPage() {
         )}
       >
         <div style={css('display:flex;justify-content:center;margin-bottom:22px')}>
-          <span style={css("font-family:'Braven',sans-serif;font-weight:700;font-size:28px;letter-spacing:-1px;color:var(--fg,#fff)")}>
+          <span style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:28px;letter-spacing:-1px;color:var(--fg,#fff)")}>
             GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
           </span>
         </div>
         <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px;text-align:center')}>
           Back-office
         </div>
-        <h1 style={css("font-family:'Braven';font-weight:700;font-size:26px;text-align:center;margin-bottom:6px")}>
+        <h1 style={css("font-family:'Broaven';font-weight:700;font-size:26px;text-align:center;margin-bottom:6px")}>
           Espace Admin GBÔ
         </h1>
         <p style={css('text-align:center;color:var(--muted,#8a8a8a);font-size:13.5px;margin-bottom:26px')}>

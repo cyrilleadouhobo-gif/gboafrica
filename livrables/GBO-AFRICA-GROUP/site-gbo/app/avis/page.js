@@ -26,12 +26,12 @@ export default async function ReviewsPage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             Avis clients
           </div>
-          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;max-width:16ch")}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;max-width:16ch")}>
             Ce que vivent nos membres.
           </h1>
           {average ? (
             <div style={css('display:flex;align-items:center;gap:12px;margin-top:22px')}>
-              <span style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:32px")}>{average}/5</span>
+              <span style={css("font-family:'Broaven';font-weight:700;font-size:32px")}>{average}/5</span>
               <div>
                 <Stars rating={Math.round(Number(average))} />
                 <div style={css('font-size:13px;color:var(--muted,#8a8a8a)')}>{count} avis publié{count > 1 ? 's' : ''}</div>
@@ -73,7 +73,7 @@ export default async function ReviewsPage() {
                 'padding:clamp(24px,3vw,32px);border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c);position:sticky;top:90px'
               )}
             >
-              <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:22px;margin-bottom:6px")}>Votre avis compte</h2>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:22px;margin-bottom:6px")}>Votre avis compte</h2>
               <p style={css('font-size:13.5px;color:var(--muted,#8a8a8a);margin-bottom:20px;line-height:1.5')}>
                 Chaque avis est relu par l&apos;équipe GBÔ avant publication.
               </p>

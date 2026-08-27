@@ -47,7 +47,7 @@ export default function Footer() {
   return (
     <footer
       style={css(
-        "font-family:'Braven',sans-serif;background:var(--footerbg,#050505);border-top:1px solid var(--border,rgba(255,255,255,.1));padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px) 32px"
+        "font-family:'Broaven',sans-serif;background:var(--footerbg,#050505);border-top:1px solid var(--border,rgba(255,255,255,.1));padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px) 32px"
       )}
     >
       <div style={css('max-width:1200px;margin:0 auto')}>
@@ -57,7 +57,7 @@ export default function Footer() {
           )}
         >
           <div style={{ gridColumn: 'span 1', minWidth: 200 }}>
-            <div style={css("font-family:'Braven';font-weight:700;font-size:28px;letter-spacing:-1px")}>
+            <div style={css("font-family:'Broaven';font-weight:700;font-size:28px;letter-spacing:-1px")}>
               GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
             </div>
             <p style={css('font-size:13px;color:var(--muted,#8a8a8a);margin:12px 0;line-height:1.5')}>

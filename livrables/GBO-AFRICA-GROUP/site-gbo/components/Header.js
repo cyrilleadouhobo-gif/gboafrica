@@ -19,11 +19,11 @@ export default function Header() {
     <>
       <header
         style={css(
-          "font-family:'Braven',sans-serif;position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:var(--headerbg,rgba(0,0,0,.72));backdrop-filter:blur(18px);border-bottom:1px solid var(--border,rgba(255,255,255,.1))"
+          "font-family:'Broaven',sans-serif;position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:var(--headerbg,rgba(0,0,0,.72));backdrop-filter:blur(18px);border-bottom:1px solid var(--border,rgba(255,255,255,.1))"
         )}
       >
         <Link href="/" onClick={closeAll} style={css('display:flex;align-items:center;gap:10px;cursor:pointer')}>
-          <span style={css("font-family:'Braven',sans-serif;font-weight:700;font-size:26px;letter-spacing:-1px;color:var(--fg,#fff)")}>
+          <span style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:26px;letter-spacing:-1px;color:var(--fg,#fff)")}>
             GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
           </span>
           <span style={css('width:1px;height:22px;background:var(--border,rgba(255,255,255,.18))')} />
@@ -35,25 +35,25 @@ export default function Header() {
         </Link>
 
         <nav style={css('display:flex;align-items:center;gap:6px')} data-desktopnav="">
-          <Link href="/fitness" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:15.5px;font-weight:600;cursor:pointer')}>
+          <Link href="/fitness" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             GBÔ Fitness
           </Link>
-          <Link href="/pour-les-salles" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:15.5px;font-weight:600;cursor:pointer')}>
+          <Link href="/pour-les-salles" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             Pour les salles
           </Link>
-          <Link href="/careers" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:15.5px;font-weight:600;cursor:pointer')}>
+          <Link href="/careers" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             Recrutement
           </Link>
-          <Link href="/partners" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:15.5px;font-weight:600;cursor:pointer')}>
+          <Link href="/partners" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             Partenaires
           </Link>
-          <Link href="/about" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:15.5px;font-weight:600;cursor:pointer')}>
+          <Link href="/about" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             À propos
           </Link>
-          <Link href="/blog" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:15.5px;font-weight:600;cursor:pointer')}>
+          <Link href="/blog" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             Blog
           </Link>
-          <Link href="/contact" onClick={closeAll} style={css('padding:9px 14px;border-radius:10px;font-size:15.5px;font-weight:600;cursor:pointer')}>
+          <Link href="/contact" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             Contact
           </Link>
         </nav>
@@ -62,7 +62,7 @@ export default function Header() {
           <Link
             href="/fitness"
             onClick={closeAll}
-            style={css('padding:11px 20px;border-radius:10px;font-size:17px;font-weight:700;background:var(--lime,#C6F202);color:#000')}
+            style={css('padding:9px 16px;border-radius:10px;font-size:14px;font-weight:700;white-space:nowrap;background:var(--lime,#C6F202);color:#000')}
           >
             Commencer
           </Link>
@@ -83,11 +83,11 @@ export default function Header() {
       {menuOpen && (
         <div
           style={css(
-            "font-family:'Braven',sans-serif;position:fixed;inset:0;z-index:80;background:var(--bg,#000);padding:20px clamp(16px,5vw,32px);overflow:auto;animation:fadeIn .2s both"
+            "font-family:'Broaven',sans-serif;position:fixed;inset:0;z-index:80;background:var(--bg,#000);padding:20px clamp(16px,5vw,32px);overflow:auto;animation:fadeIn .2s both"
           )}
         >
           <div style={css('display:flex;justify-content:space-between;align-items:center;margin-bottom:28px')}>
-            <span style={css("font-family:'Braven';font-weight:700;font-size:24px")}>
+            <span style={css("font-family:'Broaven';font-weight:700;font-size:24px")}>
               GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
             </span>
             <button

@@ -20,7 +20,7 @@ function PostulerContent() {
           {poste}
         </div>
       )}
-      <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(28px,5vw,44px);letter-spacing:-1.5px;margin-bottom:10px")}>
+      <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(22px,5vw,38px);letter-spacing:-1.5px;margin-bottom:10px")}>
         Votre candidature
       </h1>
       <p style={css('color:var(--muted,#8a8a8a);font-size:15px;margin-bottom:30px;line-height:1.5')}>

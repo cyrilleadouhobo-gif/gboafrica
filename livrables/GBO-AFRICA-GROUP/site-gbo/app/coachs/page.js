@@ -24,7 +24,7 @@ export default async function CoachsPage({ searchParams }) {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             Nos coachs
           </div>
-          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;max-width:16ch")}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;max-width:16ch")}>
             Un réseau de coachs sélectionnés et formés.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:58ch;margin-top:20px;line-height:1.5')}>

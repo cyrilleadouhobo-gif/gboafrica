@@ -29,7 +29,7 @@ export default function FitnessPage() {
           <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:12px;font-weight:700;margin-bottom:16px')}>
             ● Disponible
           </span>
-          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:-1.5px;line-height:1;max-width:16ch")}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;line-height:1;max-width:16ch")}>
             Un accompagnement sportif, pensé pour vous.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#c8c8c8);max-width:56ch;margin-top:20px;line-height:1.5')}>
@@ -56,7 +56,7 @@ export default function FitnessPage() {
               </svg>
             </div>
             <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:8px')}>Pour moi</div>
-            <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:28px;margin-bottom:14px")}>Particulier</h2>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:28px;margin-bottom:14px")}>Particulier</h2>
             <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;flex:1')}>
               Je souhaite bénéficier d&apos;un accompagnement sportif personnalisé afin d&apos;améliorer ma santé, ma condition physique ou mes performances.
             </p>
@@ -83,7 +83,7 @@ export default function FitnessPage() {
               </svg>
             </div>
             <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:8px')}>Pour mes équipes</div>
-            <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:28px;margin-bottom:14px")}>Entreprise</h2>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:28px;margin-bottom:14px")}>Entreprise</h2>
             <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;flex:1')}>
               Je souhaite mettre en place un programme Sport &amp; Bien-être pour améliorer la santé et la qualité de vie de mes collaborateurs.
             </p>
@@ -116,7 +116,7 @@ export default function FitnessPage() {
       <section style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Actif de marque</div>
-          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:8px")}>La Méthode GBÔ</h2>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:8px")}>La Méthode GBÔ</h2>
           <p style={css('color:var(--muted,#8a8a8a);font-size:16px;max-width:60ch;margin-bottom:40px;line-height:1.5')}>
             Cinq étapes pour transformer une intention en mode de vie durable.
           </p>
@@ -126,7 +126,7 @@ export default function FitnessPage() {
                 <div style={css('position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--lime,#C6F202),transparent)')} />
                 <div
                   style={css(
-                    "width:46px;height:46px;border-radius:50%;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Big Shoulders Display';font-weight:700;font-size:20px;margin-bottom:16px"
+                    "width:46px;height:46px;border-radius:50%;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700;font-size:20px;margin-bottom:16px"
                   )}
                 >
                   {m.n}

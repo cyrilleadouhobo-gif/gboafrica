@@ -70,7 +70,7 @@ export default function DevenirSallePartenairePage() {
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             GBÔ Partner Gym
           </div>
-          <h1 style={css("font-family:'Braven';font-weight:700;font-size:clamp(30px,5.5vw,52px);letter-spacing:-1.5px;max-width:18ch")}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,5.5vw,46px);letter-spacing:-1.5px;max-width:18ch")}>
             Vous êtes gérant d&apos;une salle de sport ?
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:58ch;margin-top:20px;line-height:1.5')}>
@@ -82,13 +82,13 @@ export default function DevenirSallePartenairePage() {
 
       <section style={css('padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:26px;margin-bottom:22px")}>Ce que GBÔ vous apporte</h2>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:22px")}>Ce que GBÔ vous apporte</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px')}>
             {GYM_MANAGER_BENEFITS.map((b) => (
               <div key={b.n} style={css('padding:24px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
                 <div
                   style={css(
-                    "width:36px;height:36px;border-radius:10px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Big Shoulders Display';font-weight:700;margin-bottom:14px"
+                    "width:36px;height:36px;border-radius:10px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700;margin-bottom:14px"
                   )}
                 >
                   {b.n}
@@ -118,14 +118,14 @@ export default function DevenirSallePartenairePage() {
                   <path d="M5 12l5 5L20 6" />
                 </svg>
               </div>
-              <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:24px;margin-bottom:10px")}>Candidature envoyée.</h2>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:24px;margin-bottom:10px")}>Candidature envoyée.</h2>
               <p style={css('font-size:14.5px;color:var(--muted,#8a8a8a);line-height:1.55')}>
                 Merci ! Un conseiller GBÔ étudie votre candidature et vous recontacte prochainement.
               </p>
             </div>
           ) : (
             <>
-              <h2 style={css("font-family:'Big Shoulders Display';font-weight:700;font-size:24px;margin-bottom:18px")}>Devenir partenaire GBÔ</h2>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:24px;margin-bottom:18px")}>Devenir partenaire GBÔ</h2>
               <form onSubmit={submitForm} style={{ display: 'grid', gap: 12 }}>
                 <label>
                   <span style={labelStyle}>Nom de la salle *</span>
