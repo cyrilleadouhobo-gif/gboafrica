@@ -1,10 +1,15 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
+// Provider stays "sqlite" — Turso/libSQL is wire-compatible with SQLite. At runtime the
+// driver adapter in lib/db.js handles the connection; this url is what `prisma migrate`/
+// `db push`/`studio` use directly, so TURSO_DATABASE_URL must be the full
+// libsql://...?authToken=... connection string (see .env.example).
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = env("TURSO_DATABASE_URL")
 }
 
 // SQLite has no native enum support — these are validated at the application layer
