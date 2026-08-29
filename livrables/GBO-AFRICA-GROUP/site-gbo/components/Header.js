@@ -22,12 +22,9 @@ export default function Header() {
           "font-family:'Broaven',sans-serif;position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:var(--headerbg,rgba(0,0,0,.72));backdrop-filter:blur(18px);border-bottom:1px solid var(--border,rgba(255,255,255,.1))"
         )}
       >
-        <Link href="/" onClick={closeAll} style={css('display:flex;flex-direction:column;align-items:flex-start;gap:0px;cursor:pointer')}>
+        <Link href="/" onClick={closeAll} style={css('display:flex;align-items:center;cursor:pointer')}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-mark.png" alt="GBÔ" width={90} height={27} style={{ height: 27, width: 'auto' }} />
-          <span style={css("font-size:9px;color:var(--lime,#C6F202);font-weight:600;white-space:nowrap")}>
-            Plus qu&apos;une pratique, un style de vie
-          </span>
+          <img src="/logo-full.png" alt="GBÔ — Plus qu'une pratique, un style de vie" width={111} height={40} style={{ height: 40, width: 'auto' }} />
         </Link>
 
         <nav style={css('display:flex;align-items:center;gap:6px')} data-desktopnav="">
@@ -83,14 +80,9 @@ export default function Header() {
             "font-family:'Broaven',sans-serif;position:fixed;inset:0;z-index:80;background:var(--bg,#000);padding:20px clamp(16px,5vw,32px);overflow:auto;animation:fadeIn .2s both"
           )}
         >
-          <div style={css('display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px')}>
-            <div style={css('display:flex;flex-direction:column;gap:0px')}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo-mark.png" alt="GBÔ" width={87} height={26} style={{ height: 26, width: 'auto' }} />
-              <span style={css("font-size:9px;color:var(--lime,#C6F202);font-weight:600;white-space:nowrap")}>
-                Plus qu&apos;une pratique, un style de vie
-              </span>
-            </div>
+          <div style={css('display:flex;justify-content:space-between;align-items:center;margin-bottom:28px')}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-full.png" alt="GBÔ — Plus qu'une pratique, un style de vie" width={108} height={39} style={{ height: 39, width: 'auto' }} />
             <button
               onClick={() => setMenuOpen(false)}
               style={css(
