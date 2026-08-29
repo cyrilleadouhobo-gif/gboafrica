@@ -43,9 +43,8 @@ export default function AdminLoginPage() {
         )}
       >
         <div style={css('display:flex;justify-content:center;margin-bottom:22px')}>
-          <span style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:28px;letter-spacing:-1px;color:var(--fg,#fff)")}>
-            GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-mark.png" alt="GBÔ" width={107} height={32} style={{ height: 32, width: 'auto' }} />
         </div>
         <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px;text-align:center')}>
           Back-office

@@ -23,9 +23,8 @@ export default function Header() {
         )}
       >
         <Link href="/" onClick={closeAll} style={css('display:flex;align-items:center;gap:10px;cursor:pointer')}>
-          <span style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:26px;letter-spacing:-1px;color:var(--fg,#fff)")}>
-            GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-mark.png" alt="GBÔ" width={100} height={30} style={{ height: 30, width: 'auto' }} />
           <span style={css('width:1px;height:22px;background:var(--border,rgba(255,255,255,.18))')} />
           <span style={css("font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted,#8a8a8a);max-width:120px;line-height:1.25;font-weight:500")}>
             Plus qu&apos;une pratique,
@@ -88,9 +87,8 @@ export default function Header() {
           )}
         >
           <div style={css('display:flex;justify-content:space-between;align-items:center;margin-bottom:28px')}>
-            <span style={css("font-family:'Broaven';font-weight:700;font-size:24px")}>
-              GB<span style={{ color: 'var(--lime,#C6F202)' }}>Ô</span>
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mark.png" alt="GBÔ" width={87} height={26} style={{ height: 26, width: 'auto' }} />
             <button
               onClick={() => setMenuOpen(false)}
               style={css(
