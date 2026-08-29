@@ -22,10 +22,10 @@ export default function Header() {
           "font-family:'Broaven',sans-serif;position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:var(--headerbg,rgba(0,0,0,.72));backdrop-filter:blur(18px);border-bottom:1px solid var(--border,rgba(255,255,255,.1))"
         )}
       >
-        <Link href="/" onClick={closeAll} style={css('display:flex;flex-direction:column;align-items:flex-start;gap:2px;cursor:pointer')}>
+        <Link href="/" onClick={closeAll} style={css('display:flex;flex-direction:column;align-items:flex-start;gap:0px;cursor:pointer')}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo-mark.png" alt="GBÔ" width={90} height={27} style={{ height: 27, width: 'auto' }} />
-          <span style={css("font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:500;white-space:nowrap")}>
+          <span style={css("font-size:9px;color:var(--lime,#C6F202);font-weight:600;white-space:nowrap")}>
             Plus qu&apos;une pratique, un style de vie
           </span>
         </Link>
@@ -84,10 +84,10 @@ export default function Header() {
           )}
         >
           <div style={css('display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px')}>
-            <div style={css('display:flex;flex-direction:column;gap:2px')}>
+            <div style={css('display:flex;flex-direction:column;gap:0px')}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo-mark.png" alt="GBÔ" width={87} height={26} style={{ height: 26, width: 'auto' }} />
-              <span style={css("font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:500;white-space:nowrap")}>
+              <span style={css("font-size:9px;color:var(--lime,#C6F202);font-weight:600;white-space:nowrap")}>
                 Plus qu&apos;une pratique, un style de vie
               </span>
             </div>
