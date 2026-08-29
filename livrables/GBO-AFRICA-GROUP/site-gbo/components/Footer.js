@@ -58,12 +58,8 @@ export default function Footer() {
         >
           <div style={{ gridColumn: 'span 1', minWidth: 200 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo-mark.png" alt="GBÔ" width={107} height={32} style={{ height: 32, width: 'auto' }} />
-            <p style={css('font-size:13px;color:var(--muted,#8a8a8a);margin:12px 0;line-height:1.5')}>
-              Plus qu&apos;une pratique, un style de vie.
-              <br />
-              Abidjan — Côte d&apos;Ivoire
-            </p>
+            <img src="/logo-full.png" alt="GBÔ — Plus qu'une pratique, un style de vie" width={111} height={40} style={{ height: 40, width: 'auto' }} />
+            <p style={css('font-size:13px;color:var(--muted,#8a8a8a);margin:12px 0;line-height:1.5')}>Abidjan — Côte d&apos;Ivoire</p>
             <div style={css('display:flex;gap:10px;margin-top:14px')}>
               {SOCIALS.map((s) => (
                 <a

@@ -147,7 +147,7 @@ export default function AdminPage() {
           <div>
             <div style={css('display:flex;align-items:center;gap:10px')}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo-mark.png" alt="GBÔ" width={73} height={22} style={{ height: 22, width: 'auto' }} />
+              <img src="/logo-full.png" alt="GBÔ — Plus qu'une pratique, un style de vie" width={61} height={22} style={{ height: 22, width: 'auto' }} />
               <span
                 style={css(
                   'padding:3px 10px;border-radius:8px;background:var(--surface2,#1a1a1a);font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--muted,#8a8a8a);border:1px solid var(--border,rgba(255,255,255,.12))'
