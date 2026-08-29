@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { css } from '../../../lib/css.js';
 import Honeypot from '../../../components/Honeypot.js';
 import ImageSlot from '../../../components/ImageSlot.js';
+import Reveal from '../../../components/Reveal.js';
 import { stockPhoto } from '../../../lib/stockPhoto.js';
 import { POLES, POLE_DETAIL } from '../../../data/poles.js';
 
@@ -69,6 +70,7 @@ export default function PolePage({ params }) {
           <p style={css('font-size:clamp(17px,2.4vw,22px);color:rgba(255,255,255,.85);max-width:56ch;margin-top:20px;line-height:1.45')}>{detail.tagline}</p>
           <button
             onClick={() => document.getElementById('waitlist-box')?.scrollIntoView({ behavior: 'smooth' })}
+            className="btn-cta"
             style={css('margin-top:30px;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
           >
             Rejoindre la liste d&apos;attente
@@ -76,7 +78,7 @@ export default function PolePage({ params }) {
         </div>
       </section>
 
-      <section style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px)')}>
         <div style={css('max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(30px,5vw,64px)')}>
           <div>
             <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Ce que ce sera</div>
@@ -87,9 +89,10 @@ export default function PolePage({ params }) {
             <p style={css('font-size:clamp(16px,2vw,19px);line-height:1.6;font-weight:500')}>{detail.vision}</p>
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section
+      <Reveal
+        as="section"
         style={css(
           'padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
         )}
@@ -97,8 +100,13 @@ export default function PolePage({ params }) {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>Services à venir</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px')}>
-            {detail.services.map((sv) => (
-              <div key={sv} style={css('display:flex;gap:12px;align-items:center;padding:18px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+            {detail.services.map((sv, i) => (
+              <Reveal
+                key={sv}
+                delay={i * 50}
+                className="hover-card"
+                style={css('display:flex;gap:12px;align-items:center;padding:18px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.09))')}
+              >
                 <span
                   style={css(
                     'width:26px;height:26px;flex:0 0 auto;border-radius:8px;background:rgba(198,242,2,.14);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center'
@@ -109,27 +117,27 @@ export default function PolePage({ params }) {
                   </svg>
                 </span>
                 <span style={{ fontSize: 15, fontWeight: 600 }}>{sv}</span>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:24px")}>Questions fréquentes</h2>
           <div style={{ display: 'grid', gap: 10 }}>
             {detail.faqs.map((f) => (
-              <div key={f.q} style={css('padding:22px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}>
+              <div key={f.q} className="hover-card" style={css('padding:22px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}>
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{f.q}</div>
                 <div style={css('font-size:14.5px;color:var(--muted,#8a8a8a);line-height:1.55')}>{f.a}</div>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section id="waitlist-box" style={css('padding:0 clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" id="waitlist-box" style={css('padding:0 clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div style={css('max-width:640px;margin:0 auto;padding:clamp(28px,4vw,44px);border-radius:24px;background:var(--lime,#C6F202);color:#000;text-align:center')}>
           {done ? (
             <div style={{ animation: 'fadeUp .4s both' }}>
@@ -159,7 +167,12 @@ export default function PolePage({ params }) {
                   placeholder="Votre e-mail"
                   style={css('flex:1;min-width:200px;padding:16px;border-radius:12px;border:1px solid rgba(0,0,0,.25);background:rgba(255,255,255,.6);color:#000;font-size:15px')}
                 />
-                <button type="submit" disabled={submitting} style={css(`padding:16px 26px;border-radius:12px;background:#000;color:var(--lime,#C6F202);font-weight:700;font-size:15px;opacity:${submitting ? 0.6 : 1}`)}>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="btn-cta"
+                  style={css(`padding:16px 26px;border-radius:12px;background:#000;color:var(--lime,#C6F202);font-weight:700;font-size:15px;opacity:${submitting ? 0.6 : 1}`)}
+                >
                   {submitting ? '…' : 'Rejoindre'}
                 </button>
               </div>
@@ -169,7 +182,7 @@ export default function PolePage({ params }) {
             </form>
           )}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

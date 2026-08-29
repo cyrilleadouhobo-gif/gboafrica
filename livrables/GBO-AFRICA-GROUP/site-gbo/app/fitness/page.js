@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import Reveal from '../../components/Reveal.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { METHOD_STEPS } from '../../data/content.js';
 
@@ -38,9 +39,10 @@ export default function FitnessPage() {
         </div>
       </section>
 
-      <section style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px)')}>
         <div style={css('max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px')}>
-          <div
+          <Reveal
+            className="hover-card"
             style={css(
               'padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-direction:column;backdrop-filter:blur(8px)'
             )}
@@ -62,12 +64,15 @@ export default function FitnessPage() {
             </p>
             <Link
               href="/fitness/tunnel"
+              className="btn-cta"
               style={css('margin-top:26px;width:100%;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;display:block;text-align:center')}
             >
               Commencer
             </Link>
-          </div>
-          <div
+          </Reveal>
+          <Reveal
+            delay={80}
+            className="hover-card"
             style={css(
               'padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-direction:column;backdrop-filter:blur(8px)'
             )}
@@ -89,15 +94,16 @@ export default function FitnessPage() {
             </p>
             <Link
               href="/corporate"
+              className="btn-cta"
               style={css('margin-top:26px;width:100%;padding:16px;border-radius:12px;border:1px solid var(--fg,#fff);color:var(--fg,#fff);font-weight:700;font-size:16px;background:transparent;display:block;text-align:center')}
             >
               Découvrir nos solutions
             </Link>
-          </div>
+          </Reveal>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:0 clamp(20px,5vw,64px) clamp(40px,6vw,72px)')}>
+      <Reveal as="section" style={css('padding:0 clamp(20px,5vw,64px) clamp(40px,6vw,72px)')}>
         <div
           style={css(
             'max-width:1000px;margin:0 auto;padding:22px 26px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between'
@@ -111,9 +117,9 @@ export default function FitnessPage() {
             Accédez à un réseau de salles partenaires sélectionnées par GBÔ →
           </Link>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
+      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Actif de marque</div>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:8px")}>La Méthode GBÔ</h2>
@@ -121,8 +127,8 @@ export default function FitnessPage() {
             Cinq étapes pour transformer une intention en mode de vie durable.
           </p>
           <div style={css('position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px')}>
-            {METHOD_STEPS.map((m) => (
-              <div key={m.n} style={{ position: 'relative', paddingTop: 20 }}>
+            {METHOD_STEPS.map((m, i) => (
+              <Reveal key={m.n} delay={i * 70} style={{ position: 'relative', paddingTop: 20 }}>
                 <div style={css('position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--lime,#C6F202),transparent)')} />
                 <div
                   style={css(
@@ -133,7 +139,7 @@ export default function FitnessPage() {
                 </div>
                 <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>{m.title}</div>
                 <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.55')}>{m.desc}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
           <div style={css('margin-top:40px;padding:18px 22px;border-radius:14px;border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.06);display:flex;gap:14px;align-items:flex-start')}>
@@ -146,7 +152,7 @@ export default function FitnessPage() {
             </p>
           </div>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
+import Reveal from '../../components/Reveal.js';
 import { JOBS } from '../../data/content.js';
 
 export const metadata = { title: 'Carrières — GBÔ AFRICA GROUP' };
@@ -18,11 +19,13 @@ export default function CareersPage() {
           </p>
         </div>
       </section>
-      <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(40px,6vw,70px)')}>
+      <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(40px,6vw,70px)')}>
         <div style={{ maxWidth: 1000, margin: '0 auto', display: 'grid', gap: 12 }}>
-          {JOBS.map((j) => (
-            <div
+          {JOBS.map((j, i) => (
+            <Reveal
               key={j.t}
+              delay={i * 50}
+              className="hover-card"
               style={css('display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 24px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09));flex-wrap:wrap')}
             >
               <div>
@@ -37,10 +40,10 @@ export default function CareersPage() {
               >
                 Postuler →
               </Link>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

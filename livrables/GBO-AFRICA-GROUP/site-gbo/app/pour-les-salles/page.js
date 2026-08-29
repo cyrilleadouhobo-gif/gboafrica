@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import Reveal from '../../components/Reveal.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { GYM_CHALLENGES, GYM_PILLARS, GYM_COMPLEMENTARY_SERVICES, GYM_HOW_IT_WORKS } from '../../data/content.js';
 
@@ -32,11 +33,12 @@ export default function PourLesSallesPage() {
             fitness sur les différents leviers de leur développement.
           </p>
           <div style={css('display:flex;flex-wrap:wrap;gap:12px;margin-top:30px')}>
-            <a href="#piliers" style={css('padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px')}>
+            <a href="#piliers" className="btn-cta" style={css('padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px')}>
               Découvrir nos solutions
             </a>
             <Link
               href="/contact"
+              className="btn-cta"
               style={css('padding:16px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:15px')}
             >
               Parler à GBÔ
@@ -45,30 +47,41 @@ export default function PourLesSallesPage() {
         </div>
       </section>
 
-      <section style={css('padding:clamp(56px,8vw,90px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(56px,8vw,90px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:14px')}>
             Les enjeux d&apos;une salle
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px')}>
-            {GYM_CHALLENGES.map((c) => (
-              <div key={c.t} style={css('padding:24px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}>
+            {GYM_CHALLENGES.map((c, i) => (
+              <Reveal
+                key={c.t}
+                delay={i * 60}
+                className="hover-card"
+                style={css('padding:24px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}
+              >
                 <div style={css('width:10px;height:10px;border-radius:3px;background:var(--lime,#C6F202);margin-bottom:14px')} />
                 <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 6 }}>{c.t}</div>
                 <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>{c.d}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
           <p style={css('margin-top:26px;font-size:15px;font-weight:600;color:var(--fg,#fff)')}>GBÔ intervient sur chacun de ces leviers.</p>
         </div>
-      </section>
+      </Reveal>
 
-      <section id="piliers" style={css('padding:clamp(56px,8vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
+      <Reveal
+        as="section"
+        id="piliers"
+        style={css('padding:clamp(56px,8vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}
+      >
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px')}>
-            {GYM_PILLARS.map((p) => (
-              <div
+            {GYM_PILLARS.map((p, i) => (
+              <Reveal
                 key={p.n}
+                delay={i * 70}
+                className="hover-card"
                 style={css(
                   'padding:clamp(28px,3.5vw,38px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-direction:column'
                 )}
@@ -85,13 +98,13 @@ export default function PourLesSallesPage() {
                 <Link href={p.href} style={css('margin-top:22px;font-size:14px;font-weight:700;color:var(--lime,#C6F202);display:inline-flex;align-items:center;gap:6px')}>
                   {p.cta} →
                 </Link>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(48px,6vw,70px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(48px,6vw,70px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>
             Besoin d&apos;aller plus loin ?
@@ -100,17 +113,17 @@ export default function PourLesSallesPage() {
             Complétez votre accompagnement avec nos services spécialisés.
           </p>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px')}>
-            {GYM_COMPLEMENTARY_SERVICES.map((s) => (
-              <div key={s.t} style={css('padding:20px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.08))')}>
+            {GYM_COMPLEMENTARY_SERVICES.map((s, i) => (
+              <Reveal key={s.t} delay={i * 50} className="hover-card" style={css('padding:20px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.08))')}>
                 <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 6 }}>{s.t}</div>
                 <div style={css('font-size:13px;color:var(--muted,#8a8a8a);line-height:1.5')}>{s.d}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(56px,8vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
+      <Reveal as="section" style={css('padding:clamp(56px,8vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:36px;line-height:1.2")}>
             Vous avez un enjeu. Nous construisons la réponse.
@@ -137,9 +150,9 @@ export default function PourLesSallesPage() {
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(64px,9vw,110px) clamp(20px,5vw,64px);background:#000;text-align:center')}>
+      <Reveal as="section" style={css('padding:clamp(64px,9vw,110px) clamp(20px,5vw,64px);background:#000;text-align:center')}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,42px);letter-spacing:-1px;margin-bottom:16px;line-height:1.15")}>
             Prêt à faire évoluer votre salle ?
@@ -149,12 +162,13 @@ export default function PourLesSallesPage() {
           </p>
           <Link
             href="/contact"
+            className="btn-cta"
             style={css('display:inline-block;padding:18px 32px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
           >
             Échanger avec GBÔ →
           </Link>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

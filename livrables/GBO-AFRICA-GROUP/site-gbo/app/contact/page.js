@@ -5,6 +5,7 @@ import { css } from '../../lib/css.js';
 import { useAppData } from '../../context/AppData.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Honeypot from '../../components/Honeypot.js';
+import Reveal from '../../components/Reveal.js';
 
 const fieldStyle = css(
   "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
@@ -58,6 +59,7 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={submitting}
+              className="btn-cta"
               style={css(`padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
             >
               {submitting ? 'Envoi…' : 'Envoyer'}
@@ -67,6 +69,7 @@ export default function ContactPage() {
         <div style={{ display: 'grid', gap: 12, alignContent: 'start' }}>
           <a
             href="https://wa.me/2250700000000"
+            className="hover-card"
             style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.02))')}
           >
             <span
@@ -83,7 +86,7 @@ export default function ContactPage() {
               <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>+225 07 00 00 00 00</div>
             </div>
           </a>
-          <div style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1))')}>
+          <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1))')}>
             <span
               style={css(
                 'width:42px;height:42px;border-radius:12px;background:rgba(198,242,2,.14);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;flex:0 0 auto'
@@ -99,7 +102,7 @@ export default function ContactPage() {
               <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>contact@gboafrica.com</div>
             </div>
           </div>
-          <div style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1))')}>
+          <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1))')}>
             <span
               style={css(
                 'width:42px;height:42px;border-radius:12px;background:rgba(198,242,2,.14);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;flex:0 0 auto'

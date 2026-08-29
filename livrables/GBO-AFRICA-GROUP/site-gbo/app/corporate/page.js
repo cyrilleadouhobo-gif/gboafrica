@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import Honeypot from '../../components/Honeypot.js';
+import Reveal from '../../components/Reveal.js';
 import { CORPORATE_SOLUTIONS } from '../../data/content.js';
 
 const fieldStyle = css(
@@ -70,27 +71,27 @@ export default function CorporatePage() {
         </div>
       </section>
 
-      <section style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:30px")}>Nos solutions</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px')}>
-            {CORPORATE_SOLUTIONS.map((c) => (
-              <div
+            {CORPORATE_SOLUTIONS.map((c, i) => (
+              <Reveal
                 key={c.t}
-                style={css(
-                  'padding:26px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02));transition:.2s'
-                )}
+                delay={i * 60}
+                className="hover-card"
+                style={css('padding:26px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}
               >
                 <div style={css('width:10px;height:10px;border-radius:3px;background:var(--lime,#C6F202);margin-bottom:16px')} />
                 <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>{c.t}</div>
                 <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.55')}>{c.d}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div
           style={css(
             'max-width:760px;margin:0 auto;padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c)'
@@ -170,6 +171,7 @@ export default function CorporatePage() {
               <button
                 type="submit"
                 disabled={submitting}
+                className="btn-cta"
                 style={css(
                   `margin-top:24px;width:100%;padding:17px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`
                 )}
@@ -179,7 +181,7 @@ export default function CorporatePage() {
             </form>
           )}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

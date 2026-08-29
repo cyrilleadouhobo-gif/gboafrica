@@ -1,6 +1,7 @@
 import { css } from '../../lib/css.js';
 import CoachApplicationForm from '../../components/CoachApplicationForm.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import Reveal from '../../components/Reveal.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { TESTIMONIALS } from '../../data/content.js';
 
@@ -35,6 +36,7 @@ export default function DevenirCoachPage() {
           </p>
           <a
             href="#candidature"
+            className="btn-cta"
             style={css('display:inline-block;margin-top:30px;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
           >
             Postuler maintenant
@@ -42,33 +44,33 @@ export default function DevenirCoachPage() {
         </div>
       </section>
 
-      <section style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>
             Pourquoi rejoindre le réseau GBÔ
           </h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px')}>
-            {BENEFITS.map((b) => (
-              <div key={b.t} style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+            {BENEFITS.map((b, i) => (
+              <Reveal key={b.t} delay={i * 70} className="hover-card" style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{b.t}</div>
                 <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.55')}>{b.d}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {coachTestimonial && (
-        <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(56px,8vw,90px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
+        <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(56px,8vw,90px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
           <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
             <p style={css("font-family:'Broaven';font-weight:600;font-size:clamp(20px,3vw,28px);line-height:1.3")}>{coachTestimonial.quote}</p>
             <div style={css('margin-top:18px;font-size:14px;font-weight:700')}>{coachTestimonial.name}</div>
             <div style={css('font-size:13px;color:var(--muted,#8a8a8a)')}>{coachTestimonial.role}</div>
           </div>
-        </section>
+        </Reveal>
       )}
 
-      <section id="candidature" style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" id="candidature" style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px)')}>
         <div
           style={css(
             'max-width:760px;margin:0 auto;padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c)'
@@ -80,7 +82,7 @@ export default function DevenirCoachPage() {
           </p>
           <CoachApplicationForm />
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

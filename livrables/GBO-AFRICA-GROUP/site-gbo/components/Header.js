@@ -62,6 +62,7 @@ export default function Header() {
           <Link
             href="/fitness"
             onClick={closeAll}
+            className="btn-cta"
             style={css('padding:9px 16px;border-radius:10px;font-size:14px;font-weight:700;white-space:nowrap;background:var(--lime,#C6F202);color:#000')}
           >
             Commencer

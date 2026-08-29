@@ -1,5 +1,6 @@
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import Reveal from '../../components/Reveal.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { VALUES } from '../../data/content.js';
 
@@ -21,13 +22,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section style={css('padding:0 clamp(20px,5vw,64px) clamp(48px,7vw,90px)')}>
+      <Reveal as="section" style={css('padding:0 clamp(20px,5vw,64px) clamp(48px,7vw,90px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto', aspectRatio: '21/9', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))', position: 'relative' }}>
           <ImageSlot placeholder="Visuel équipe / communauté GBÔ" src={stockPhoto('team', 'about-hero', '1600x700')} />
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
+      <Reveal as="section" style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={css('max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(30px,5vw,64px)')}>
           <div>
             <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Mission</div>
@@ -41,24 +42,24 @@ export default function AboutPage() {
             <p style={{ fontSize: 19, lineHeight: 1.55, fontWeight: 500 }}>Devenir la référence africaine du sport, du fitness et du bien-être accessible à tous.</p>
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(48px,7vw,90px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.5vw,34px);letter-spacing:-1px;margin-bottom:28px")}>Nos valeurs</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px')}>
-            {VALUES.map((v) => (
-              <div key={v.n} style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+            {VALUES.map((v, i) => (
+              <Reveal key={v.n} delay={i * 70} className="hover-card" style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
                 <div style={css("color:var(--lime,#C6F202);font-family:'Broaven';font-weight:700;margin-bottom:8px")}>{v.n}</div>
                 <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 5 }}>{v.title}</div>
                 <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>{v.desc}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:0 clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" style={css('padding:0 clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div
           style={css(
             'max-width:1100px;margin:0 auto;padding:clamp(30px,5vw,56px);border-radius:24px;background:var(--lime,#C6F202);color:#000;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:center'
@@ -81,7 +82,7 @@ export default function AboutPage() {
             <div style={{ fontSize: 14, fontWeight: 600, opacity: 0.75 }}>FCFA/mois · Club Premium</div>
           </div>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

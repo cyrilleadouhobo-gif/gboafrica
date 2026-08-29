@@ -1,6 +1,7 @@
 import { css } from '../../lib/css.js';
 import { prisma } from '../../lib/db.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import Reveal from '../../components/Reveal.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { ABIDJAN_COMMUNES } from '../../lib/constants.js';
 
@@ -34,7 +35,7 @@ export default async function CoachsPage({ searchParams }) {
         </div>
       </section>
 
-      <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <form method="get" style={css('display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px')}>
             <a
@@ -72,8 +73,13 @@ export default async function CoachsPage({ searchParams }) {
             </div>
           ) : (
             <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px')}>
-              {coaches.map((c) => (
-                <div key={c.id} style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+              {coaches.map((c, i) => (
+                <Reveal
+                  key={c.id}
+                  delay={i * 50}
+                  className="hover-card"
+                  style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}
+                >
                   <div style={{ aspectRatio: '4/5', position: 'relative' }}>
                     <ImageSlot placeholder={`Photo de ${c.name}`} src={stockPhoto('portrait', c.id, '400x500')} />
                   </div>
@@ -93,12 +99,12 @@ export default async function CoachsPage({ searchParams }) {
                     <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);margin-top:6px;line-height:1.45')}>{c.spec}</div>
                     <div style={css('font-size:12.5px;color:var(--lime,#C6F202);margin-top:8px;font-weight:600')}>{c.zones}</div>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           )}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

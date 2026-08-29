@@ -67,6 +67,39 @@ a:hover {
   transform: translateY(-2px);
 }
 
+/* Scroll-triggered fade/slide-up, toggled by components/Reveal.js via IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Lift + glow on hover for card-like blocks (value/method/pole/blog/testimonial cards). */
+.hover-card {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(198, 242, 2, 0.35);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Lift + soft lime glow on hover for primary CTA buttons. */
+.btn-cta {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(198, 242, 2, 0.28);
+}
+.btn-cta:active {
+  transform: translateY(0);
+}
+
 button {
   font-family: inherit;
   cursor: pointer;

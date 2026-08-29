@@ -5,6 +5,7 @@ import { css } from '../../lib/css.js';
 import { chip } from '../../lib/styleHelpers.js';
 import { useAppData } from '../../context/AppData.js';
 import Honeypot from '../../components/Honeypot.js';
+import Reveal from '../../components/Reveal.js';
 import { GYM_MANAGER_BENEFITS } from '../../data/content.js';
 import { GYM_PARTNER_REASONS } from '../../lib/constants.js';
 
@@ -80,12 +81,12 @@ export default function DevenirSallePartenairePage() {
         </div>
       </section>
 
-      <section style={css('padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:22px")}>Ce que GBÔ vous apporte</h2>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px')}>
-            {GYM_MANAGER_BENEFITS.map((b) => (
-              <div key={b.n} style={css('padding:24px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+            {GYM_MANAGER_BENEFITS.map((b, i) => (
+              <Reveal key={b.n} delay={i * 60} className="hover-card" style={css('padding:24px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
                 <div
                   style={css(
                     "width:36px;height:36px;border-radius:10px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700;margin-bottom:14px"
@@ -95,13 +96,13 @@ export default function DevenirSallePartenairePage() {
                 </div>
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6 }}>{b.t}</div>
                 <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.55')}>{b.d}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div
           style={css(
             'max-width:700px;margin:0 auto;padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c)'
@@ -197,6 +198,7 @@ export default function DevenirSallePartenairePage() {
                 <button
                   type="submit"
                   disabled={submitting}
+                  className="btn-cta"
                   style={css(`margin-top:10px;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
                 >
                   {submitting ? 'Envoi…' : 'Devenir partenaire'}
@@ -205,7 +207,7 @@ export default function DevenirSallePartenairePage() {
             </>
           )}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

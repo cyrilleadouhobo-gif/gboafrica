@@ -1,6 +1,7 @@
 import { css } from '../../lib/css.js';
 import { prisma } from '../../lib/db.js';
 import ReviewForm from '../../components/ReviewForm.js';
+import Reveal from '../../components/Reveal.js';
 
 export const metadata = { title: 'Avis clients — GBÔ AFRICA GROUP' };
 export const dynamic = 'force-dynamic';
@@ -45,7 +46,7 @@ export default async function ReviewsPage() {
         </div>
       </section>
 
-      <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div style={css('max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(32px,5vw,56px)')}>
           <div>
             {count === 0 ? (
@@ -54,15 +55,20 @@ export default async function ReviewsPage() {
               </div>
             ) : (
               <div style={{ display: 'grid', gap: 14 }}>
-                {reviews.map((r) => (
-                  <div key={r.id} style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--surface,#0c0c0c)')}>
+                {reviews.map((r, i) => (
+                  <Reveal
+                    key={r.id}
+                    delay={i * 50}
+                    className="hover-card"
+                    style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--surface,#0c0c0c)')}
+                  >
                     <Stars rating={r.rating} />
                     <p style={css('font-size:14.5px;line-height:1.6;margin:12px 0')}>{r.comment}</p>
                     <div style={css('font-size:13px;font-weight:600')}>
                       {r.authorName}
                       {r.context && <span style={css('color:var(--muted,#8a8a8a);font-weight:500')}> · {r.context}</span>}
                     </div>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
             )}
@@ -81,7 +87,7 @@ export default async function ReviewsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

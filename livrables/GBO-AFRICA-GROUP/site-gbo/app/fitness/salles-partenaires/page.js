@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { css } from '../../../lib/css.js';
 import ImageSlot from '../../../components/ImageSlot.js';
+import Reveal from '../../../components/Reveal.js';
 import { stockPhoto } from '../../../lib/stockPhoto.js';
 import { GYM_ECOSYSTEM_ADVANTAGES } from '../../../data/content.js';
 
@@ -38,6 +39,7 @@ export default function SallesPartenairesPage() {
           </p>
           <Link
             href="/devenir-salle-partenaire"
+            className="btn-cta"
             style={css('margin-top:30px;display:inline-block;padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
           >
             Devenir salle partenaire
@@ -45,24 +47,24 @@ export default function SallesPartenairesPage() {
         </div>
       </section>
 
-      <section style={css('padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:24px')}>
             Les avantages
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px')}>
-            {GYM_ECOSYSTEM_ADVANTAGES.map((a) => (
-              <div key={a.t} style={css('padding:26px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+            {GYM_ECOSYSTEM_ADVANTAGES.map((a, i) => (
+              <Reveal key={a.t} delay={i * 60} className="hover-card" style={css('padding:26px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.09))')}>
                 <div style={{ fontSize: 26, marginBottom: 12 }}>{a.icon}</div>
                 <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 8 }}>{a.t}</div>
                 <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.55')}>{a.d}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div
           style={css(
             'max-width:900px;margin:0 auto;padding:clamp(28px,4vw,44px);border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c);text-align:center'
@@ -74,12 +76,13 @@ export default function SallesPartenairesPage() {
           </p>
           <Link
             href="/devenir-salle-partenaire"
+            className="btn-cta"
             style={css('display:inline-block;padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
           >
             Devenir salle partenaire
           </Link>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

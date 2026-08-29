@@ -1,5 +1,6 @@
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
+import Reveal from '../../components/Reveal.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { ARTICLES, BLOG_CATS } from '../../data/content.js';
 
@@ -33,10 +34,15 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
-      <section style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
+      <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px')}>
-          {ARTICLES.map((a) => (
-            <div key={a.id} style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09));cursor:pointer;transition:.2s')}>
+          {ARTICLES.map((a, i) => (
+            <Reveal
+              key={a.id}
+              delay={i * 60}
+              className="hover-card"
+              style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09));cursor:pointer')}
+            >
               <div style={{ aspectRatio: '16/10', position: 'relative' }}>
                 <ImageSlot placeholder="Visuel article" src={stockPhoto(CAT_TAGS[a.cat] || 'fitnessMen', a.id, '600x375')} />
               </div>
@@ -47,10 +53,10 @@ export default function BlogPage() {
                 <div style={{ fontWeight: 700, fontSize: 19, margin: '8px 0 6px', lineHeight: 1.3 }}>{a.title}</div>
                 <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5')}>{a.excerpt}</div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }
