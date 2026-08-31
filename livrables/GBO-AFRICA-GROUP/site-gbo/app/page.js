@@ -42,22 +42,25 @@ export default function HomePage() {
 
   return (
     <div>
-      <section style={css('position:relative;background:#050505;padding:clamp(48px,9vw,96px) clamp(20px,5vw,64px) clamp(64px,10vw,120px)')}>
-        <div style={css('position:absolute;inset:0;overflow:hidden;pointer-events:none')}>
-          <div
-            style={css(
-              'position:absolute;top:-140px;left:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.16),transparent 70%)'
-            )}
-          />
-          <div
-            style={css(
-              'position:absolute;bottom:-160px;right:-120px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.12),transparent 70%)'
-            )}
-          />
-        </div>
-
-        <div style={css('position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:56px;align-items:center')}>
-          <div>
+      <section style={css('position:relative;min-height:calc(100vh - 68px);display:flex;align-items:flex-end;overflow:hidden;background:#050505')}>
+        <ImageSlot placeholder="Visuel hero — mouvement, énergie (plein écran)" src={stockPhoto('fitnessMen', 'home-hero', '1600x1000')} />
+        <div
+          style={css(
+            'position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.9) 100%);pointer-events:none'
+          )}
+        />
+        <div
+          style={css(
+            'position:absolute;top:-140px;left:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.35),transparent 70%);mix-blend-mode:screen;pointer-events:none'
+          )}
+        />
+        <div
+          style={css(
+            'position:absolute;bottom:-160px;right:-120px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.3),transparent 70%);mix-blend-mode:screen;pointer-events:none'
+          )}
+        />
+        <div style={css('position:relative;max-width:1200px;margin:0 auto;width:100%;padding:0 clamp(20px,5vw,64px) clamp(56px,9vw,110px);pointer-events:none')}>
+          <div style={{ pointerEvents: 'auto' }}>
             <div
               style={css(
                 "display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:30px;border:1px solid rgba(198,242,2,.4);background:rgba(198,242,2,.08);font-size:12px;font-weight:600;letter-spacing:.5px;color:#C6F202;margin-bottom:22px;animation:fadeUp .6s both"
@@ -65,10 +68,10 @@ export default function HomePage() {
             >
               ● Abidjan · Côte d&apos;Ivoire
             </div>
-            <h1 style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:clamp(32px,4.6vw,54px);line-height:1.02;letter-spacing:-1.5px;color:#fff;max-width:12ch;animation:fadeUp .7s .05s both")}>
+            <h1 style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:clamp(34px,7.5vw,74px);line-height:.98;letter-spacing:-2px;color:#fff;max-width:14ch;animation:fadeUp .7s .05s both")}>
               Plus qu&apos;une pratique, un <span style={{ color: '#C6F202' }}>style de vie.</span>
             </h1>
-            <p style={css("font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.82);max-width:46ch;margin-top:22px;line-height:1.55;animation:fadeUp .7s .12s both")}>
+            <p style={css("font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:52ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>
               Sport, fitness et bien-être accessibles à tous. Un accompagnement premium, une méthode propriétaire, une communauté. GBÔ AFRICA GROUP.
             </p>
             <div style={css('display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;animation:fadeUp .7s .2s both')}>
@@ -84,59 +87,16 @@ export default function HomePage() {
               </button>
             </div>
           </div>
-
-          <div style={css('position:relative')}>
-            <div
-              style={css(
-                'position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0c0c0c;aspect-ratio:4/3;animation:fadeUp .7s .15s both'
-              )}
-            >
-              <ImageSlot placeholder="Visuel GBÔ — mouvement, énergie" src={stockPhoto('fitnessMen', 'home-hero', '1200x900')} />
-              <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.5) 100%)')} />
-            </div>
-
-            <div
-              style={css(
-                'position:absolute;top:-18px;left:24px;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;background:#0c0c0c;border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 32px rgba(0,0,0,.45);animation:fadeUp .7s .3s both'
-              )}
-            >
-              <span
-                style={css(
-                  'width:34px;height:34px;flex-shrink:0;border-radius:10px;background:rgba(198,242,2,.12);color:#C6F202;display:flex;align-items:center;justify-content:center'
-                )}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                </svg>
-              </span>
-              <span>
-                <span style={css('display:block;font-size:13.5px;font-weight:700;color:#fff')}>Communauté</span>
-                <span style={css('display:block;font-size:11.5px;color:var(--muted,#8a8a8a)')}>Active &amp; engagée</span>
-              </span>
-            </div>
-
-            <div
-              style={css(
-                'position:absolute;bottom:-18px;right:24px;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;background:#0c0c0c;border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 32px rgba(0,0,0,.45);animation:fadeUp .7s .35s both'
-              )}
-            >
-              <span
-                style={css(
-                  'width:34px;height:34px;flex-shrink:0;border-radius:10px;background:rgba(198,242,2,.12);color:#C6F202;display:flex;align-items:center;justify-content:center'
-                )}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 000-7.6z" />
-                </svg>
-              </span>
-              <span>
-                <span style={css('display:block;font-size:13.5px;font-weight:700;color:#fff')}>Bien-être</span>
-                <span style={css('display:block;font-size:11.5px;color:var(--muted,#8a8a8a)')}>Corps &amp; esprit</span>
-              </span>
-            </div>
-          </div>
+        </div>
+        <div
+          style={css(
+            'position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:11px;letter-spacing:1px;animation:pulse 2s infinite'
+          )}
+        >
+          SCROLL
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M12 5v14M6 13l6 6 6-6" />
+          </svg>
         </div>
       </section>
 
