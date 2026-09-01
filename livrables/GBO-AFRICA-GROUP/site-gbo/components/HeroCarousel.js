@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 // automatique + puces cliquables. Remplace l'ancien bandeau défilant (HeroSlideshow), jugé
 // trop chargé visuellement — l'objectif ici est un rendu institutionnel, sobre, une image
 // à la fois derrière le texte.
-export default function HeroCarousel({ slides, interval = 6000 }) {
+export default function HeroCarousel({ slides, interval = 6000, dotsBottom = 64 }) {
   const [active, setActive] = useState(0);
   const timerRef = useRef(null);
 
@@ -45,7 +45,7 @@ export default function HeroCarousel({ slides, interval = 6000 }) {
           }}
         />
       ))}
-      <div style={{ position: 'absolute', bottom: 64, right: 'clamp(20px,5vw,64px)', display: 'flex', gap: 8, zIndex: 2 }}>
+      <div style={{ position: 'absolute', bottom: dotsBottom, right: 'clamp(20px,5vw,64px)', display: 'flex', gap: 8, zIndex: 2 }}>
         {slides.map((s, i) => (
           <button
             key={s.src}
