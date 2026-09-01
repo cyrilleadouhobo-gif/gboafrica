@@ -1,6 +1,7 @@
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { VALUES } from '../../data/content.js';
 
@@ -9,8 +10,9 @@ export const metadata = { title: 'À propos — GBÔ AFRICA GROUP' };
 export default function AboutPage() {
   return (
     <div>
-      <section style={css('padding:clamp(80px,10vw,130px) clamp(20px,5vw,64px) clamp(40px,5vw,60px)')}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+      <section style={css('position:relative;padding:clamp(80px,10vw,130px) clamp(20px,5vw,64px) clamp(40px,5vw,60px)')}>
+        <GlowBlobs />
+        <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>À propos</div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6.5vw,62px);letter-spacing:-2px;line-height:1;max-width:18ch")}>
             Nous croyons que le sport change des vies.

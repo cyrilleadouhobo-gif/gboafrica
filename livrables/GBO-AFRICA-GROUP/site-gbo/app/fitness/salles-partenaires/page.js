@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { css } from '../../../lib/css.js';
 import ImageSlot from '../../../components/ImageSlot.js';
 import Reveal from '../../../components/Reveal.js';
+import GlowBlobs from '../../../components/GlowBlobs.js';
 import { stockPhoto } from '../../../lib/stockPhoto.js';
 import { GYM_ECOSYSTEM_ADVANTAGES } from '../../../data/content.js';
 
@@ -23,6 +24,7 @@ export default function SallesPartenairesPage() {
             'position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.6) 45%,rgba(0,0,0,.35) 75%),linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.35) 45%,rgba(0,0,0,.85) 100%);pointer-events:none'
           )}
         />
+        <GlowBlobs />
         <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
           <div style={css('font-size:13px;color:var(--muted,#c0c0c0);margin-bottom:20px')}>
             <Link href="/">Accueil</Link> <span style={{ opacity: 0.5 }}>/</span> <Link href="/fitness">GBÔ Fitness</Link>{' '}

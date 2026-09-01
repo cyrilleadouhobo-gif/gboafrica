@@ -1,5 +1,6 @@
 import { css } from '../../lib/css.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { NEWS_ITEMS } from '../../data/content.js';
 
 export const metadata = { title: 'Actualités — GBÔ AFRICA GROUP' };
@@ -7,8 +8,13 @@ export const metadata = { title: 'Actualités — GBÔ AFRICA GROUP' };
 export default function NewsPage() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'clamp(80px,10vw,120px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
-      <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Actualités</div>
-      <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;margin-bottom:40px")}>La vie de la marque.</h1>
+      <div style={{ position: 'relative' }}>
+        <GlowBlobs compact />
+        <div style={{ position: 'relative' }}>
+          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Actualités</div>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;margin-bottom:40px")}>La vie de la marque.</h1>
+        </div>
+      </div>
       <div style={{ display: 'grid', gap: 14 }}>
         {NEWS_ITEMS.map((n, i) => (
           <Reveal

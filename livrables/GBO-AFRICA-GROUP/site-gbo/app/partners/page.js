@@ -5,6 +5,7 @@ import { css } from '../../lib/css.js';
 import { useAppData } from '../../context/AppData.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { PARTNER_TYPES } from '../../data/content.js';
 
 const fieldStyle = css(
@@ -41,8 +42,9 @@ export default function PartnersPage() {
 
   return (
     <div>
-      <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+      <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
+        <GlowBlobs />
+        <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Partenaires</div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;max-width:16ch")}>Grandissons ensemble.</h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:58ch;margin-top:20px;line-height:1.5')}>

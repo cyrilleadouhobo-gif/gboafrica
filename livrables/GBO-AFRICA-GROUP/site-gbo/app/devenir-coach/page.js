@@ -2,6 +2,7 @@ import { css } from '../../lib/css.js';
 import CoachApplicationForm from '../../components/CoachApplicationForm.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { TESTIMONIALS } from '../../data/content.js';
 
@@ -24,6 +25,7 @@ export default function DevenirCoachPage() {
           <ImageSlot placeholder="Coach GBÔ en séance" src={stockPhoto('fitnessMen', 'devenir-coach-hero', '1600x900')} />
         </div>
         <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.92));pointer-events:none')} />
+        <GlowBlobs />
         <div style={{ position: 'relative', maxWidth: 900, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>
             Réseau de coachs

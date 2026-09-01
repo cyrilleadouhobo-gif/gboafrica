@@ -6,6 +6,7 @@ import { chip } from '../../lib/styleHelpers.js';
 import { useAppData } from '../../context/AppData.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { GYM_MANAGER_BENEFITS } from '../../data/content.js';
 import { GYM_PARTNER_REASONS } from '../../lib/constants.js';
 
@@ -66,8 +67,9 @@ export default function DevenirSallePartenairePage() {
 
   return (
     <div>
-      <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+      <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
+        <GlowBlobs />
+        <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             GBÔ Partner Gym
           </div>

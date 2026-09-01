@@ -6,6 +6,7 @@ import { useAppData } from '../../context/AppData.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 
 const fieldStyle = css(
   "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
@@ -41,8 +42,13 @@ export default function ContactPage() {
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(80px,10vw,120px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
-      <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Contact</div>
-      <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:40px")}>Parlons de vos objectifs.</h1>
+      <div style={{ position: 'relative' }}>
+        <GlowBlobs compact />
+        <div style={{ position: 'relative' }}>
+          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Contact</div>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:40px")}>Parlons de vos objectifs.</h1>
+        </div>
+      </div>
       <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px')}>
         <div>
           <form

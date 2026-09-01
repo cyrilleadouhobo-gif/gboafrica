@@ -2,6 +2,7 @@ import { css } from '../../lib/css.js';
 import { prisma } from '../../lib/db.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { ABIDJAN_COMMUNES } from '../../lib/constants.js';
 
@@ -20,8 +21,9 @@ export default async function CoachsPage({ searchParams }) {
 
   return (
     <div>
-      <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+      <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
+        <GlowBlobs />
+        <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             Nos coachs
           </div>

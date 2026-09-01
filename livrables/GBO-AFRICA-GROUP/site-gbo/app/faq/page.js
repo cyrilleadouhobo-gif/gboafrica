@@ -1,5 +1,6 @@
 import { css } from '../../lib/css.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { FAQ_GROUPS } from '../../data/content.js';
 
 export const metadata = { title: 'FAQ — GBÔ AFRICA GROUP' };
@@ -7,8 +8,13 @@ export const metadata = { title: 'FAQ — GBÔ AFRICA GROUP' };
 export default function FaqPage() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 'clamp(80px,10vw,120px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
-      <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>FAQ</div>
-      <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:40px")}>Questions fréquentes.</h1>
+      <div style={{ position: 'relative' }}>
+        <GlowBlobs compact />
+        <div style={{ position: 'relative' }}>
+          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>FAQ</div>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:40px")}>Questions fréquentes.</h1>
+        </div>
+      </div>
       {FAQ_GROUPS.map((g) => (
         <Reveal key={g.cat} style={{ marginBottom: 36 }}>
           <div style={css('font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>{g.cat}</div>

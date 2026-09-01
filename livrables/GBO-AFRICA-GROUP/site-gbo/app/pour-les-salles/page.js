@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
 import { GYM_CHALLENGES, GYM_PILLARS, GYM_COMPLEMENTARY_SERVICES, GYM_HOW_IT_WORKS } from '../../data/content.js';
 
@@ -19,6 +20,7 @@ export default function PourLesSallesPage() {
             'position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.25) 75%),linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.45) 40%,rgba(0,0,0,.95) 100%);pointer-events:none'
           )}
         />
+        <GlowBlobs />
         <div style={css('position:relative;max-width:1100px;margin:0 auto;width:100%;padding:clamp(90px,12vw,130px) clamp(20px,5vw,64px) clamp(56px,8vw,90px)')}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
             Pour les salles

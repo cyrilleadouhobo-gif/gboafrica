@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
+import GlowBlobs from '../../components/GlowBlobs.js';
 import { CORPORATE_SOLUTIONS } from '../../data/content.js';
 
 const fieldStyle = css(
@@ -54,6 +55,7 @@ export default function CorporatePage() {
   return (
     <div>
       <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(40px,5vw,60px);border-bottom:1px solid var(--border,rgba(255,255,255,.08));position:relative;overflow:hidden')}>
+        <GlowBlobs />
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-bottom:20px')}>
             <Link href="/fitness">GBÔ Fitness</Link> <span style={{ opacity: 0.5 }}>/</span> Entreprise

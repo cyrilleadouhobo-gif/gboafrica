@@ -7,6 +7,7 @@ import { css } from '../../../lib/css.js';
 import Honeypot from '../../../components/Honeypot.js';
 import ImageSlot from '../../../components/ImageSlot.js';
 import Reveal from '../../../components/Reveal.js';
+import GlowBlobs from '../../../components/GlowBlobs.js';
 import { stockPhoto } from '../../../lib/stockPhoto.js';
 import { POLES, POLE_DETAIL } from '../../../data/poles.js';
 
@@ -52,6 +53,7 @@ export default function PolePage({ params }) {
           <ImageSlot placeholder="Illustration premium du pôle" src={stockPhoto('fitnessMen', slug, '1600x900')} />
         </div>
         <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.9));pointer-events:none')} />
+        <GlowBlobs />
         <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
           <div style={css('font-size:13px;color:rgba(255,255,255,.6);margin-bottom:20px')}>
             <Link href="/" style={{ color: 'rgba(255,255,255,.6)' }}>
