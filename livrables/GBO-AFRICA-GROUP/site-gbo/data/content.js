@@ -15,11 +15,14 @@ export const METHOD_STEPS = [
   { n: '5', title: 'Transformation', desc: "Atteinte progressive des objectifs et adoption durable d'un mode de vie plus sain." },
 ];
 
+// `photo` = id Unsplash choisi à la main pour correspondre au profil (âge/genre/contexte),
+// plutôt que la sélection par hash de stockPhoto() qui pouvait retomber sur une photo hors
+// sujet (ex : une photo de petit-déjeuner) ou dupliquer la même image sur deux profils.
 export const TRANSFORMATIONS = [
-  { id: 'tr1', name: 'Awa, 34 ans', detail: 'Remise en forme · 4 mois', ph: 'Avant / après (avec consentement)' },
-  { id: 'tr2', name: 'Serge, 41 ans', detail: 'Prise de masse · 6 mois', ph: 'Avant / après (avec consentement)' },
-  { id: 'tr3', name: 'Fatou, 29 ans', detail: 'Postnatal · 3 mois', ph: 'Avant / après (avec consentement)' },
-  { id: 'tr4', name: 'Ismaël, 63 ans', detail: 'Mobilité senior · 5 mois', ph: 'Avant / après (avec consentement)' },
+  { id: 'tr1', name: 'Awa, 34 ans', detail: 'Remise en forme · 4 mois', ph: 'Avant / après (avec consentement)', photo: 'photo-1603503363848-6952525df449' },
+  { id: 'tr2', name: 'Serge, 41 ans', detail: 'Prise de masse · 6 mois', ph: 'Avant / après (avec consentement)', photo: 'photo-1572459815549-873917ec8c0a' },
+  { id: 'tr3', name: 'Fatou, 29 ans', detail: 'Postnatal · 3 mois', ph: 'Avant / après (avec consentement)', photo: 'photo-1651525764791-3ae6ce60094c' },
+  { id: 'tr4', name: 'Ismaël, 63 ans', detail: 'Mobilité senior · 5 mois', ph: 'Avant / après (avec consentement)', photo: 'photo-1590697442615-a381b5b557c7' },
 ];
 
 export const TESTIMONIALS = [
@@ -47,6 +50,18 @@ export const ARTICLES = [
 export const BLOG_PREVIEW = ARTICLES.slice(0, 3).map(({ id, cat, read, title, excerpt }) => ({ id: 'bp-' + id, cat, read, title, excerpt }));
 export const BLOG_CATS = ['Tous', 'Fitness', 'Nutrition', 'Santé', 'Lifestyle', 'Entreprise', 'Prénatal', 'Senior'];
 
+// Catégorie d'article -> catégorie stockPhoto correspondante. Centralisé ici pour que la
+// page blog et l'aperçu blog de l'accueil affichent toujours un visuel cohérent avec le
+// sujet de l'article (au lieu d'une seule catégorie fixe pour tous les articles).
+export const ARTICLE_CAT_PHOTO = {
+  Nutrition: 'nutrition',
+  Prénatal: 'portrait',
+  Entreprise: 'team',
+  Senior: 'senior',
+  Fitness: 'fitnessMen',
+  'Bien-être': 'fitnessWomen',
+};
+
 export const NEWS_ITEMS = [
   { id: 'n1', date: 'Août 2026', tag: 'Marque', title: 'GBÔ AFRICA GROUP dévoile sa plateforme digitale officielle' },
   { id: 'n2', date: 'Juillet 2026', tag: 'Pôle', title: 'GBÔ Fitness ouvre les inscriptions à Abidjan' },
@@ -66,6 +81,23 @@ export const GYM_ECOSYSTEM_ADVANTAGES = [
   { icon: '📍', t: 'Visibilité', d: 'Votre salle peut être référencée dans le réseau de partenaires GBÔ et être valorisée auprès de notre communauté.' },
   { icon: '🤝', t: 'Opportunités commerciales', d: 'Participez aux campagnes, challenges et événements organisés par GBÔ.' },
   { icon: '🏆', t: 'Communauté', d: "Intégrez un réseau de salles partageant une ambition commune autour du développement du fitness en Côte d'Ivoire." },
+];
+
+// Salles déjà partenaires, affichées publiquement (repris de l'ancien site). Un seul
+// partenaire actif pour l'instant — tableau pensé pour en accueillir d'autres.
+export const PARTNER_GYMS = [
+  {
+    id: 'best-gym',
+    name: 'BEST-GYM',
+    logo: '/images/best-gym-mark.png',
+    tagline: 'Réseau de salles de sport premium',
+    rating: 4.8,
+    location: 'Avocatier Carrefour, Niamkey',
+    services: ['Fitness', 'Musculation', 'Boxe', 'Rééducation'],
+    phones: ['07 08 03 24 41', '05 05 27 80 70'],
+    hours: '06h - 21h, ouvert 7j/7',
+    video: '/videos/best-gym.mp4',
+  },
 ];
 
 export const GYM_MANAGER_BENEFITS = [

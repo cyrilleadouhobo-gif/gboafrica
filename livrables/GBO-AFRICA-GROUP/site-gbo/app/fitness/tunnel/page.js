@@ -267,7 +267,7 @@ export default function TunnelPage() {
             )}
           </div>
 
-          <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
+          <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
             <label style={{ display: 'block' }}>
               <span style={labelStyle}>Prénom *</span>
               <input required name="prenom" style={fieldStyle} />

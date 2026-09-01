@@ -122,7 +122,7 @@ export default function CorporatePage() {
             <form onSubmit={submitCompany}>
               <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:6px")}>Demander une proposition</h2>
               <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:24px')}>Réponse sous 48h ouvrées.</p>
-              <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
+              <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
                 <label style={{ display: 'block' }}>
                   <span style={labelStyle}>Entreprise *</span>
                   <input required name="entreprise" style={fieldStyle} />

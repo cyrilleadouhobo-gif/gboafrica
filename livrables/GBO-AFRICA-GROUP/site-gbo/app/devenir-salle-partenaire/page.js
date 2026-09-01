@@ -7,7 +7,8 @@ import { useAppData } from '../../context/AppData.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
-import { GYM_MANAGER_BENEFITS } from '../../data/content.js';
+import VideoIntro from '../../components/VideoIntro.js';
+import { GYM_MANAGER_BENEFITS, PARTNER_GYMS } from '../../data/content.js';
 import { GYM_PARTNER_REASONS } from '../../lib/constants.js';
 
 const fieldStyle = css(
@@ -104,6 +105,96 @@ export default function DevenirSallePartenairePage() {
         </div>
       </Reveal>
 
+      {PARTNER_GYMS.length > 0 && (
+        <Reveal
+          as="section"
+          style={css(
+            'padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
+          )}
+        >
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:10px')}>
+              Ils nous font déjà confiance
+            </div>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(22px,3.2vw,30px);letter-spacing:-1px;margin-bottom:24px")}>
+              Nos salles partenaires
+            </h2>
+            {PARTNER_GYMS.map((g) => (
+              <div key={g.id} style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;align-items:center')}>
+                <div
+                  style={css(
+                    'border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.02));overflow:hidden'
+                  )}
+                >
+                  <div
+                    style={css(
+                      'display:flex;gap:16px;align-items:flex-start;padding:24px;border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
+                    )}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={g.logo}
+                      alt={g.name}
+                      style={{ width: 60, height: 60, borderRadius: 14, background: '#fff', flexShrink: 0, padding: 6, objectFit: 'contain' }}
+                    />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontWeight: 700, fontSize: 19 }}>{g.name}</div>
+                      <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);margin-top:2px')}>{g.tagline}</div>
+                      <div style={css('display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:13px')}>
+                        <span style={css('color:var(--lime,#C6F202);font-weight:700')}>★ {g.rating}</span>
+                        <span style={css('color:var(--muted,#8a8a8a)')}>📍 {g.location}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ padding: 24 }}>
+                    <div style={css('font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:12px')}>
+                      Services proposés
+                    </div>
+                    <div style={css('display:grid;gap:8px;margin-bottom:22px')}>
+                      {g.services.map((s) => (
+                        <div
+                          key={s}
+                          style={css(
+                            'display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.04);font-size:13.5px;font-weight:600'
+                          )}
+                        >
+                          <span
+                            style={css(
+                              'width:26px;height:26px;border-radius:8px;background:rgba(198,242,2,.12);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;font-size:13px'
+                            )}
+                          >
+                            🏆
+                          </span>
+                          {s}
+                        </div>
+                      ))}
+                    </div>
+                    <div style={css('font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:12px')}>
+                      Contactez {g.name}
+                    </div>
+                    <div style={css('display:grid;gap:8px;margin-bottom:18px')}>
+                      <div style={css('padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.04);font-size:13.5px')}>
+                        📞 {g.phones.join(' · ')}
+                      </div>
+                      <div style={css('padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.04);font-size:13.5px')}>🕐 {g.hours}</div>
+                    </div>
+                    <span
+                      style={css(
+                        'display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;border:1px solid rgba(198,242,2,.4);background:rgba(198,242,2,.08);color:var(--lime,#C6F202);font-size:12.5px;font-weight:700'
+                      )}
+                    >
+                      ✓ Partenaire officiel GBÔ
+                    </span>
+                  </div>
+                </div>
+
+                {g.video && <VideoIntro src={g.video} label={`Vidéo — ${g.name}`} />}
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      )}
+
       <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div
           style={css(
@@ -138,7 +229,7 @@ export default function DevenirSallePartenairePage() {
                   <span style={labelStyle}>Nom du responsable *</span>
                   <input required name="managerName" style={fieldStyle} />
                 </label>
-                <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
+                <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
                   <label>
                     <span style={labelStyle}>Téléphone *</span>
                     <input required name="phone" type="tel" placeholder="+225 07 00 00 00 00" style={fieldStyle} />
@@ -152,7 +243,7 @@ export default function DevenirSallePartenairePage() {
                   <span style={labelStyle}>Email *</span>
                   <input required name="email" type="email" style={fieldStyle} />
                 </label>
-                <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
+                <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
                   <label>
                     <span style={labelStyle}>Commune *</span>
                     <input required name="commune" style={fieldStyle} />

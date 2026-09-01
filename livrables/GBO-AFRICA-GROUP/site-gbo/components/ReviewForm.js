@@ -72,7 +72,7 @@ export default function ReviewForm() {
           </button>
         ))}
       </div>
-      <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
+      <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
         <input required name="authorName" placeholder="Votre nom *" maxLength={80} style={fieldStyle} />
         <input name="context" placeholder="Ex. Membre · Cocody" maxLength={80} style={fieldStyle} />
         <textarea

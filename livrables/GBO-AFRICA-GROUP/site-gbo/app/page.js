@@ -7,9 +7,10 @@ import ImageSlot from '../components/ImageSlot.js';
 import Honeypot from '../components/Honeypot.js';
 import Reveal from '../components/Reveal.js';
 import GlowBlobs from '../components/GlowBlobs.js';
-import { stockPhoto } from '../lib/stockPhoto.js';
+import VideoIntro from '../components/VideoIntro.js';
+import { stockPhoto, stockPhotoDirect } from '../lib/stockPhoto.js';
 import { POLES, badgeStyle } from '../data/poles.js';
-import { VALUES, METHOD_STEPS, TRANSFORMATIONS, TESTIMONIALS, PARTNERS, BLOG_PREVIEW } from '../data/content.js';
+import { VALUES, METHOD_STEPS, TRANSFORMATIONS, TESTIMONIALS, PARTNERS, BLOG_PREVIEW, ARTICLE_CAT_PHOTO } from '../data/content.js';
 
 export default function HomePage() {
   const { showToast } = useAppData();
@@ -100,6 +101,22 @@ export default function HomePage() {
           </svg>
         </div>
       </section>
+
+      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px)')}>
+        <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:56px;align-items:center')}>
+          <VideoIntro src="/videos/gbo-intro.mp4" />
+          <div>
+            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Vidéo</div>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-1px;margin-bottom:16px")}>
+              Découvrez GBÔ en images.
+            </h2>
+            <p style={css('font-size:16px;color:var(--muted,#8a8a8a);line-height:1.55;max-width:48ch')}>
+              Une minute pour comprendre notre mission : rendre le sport, le fitness et le bien-être accessibles à tous, à Abidjan et partout en
+              Côte d&apos;Ivoire.
+            </p>
+          </div>
+        </div>
+      </Reveal>
 
       <Reveal as="section" style={css('position:relative;padding:clamp(64px,11vw,140px) clamp(20px,5vw,64px);text-align:center')} data-anchor="mission">
         <GlowBlobs />
@@ -275,7 +292,7 @@ export default function HomePage() {
                 style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}
               >
                 <div style={{ aspectRatio: '3/4', position: 'relative' }}>
-                  <ImageSlot placeholder={t.ph} src={stockPhoto('portrait', t.id, '600x800')} />
+                  <ImageSlot placeholder={t.ph} src={stockPhotoDirect(t.photo, '600x800')} />
                 </div>
                 <div style={{ padding: 14 }}>
                   <div style={{ fontWeight: 700, fontSize: 15 }}>{t.name}</div>
@@ -353,7 +370,7 @@ export default function HomePage() {
                 style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09));cursor:pointer;display:block')}
               >
                 <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-                  <ImageSlot placeholder="Visuel article" src={stockPhoto('team', b.id, '600x375')} />
+                  <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[b.cat] || 'fitnessMen', b.id, '600x375')} />
                 </div>
                 <div style={{ padding: 18 }}>
                   <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>

@@ -3,18 +3,9 @@ import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
-import { ARTICLES, BLOG_CATS } from '../../data/content.js';
+import { ARTICLES, BLOG_CATS, ARTICLE_CAT_PHOTO } from '../../data/content.js';
 
 export const metadata = { title: 'Le journal GBÔ — Fitness, nutrition & bien-être' };
-
-const CAT_TAGS = {
-  Nutrition: 'nutrition',
-  Prénatal: 'portrait',
-  Entreprise: 'team',
-  Senior: 'senior',
-  Fitness: 'fitnessMen',
-  'Bien-être': 'fitnessWomen',
-};
 
 export default function BlogPage() {
   return (
@@ -46,7 +37,7 @@ export default function BlogPage() {
               style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09));cursor:pointer')}
             >
               <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-                <ImageSlot placeholder="Visuel article" src={stockPhoto(CAT_TAGS[a.cat] || 'fitnessMen', a.id, '600x375')} />
+                <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[a.cat] || 'fitnessMen', a.id, '600x375')} />
               </div>
               <div style={{ padding: 20 }}>
                 <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>

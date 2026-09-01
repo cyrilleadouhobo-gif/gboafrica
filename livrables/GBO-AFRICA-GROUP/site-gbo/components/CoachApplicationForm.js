@@ -43,7 +43,7 @@ export default function CoachApplicationForm({ jobTitle }) {
 
   return (
     <form onSubmit={submitCareer}>
-      <div style={css('display:grid;grid-template-columns:1fr 1fr;gap:12px')}>
+      <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
         <input required name="nom" placeholder="Nom complet *" style={fieldStyle} />
         <input required name="tel" type="tel" placeholder="Téléphone *" style={fieldStyle} />
         <input required name="email" type="email" placeholder="E-mail *" style={fieldStyle} />

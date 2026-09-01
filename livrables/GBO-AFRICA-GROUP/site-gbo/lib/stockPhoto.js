@@ -26,8 +26,9 @@ const BANK = {
   gymInterior: ['photo-1534438327276-14e5300c3a48'],
   // Group / network / community — several people together, team spirit
   community: ['photo-1584365132623-e273491c69d2'],
-  // General portrait / lifestyle (testimonials, avatars)
-  portrait: ['photo-1634826225912-905141f688f3', 'photo-1572224384995-f9529873f379', 'photo-1603503363848-6952525df449'],
+  // General portrait / lifestyle (testimonials, avatars) — dropped photo-1634826225912-905141f688f3
+  // (café/breakfast shot, not fitness-appropriate — was showing up for unrelated names/contexts).
+  portrait: ['photo-1572224384995-f9529873f379', 'photo-1603503363848-6952525df449'],
 };
 
 function hashSeed(seed) {
@@ -40,6 +41,14 @@ function hashSeed(seed) {
 export function stockPhoto(category, seed, size = '800x600') {
   const pool = BANK[category] || BANK.fitnessMen;
   const id = pool[hashSeed(seed) % pool.length];
+  const [w, h] = size.split('x');
+  return `https://images.unsplash.com/${id}?w=${w}&h=${h}&q=75&auto=format&fit=crop`;
+}
+
+// Formats a specific Unsplash photo id directly, bypassing the hash-based pool pick above.
+// Use when a slot needs a guaranteed, hand-matched photo (e.g. one portrait per named
+// person) rather than whatever the hash happens to land on.
+export function stockPhotoDirect(id, size = '800x600') {
   const [w, h] = size.split('x');
   return `https://images.unsplash.com/${id}?w=${w}&h=${h}&q=75&auto=format&fit=crop`;
 }

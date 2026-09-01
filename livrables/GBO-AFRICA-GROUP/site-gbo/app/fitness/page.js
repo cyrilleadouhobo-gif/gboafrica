@@ -115,7 +115,7 @@ export default function FitnessPage() {
             <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>Vos séances, où vous voulez</div>
             <div style={css('font-size:14px;color:var(--muted,#8a8a8a)')}>À domicile · En salle partenaire · En extérieur</div>
           </div>
-          <Link href="/fitness/salles-partenaires" style={css('font-size:13.5px;font-weight:700;color:var(--lime,#C6F202);white-space:nowrap')}>
+          <Link href="/devenir-salle-partenaire" style={css('font-size:13.5px;font-weight:700;color:var(--lime,#C6F202);white-space:nowrap')}>
             Accédez à un réseau de salles partenaires sélectionnées par GBÔ →
           </Link>
         </div>
