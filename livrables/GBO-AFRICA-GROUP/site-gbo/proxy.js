@@ -48,7 +48,7 @@ export function proxy(request) {
     "style-src 'self' 'unsafe-inline'",
     // TODO: drop images.unsplash.com once real GBÔ photography replaces the temporary
     // stock images (see lib/stockPhoto.js) — no third-party image host should be needed then.
-    "img-src 'self' data: https://images.unsplash.com",
+    "img-src 'self' data: https://images.unsplash.com https://images.pexels.com",
     // Broaven is self-hosted (public/fonts/broaven) — no external font host needed.
     "font-src 'self'",
     isDev ? "connect-src 'self' ws:" : "connect-src 'self'", // ws: for the dev-mode HMR websocket

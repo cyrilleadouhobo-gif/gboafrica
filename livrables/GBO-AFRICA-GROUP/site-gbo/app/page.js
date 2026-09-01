@@ -8,9 +8,25 @@ import Honeypot from '../components/Honeypot.js';
 import Reveal from '../components/Reveal.js';
 import GlowBlobs from '../components/GlowBlobs.js';
 import VideoIntro from '../components/VideoIntro.js';
+import HeroCarousel from '../components/HeroCarousel.js';
 import { stockPhoto, stockPhotoDirect } from '../lib/stockPhoto.js';
 import { POLES, badgeStyle } from '../data/poles.js';
-import { VALUES, METHOD_STEPS, TRANSFORMATIONS, TESTIMONIALS, PARTNERS, BLOG_PREVIEW, ARTICLE_CAT_PHOTO } from '../data/content.js';
+import { VALUES, METHOD_STEPS, TESTIMONIALS, PARTNERS } from '../data/content.js';
+
+// Carrousel plein écran du hero : une salle bien équipée, un groupe accompagné par un coach,
+// un moment de complicité entre sportifs souriants — pour incarner un fitness accessible à
+// tous. Casting confirmé visuellement (pas seulement sur la légende) avant intégration.
+const HERO_SLIDES = [
+  { src: stockPhotoDirect('photo-1786104135363-f0c6c775451e', '1600x1000') }, // salle moderne bien équipée
+  { src: 'https://images.pexels.com/photos/34043569/pexels-photo-34043569.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // groupe accompagné, salle à Accra
+  { src: 'https://images.pexels.com/photos/34043555/pexels-photo-34043555.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // moment complice, sourires
+];
+
+// Bandeaux photo des sections Valeurs / Méthode / Pôles — même collection Accra que le hero
+// (même photographe, casting confirmé visuellement), pour casser les blocs 100% texte.
+const VALUES_BANNER = 'https://images.pexels.com/photos/34043568/pexels-photo-34043568.jpeg?auto=compress&cs=tinysrgb&w=1600'; // groupe posé, esprit d'équipe
+const METHODE_BANNER = 'https://images.pexels.com/photos/34043577/pexels-photo-34043577.jpeg?auto=compress&cs=tinysrgb&w=1600'; // développé couché, rigueur technique
+const POLES_BANNER = 'https://images.pexels.com/photos/34043595/pexels-photo-34043595.jpeg?auto=compress&cs=tinysrgb&w=1600'; // squat, énergie, diversité des pratiques
 
 export default function HomePage() {
   const { showToast } = useAppData();
@@ -45,7 +61,7 @@ export default function HomePage() {
   return (
     <div>
       <section style={css('position:relative;min-height:calc(100vh - 68px);display:flex;align-items:flex-end;overflow:hidden;background:#050505')}>
-        <ImageSlot placeholder="Visuel hero — mouvement, énergie (plein écran)" src={stockPhoto('fitnessMen', 'home-hero', '1600x1000')} />
+        <HeroCarousel slides={HERO_SLIDES} />
         <div
           style={css(
             'position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.9) 100%);pointer-events:none'
@@ -153,11 +169,12 @@ export default function HomePage() {
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ position: 'relative' }}>
-            <GlowBlobs compact />
-            <div style={{ position: 'relative' }}>
-              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:10px')}>Nos valeurs</div>
-              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Ce qui nous tient debout.</h2>
+          <div style={css('position:relative;height:260px;border-radius:24px;overflow:hidden;margin-bottom:34px')}>
+            <ImageSlot src={VALUES_BANNER} placeholder="Esprit d'équipe GBÔ" />
+            <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.15) 100%)')} />
+            <div style={css('position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vw,48px)')}>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Nos valeurs</div>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;color:#fff")}>Ce qui nous tient debout.</h2>
             </div>
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px')}>
@@ -187,14 +204,18 @@ export default function HomePage() {
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:38px')}>
-            <div>
-              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Actif de marque</div>
-              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px")}>La Méthode GBÔ</h2>
+          <div style={css('position:relative;height:260px;border-radius:24px;overflow:hidden;margin-bottom:38px')}>
+            <ImageSlot src={METHODE_BANNER} placeholder="Rigueur technique en salle" />
+            <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.4) 60%,rgba(0,0,0,.1) 100%)')} />
+            <div style={css('position:relative;height:100%;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding:clamp(24px,4vw,48px)')}>
+              <div>
+                <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Actif de marque</div>
+                <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;color:#fff")}>La Méthode GBÔ</h2>
+              </div>
+              <Link href="/fitness" style={css('padding:12px 22px;border-radius:11px;border:1px solid rgba(255,255,255,.4);font-weight:700;font-size:14px;color:#fff;background:rgba(0,0,0,.3)')}>
+                En savoir plus →
+              </Link>
             </div>
-            <Link href="/fitness" style={css('padding:12px 22px;border-radius:11px;border:1px solid var(--border,rgba(255,255,255,.2));font-weight:700;font-size:14px;color:var(--fg,#fff)')}>
-              En savoir plus →
-            </Link>
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px')}>
             {METHOD_STEPS.map((m, i) => (
@@ -215,11 +236,12 @@ export default function HomePage() {
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ position: 'relative' }}>
-            <GlowBlobs compact />
-            <div style={{ position: 'relative' }}>
-              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:10px')}>L&apos;écosystème</div>
-              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Six pôles, une marque.</h2>
+          <div style={css('position:relative;height:260px;border-radius:24px;overflow:hidden;margin-bottom:34px')}>
+            <ImageSlot src={POLES_BANNER} placeholder="Diversité des pratiques GBÔ" />
+            <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.15) 100%)')} />
+            <div style={css('position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vw,48px)')}>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>L&apos;écosystème</div>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;color:#fff")}>Six pôles, une marque.</h2>
             </div>
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px')}>
@@ -276,34 +298,6 @@ export default function HomePage() {
         </div>
       </Reveal>
 
-      <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Preuves</div>
-          <div style={css('display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:30px')}>
-            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px")}>Des transformations réelles.</h2>
-            <span style={css('font-size:12px;color:var(--muted,#8a8a8a);max-width:34ch')}>Publiées avec le consentement des membres. Aucun visuel n&apos;est fictif.</span>
-          </div>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px')}>
-            {TRANSFORMATIONS.map((t, i) => (
-              <Reveal
-                key={t.id}
-                delay={i * 60}
-                className="hover-card"
-                style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}
-              >
-                <div style={{ aspectRatio: '3/4', position: 'relative' }}>
-                  <ImageSlot placeholder={t.ph} src={stockPhotoDirect(t.photo, '600x800')} />
-                </div>
-                <div style={{ padding: 14 }}>
-                  <div style={{ fontWeight: 700, fontSize: 15 }}>{t.name}</div>
-                  <div style={css('font-size:13px;color:var(--muted,#8a8a8a)')}>{t.detail}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ position: 'relative' }}>
@@ -348,40 +342,6 @@ export default function HomePage() {
             ))}
           </div>
           <div style={css('font-size:11px;color:var(--muted,#8a8a8a);margin-top:22px;opacity:.7')}>Logos réels uniquement — emplacements réservés aux partenaires officiels.</div>
-        </div>
-      </Reveal>
-
-      <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:30px')}>
-            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px")}>Le journal GBÔ</h2>
-            <Link href="/blog" style={css('padding:12px 22px;border-radius:11px;border:1px solid var(--border,rgba(255,255,255,.2));font-weight:700;font-size:14px;color:var(--fg,#fff)')}>
-              Tout le blog →
-            </Link>
-          </div>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px')}>
-            {BLOG_PREVIEW.map((b, i) => (
-              <Reveal
-                as={Link}
-                key={b.id}
-                href="/blog"
-                delay={i * 70}
-                className="hover-card"
-                style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09));cursor:pointer;display:block')}
-              >
-                <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-                  <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[b.cat] || 'fitnessMen', b.id, '600x375')} />
-                </div>
-                <div style={{ padding: 18 }}>
-                  <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
-                    {b.cat} · {b.read}
-                  </div>
-                  <div style={{ fontWeight: 700, fontSize: 18, margin: '8px 0 6px', lineHeight: 1.3 }}>{b.title}</div>
-                  <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5')}>{b.excerpt}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </Reveal>
 
