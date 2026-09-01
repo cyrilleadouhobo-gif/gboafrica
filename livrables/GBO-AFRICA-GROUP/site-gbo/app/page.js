@@ -6,6 +6,7 @@ import { useAppData } from '../context/AppData.js';
 import ImageSlot from '../components/ImageSlot.js';
 import Honeypot from '../components/Honeypot.js';
 import Reveal from '../components/Reveal.js';
+import GlowBlobs from '../components/GlowBlobs.js';
 import { stockPhoto } from '../lib/stockPhoto.js';
 import { POLES, badgeStyle } from '../data/poles.js';
 import { VALUES, METHOD_STEPS, TRANSFORMATIONS, TESTIMONIALS, PARTNERS, BLOG_PREVIEW } from '../data/content.js';
@@ -100,8 +101,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Reveal as="section" style={css('padding:clamp(64px,11vw,140px) clamp(20px,5vw,64px);text-align:center')} data-anchor="mission">
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+      <Reveal as="section" style={css('position:relative;padding:clamp(64px,11vw,140px) clamp(20px,5vw,64px);text-align:center')} data-anchor="mission">
+        <GlowBlobs />
+        <div style={{ maxWidth: 960, margin: '0 auto', position: 'relative' }}>
           <p style={css("font-size:clamp(26px,4.4vw,46px);font-family:'Broaven';font-weight:500;line-height:1.25;letter-spacing:-1px")}>
             GBÔ est un <span style={{ color: 'var(--lime,#C6F202)' }}>écosystème du mouvement</span> — sport, bien-être, communauté et formation réunis sous une même
             exigence : l&apos;excellence accessible.
@@ -134,8 +136,13 @@ export default function HomePage() {
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:10px')}>Nos valeurs</div>
-          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Ce qui nous tient debout.</h2>
+          <div style={{ position: 'relative' }}>
+            <GlowBlobs compact />
+            <div style={{ position: 'relative' }}>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:10px')}>Nos valeurs</div>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Ce qui nous tient debout.</h2>
+            </div>
+          </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px')}>
             {VALUES.map((v, i) => (
               <Reveal
@@ -191,8 +198,13 @@ export default function HomePage() {
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:10px')}>L&apos;écosystème</div>
-          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Six pôles, une marque.</h2>
+          <div style={{ position: 'relative' }}>
+            <GlowBlobs compact />
+            <div style={{ position: 'relative' }}>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:10px')}>L&apos;écosystème</div>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Six pôles, une marque.</h2>
+            </div>
+          </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px')}>
             {poles.map((p, i) => (
               <Reveal
@@ -277,7 +289,10 @@ export default function HomePage() {
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Ils vivent GBÔ.</h2>
+          <div style={{ position: 'relative' }}>
+            <GlowBlobs compact />
+            <h2 style={css("position:relative;font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:34px")}>Ils vivent GBÔ.</h2>
+          </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px')}>
             {TESTIMONIALS.map((t, i) => (
               <Reveal
@@ -353,8 +368,9 @@ export default function HomePage() {
         </div>
       </Reveal>
 
-      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
-        <div style={{ maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
+      <Reveal as="section" style={css('position:relative;padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
+        <GlowBlobs />
+        <div style={{ maxWidth: 820, margin: '0 auto', textAlign: 'center', position: 'relative' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-1px;margin-bottom:12px")}>Restez dans le mouvement.</h2>
           <p style={css('color:var(--muted,#8a8a8a);font-size:16px;margin-bottom:26px;line-height:1.5')}>
             Conseils fitness, nutrition et bien-être, une fois par semaine. Double opt-in, désinscription en un clic.
