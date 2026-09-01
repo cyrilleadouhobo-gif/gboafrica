@@ -52,12 +52,12 @@ export default function HomePage() {
         />
         <div
           style={css(
-            'position:absolute;top:-140px;left:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.35),transparent 70%);mix-blend-mode:screen;pointer-events:none'
+            'position:absolute;top:-140px;left:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.15),transparent 70%);mix-blend-mode:screen;pointer-events:none'
           )}
         />
         <div
           style={css(
-            'position:absolute;bottom:-160px;right:-120px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.3),transparent 70%);mix-blend-mode:screen;pointer-events:none'
+            'position:absolute;bottom:-160px;right:-120px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(198,242,2,.13),transparent 70%);mix-blend-mode:screen;pointer-events:none'
           )}
         />
         <div style={css('position:relative;max-width:1200px;margin:0 auto;width:100%;padding:0 clamp(20px,5vw,64px) clamp(56px,9vw,110px);pointer-events:none')}>
