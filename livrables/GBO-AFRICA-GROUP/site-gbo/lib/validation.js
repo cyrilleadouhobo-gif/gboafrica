@@ -14,7 +14,10 @@ const optionalText = (max = 2000) => z.string().trim().max(max).optional().or(z.
 export const particulierLeadSchema = z.object({
   profile: z.enum(['adulte', 'femme', 'enceinte', 'maman', 'senior']),
   objective: shortText('Objectif', 200),
-  nutrition: z.enum(['oui', 'non']),
+  // 'plus_infos' = "Je souhaite en savoir plus" (page /deux-seances-gratuites) — traité comme
+  // un intérêt (donc suivi nutrition déclenché) mais distingué d'un "oui" ferme dans le CRM,
+  // voir le mapping vers nutritionObjective dans app/api/leads/route.js.
+  nutrition: z.enum(['oui', 'non', 'plus_infos']),
   // The tunnel sends this as JS `null` (its initial React state) whenever nutrition
   // is 'non' — optionalText() alone only tolerates `undefined`/'' , not `null`.
   nutritionObj: optionalText(200).nullable(),
@@ -24,6 +27,7 @@ export const particulierLeadSchema = z.object({
   tel: phone,
   email,
   commune: optionalText(120),
+  availability: optionalText(300),
   comment: optionalText(1000),
   consent: z.literal(true, { errorMap: () => ({ message: 'Le consentement est requis.' }) }),
   website: honeypot,

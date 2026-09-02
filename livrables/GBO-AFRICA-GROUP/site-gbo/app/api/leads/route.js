@@ -42,8 +42,13 @@ export async function POST(request) {
       practiceLocation: d.practiceLocation || null,
       contactEmail: d.email,
       contactPhone: d.tel,
-      nutrition: d.nutrition === 'oui',
-      nutritionObjective: d.nutrition === 'oui' ? d.nutritionObj || null : null,
+      // 'plus_infos' compte comme un intérêt (déclenche le suivi nutrition côté conseiller)
+      // mais reste distinguable d'un "oui" ferme via nutritionObjective ci-dessous.
+      nutrition: d.nutrition === 'oui' || d.nutrition === 'plus_infos',
+      nutritionObjective:
+        d.nutrition === 'oui' ? d.nutritionObj || null : d.nutrition === 'plus_infos' ? 'Souhaite en savoir plus' : null,
+      availability: d.availability || null,
+      comment: d.comment || null,
       consentAt: new Date(),
     },
   });

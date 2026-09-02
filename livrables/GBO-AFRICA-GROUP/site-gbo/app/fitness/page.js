@@ -10,19 +10,19 @@ export const metadata = {
   title: 'GBÔ Fitness — Un accompagnement sportif, pensé pour vous.',
 };
 
-// Carrousel du hero Fitness — même collection Accra que l'accueil (même photographe,
-// casting confirmé visuellement), quatre photos pour couvrir la diversité des pratiques
-// et des profils accompagnés par GBÔ.
+// Carrousel du hero Fitness — visuels GBÔ fournis par Cyrille (Documents/hero fitness).
+// Casting mixte et bannière floutée assumés par Cyrille sur 2 des 4 photos (voir échange
+// du jour) ; `position` recadre les 2 photos carrées sur mobile (cover coupe sinon le sujet).
 const FITNESS_HERO_SLIDES = [
-  { src: 'https://images.pexels.com/photos/34043593/pexels-photo-34043593.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // femme, tapis de course
-  { src: 'https://images.pexels.com/photos/34043561/pexels-photo-34043561.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // développé couché, effort
-  { src: 'https://images.pexels.com/photos/34043570/pexels-photo-34043570.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // deux hommes, complicité
-  { src: 'https://images.pexels.com/photos/34043575/pexels-photo-34043575.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // dips, technique
+  { src: '/images/hero-fitness/fitness-1.jpg', position: '72% 55%' }, // développé couché, salle moderne
+  { src: '/images/hero-fitness/fitness-2.jpg' }, // ambiance salle, dumbbells
+  { src: '/images/hero-fitness/fitness-3.jpg', position: '35% center' }, // cours collectif en extérieur
+  { src: '/images/hero-fitness/fitness-4.jpg', position: '60% 55%' }, // étirements en extérieur
 ];
 
 // Bandeaux des cartes offres (voir section « Choisissez votre accompagnement »).
 const PARTICULIER_BANNER = 'https://images.pexels.com/photos/34043589/pexels-photo-34043589.jpeg?auto=compress&cs=tinysrgb&w=1200'; // effort individuel
-const ENTREPRISE_BANNER = 'https://images.pexels.com/photos/34043568/pexels-photo-34043568.jpeg?auto=compress&cs=tinysrgb&w=1200'; // groupe, esprit d'équipe
+const ENTREPRISE_BANNER = 'https://images.pexels.com/photos/30688593/pexels-photo-30688593.jpeg?auto=compress&cs=tinysrgb&w=1200'; // équipe de professionnels, Lagos — code vestimentaire entreprise
 
 export default function FitnessPage() {
   return (
@@ -40,9 +40,6 @@ export default function FitnessPage() {
         />
         <GlowBlobs />
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
-          <div style={css('font-size:13px;color:var(--muted,#c8c8c8);margin-bottom:20px')}>
-            <Link href="/">Accueil</Link> <span style={{ opacity: 0.5 }}>/</span> GBÔ Fitness
-          </div>
           <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:12px;font-weight:700;margin-bottom:16px')}>
             ● Disponible
           </span>
@@ -195,7 +192,7 @@ export default function FitnessPage() {
             <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>Vos séances, où vous voulez</div>
             <div style={css('font-size:14px;color:var(--muted,#8a8a8a)')}>À domicile · En salle partenaire · En extérieur</div>
           </div>
-          <Link href="/devenir-salle-partenaire" style={css('font-size:13.5px;font-weight:700;color:var(--lime,#C6F202);white-space:nowrap')}>
+          <Link href="/devenir-salle-partenaire" style={css('font-size:13.5px;font-weight:700;color:var(--lime,#C6F202)')}>
             Accédez à un réseau de salles partenaires sélectionnées par GBÔ →
           </Link>
         </div>

@@ -40,6 +40,8 @@ model Lead {
   practiceLocation   String?
   nutrition          Boolean    @default(false)
   nutritionObjective String?
+  availability       String?
+  comment            String?
   consentAt          DateTime?
   coachId            Int?
   coach              Coach?     @relation(fields: [coachId], references: [id])

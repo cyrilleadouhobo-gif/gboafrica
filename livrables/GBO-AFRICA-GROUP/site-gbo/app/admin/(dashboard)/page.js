@@ -513,6 +513,7 @@ export default function AdminPage() {
                 ['Téléphone', selectedLead.contactPhone || '—'],
                 ['Coach', selectedLead.coach?.name || '—'],
                 ['Nutrition', selectedLead.nutrition ? selectedLead.nutritionObjective || 'Demandé' : 'Non demandé'],
+                ['Disponibilités', selectedLead.availability || '—'],
               ].map(([k, v]) => (
                 <div key={k} style={css('display:flex;justify-content:space-between;padding:13px 16px;background:var(--surface,#0c0c0c);font-size:13.5px')}>
                   <span style={css('color:var(--muted,#8a8a8a)')}>{k}</span>
@@ -520,6 +521,12 @@ export default function AdminPage() {
                 </div>
               ))}
             </div>
+            {selectedLead.comment && (
+              <div style={css('padding:14px 16px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));margin-bottom:22px')}>
+                <div style={css('font-size:12px;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:6px')}>Commentaire du prospect</div>
+                <div style={css('font-size:13.5px;line-height:1.5')}>{selectedLead.comment}</div>
+              </div>
+            )}
             <div style={css('font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:10px')}>
               Faire avancer le prospect
             </div>

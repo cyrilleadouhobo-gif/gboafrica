@@ -40,6 +40,10 @@ export default function HeroCarousel({ slides, interval = 6000, dotsBottom = 64 
             width: '100%',
             height: '100%',
             objectFit: 'cover',
+            // Point focal réglable par slide (défaut : centre) — sur mobile, le format très
+            // vertical du hero recadre agressivement une photo pensée pour un cadrage large ;
+            // sans ça le sujet peut disparaître hors champ (cas vécu avec une photo carrée).
+            objectPosition: s.position || 'center',
             opacity: i === active ? 1 : 0,
             transition: 'opacity 1.4s ease',
           }}

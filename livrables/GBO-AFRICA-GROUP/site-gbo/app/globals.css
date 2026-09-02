@@ -260,7 +260,10 @@ select {
 [data-mobileonly] {
   display: none !important;
 }
-@media (max-width: 880px) {
+/* Seuil relevé à 1360px (au lieu de 880px) : avec le CTA "Deux séances gratuites" (plus long
+   que l'ancien "Commencer"), le header plein (logo + nav 7 items + CTA) a besoin d'environ
+   1300px pour ne pas déborder hors écran silencieusement (overflow-x caché sur le body). */
+@media (max-width: 1360px) {
   [data-desktopnav] {
     display: none !important;
   }
@@ -269,6 +272,14 @@ select {
   }
   [data-mobileonly] {
     display: flex !important;
+  }
+}
+/* "Deux séances gratuites" ne tient plus à côté du logo + burger sous ~450px (testé : casse
+   dès 440px). Le bouton reste disponible en un tap via le menu burger (même libellé, pleine
+   largeur, en bas du tiroir) donc on le masque juste ici plutôt que de tronquer le texte. */
+@media (max-width: 460px) {
+  [data-hidesmallmobile] {
+    display: none !important;
   }
 }
 @media (max-width: 680px) {
@@ -280,5 +291,16 @@ select {
   }
   [data-col-hide] {
     display: none !important;
+  }
+}
+/* Section vidéo d'accueil : sur mobile la grille passe en 1 colonne (en dessous de ~816px,
+   quand minmax(380px,1fr) ne tient plus à 2 sur la largeur) — on veut le texte avant la
+   vidéo une fois empilé, alors qu'en 2 colonnes l'ordre visuel (vidéo à gauche) ne change pas. */
+@media (max-width: 900px) {
+  [data-video-col] {
+    order: 2;
+  }
+  [data-text-col] {
+    order: 1;
   }
 }

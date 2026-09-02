@@ -9,17 +9,17 @@ import Reveal from '../components/Reveal.js';
 import GlowBlobs from '../components/GlowBlobs.js';
 import VideoIntro from '../components/VideoIntro.js';
 import HeroCarousel from '../components/HeroCarousel.js';
-import { stockPhoto, stockPhotoDirect } from '../lib/stockPhoto.js';
+import { stockPhoto } from '../lib/stockPhoto.js';
 import { POLES, badgeStyle } from '../data/poles.js';
 import { VALUES, METHOD_STEPS, TESTIMONIALS, PARTNERS } from '../data/content.js';
 
-// Carrousel plein écran du hero : une salle bien équipée, un groupe accompagné par un coach,
-// un moment de complicité entre sportifs souriants — pour incarner un fitness accessible à
-// tous. Casting confirmé visuellement (pas seulement sur la légende) avant intégration.
+// Carrousel plein écran du hero : vrais visuels GBÔ fournis par Cyrille (Documents/Hero
+// accueil), mis à jour le 02/09. Casting et logos de marques tierces visibles sur les 2
+// dernières photos assumés par Cyrille (voir échange du jour).
 const HERO_SLIDES = [
-  { src: stockPhotoDirect('photo-1786104135363-f0c6c775451e', '1600x1000') }, // salle moderne bien équipée
-  { src: 'https://images.pexels.com/photos/34043569/pexels-photo-34043569.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // groupe accompagné, salle à Accra
-  { src: 'https://images.pexels.com/photos/34043555/pexels-photo-34043555.jpeg?auto=compress&cs=tinysrgb&w=1600' }, // moment complice, sourires
+  { src: '/images/hero/hero-salle.jpg' }, // salle bien équipée
+  { src: '/images/hero/hero-coaching.jpg', position: '68% 30%' }, // coach guidant un exercice, recentré sur le sportif au premier plan pour les écrans étroits
+  { src: '/images/hero/hero-group.jpg', position: '50% 25%' }, // trio à l'entraînement, recentré sur les visages pour les écrans étroits
 ];
 
 // Bandeaux photo des sections Valeurs / Méthode / Pôles — même collection Accra que le hero
@@ -64,7 +64,7 @@ export default function HomePage() {
         <HeroCarousel slides={HERO_SLIDES} />
         <div
           style={css(
-            'position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.9) 100%);pointer-events:none'
+            'position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.48) 0%,rgba(0,0,0,.52) 30%,rgba(0,0,0,.68) 55%,rgba(0,0,0,.94) 100%);pointer-events:none'
           )}
         />
         <div
@@ -119,16 +119,16 @@ export default function HomePage() {
       </section>
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px)')}>
-        <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:56px;align-items:center')}>
-          <VideoIntro src="/videos/gbo-intro.mp4" />
-          <div>
-            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Vidéo</div>
+        <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:56px;align-items:center')}>
+          <div data-video-col="">
+            <VideoIntro src="/videos/gbo-intro.mp4" />
+          </div>
+          <div data-text-col="">
             <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-1px;margin-bottom:16px")}>
               Découvrez GBÔ en images.
             </h2>
             <p style={css('font-size:16px;color:var(--muted,#8a8a8a);line-height:1.55;max-width:48ch')}>
-              Une minute pour comprendre notre mission : rendre le sport, le fitness et le bien-être accessibles à tous, à Abidjan et partout en
-              Côte d&apos;Ivoire.
+              Une minute pour se donner envie de bouger et d&apos;offrir à votre corps ce qu&apos;il mérite.
             </p>
           </div>
         </div>

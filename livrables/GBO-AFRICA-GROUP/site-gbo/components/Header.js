@@ -53,12 +53,13 @@ export default function Header() {
 
         <div style={css('display:flex;align-items:center;gap:10px')}>
           <Link
-            href="/fitness"
+            href="/deux-seances-gratuites"
             onClick={closeAll}
             className="btn-cta"
+            data-hidesmallmobile=""
             style={css('padding:9px 16px;border-radius:10px;font-size:14px;font-weight:700;white-space:nowrap;background:var(--lime,#C6F202);color:#000')}
           >
-            Commencer
+            Deux séances gratuites
           </Link>
           <button
             onClick={() => setMenuOpen((v) => !v)}
@@ -137,11 +138,11 @@ export default function Header() {
             </Link>
           </div>
           <Link
-            href="/fitness"
+            href="/deux-seances-gratuites"
             onClick={closeAll}
             style={css('margin-top:24px;width:100%;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;display:block;text-align:center')}
           >
-            Commencer
+            Deux séances gratuites
           </Link>
         </div>
       )}
