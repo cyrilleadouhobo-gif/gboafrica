@@ -293,14 +293,3 @@ select {
     display: none !important;
   }
 }
-/* Section vidéo d'accueil : sur mobile la grille passe en 1 colonne (en dessous de ~816px,
-   quand minmax(380px,1fr) ne tient plus à 2 sur la largeur) — on veut le texte avant la
-   vidéo une fois empilé, alors qu'en 2 colonnes l'ordre visuel (vidéo à gauche) ne change pas. */
-@media (max-width: 900px) {
-  [data-video-col] {
-    order: 2;
-  }
-  [data-text-col] {
-    order: 1;
-  }
-}

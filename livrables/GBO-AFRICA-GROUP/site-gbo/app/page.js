@@ -87,10 +87,11 @@ export default function HomePage() {
               ● Abidjan · Côte d&apos;Ivoire
             </div>
             <h1 style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:clamp(34px,7.5vw,74px);line-height:.98;letter-spacing:-2px;color:#fff;max-width:14ch;animation:fadeUp .7s .05s both")}>
-              Plus qu&apos;une pratique, un <span style={{ color: '#C6F202' }}>style de vie.</span>
+              GBÔ AFRICA <span style={{ color: '#C6F202' }}>GROUP</span>
             </h1>
-            <p style={css("font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:52ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>
-              Sport, fitness et bien-être accessibles à tous. Un accompagnement premium, une méthode propriétaire, une communauté. GBÔ AFRICA GROUP.
+            <p style={css("font-style:italic;font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:52ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>
+              Construire un écosystème sportif plus accessible, plus structuré et plus performant. Nous développons des solutions pour permettre aux
+              particuliers, aux entreprises et aux acteurs du sport de mieux pratiquer, progresser et se développer.
             </p>
             <div style={css('display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;animation:fadeUp .7s .2s both')}>
               <Link href="/fitness" className="btn-cta" style={css('padding:16px 30px;border-radius:12px;background:#C6F202;color:#000;font-weight:700;font-size:16px')}>
@@ -119,18 +120,16 @@ export default function HomePage() {
       </section>
 
       <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px)')}>
-        <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:56px;align-items:center')}>
-          <div data-video-col="">
-            <VideoIntro src="/videos/gbo-intro.mp4" />
-          </div>
-          <div data-text-col="">
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', maxWidth: 700, margin: '0 auto 40px' }}>
             <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-1px;margin-bottom:16px")}>
               Découvrez GBÔ en images.
             </h2>
-            <p style={css('font-size:16px;color:var(--muted,#8a8a8a);line-height:1.55;max-width:48ch')}>
+            <p style={css('font-size:16px;color:var(--muted,#8a8a8a);line-height:1.55')}>
               Une minute pour se donner envie de bouger et d&apos;offrir à votre corps ce qu&apos;il mérite.
             </p>
           </div>
+          <VideoIntro src="/videos/gbo-intro.mp4" />
         </div>
       </Reveal>
 
