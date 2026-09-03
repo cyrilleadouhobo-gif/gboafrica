@@ -28,12 +28,21 @@ const VALUES_BANNER = 'https://images.pexels.com/photos/34043568/pexels-photo-34
 const METHODE_BANNER = 'https://images.pexels.com/photos/34043577/pexels-photo-34043577.jpeg?auto=compress&cs=tinysrgb&w=1600'; // développé couché, rigueur technique
 const POLES_BANNER = 'https://images.pexels.com/photos/34043595/pexels-photo-34043595.jpeg?auto=compress&cs=tinysrgb&w=1600'; // squat, énergie, diversité des pratiques
 
+// Aperçu de 6 coachs sur la home (liste complète et à jour sur /coachs, alimentée par la
+// base). Photos Pexels choisies et vérifiées individuellement (sujets noirs/africains,
+// tenue sport, pas de logo de marque tierce visible) — provisoire, à remplacer par les
+// vraies photos des coachs GBÔ dès que Cyrille les fournit.
+const COACHES_PREVIEW = [
+  { name: 'Coach Awa', spec: 'Prénatal / Postnatal', photo: 'https://images.pexels.com/photos/6455796/pexels-photo-6455796.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Coach Yao', spec: 'Perte de poids, Renfo', photo: 'https://images.pexels.com/photos/8612491/pexels-photo-8612491.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Coach Grace', spec: 'Sport santé, Senior', photo: 'https://images.pexels.com/photos/6390235/pexels-photo-6390235.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Coach Ibrahim', spec: 'Prise de masse, Perf', photo: 'https://images.pexels.com/photos/5878697/pexels-photo-5878697.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Coach Fatou', spec: 'Bien-être & mobilité', photo: 'https://images.pexels.com/photos/7113554/pexels-photo-7113554.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Coach Kouassi', spec: 'Préparation physique', photo: 'https://images.pexels.com/photos/4908557/pexels-photo-4908557.jpeg?auto=compress&cs=tinysrgb&w=800' },
+];
+
 export default function HomePage() {
   const { showToast } = useAppData();
-
-  const scrollToMission = () => {
-    document.querySelector('[data-anchor="mission"]')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const submitNewsletter = async (e) => {
     e.preventDefault();
@@ -79,31 +88,23 @@ export default function HomePage() {
         />
         <div style={css('position:relative;max-width:1200px;margin:0 auto;width:100%;padding:0 clamp(20px,5vw,64px) clamp(56px,9vw,110px);pointer-events:none')}>
           <div style={{ pointerEvents: 'auto' }}>
-            <div
-              style={css(
-                "display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:30px;border:1px solid rgba(198,242,2,.4);background:rgba(198,242,2,.08);font-size:12px;font-weight:600;letter-spacing:.5px;color:#C6F202;margin-bottom:22px;animation:fadeUp .6s both"
-              )}
-            >
-              ● Abidjan · Côte d&apos;Ivoire
-            </div>
-            <h1 style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:clamp(34px,7.5vw,74px);line-height:.98;letter-spacing:-2px;color:#fff;max-width:14ch;animation:fadeUp .7s .05s both")}>
+            <h1 style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:clamp(26px,6vw,74px);line-height:.98;letter-spacing:-2px;color:#fff;white-space:nowrap;margin-top:clamp(16px,4vw,44px);animation:fadeUp .7s .05s both")}>
               GBÔ AFRICA <span style={{ color: '#C6F202' }}>GROUP</span>
             </h1>
-            <p style={css("font-style:italic;font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:52ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>
-              Construire un écosystème sportif plus accessible, plus structuré et plus performant. Nous développons des solutions pour permettre aux
-              particuliers, aux entreprises et aux acteurs du sport de mieux pratiquer, progresser et se développer.
+            <p style={css("font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:64ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>
+              Construire un écosystème sportif plus accessible, plus structuré et plus performant.
             </p>
-            <div style={css('display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;animation:fadeUp .7s .2s both')}>
-              <Link href="/fitness" className="btn-cta" style={css('padding:16px 30px;border-radius:12px;background:#C6F202;color:#000;font-weight:700;font-size:16px')}>
-                Commencer
-              </Link>
-              <button
-                onClick={scrollToMission}
+            <p style={css("font-style:italic;font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:64ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .16s both")}>
+              Nous développons des solutions pour permettre aux particuliers, aux entreprises et aux acteurs du sport de mieux pratiquer, progresser et se développer.
+            </p>
+            <div style={css('display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:34px;animation:fadeUp .7s .2s both')}>
+              <Link
+                href="/fitness"
                 className="btn-cta"
                 style={css('padding:16px 30px;border-radius:12px;border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:16px;background:rgba(255,255,255,.05)')}
               >
-                Découvrir GBÔ
-              </button>
+                Découvrir GBÔ Fitness
+              </Link>
             </div>
           </div>
         </div>
@@ -129,7 +130,9 @@ export default function HomePage() {
               Une minute pour se donner envie de bouger et d&apos;offrir à votre corps ce qu&apos;il mérite.
             </p>
           </div>
-          <VideoIntro src="/videos/gbo-intro.mp4" />
+          <div data-video-shrink="">
+            <VideoIntro src="/videos/gbo-intro.mp4" />
+          </div>
         </div>
       </Reveal>
 
@@ -294,6 +297,40 @@ export default function HomePage() {
           >
             Découvrir les solutions pour les salles →
           </Link>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={css('text-align:center;max-width:640px;margin:0 auto 40px')}>
+            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
+              Nos coachs
+            </div>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:16px")}>
+              Une équipe de coachs certifiés.
+            </h2>
+            <p style={css('font-size:16px;color:var(--muted,#8a8a8a);line-height:1.55')}>
+              Sélectionnés et formés par GBÔ, chaque coach est affecté selon sa spécialité, sa zone et vos disponibilités.
+            </p>
+          </div>
+          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px')}>
+            {COACHES_PREVIEW.map((c, i) => (
+              <Reveal key={c.name} delay={i * 50} className="hover-card" style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+                <div style={{ aspectRatio: '4/5', position: 'relative' }}>
+                  <ImageSlot placeholder={`Photo de ${c.name}`} src={c.photo} />
+                </div>
+                <div style={{ padding: 16 }}>
+                  <div style={{ fontWeight: 700, fontSize: 16 }}>{c.name}</div>
+                  <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-top:4px;line-height:1.4')}>{c.spec}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 32 }}>
+            <Link href="/coachs" style={css('font-weight:700;font-size:15px;color:var(--lime,#C6F202)')}>
+              Voir tous nos coachs →
+            </Link>
+          </div>
         </div>
       </Reveal>
 

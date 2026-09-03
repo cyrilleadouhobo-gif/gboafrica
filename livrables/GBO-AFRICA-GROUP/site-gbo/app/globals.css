@@ -282,6 +282,13 @@ select {
     display: none !important;
   }
 }
+/* Vidéo d'accueil moins haute sur desktop (16/9 la rendait trop imposante en pleine
+   largeur) sans toucher au mobile, qui garde le 16/9 classique. */
+@media (min-width: 901px) {
+  [data-video-shrink] > div {
+    aspect-ratio: 21 / 9 !important;
+  }
+}
 @media (max-width: 680px) {
   [data-hidemobile] {
     display: none !important;
