@@ -88,6 +88,15 @@ a:hover {
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
 }
 
+/* Variante d'ombre verte (lime) au survol, demandée pour les cartes « piliers » de
+   /pour-les-salles — s'ajoute à .hover-card sans changer l'ombre noire par défaut
+   utilisée ailleurs sur le site. */
+.hover-card-lime:hover {
+  /* Décalage nul + flou large : le halo entoure la carte sur ses 4 côtés au lieu de
+     ne déborder qu'en bas (cas d'un box-shadow classique avec un offset en y). */
+  box-shadow: 0 0 32px rgba(198, 242, 2, 0.35);
+}
+
 /* Lift + soft lime glow on hover for primary CTA buttons. */
 .btn-cta {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -298,5 +307,23 @@ select {
   }
   [data-col-hide] {
     display: none !important;
+  }
+}
+
+/* "Nos valeurs" (/about) : grille classique par défaut, remplacée sous 680px par un
+   bandeau défilant en boucle (liste dupliquée en JS + animation marquee ci-dessus)
+   plutôt que d'empiler les cartes verticalement. */
+[data-values-marquee] {
+  display: none;
+}
+.values-marquee-track {
+  animation: marquee 18s linear infinite;
+}
+@media (max-width: 680px) {
+  [data-values-grid] {
+    display: none !important;
+  }
+  [data-values-marquee] {
+    display: block !important;
   }
 }

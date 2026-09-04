@@ -10,8 +10,7 @@ import GlowBlobs from '../components/GlowBlobs.js';
 import VideoIntro from '../components/VideoIntro.js';
 import HeroCarousel from '../components/HeroCarousel.js';
 import { stockPhoto } from '../lib/stockPhoto.js';
-import { POLES, badgeStyle } from '../data/poles.js';
-import { VALUES, METHOD_STEPS, TESTIMONIALS, PARTNERS } from '../data/content.js';
+import { METHOD_STEPS, TESTIMONIALS, PARTNERS } from '../data/content.js';
 
 // Carrousel plein écran du hero : vrais visuels GBÔ fournis par Cyrille (Documents/Hero
 // accueil), mis à jour le 02/09. Casting et logos de marques tierces visibles sur les 2
@@ -24,9 +23,7 @@ const HERO_SLIDES = [
 
 // Bandeaux photo des sections Valeurs / Méthode / Pôles — même collection Accra que le hero
 // (même photographe, casting confirmé visuellement), pour casser les blocs 100% texte.
-const VALUES_BANNER = 'https://images.pexels.com/photos/34043568/pexels-photo-34043568.jpeg?auto=compress&cs=tinysrgb&w=1600'; // groupe posé, esprit d'équipe
 const METHODE_BANNER = 'https://images.pexels.com/photos/34043577/pexels-photo-34043577.jpeg?auto=compress&cs=tinysrgb&w=1600'; // développé couché, rigueur technique
-const POLES_BANNER = 'https://images.pexels.com/photos/34043595/pexels-photo-34043595.jpeg?auto=compress&cs=tinysrgb&w=1600'; // squat, énergie, diversité des pratiques
 
 // Aperçu de 6 coachs sur la home (liste complète et à jour sur /coachs, alimentée par la
 // base). Photos Pexels choisies et vérifiées individuellement (sujets noirs/africains,
@@ -64,8 +61,6 @@ export default function HomePage() {
       showToast('Connexion impossible. Réessayez.');
     }
   };
-
-  const poles = POLES.map((p) => ({ ...p, statusLabel: p.status === 'op' ? 'Disponible' : 'Bientôt' }));
 
   return (
     <div>
@@ -146,64 +141,6 @@ export default function HomePage() {
         </div>
       </Reveal>
 
-      <Reveal
-        as="section"
-        style={css(
-          'padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
-        )}
-      >
-        <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,72px)')}>
-          <div>
-            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>Notre mission</div>
-            <p style={css('font-size:clamp(18px,2.4vw,24px);line-height:1.5;font-weight:500')}>
-              Développer des solutions innovantes permettant à chaque individu et à chaque organisation d&apos;intégrer durablement le sport, l&apos;activité
-              physique et le bien-être dans leur quotidien.
-            </p>
-          </div>
-          <div>
-            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>Notre vision</div>
-            <p style={css('font-size:clamp(18px,2.4vw,24px);line-height:1.5;font-weight:500')}>
-              Devenir la référence africaine du sport, du fitness et du bien-être accessible à tous.
-            </p>
-          </div>
-        </div>
-      </Reveal>
-
-      <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('position:relative;height:260px;border-radius:24px;overflow:hidden;margin-bottom:34px')}>
-            <ImageSlot src={VALUES_BANNER} placeholder="Esprit d'équipe GBÔ" />
-            <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.15) 100%)')} />
-            <div style={css('position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vw,48px)')}>
-              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Nos valeurs</div>
-              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;color:#fff")}>Ce qui nous tient debout.</h2>
-            </div>
-          </div>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px')}>
-            {VALUES.map((v, i) => (
-              <Reveal
-                key={v.n}
-                delay={i * 70}
-                className="hover-card"
-                style={css(
-                  'padding:24px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))'
-                )}
-              >
-                <div
-                  style={css(
-                    "width:44px;height:44px;border-radius:12px;background:rgba(198,242,2,.12);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-family:'Broaven';font-weight:700;font-size:18px"
-                  )}
-                >
-                  {v.n}
-                </div>
-                <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}>{v.title}</div>
-                <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5')}>{v.desc}</div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
       <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('position:relative;height:260px;border-radius:24px;overflow:hidden;margin-bottom:38px')}>
@@ -230,45 +167,6 @@ export default function HomePage() {
                 <div style={css("font-family:'Broaven';font-weight:700;font-size:40px;color:rgba(198,242,2,.22);line-height:1")}>{m.n}</div>
                 <div style={{ fontWeight: 700, fontSize: 17, margin: '8px 0 6px' }}>{m.title}</div>
                 <div style={css('font-size:13px;color:var(--muted,#8a8a8a);line-height:1.5')}>{m.desc}</div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
-      <Reveal as="section" style={css('padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px)')}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('position:relative;height:260px;border-radius:24px;overflow:hidden;margin-bottom:34px')}>
-            <ImageSlot src={POLES_BANNER} placeholder="Diversité des pratiques GBÔ" />
-            <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.15) 100%)')} />
-            <div style={css('position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vw,48px)')}>
-              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>L&apos;écosystème</div>
-              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;color:#fff")}>Six pôles, une marque.</h2>
-            </div>
-          </div>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px')}>
-            {poles.map((p, i) => (
-              <Reveal
-                as={Link}
-                key={p.key}
-                href={p.key === 'fitness' ? '/fitness' : `/poles/${p.key}`}
-                delay={i * 60}
-                className="hover-card"
-                style={css('display:block;padding:26px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.02));cursor:pointer')}
-              >
-                <div style={css('display:flex;align-items:center;justify-content:space-between;margin-bottom:18px')}>
-                  <div
-                    style={css(
-                      "width:48px;height:48px;border-radius:13px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700;font-size:20px"
-                    )}
-                  >
-                    {p.mono}
-                  </div>
-                  <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
-                </div>
-                <div style={{ fontWeight: 700, fontSize: 20, marginBottom: 6 }}>{p.name}</div>
-                <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5')}>{p.tagline}</div>
-                <div style={css('margin-top:18px;font-size:13px;font-weight:700;color:var(--lime,#C6F202)')}>{p.cta} →</div>
               </Reveal>
             ))}
           </div>
