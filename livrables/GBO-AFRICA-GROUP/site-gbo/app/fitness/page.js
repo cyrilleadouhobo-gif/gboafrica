@@ -4,6 +4,7 @@ import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import HeroCarousel from '../../components/HeroCarousel.js';
+import { stockPhoto } from '../../lib/stockPhoto.js';
 import { METHOD_STEPS } from '../../data/content.js';
 
 export const metadata = {
@@ -20,16 +21,136 @@ const FITNESS_HERO_SLIDES = [
   { src: '/images/hero-fitness/fitness-4.jpg', position: '60% 55%' }, // étirements en extérieur
 ];
 
+const TRUST_ITEMS = [
+  {
+    label: 'Des coachs qualifiés',
+    icon: (
+      <>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+      </>
+    ),
+  },
+  {
+    label: 'Partout à Abidjan',
+    icon: (
+      <>
+        <path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" />
+        <circle cx="12" cy="9" r="2.5" />
+      </>
+    ),
+  },
+  {
+    label: 'Un suivi personnalisé',
+    icon: (
+      <>
+        <rect x="5" y="3" width="14" height="18" rx="2" />
+        <path d="M9 8h6M9 12h6M9 16h3" />
+      </>
+    ),
+  },
+];
+
 // Bandeaux des cartes offres (voir section « Choisissez votre accompagnement »).
 const PARTICULIER_BANNER = 'https://images.pexels.com/photos/34043589/pexels-photo-34043589.jpeg?auto=compress&cs=tinysrgb&w=1200'; // effort individuel
 const ENTREPRISE_BANNER = 'https://images.pexels.com/photos/30688593/pexels-photo-30688593.jpeg?auto=compress&cs=tinysrgb&w=1200'; // équipe de professionnels, Lagos — code vestimentaire entreprise
+
+// Icônes des 4 étapes (voir section « Notre approche »).
+const STEP_ICONS = [
+  // Évaluer — loupe
+  <>
+    <circle cx="10" cy="10" r="6" />
+    <path d="M21 21l-5-5" />
+  </>,
+  // Construire — plan / document
+  <>
+    <path d="M6 3h9l4 4v14H6z" />
+    <path d="M9 12h6M9 16h6" />
+  </>,
+  // Accompagner — haltère
+  <>
+    <path d="M4 9v6M20 9v6" />
+    <path d="M2 8v8M22 8v8" />
+    <path d="M7 12h10" />
+  </>,
+  // Suivre — courbe de progression
+  <>
+    <path d="M4 19V9M11 19V4M18 19v-7" />
+  </>,
+];
+
+// Profils provisoires (noms/photos placeholder), en attendant que Cyrille fournisse les
+// vraies fiches coachs pour cette section — même logique que COACHES_PREVIEW sur l'accueil.
+const FITNESS_COACHES = [
+  { name: 'Koffi A.', spec: 'Renforcement musculaire', level: 'Expert', zone: 'Cocody', photo: 'https://images.pexels.com/photos/4908557/pexels-photo-4908557.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Awa D.', spec: 'Perte de poids', level: 'Confirmé', zone: 'Plateau', photo: 'https://images.pexels.com/photos/6455796/pexels-photo-6455796.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Moussa T.', spec: 'Préparation physique', level: 'Expert', zone: 'Marcory', photo: 'https://images.pexels.com/photos/5878697/pexels-photo-5878697.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Sarah K.', spec: 'Remise en forme', level: 'Confirmé', zone: 'Yopougon', photo: 'https://images.pexels.com/photos/7113554/pexels-photo-7113554.jpeg?auto=compress&cs=tinysrgb&w=800' },
+];
+
+// Icônes des objectifs (voir section « Quel est votre objectif ? »).
+const GOALS = [
+  {
+    label: 'Perte de poids',
+    icon: (
+      <>
+        <path d="M12 3v3M5 8l2 2M19 8l-2 2" />
+        <circle cx="12" cy="15" r="6" />
+        <path d="M12 15l3-3" />
+      </>
+    ),
+  },
+  {
+    label: 'Remise en forme',
+    icon: <path d="M20.8 8.6c0 5-8.8 10-8.8 10s-8.8-5-8.8-10a4.6 4.6 0 018.8-1.8A4.6 4.6 0 0120.8 8.6z" />,
+  },
+  {
+    label: 'Renforcement musculaire',
+    icon: (
+      <>
+        <path d="M4 9v6M20 9v6" />
+        <path d="M2 8v8M22 8v8" />
+        <path d="M7 12h10" />
+      </>
+    ),
+  },
+  {
+    label: 'Prise de masse musculaire',
+    icon: (
+      <>
+        <path d="M6.5 7c-2 1-3 3-2 5.5C3.5 14 4 17 7 18c2 3 8 3 10 0 3-1 3.5-4 2.5-5.5 1-2.5 0-4.5-2-5.5-1-2-4-3-5.5-1.5C10.5 4 7.5 5 6.5 7z" />
+      </>
+    ),
+  },
+  {
+    label: 'Préparation physique',
+    icon: (
+      <>
+        <circle cx="13" cy="5" r="2" />
+        <path d="M6 21l3-6 3 2 2-5 4 3M9 15l-3-3 2-4" />
+      </>
+    ),
+  },
+  {
+    label: 'Amélioration de la condition physique',
+    icon: <path d="M4 19V9M11 19V4M18 19v-7" />,
+  },
+  {
+    label: 'Besoins spécifiques',
+    icon: (
+      <>
+        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+      </>
+    ),
+  },
+];
 
 export default function FitnessPage() {
   return (
     <div>
       <section
         style={css(
-          'position:relative;overflow:hidden;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
+          'position:relative;overflow:hidden;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(40px,5vw,56px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
         )}
       >
         <HeroCarousel slides={FITNESS_HERO_SLIDES} dotsBottom={20} />
@@ -39,67 +160,81 @@ export default function FitnessPage() {
           )}
         />
         <GlowBlobs />
+
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
-          <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:12px;font-weight:700;margin-bottom:16px')}>
-            ● Disponible
-          </span>
-          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;line-height:1;max-width:16ch")}>
-            Un accompagnement sportif, pensé pour vous.
+          <div style={css('display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>
+            GBÔ FITNESS <span style={{ width: 26, height: 2, background: '#C6F202', display: 'inline-block' }} />
+          </div>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;line-height:1.02;max-width:14ch")}>
+            BOUGEZ.
+            <br />
+            PROGRESSEZ.
+            <br />
+            À VOTRE RYTHME.
           </h1>
           <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#c8c8c8);max-width:56ch;margin-top:20px;line-height:1.5')}>
-            Choisissez le type d&apos;accompagnement recherché. Aucun compte n&apos;est requis pour démarrer.
+            Un accompagnement sportif adapté à vos objectifs, votre niveau et votre quotidien.
           </p>
+          <Link
+            href="#accompagnement"
+            className="btn-cta"
+            style={css('margin-top:28px;display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
+          >
+            Commencer maintenant →
+          </Link>
+          <div style={css('display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,34px);margin-top:34px')}>
+            {TRUST_ITEMS.map((t) => (
+              <div key={t.label} style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--lime,#C6F202)" strokeWidth="2">
+                  {t.icon}
+                </svg>
+                <span style={css('font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85)')}>{t.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px)')}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 34 }}>
-            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>
-              Deux formats, une même exigence
+      <Reveal as="section" id="accompagnement" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px)')}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+          <div
+            style={css(
+              'display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end;margin-bottom:34px'
+            )}
+          >
+            <div>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>
+                Deux façons de vous accompagner
+              </div>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,4vw,36px);letter-spacing:-1px")}>Choisissez votre accompagnement.</h2>
             </div>
-            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,4vw,36px);letter-spacing:-1px")}>Choisissez votre accompagnement.</h2>
+            <p style={css('font-size:14.5px;color:var(--muted,#8a8a8a);max-width:38ch;line-height:1.6')}>
+              Que vous soyez un particulier ou une entreprise, GBÔ vous propose des solutions adaptées à vos besoins.
+            </p>
           </div>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px')}>
+          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px')}>
             <Reveal
               className="hover-card"
               style={css(
-                'border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-direction:column;overflow:hidden'
+                'border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-wrap:wrap;overflow:hidden'
               )}
             >
-              <div style={{ position: 'relative', height: 150 }}>
+              <div style={{ position: 'relative', flex: '1 1 220px', minHeight: 220 }}>
                 <ImageSlot placeholder="Accompagnement individuel GBÔ" src={PARTICULIER_BANNER} />
-                <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 75%,rgba(0,0,0,.85) 100%)')} />
-                <span
-                  style={css(
-                    "position:absolute;top:14px;left:14px;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:11px;font-weight:700;letter-spacing:.3px"
-                  )}
-                >
-                  Le plus choisi
-                </span>
               </div>
-              <div style={css('padding:clamp(24px,4vw,32px);display:flex;flex-direction:column;flex:1')}>
-                <div
-                  style={css(
-                    'width:44px;height:44px;border-radius:12px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;margin-bottom:18px'
-                  )}
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="8" r="4" />
-                    <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
-                  </svg>
-                </div>
+              <div style={css('padding:clamp(24px,4vw,32px);display:flex;flex-direction:column;flex:2 1 300px')}>
                 <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:8px')}>Pour moi</div>
                 <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:10px")}>Particulier</h2>
-                <p style={css('font-size:15px;font-weight:600;color:var(--fg,#fff);line-height:1.5;margin-bottom:18px')}>
-                  Un coach dédié, un programme qui s&apos;adapte à votre vie — pas l&apos;inverse.
+                <p style={css('font-size:15px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:18px')}>
+                  Un coaching adapté à votre objectif, votre niveau et votre rythme.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 8, flex: 1 }}>
                   {[
-                    'Bilan initial offert',
-                    'Coach dédié selon vos objectifs',
-                    'Séances à domicile, en salle partenaire ou en extérieur',
-                    'Suivi nutritionnel en option',
+                    'Coaching à domicile',
+                    'Coaching en salle partenaire',
+                    'Coaching individuel, duo ou groupe',
+                    'Suivi de progression',
+                    'Option suivi nutritionnel',
                   ].map((f) => (
                     <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--lime,#C6F202)" strokeWidth="3" style={{ flex: '0 0 auto', marginTop: 2 }}>
@@ -110,56 +245,32 @@ export default function FitnessPage() {
                   ))}
                 </div>
                 <Link
-                  href="/fitness/tunnel"
+                  href="/deux-seances-gratuites"
                   className="btn-cta"
-                  style={css('margin-top:18px;width:100%;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;display:block;text-align:center')}
+                  style={css('margin-top:18px;padding:15px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px;display:inline-block;text-align:center')}
                 >
-                  Commencer
+                  Commencer mon accompagnement →
                 </Link>
-                <div style={css('margin-top:10px;text-align:center;font-size:12px;color:var(--muted,#8a8a8a)')}>Sans engagement · Aucun compte requis</div>
               </div>
             </Reveal>
             <Reveal
               delay={80}
               className="hover-card"
               style={css(
-                'border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-direction:column;overflow:hidden'
+                'border-radius:24px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-wrap:wrap;overflow:hidden'
               )}
             >
-              <div style={{ position: 'relative', height: 150 }}>
+              <div style={{ position: 'relative', flex: '1 1 220px', minHeight: 220 }}>
                 <ImageSlot placeholder="Programme entreprise GBÔ" src={ENTREPRISE_BANNER} />
-                <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 75%,rgba(0,0,0,.85) 100%)')} />
-                <span
-                  style={css(
-                    "position:absolute;top:14px;left:14px;padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.4);color:#fff;font-size:11px;font-weight:700;letter-spacing:.3px"
-                  )}
-                >
-                  Sur devis
-                </span>
               </div>
-              <div style={css('padding:clamp(24px,4vw,32px);display:flex;flex-direction:column;flex:1')}>
-                <div
-                  style={css(
-                    'width:44px;height:44px;border-radius:12px;border:1px solid var(--lime,#C6F202);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;margin-bottom:18px'
-                  )}
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3 21V7l7-4v6l7-4v16" />
-                    <path d="M3 21h18" />
-                  </svg>
-                </div>
+              <div style={css('padding:clamp(24px,4vw,32px);display:flex;flex-direction:column;flex:2 1 300px')}>
                 <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:8px')}>Pour mes équipes</div>
                 <h2 style={css("font-family:'Broaven';font-weight:700;font-size:26px;margin-bottom:10px")}>Entreprise</h2>
-                <p style={css('font-size:15px;font-weight:600;color:var(--fg,#fff);line-height:1.5;margin-bottom:18px')}>
-                  Un collectif plus en forme, plus soudé, moins absent.
+                <p style={css('font-size:15px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:18px')}>
+                  Des séances collectives encadrées pour intégrer davantage d&apos;activité physique dans la vie de vos collaborateurs.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 8, flex: 1 }}>
-                  {[
-                    'Diagnostic santé et bien-être de vos équipes',
-                    'Programme sur-mesure (sport, ateliers, événements)',
-                    "Suivi d'impact : participation, satisfaction",
-                    'Interlocuteur dédié GBÔ Corporate',
-                  ].map((f) => (
+                  {['Séances collectives', 'Programme adapté à votre entreprise', 'Coach GBÔ', "Suivi de l'activité et reporting"].map((f) => (
                     <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--lime,#C6F202)" strokeWidth="3" style={{ flex: '0 0 auto', marginTop: 2 }}>
                         <path d="M5 12l5 5L20 6" />
@@ -171,64 +282,184 @@ export default function FitnessPage() {
                 <Link
                   href="/corporate"
                   className="btn-cta"
-                  style={css('margin-top:18px;width:100%;padding:16px;border-radius:12px;border:1px solid var(--fg,#fff);color:var(--fg,#fff);font-weight:700;font-size:16px;background:transparent;display:block;text-align:center')}
+                  style={css('margin-top:18px;padding:15px 26px;border-radius:12px;border:1px solid var(--fg,#fff);color:var(--fg,#fff);font-weight:700;font-size:15px;background:transparent;display:inline-block;text-align:center')}
                 >
-                  Découvrir nos solutions
+                  Découvrir nos solutions →
                 </Link>
-                <div style={css('margin-top:10px;text-align:center;font-size:12px;color:var(--muted,#8a8a8a)')}>Devis gratuit sous 48h</div>
               </div>
             </Reveal>
           </div>
         </div>
       </Reveal>
 
-      <Reveal as="section" style={css('padding:0 clamp(20px,5vw,64px) clamp(40px,6vw,72px)')}>
-        <div
-          style={css(
-            'max-width:1000px;margin:0 auto;padding:22px 26px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between'
-          )}
-        >
-          <div>
-            <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>Vos séances, où vous voulez</div>
-            <div style={css('font-size:14px;color:var(--muted,#8a8a8a)')}>À domicile · En salle partenaire · En extérieur</div>
-          </div>
-          <Link href="/devenir-salle-partenaire" style={css('font-size:13.5px;font-weight:700;color:var(--lime,#C6F202)')}>
-            Accédez à un réseau de salles partenaires sélectionnées par GBÔ →
-          </Link>
-        </div>
-      </Reveal>
-
       <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Actif de marque</div>
-          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:8px")}>La Méthode GBÔ</h2>
-          <p style={css('color:var(--muted,#8a8a8a);font-size:16px;max-width:60ch;margin-bottom:40px;line-height:1.5')}>
-            Cinq étapes pour transformer une intention en mode de vie durable.
-          </p>
-          <div style={css('position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px')}>
-            {METHOD_STEPS.map((m, i) => (
-              <Reveal key={m.n} delay={i * 70} style={{ position: 'relative', paddingTop: 20 }}>
-                <div style={css('position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--lime,#C6F202),transparent)')} />
-                <div
-                  style={css(
-                    "width:46px;height:46px;border-radius:50%;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700;font-size:20px;margin-bottom:16px"
-                  )}
+          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>Notre approche</div>
+          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4.5vw,44px);letter-spacing:-1px;margin-bottom:40px")}>
+            Un accompagnement qui s&apos;adapte à vous.
+          </h2>
+          <div data-stepsrow="" style={css('display:flex;align-items:flex-start;gap:10px')}>
+            {METHOD_STEPS.flatMap((m, i) => [
+              i > 0 && (
+                <svg
+                  key={`arrow-${m.n}`}
+                  data-hidemobile=""
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--border,rgba(255,255,255,.25))"
+                  strokeWidth="2"
+                  style={{ flex: '0 0 auto', marginTop: 12 }}
                 >
-                  {m.n}
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              ),
+              <div key={m.n} style={{ flex: '1 1 0', minWidth: 140 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                  <div
+                    style={css(
+                      "width:38px;height:38px;border-radius:50%;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700;font-size:14px;flex:0 0 auto"
+                    )}
+                  >
+                    {m.n}
+                  </div>
+                  <div
+                    style={css(
+                      'width:44px;height:44px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));display:flex;align-items:center;justify-content:center;flex:0 0 auto'
+                    )}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--lime,#C6F202)" strokeWidth="2">
+                      {STEP_ICONS[i]}
+                    </svg>
+                  </div>
                 </div>
                 <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>{m.title}</div>
                 <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.55')}>{m.desc}</div>
+              </div>,
+            ])}
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px)')}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div
+            style={css('display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:34px')}
+          >
+            <div>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>
+                Des coachs pour vos objectifs
+              </div>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,4vw,36px);letter-spacing:-1px")}>
+                Le bon accompagnement commence par le bon coach.
+              </h2>
+            </div>
+            <Link href="/coachs" style={css('font-size:14px;font-weight:700;color:var(--lime,#C6F202);white-space:nowrap')}>
+              Voir tous nos coachs →
+            </Link>
+          </div>
+          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px')}>
+            {FITNESS_COACHES.map((c, i) => (
+              <Reveal key={c.name} delay={i * 60} className="hover-card" style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}>
+                <div style={{ aspectRatio: '4/5', position: 'relative' }}>
+                  <ImageSlot placeholder={`Photo de ${c.name}`} src={c.photo} />
+                </div>
+                <div style={{ padding: 16 }}>
+                  <div style={{ fontWeight: 700, fontSize: 16 }}>{c.name}</div>
+                  <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-top:4px;line-height:1.4')}>{c.spec}</div>
+                  <div style={css('display:flex;gap:8px;margin-top:10px')}>
+                    <span style={css('padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(198,242,2,.12);color:var(--lime,#C6F202);border:1px solid rgba(198,242,2,.3)')}>
+                      {c.level}
+                    </span>
+                    <span style={css('padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;color:var(--muted,#8a8a8a);border:1px solid var(--border,rgba(255,255,255,.14))')}>
+                      {c.zone}
+                    </span>
+                  </div>
+                  <Link href="/coachs" style={css('margin-top:14px;font-size:13px;font-weight:700;color:var(--lime,#C6F202);display:inline-block')}>
+                    Voir le profil →
+                  </Link>
+                </div>
               </Reveal>
             ))}
           </div>
-          <div style={css('margin-top:40px;padding:18px 22px;border-radius:14px;border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.06);display:flex;gap:14px;align-items:flex-start')}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" style={{ flex: '0 0 auto', marginTop: 1 }}>
-              <path d="M12 9v4M12 17h.01M10.3 3.9L2 18a2 2 0 001.7 3h16.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" />
-            </svg>
-            <p style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.55')}>
-              Le coach GBÔ n&apos;est ni médecin ni nutritionniste. L&apos;accompagnement complète et ne remplace pas le suivi médical ; une validation médicale
-              préalable est recommandée, en particulier pour les programmes prénatal, postnatal et senior.
-            </p>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={css('text-align:center;max-width:640px;margin:0 auto 34px')}>
+            <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>
+              Votre objectif. Notre accompagnement.
+            </div>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,4vw,36px);letter-spacing:-1px")}>Quel est votre objectif ?</h2>
+          </div>
+          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px')}>
+            {GOALS.map((g, i) => (
+              <Link key={g.label} href="/fitness/tunnel" style={{ color: 'inherit', textDecoration: 'none' }}>
+                <Reveal
+                  delay={i * 40}
+                  className="hover-card"
+                  style={css(
+                    'padding:22px 14px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03));display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px'
+                  )}
+                >
+                  <div
+                    style={css(
+                      'width:42px;height:42px;border-radius:12px;background:rgba(198,242,2,.1);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center'
+                    )}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      {g.icon}
+                    </svg>
+                  </div>
+                  <span style={css('font-size:13px;font-weight:600;color:rgba(255,255,255,.85);line-height:1.3')}>{g.label}</span>
+                </Reveal>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px)')}>
+        <div
+          style={{
+            position: 'relative',
+            maxWidth: 1200,
+            margin: '0 auto',
+            borderRadius: 24,
+            overflow: 'hidden',
+            border: '1px solid rgba(255,255,255,.1)',
+          }}
+        >
+          <ImageSlot placeholder="Des personnes plus fortes, un quotidien plus beau" src={stockPhoto('gymInterior', 'fitness-final-cta', '1600x600')} />
+          <div
+            style={css(
+              'position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.75) 50%,rgba(0,0,0,.35) 100%);pointer-events:none'
+            )}
+          />
+          <div style={css('position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:clamp(32px,5vw,56px)')}>
+            <div style={{ maxWidth: 480 }}>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:10px')}>
+                Prêt à commencer ?
+              </div>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.6vw,36px);letter-spacing:-1px;line-height:1.1;margin-bottom:14px")}>
+                Transformez vos objectifs en réalité.
+              </h2>
+              <p style={css('font-size:15px;color:rgba(255,255,255,.75);line-height:1.55;margin-bottom:22px')}>
+                Choisissez votre accompagnement et présentez-nous votre objectif. GBÔ vous orientera vers la formule et le coach adaptés.
+              </p>
+              <Link
+                href="/fitness/tunnel"
+                className="btn-cta"
+                style={css('display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px')}
+              >
+                Commencer maintenant →
+              </Link>
+            </div>
+            <Link href="/deux-seances-gratuites" style={css('font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8);text-align:right;max-width:220px;line-height:1.5')}>
+              Deux séances gratuites pour découvrir l&apos;expérience GBÔ
+            </Link>
           </div>
         </div>
       </Reveal>

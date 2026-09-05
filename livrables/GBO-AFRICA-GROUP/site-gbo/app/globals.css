@@ -310,6 +310,31 @@ select {
   }
 }
 
+/* Bandeau chiffres clés de l'accueil : chiffres et tagline "L'Afrique en mouvement"
+   sur une seule ligne comme sur la maquette, tant qu'il y a la place ; repasse en
+   colonne sous 900px pour éviter l'écrasement. */
+[data-statsrow] {
+  flex-wrap: nowrap;
+}
+@media (max-width: 1220px) {
+  [data-statsrow] {
+    flex-wrap: wrap;
+  }
+}
+
+/* Étapes "Notre approche" (/fitness) : rangée unique avec flèches entre les étapes tant
+   qu'il y a la place, repasse en grille souple sous 900px (flèches déjà masquées à 680px
+   par [data-hidemobile]). */
+[data-stepsrow] {
+  flex-wrap: nowrap;
+}
+@media (max-width: 900px) {
+  [data-stepsrow] {
+    flex-wrap: wrap;
+    row-gap: 32px;
+  }
+}
+
 /* "Nos valeurs" (/about) : grille classique par défaut, remplacée sous 680px par un
    bandeau défilant en boucle (liste dupliquée en JS + animation marquee ci-dessus)
    plutôt que d'empiler les cartes verticalement. */

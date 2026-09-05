@@ -8,11 +8,10 @@ export const VALUES = [
 ];
 
 export const METHOD_STEPS = [
-  { n: '1', title: 'Évaluation', desc: "Bilan des objectifs, de la condition physique, des habitudes et de l'éligibilité aux programmes spécifiques." },
-  { n: '2', title: 'Programme personnalisé', desc: 'Un plan adapté au profil, aux objectifs, au niveau et au lieu de pratique.' },
-  { n: '3', title: 'Coaching', desc: 'Mise en œuvre avec un coach GBÔ sélectionné selon expertise et zone.' },
-  { n: '4', title: 'Suivi', desc: "Évaluation régulière des progrès, ajustement et accompagnement motivationnel." },
-  { n: '5', title: 'Transformation', desc: "Atteinte progressive des objectifs et adoption durable d'un mode de vie plus sain." },
+  { n: '01', title: 'Évaluer', desc: 'Comprendre vos objectifs, votre niveau et vos besoins.' },
+  { n: '02', title: 'Construire', desc: 'Définir un programme adapté à votre situation.' },
+  { n: '03', title: 'Accompagner', desc: 'Mettre en œuvre les séances avec un coach sélectionné.' },
+  { n: '04', title: 'Suivre', desc: "Mesurer votre progression et ajuster l'accompagnement." },
 ];
 
 // `photo` = id Unsplash choisi à la main pour correspondre au profil (âge/genre/contexte),
@@ -31,7 +30,13 @@ export const TESTIMONIALS = [
   { id: 'ts3', quote: '« Être coach GBÔ, c\'est un cadre exigeant et une vraie communauté de professionnels. »', name: 'Coach Grace', role: 'Coach partenaire' },
 ];
 
-export const PARTNERS = ['PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE', 'PARTENAIRE'];
+export const PARTNERS = [
+  { name: 'Cabinet Médico-Nutrition SARL', logo: '/images/logos/cabinet-medico-nutrition.jpg' },
+  { name: 'IREF', logo: '/images/logos/iref.jpg' },
+  { name: 'AutoPhile Parts Company', logo: '/images/logos/autophile-parts.jpg' },
+  { name: 'Scoops Blêblê de Tanguelan', logo: '/images/logos/scoops-blebe.jpg' },
+  { name: 'Servo Africa Group', logo: '/images/logos/servo-africa-group.jpg' },
+];
 export const SOCIALS = [
   { label: 'FB', name: 'Facebook', href: 'https://www.facebook.com/share/18FUm2fkS1/?mibextid=wwXIfr' },
   { label: 'IG', name: 'Instagram', href: 'https://www.instagram.com/gbo_africa?igsi=MTE3YWMyeWI4c3V1aQ%3D%3D&utm_source=qr' },
