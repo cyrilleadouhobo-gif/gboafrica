@@ -383,3 +383,16 @@ select {
     display: block !important;
   }
 }
+/* Si l'appareil a "Réduire les animations" activé, l'animation marquee est coupée
+   globalement (règle plus haut) et le bandeau resterait figé avec seulement les
+   2-3 premiers logos visibles. On revient alors à la grille classique (qui affiche
+   tous les logos, quitte à s'empiler) plutôt que de laisser un bandeau immobile
+   et incomplet. */
+@media (max-width: 680px) and (prefers-reduced-motion: reduce) {
+  [data-partners-grid] {
+    display: flex !important;
+  }
+  [data-partners-marquee] {
+    display: none !important;
+  }
+}
