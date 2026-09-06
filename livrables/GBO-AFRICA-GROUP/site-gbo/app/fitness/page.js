@@ -232,7 +232,6 @@ export default function FitnessPage() {
                   {[
                     'Coaching à domicile',
                     'Coaching en salle partenaire',
-                    'Coaching individuel, duo ou groupe',
                     'Suivi de progression',
                     'Option suivi nutritionnel',
                   ].map((f) => (
@@ -270,7 +269,7 @@ export default function FitnessPage() {
                   Des séances collectives encadrées pour intégrer davantage d&apos;activité physique dans la vie de vos collaborateurs.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 8, flex: 1 }}>
-                  {['Séances collectives', 'Programme adapté à votre entreprise', 'Coach GBÔ', "Suivi de l'activité et reporting"].map((f) => (
+                  {['Séances collectives', 'Programme adapté à votre entreprise'].map((f) => (
                     <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--lime,#C6F202)" strokeWidth="3" style={{ flex: '0 0 auto', marginTop: 2 }}>
                         <path d="M5 12l5 5L20 6" />

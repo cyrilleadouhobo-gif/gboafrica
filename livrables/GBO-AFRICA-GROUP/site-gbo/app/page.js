@@ -369,11 +369,7 @@ export default function HomePage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'clamp(14px,2vw,32px)', minWidth: 0, flex: '1 1 auto' }}>
               {HOME_STATS.flatMap((s, i) => [
                 i > 0 && (
-                  <span
-                    key={`sep-${s.l}`}
-                    aria-hidden="true"
-                    style={{ width: 1, height: 30, background: 'rgba(255,255,255,.25)', flex: '0 0 auto' }}
-                  />
+                  <span key={`sep-${s.l}`} aria-hidden="true" data-statsep="" style={{ background: 'rgba(255,255,255,.25)', flex: '0 0 auto' }} />
                 ),
                 <div key={s.l}>
                   <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4vw,40px);color:var(--lime,#C6F202)")}>{s.n}</div>
@@ -468,7 +464,11 @@ export default function HomePage() {
       <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);overflow:hidden')}>
         <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:26px')}>Ils nous font confiance</div>
-          <div style={css('display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:center')}>
+
+          {/* Desktop/tablette : grille classique. Remplacée sous 680px par un bandeau
+              défilant en boucle (liste dupliquée + animation marquee de globals.css) plutôt
+              que de laisser les logos se chevaucher en s'empilant. */}
+          <div data-partners-grid="" style={css('display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:center')}>
             {PARTNERS.map((p) => (
               <div
                 key={p.name}
@@ -490,6 +490,32 @@ export default function HomePage() {
                 />
               </div>
             ))}
+          </div>
+
+          <div data-partners-marquee="" style={{ overflow: 'hidden' }}>
+            <div className="partners-marquee-track" style={css('display:flex;gap:24px;width:max-content')}>
+              {[...PARTNERS, ...PARTNERS].map((p, i) => (
+                <div
+                  key={`${p.name}-${i}`}
+                  title={p.name}
+                  style={{
+                    width: 140,
+                    height: 90,
+                    borderRadius: 14,
+                    background: '#fff',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    flex: '0 0 auto',
+                  }}
+                >
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 12 }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Reveal>

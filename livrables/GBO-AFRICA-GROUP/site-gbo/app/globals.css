@@ -322,6 +322,20 @@ select {
   }
 }
 
+/* Séparateurs entre les chiffres du bandeau stats : barres verticales tant que les
+   chiffres restent sur une ligne, barres horizontales sous 680px une fois qu'ils
+   s'empilent (une barre verticale entre deux lignes n'a plus de sens). */
+[data-statsep] {
+  width: 1px;
+  height: 30px;
+}
+@media (max-width: 680px) {
+  [data-statsep] {
+    width: 100%;
+    height: 1px;
+  }
+}
+
 /* Étapes "Notre approche" (/fitness) : rangée unique avec flèches entre les étapes tant
    qu'il y a la place, repasse en grille souple sous 900px (flèches déjà masquées à 680px
    par [data-hidemobile]). */
@@ -349,6 +363,23 @@ select {
     display: none !important;
   }
   [data-values-marquee] {
+    display: block !important;
+  }
+}
+
+/* Section "Ils nous font confiance" (accueil) : même logique que "Nos valeurs" ci-dessus
+   — bandeau défilant sous 680px au lieu d'empiler/chevaucher les logos partenaires. */
+[data-partners-marquee] {
+  display: none;
+}
+.partners-marquee-track {
+  animation: marquee 22s linear infinite;
+}
+@media (max-width: 680px) {
+  [data-partners-grid] {
+    display: none !important;
+  }
+  [data-partners-marquee] {
     display: block !important;
   }
 }

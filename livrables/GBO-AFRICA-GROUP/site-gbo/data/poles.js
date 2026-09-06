@@ -1,9 +1,7 @@
 export const POLES = [
   { key: 'fitness', name: 'GBÔ Fitness', mono: 'F', tagline: 'Coaching personnalisé, sport santé, entreprise.', status: 'op', cta: 'Commencer' },
   { key: 'academy', name: 'GBÔ Academy', mono: 'A', tagline: 'Formation & certification des métiers du sport.', status: 'soon', cta: "Rejoindre la liste" },
-  { key: 'talent', name: 'GBÔ Talent', mono: 'T', tagline: 'Détection & développement des talents.', status: 'soon', cta: "Rejoindre la liste" },
   { key: 'events', name: 'GBÔ Events', mono: 'E', tagline: 'Événementiel sportif & bien-être.', status: 'soon', cta: "Rejoindre la liste" },
-  { key: 'shop', name: 'GBÔ Shop', mono: 'S', tagline: 'Nutrition, équipements & textile.', status: 'soon', cta: "Rejoindre la liste" },
   { key: 'security', name: 'GBÔ Security', mono: 'Se', tagline: 'Sécurité & encadrement des événements.', status: 'soon', cta: "Rejoindre la liste" },
 ];
 

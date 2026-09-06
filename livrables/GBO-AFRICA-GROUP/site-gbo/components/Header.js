@@ -4,13 +4,18 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { css } from '../lib/css.js';
+import { POLES, badgeStyle } from '../data/poles.js';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [polesOpen, setPolesOpen] = useState(false);
   const pathname = usePathname();
+
+  const poles = POLES.map((p) => ({ ...p, statusLabel: p.status === 'op' ? 'Disponible' : 'Bientôt' }));
 
   const closeAll = () => {
     setMenuOpen(false);
+    setPolesOpen(false);
   };
 
   if (pathname === '/admin/login') return null;
@@ -28,9 +33,25 @@ export default function Header() {
         </Link>
 
         <nav style={css('display:flex;align-items:center;gap:6px')} data-desktopnav="">
-          <Link href="/fitness" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
-            GBÔ Fitness
-          </Link>
+          <button
+            onClick={() => setPolesOpen((v) => !v)}
+            style={css(
+              "display:flex;align-items:center;gap:6px;padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;color:var(--fg,#fff);cursor:pointer"
+            )}
+          >
+            Pôles
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              style={{ transform: polesOpen ? 'rotate(180deg)' : 'none', transition: 'transform .15s' }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
           <Link href="/pour-les-salles" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             Pour les salles
           </Link>
@@ -75,6 +96,41 @@ export default function Header() {
         </div>
       </header>
 
+      {polesOpen && (
+        <div
+          data-desktopnav=""
+          style={css(
+            "font-family:'Broaven',sans-serif;position:sticky;top:68px;z-index:55;background:var(--surface,#101010);border-bottom:1px solid var(--border,rgba(255,255,255,.1));padding:22px clamp(16px,4vw,48px);animation:fadeIn .2s both"
+          )}
+        >
+          <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px')}>
+            {poles.map((p) => (
+              <Link
+                key={p.key}
+                href={p.key === 'fitness' ? '/fitness' : `/poles/${p.key}`}
+                onClick={closeAll}
+                style={css(
+                  "display:flex;gap:12px;padding:14px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.08));background:var(--glass,rgba(255,255,255,.03));cursor:pointer"
+                )}
+              >
+                <div
+                  style={css(
+                    "flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--lime,#C6F202);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Broaven';font-weight:700"
+                  )}
+                >
+                  {p.mono}
+                </div>
+                <div style={{ minWidth: 0 }}>
+                  <span style={{ fontWeight: 700, fontSize: 15 }}>{p.name}</span>
+                  <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);margin-top:2px;line-height:1.35')}>{p.tagline}</div>
+                  <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       {menuOpen && (
         <div
           style={css(
@@ -95,10 +151,23 @@ export default function Header() {
               </svg>
             </button>
           </div>
+          <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted,#8a8a8a);margin:6px 0 12px')}>Pôles</div>
+          <div style={css('display:grid;gap:8px;margin-bottom:22px')}>
+            {poles.map((p) => (
+              <Link
+                key={p.key}
+                href={p.key === 'fitness' ? '/fitness' : `/poles/${p.key}`}
+                onClick={closeAll}
+                style={css(
+                  'display:flex;align-items:center;justify-content:space-between;padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.1))'
+                )}
+              >
+                <span style={{ fontWeight: 700, fontSize: 17 }}>{p.name}</span>
+                <span style={css(badgeStyle(p.status))}>{p.statusLabel}</span>
+              </Link>
+            ))}
+          </div>
           <div style={css('display:grid;gap:2px')}>
-            <Link href="/fitness" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
-              GBÔ Fitness
-            </Link>
             <Link href="/pour-les-salles" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
               Pour les salles
             </Link>
