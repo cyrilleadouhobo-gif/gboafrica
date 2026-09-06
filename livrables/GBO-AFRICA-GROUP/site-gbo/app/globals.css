@@ -298,6 +298,29 @@ select {
     aspect-ratio: 21 / 9 !important;
   }
 }
+
+/* Héros plein écran (accueil, pour-les-salles) : sur mobile et tablette portrait (jusqu'à
+   900px, testé sur iPad 768-834px), l'écran est étroit et haut, alors que les photos sont
+   au format paysage. Avec une hauteur calée sur 100vh/70vh, object-fit:cover doit
+   énormément zoomer/rogner l'image pour remplir toute cette hauteur, ne laissant voir
+   qu'une fine bande verticale de la photo. On réduit la hauteur minimale sous 900px pour
+   rapprocher le ratio du cadre de celui des photos et limiter ce recadrage excessif.
+   Au-delà (tablette paysage 1024px+, desktop), le ratio large de l'écran ne pose déjà pas
+   ce problème, donc on garde la hauteur pleine d'origine. */
+[data-hero-home] {
+  min-height: calc(100vh - 68px);
+}
+[data-hero-salles] {
+  min-height: 70vh;
+}
+@media (max-width: 900px) {
+  [data-hero-home] {
+    min-height: 58vh;
+  }
+  [data-hero-salles] {
+    min-height: 50vh;
+  }
+}
 @media (max-width: 680px) {
   [data-hidemobile] {
     display: none !important;

@@ -183,7 +183,7 @@ const GYM_SOLUTION_POINTS = [
 export default function HomePage() {
   return (
     <div>
-      <section style={css('position:relative;min-height:calc(100vh - 68px);display:flex;align-items:flex-end;overflow:hidden;background:#050505')}>
+      <section data-hero-home="" style={css('position:relative;display:flex;align-items:flex-end;overflow:hidden;background:#050505')}>
         <HeroCarousel slides={HERO_SLIDES} />
         <div
           style={css(
@@ -202,14 +202,7 @@ export default function HomePage() {
         />
         <div style={css('position:relative;max-width:1200px;margin:0 auto;width:100%;padding:0 clamp(20px,5vw,64px) clamp(56px,9vw,110px);pointer-events:none')}>
           <div style={{ pointerEvents: 'auto' }}>
-            <div
-              style={css(
-                'display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-top:clamp(16px,4vw,44px);margin-bottom:16px;animation:fadeUp .7s both'
-              )}
-            >
-              GBÔ AFRICA GROUP <span style={{ width: 26, height: 2, background: '#C6F202', display: 'inline-block' }} />
-            </div>
-            <h1 style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:clamp(30px,6.5vw,68px);line-height:1;letter-spacing:-2px;color:#fff;max-width:14ch;animation:fadeUp .7s .05s both")}>
+            <h1 style={css("font-family:'Broaven',sans-serif;font-weight:700;font-size:clamp(30px,6.5vw,68px);line-height:1;letter-spacing:-2px;color:#fff;max-width:14ch;margin-top:clamp(16px,4vw,44px);animation:fadeUp .7s .05s both")}>
               NOUS FAISONS AVANCER <span style={{ color: '#C6F202' }}>LE SPORT.</span>
             </h1>
             <p style={css("font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:56ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>
@@ -424,7 +417,9 @@ export default function HomePage() {
             </p>
             <div style={css('display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px')}>
               <Link
-                href="/devenir-salle-partenaire"
+                href="https://saas-egym.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-cta"
                 style={css('padding:15px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14.5px')}
               >

@@ -124,16 +124,6 @@ export default function Footer() {
         </div>
         <div style={css('display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-top:24px;font-size:13.5px;color:var(--muted,#8a8a8a)')}>
           <span>© 2026 GBÔ AFRICA GROUP. Tous droits réservés.</span>
-          <div style={css('display:flex;gap:16px;align-items:center')}>
-            <span style={{ opacity: 0.6 }}>Conforme ARTCI · Loi n° 2013-450</span>
-            <span
-              style={css(
-                'display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:8px;border:1px solid var(--border,rgba(255,255,255,.14));opacity:.7'
-              )}
-            >
-              FR ▾
-            </span>
-          </div>
         </div>
       </div>
     </footer>

@@ -120,9 +120,6 @@ export default function MiseADispositionDePersonnelPage() {
         <div style={{ position: 'relative', maxWidth: 1160, margin: '0 auto' }}>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(32px,5vw,64px);align-items:center')}>
             <div>
-              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>
-                Mise à disposition de personnel
-              </div>
               <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(30px,6.5vw,58px);letter-spacing:-2px;line-height:1;max-width:16ch")}>
                 RENFORCEZ VOTRE <span style={{ color: '#C6F202' }}>ÉQUIPE.</span>
               </h1>

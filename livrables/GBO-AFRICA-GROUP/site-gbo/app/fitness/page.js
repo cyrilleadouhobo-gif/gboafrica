@@ -150,7 +150,7 @@ export default function FitnessPage() {
     <div>
       <section
         style={css(
-          'position:relative;overflow:hidden;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(40px,5vw,56px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
+          'position:relative;overflow:hidden;padding:clamp(48px,10vw,120px) clamp(20px,5vw,64px) clamp(24px,5vw,56px);border-bottom:1px solid var(--border,rgba(255,255,255,.08))'
         )}
       >
         <HeroCarousel slides={FITNESS_HERO_SLIDES} dotsBottom={20} />
@@ -162,9 +162,6 @@ export default function FitnessPage() {
         <GlowBlobs />
 
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
-          <div style={css('display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>
-            GBÔ FITNESS <span style={{ width: 26, height: 2, background: '#C6F202', display: 'inline-block' }} />
-          </div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;line-height:1.02;max-width:14ch")}>
             BOUGEZ.
             <br />

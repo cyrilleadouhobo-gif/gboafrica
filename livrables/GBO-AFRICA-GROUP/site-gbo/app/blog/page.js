@@ -13,7 +13,6 @@ export default function BlogPage() {
       <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(24px,4vw,40px)')}>
         <GlowBlobs />
         <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Le journal GBÔ</div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px")}>Fitness, nutrition &amp; bien-être.</h1>
           <div style={css('display:flex;gap:10px;flex-wrap:wrap;margin-top:26px')}>
             {BLOG_CATS.map((c) => (

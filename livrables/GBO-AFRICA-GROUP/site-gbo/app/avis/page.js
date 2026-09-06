@@ -26,9 +26,6 @@ export default async function ReviewsPage() {
       <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
         <GlowBlobs />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
-            Avis clients
-          </div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;max-width:16ch")}>
             Ce que vivent nos membres.
           </h1>

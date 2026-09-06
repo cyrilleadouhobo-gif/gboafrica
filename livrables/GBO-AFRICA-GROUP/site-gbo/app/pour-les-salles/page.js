@@ -15,7 +15,8 @@ const TWO_SOLUTIONS = [
     title: 'La gestion de votre salle, simplement.',
     desc: "Centralisez la gestion de vos clients, abonnements, paiements, renouvellements, dépenses, stocks et indicateurs d'activité depuis une seule plateforme.",
     cta: 'Découvrir E-Gym',
-    href: '/devenir-salle-partenaire',
+    href: 'https://saas-egym.vercel.app/',
+    external: true,
   },
   {
     label: 'Mise à disposition de personnel',
@@ -29,7 +30,7 @@ const TWO_SOLUTIONS = [
 export default function PourLesSallesPage() {
   return (
     <div>
-      <section style={css('position:relative;min-height:70vh;display:flex;align-items:flex-end;overflow:hidden;background:#050505;border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
+      <section data-hero-salles="" style={css('position:relative;display:flex;align-items:flex-end;overflow:hidden;background:#050505;border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
         <ImageSlot placeholder="Visuel — salle moderne" src={stockPhoto('gymInterior', 'pour-les-salles-hero', '1600x1000')} />
         <div
           style={css(
@@ -96,6 +97,7 @@ export default function PourLesSallesPage() {
                 <p style={css('font-size:15px;color:var(--muted,#8a8a8a);line-height:1.6;flex:1')}>{s.desc}</p>
                 <Link
                   href={s.href}
+                  {...(s.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   style={css('margin-top:22px;font-size:14px;font-weight:700;color:var(--lime,#C6F202);display:inline-flex;align-items:center;gap:6px')}
                 >
                   {s.cta} →

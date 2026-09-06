@@ -20,16 +20,13 @@ const coachTestimonial = TESTIMONIALS.find((t) => t.id === 'ts3');
 export default function DevenirCoachPage() {
   return (
     <div>
-      <section style={css('position:relative;padding:clamp(80px,10vw,130px) clamp(20px,5vw,64px) clamp(48px,6vw,80px);overflow:hidden;background:#060606')}>
+      <section style={css('position:relative;padding:clamp(48px,10vw,130px) clamp(20px,5vw,64px) clamp(28px,6vw,80px);overflow:hidden;background:#060606')}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.4 }}>
           <ImageSlot placeholder="Coach GBÔ en séance" src={stockPhoto('fitnessMen', 'devenir-coach-hero', '1600x900')} />
         </div>
         <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.92));pointer-events:none')} />
         <GlowBlobs />
         <div style={{ position: 'relative', maxWidth: 900, margin: '0 auto' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:16px')}>
-            Réseau de coachs
-          </div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6.5vw,58px);letter-spacing:-2px;line-height:1;max-width:18ch;color:#fff")}>
             Coachez selon vos règles. GBÔ apporte les clients.
           </h1>

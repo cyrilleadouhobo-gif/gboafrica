@@ -60,9 +60,6 @@ export default function CorporatePage() {
           <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-bottom:20px')}>
             <Link href="/fitness">GBÔ Fitness</Link> <span style={{ opacity: 0.5 }}>/</span> Entreprise
           </div>
-          <span style={css('display:inline-block;padding:5px 12px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.2));font-size:12px;font-weight:700;margin-bottom:16px;color:var(--muted,#8a8a8a)')}>
-            Solutions corporate
-          </span>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,5.5vw,50px);letter-spacing:-1.5px;line-height:1.02;max-width:20ch")}>
             Le sport, moteur de performance de vos équipes.
           </h1>

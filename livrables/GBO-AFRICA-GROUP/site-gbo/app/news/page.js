@@ -11,7 +11,6 @@ export default function NewsPage() {
       <div style={{ position: 'relative' }}>
         <GlowBlobs compact />
         <div style={{ position: 'relative' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>Actualités</div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;margin-bottom:40px")}>La vie de la marque.</h1>
         </div>
       </div>
