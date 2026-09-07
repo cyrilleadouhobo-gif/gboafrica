@@ -111,7 +111,7 @@ const FAQ = [
   },
   {
     q: "L'accompagnement nutritionnel est-il disponible ?",
-    a: 'Oui, en option. Indiquez-le dans le formulaire : votre demande est transmise au Centre Médico Nutrition, partenaire nutrition de GBÔ.',
+    a: 'Oui, en option. Indiquez-le dans le formulaire : votre demande est transmise au Cabinet Médico-Nutrition, partenaire nutrition de GBÔ.',
   },
   {
     q: 'Comment est choisi mon coach ?',

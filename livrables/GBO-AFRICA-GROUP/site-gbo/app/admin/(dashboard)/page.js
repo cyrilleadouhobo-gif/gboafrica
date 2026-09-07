@@ -567,14 +567,14 @@ export default function AdminPage() {
                 </div>
                 {selectedLead.nutritionFollowUp ? (
                   <div style={css('padding:14px;border-radius:12px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.35);color:#34d399;font-size:13.5px;font-weight:600')}>
-                    Déjà transmis au Centre Médico Nutrition
+                    Déjà transmis au Cabinet Médico-Nutrition
                   </div>
                 ) : (
                   <button
                     onClick={() => transmitToNutritionPartner(selectedLead.id)}
                     style={css('width:100%;padding:14px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14px')}
                   >
-                    Transmettre au Centre Médico Nutrition
+                    Transmettre au Cabinet Médico-Nutrition
                   </button>
                 )}
               </>

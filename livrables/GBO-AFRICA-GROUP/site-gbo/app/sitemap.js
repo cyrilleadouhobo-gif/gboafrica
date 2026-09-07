@@ -11,7 +11,6 @@ const STATIC_ROUTES = [
   { path: '/coachs', priority: 0.7, changeFrequency: 'weekly' },
   { path: '/contact', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/corporate', priority: 0.6, changeFrequency: 'monthly' },
-  { path: '/devenir-coach', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/faq', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/fitness', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/fitness/tunnel', priority: 0.8, changeFrequency: 'monthly' },

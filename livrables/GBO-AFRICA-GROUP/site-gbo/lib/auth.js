@@ -89,7 +89,7 @@ export async function getCurrentAdmin() {
 
 /**
  * Role-scoped checks built on top of getCurrentAdmin(). AdminUser rows can hold either
- * role: 'admin' (full GBÔ back-office) or 'nutrition_partner' (Centre Médico Nutrition —
+ * role: 'admin' (full GBÔ back-office) or 'nutrition_partner' (Cabinet Médico-Nutrition —
  * sees only /partenaires/nutrition and /api/partner/*). Every /api/admin/* route and the
  * admin dashboard layout must use getCurrentStaffAdmin(), never the bare getCurrentAdmin(),
  * or a nutrition_partner session would reach the full CRM.

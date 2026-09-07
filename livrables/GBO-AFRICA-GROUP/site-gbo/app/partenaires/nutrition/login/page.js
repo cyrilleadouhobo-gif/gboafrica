@@ -46,7 +46,7 @@ export default function NutritionPartnerLoginPage() {
           Espace partenaire
         </div>
         <h1 style={css("font-family:'Broaven';font-weight:700;font-size:26px;text-align:center;margin-bottom:6px")}>
-          Centre Médico Nutrition
+          Cabinet Médico-Nutrition
         </h1>
         <p style={css('text-align:center;color:var(--muted,#8a8a8a);font-size:13.5px;margin-bottom:26px')}>Suivi des clients transmis par GBÔ.</p>
 

@@ -73,11 +73,17 @@ export const NEWS_ITEMS = [
   { id: 'n3', date: 'Juin 2026', tag: 'Communauté', title: 'Lancement du Club GBÔ et de son programme de points' },
 ];
 
+// pole : clé de filtre (correspond aux pôles de data/poles.js + 'groupe' pour les postes
+// transverses non rattachés à un pôle en particulier). icon : voir JOB_ICONS (app/careers/page.js).
 export const JOBS = [
-  { t: 'Coach sportif certifié', loc: 'Abidjan · Terrain', type: 'Réseau partenaire' },
-  { t: 'Conseiller relation client', loc: 'Plateau · Bureau', type: 'Temps plein' },
-  { t: 'Coach prénatal / postnatal', loc: 'Cocody · Terrain', type: 'Réseau partenaire' },
-  { t: 'Community manager', loc: 'Abidjan · Hybride', type: 'Temps plein' },
+  { t: 'Coach sportif certifié', pole: 'fitness', loc: 'Abidjan', mode: 'Terrain · Réseau partenaire', icon: 'person' },
+  { t: 'Coach prénatal / postnatal', pole: 'fitness', loc: 'Cocody', mode: 'Terrain · Réseau partenaire', icon: 'baby' },
+  { t: 'Conseiller relation client', pole: 'groupe', loc: 'Plateau', mode: 'Bureau · Temps plein', icon: 'headset' },
+  { t: 'Community manager', pole: 'groupe', loc: 'Abidjan', mode: 'Hybride · Temps plein', icon: 'megaphone' },
+  { t: 'Chargé de partenariats & sponsoring', pole: 'events', loc: 'Abidjan', mode: 'Hybride · Temps plein', icon: 'handshake' },
+  { t: 'Formateur Sport & Fitness', pole: 'academy', loc: 'Abidjan', mode: 'Terrain · Temps plein', icon: 'graduation' },
+  { t: 'Agent de sécurité', pole: 'security', loc: 'Abidjan', mode: 'Terrain · Temps plein', icon: 'shield' },
+  { t: 'Commercial / Business Developer', pole: 'groupe', loc: 'Abidjan', mode: 'Terrain · Temps plein', icon: 'chart' },
 ];
 
 export const GYM_ECOSYSTEM_ADVANTAGES = [

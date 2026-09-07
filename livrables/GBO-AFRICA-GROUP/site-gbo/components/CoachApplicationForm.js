@@ -9,8 +9,7 @@ const fieldStyle = css(
   "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
 );
 
-// Shared by /careers (generic jobs board) and /devenir-coach (dedicated coach pitch) —
-// both post to the same /api/careers endpoint, which stores every submission as a
+// Used by /careers/postuler — posts to /api/careers, which stores every submission as a
 // Message (type CAREER) for the admin to review. No dedicated Coach-application table:
 // a coach only becomes a Coach record once GBÔ actually onboards them.
 export default function CoachApplicationForm({ jobTitle }) {

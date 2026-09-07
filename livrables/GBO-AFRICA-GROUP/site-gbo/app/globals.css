@@ -431,6 +431,27 @@ select {
   }
 }
 
+/* CTA "Parlons de votre besoin" (mise-a-disposition-de-personnel) : 3 colonnes (texte /
+   bouton centré / points forts) tant qu'il y a la place, empilées verticalement (texte,
+   puis bouton, puis points forts) sous 760px. */
+@media (max-width: 760px) {
+  [data-personnelcta] {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+}
+
+/* Cartes de poste (/careers) : entre ~760 et 1080px, il restait juste assez de place pour
+   que le groupe badge/lieu/mode reste sur la même ligne que le titre en le forçant à
+   rétrécir et passer sur 2 lignes — au lieu de passer proprement à la ligne comme sur les
+   largeurs plus étroites. On force ce groupe sur sa propre ligne dans cette zone
+   intermédiaire (le titre garde alors toute la largeur disponible, sur une seule ligne). */
+@media (min-width: 760px) and (max-width: 1260px) {
+  [data-jobmeta] {
+    flex-basis: 100% !important;
+  }
+}
+
 /* Section "Ils nous font confiance" (accueil) : même logique que "Nos valeurs" ci-dessus
    — bandeau défilant sous 680px au lieu d'empiler/chevaucher les logos partenaires. */
 [data-partners-marquee] {

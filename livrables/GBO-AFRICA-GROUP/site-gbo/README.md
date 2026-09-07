@@ -17,7 +17,7 @@ Le back-office est sur `/admin` (redirige vers `/admin/login` si non connecté).
 
 ## Espace partenaire nutrition
 
-Le Centre Médico Nutrition (partenaire externe pour le suivi nutritionnel) a son propre
+Le Cabinet Médico-Nutrition (partenaire externe pour le suivi nutritionnel) a son propre
 espace, cloisonné du back-office GBÔ :
 
 - `/partenaires/nutrition/login` puis `/partenaires/nutrition` — un seul compte partagé
@@ -31,7 +31,7 @@ espace, cloisonné du back-office GBÔ :
   laisser une session partenaire atteindre le CRM complet.
 - Le partenaire ne voit jamais les prospects `Lead` directement : un admin doit d'abord
   transmettre explicitement (`POST /api/admin/leads/[id]/nutrition-handoff`, bouton
-  « Transmettre au Centre Médico Nutrition » dans le détail prospect), ce qui crée un
+  « Transmettre au Cabinet Médico-Nutrition » dans le détail prospect), ce qui crée un
   `NutritionFollowUp` — c'est cette table, pas `Lead`, que l'espace partenaire interroge.
   Seuls nom, contact et objectif nutritionnel sont exposés (minimisation des données).
 

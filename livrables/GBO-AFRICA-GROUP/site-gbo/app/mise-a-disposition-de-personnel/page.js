@@ -115,7 +115,7 @@ const HOW_IT_WORKS = [
 export default function MiseADispositionDePersonnelPage() {
   return (
     <div>
-      <section style={css('position:relative;padding:clamp(72px,10vw,120px) clamp(20px,5vw,64px) clamp(56px,8vw,90px);overflow:hidden;background:#050505')}>
+      <section style={css('position:relative;padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px) clamp(40px,6vw,64px);overflow:hidden;background:#050505')}>
         <GlowBlobs />
         <div style={{ position: 'relative', maxWidth: 1160, margin: '0 auto' }}>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(32px,5vw,64px);align-items:center')}>
@@ -145,7 +145,7 @@ export default function MiseADispositionDePersonnelPage() {
               </div>
             </div>
             <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 28, overflow: 'hidden', border: '1px solid rgba(255,255,255,.1)' }}>
-              <ImageSlot placeholder="Coach et responsable de salle GBÔ" src={stockPhoto('team', 'personnel-hero', '1000x1200')} />
+              <ImageSlot placeholder="Coach GBÔ" src={COACH_PHOTO} />
               <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.55) 100%);pointer-events:none')} />
             </div>
           </div>
@@ -278,10 +278,19 @@ export default function MiseADispositionDePersonnelPage() {
         </div>
       </Reveal>
 
-      <Reveal as="section" style={css('padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
+      <Reveal as="section" style={css('position:relative;overflow:hidden;padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
+        <div style={{ position: 'absolute', inset: 0 }}>
+          <ImageSlot placeholder="Coach GBÔ en séance" src={stockPhoto('fitnessMen', 'personnel-cta-bg', '1600x900')} />
+        </div>
         <div
           style={css(
-            'max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(24px,4vw,48px);align-items:center'
+            'position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.9) 100%);pointer-events:none'
+          )}
+        />
+        <div
+          data-personnelcta=""
+          style={css(
+            'position:relative;max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1.2fr auto 1fr;gap:clamp(28px,4vw,48px);align-items:center'
           )}
         >
           <div>
@@ -291,13 +300,15 @@ export default function MiseADispositionDePersonnelPage() {
             <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4.5vw,40px);letter-spacing:-1px;margin-bottom:16px;line-height:1.1")}>
               Parlons de votre besoin.
             </h2>
-            <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:26px')}>
-              Présentez-nous votre besoin et GBÔ vous accompagne dans la recherche des profils adaptés à votre salle.
+            <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6')}>
+              Présentez-nous votre besoin et nous vous accompagnons dans la recherche des profils adaptés à votre salle de sport.
             </p>
+          </div>
+          <div style={{ textAlign: 'center' }}>
             <Link
               href="/contact"
               className="btn-cta"
-              style={css('display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px')}
+              style={css('display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px;white-space:nowrap')}
             >
               Demander du personnel →
             </Link>
@@ -307,7 +318,7 @@ export default function MiseADispositionDePersonnelPage() {
               <div key={p.t} style={css('display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:600')}>
                 <span
                   style={css(
-                    'width:34px;height:34px;flex:0 0 auto;border-radius:10px;background:rgba(198,242,2,.12);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center'
+                    'width:34px;height:34px;flex:0 0 auto;border-radius:10px;background:rgba(198,242,2,.16);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center'
                   )}
                 >
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

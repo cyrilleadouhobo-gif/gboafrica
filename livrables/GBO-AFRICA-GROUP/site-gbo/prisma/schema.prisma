@@ -76,7 +76,7 @@ model GymPartner {
 }
 
 // Created only when a GBÔ admin explicitly hands a nutrition-flagged lead off to the
-// partner (Le Centre Médico Nutrition) — its existence is the access gate: the partner
+// partner (Le Cabinet Médico-Nutrition) — its existence is the access gate: the partner
 // portal only ever queries this table, never Lead directly, so nothing is visible to the
 // partner before an admin has deliberately transmitted it.
 model NutritionFollowUp {

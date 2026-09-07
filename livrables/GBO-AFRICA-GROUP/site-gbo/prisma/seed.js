@@ -38,7 +38,7 @@ async function main() {
     passwordVar: 'ADMIN_PASSWORD',
   });
 
-  // Le Centre Médico Nutrition : un seul compte partagé côté partenaire (décidé avec
+  // Le Cabinet Médico-Nutrition : un seul compte partagé côté partenaire (décidé avec
   // Cyrille — à eux de gérer en interne qui l'utilise), scope limité par role dans
   // lib/auth.js (getCurrentNutritionPartner) à /partenaires/nutrition et /api/partner/*.
   await seedAdminUser({

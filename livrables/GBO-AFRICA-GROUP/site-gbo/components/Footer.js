@@ -96,7 +96,6 @@ export default function Footer() {
               <Link href="/blog">Blog</Link>
               <Link href="/news">Actualités</Link>
               <Link href="/avis">Avis clients</Link>
-              <Link href="/devenir-coach">Devenir coach</Link>
               <Link href="/careers">Carrières</Link>
               <Link href="/partners">Partenaires</Link>
               <Link href="/devenir-salle-partenaire">Salles partenaires</Link>
