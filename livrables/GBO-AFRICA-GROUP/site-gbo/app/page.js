@@ -591,34 +591,20 @@ export default function HomePage() {
               'position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);padding:clamp(32px,5vw,56px)'
             )}
           >
-            <div
-              style={css(
-                'position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(32px,5vw,56px);align-items:center'
-              )}
-            >
-              <div>
+            <div data-partnergrid="" style={css('position:relative;align-items:center')}>
+              <div style={{ gridArea: 'intro' }}>
                 <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
                   Devenir partenaire
                 </div>
                 <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4.5vw,40px);letter-spacing:-1px;line-height:1.1;margin-bottom:16px")}>
                   Construisons ensemble <span style={{ color: 'var(--lime,#C6F202)' }}>l&apos;écosystème du mouvement.</span>
                 </h2>
-                <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:24px;max-width:52ch')}>
+                <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;max-width:52ch')}>
                   Salles de sport, marques, entreprises, institutions et professionnels : construisons ensemble des initiatives qui font avancer le sport et
                   le bien-être en Afrique.
                 </p>
-                <Link
-                  href="/partners"
-                  className="btn-cta"
-                  style={css('display:inline-flex;padding:15px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14.5px')}
-                >
-                  Devenir partenaire →
-                </Link>
-                <div style={css('margin-top:22px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600')}>
-                  Plus d&apos;impact. Plus d&apos;opportunités. Ensemble.
-                </div>
               </div>
-              <div style={css('display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px')}>
+              <div data-partnercards="" style={{ gridArea: 'cards', ...css('display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px') }}>
                 {PARTNER_TYPES.map((p, i) => (
                   <div
                     key={p.t}
@@ -647,6 +633,18 @@ export default function HomePage() {
                     <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>{p.d}</div>
                   </div>
                 ))}
+              </div>
+              <div style={{ gridArea: 'cta', marginTop: 24 }}>
+                <Link
+                  href="/partners"
+                  className="btn-cta"
+                  style={css('display:inline-flex;padding:15px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14.5px')}
+                >
+                  Devenir partenaire →
+                </Link>
+                <div style={css('margin-top:22px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600')}>
+                  Plus d&apos;impact. Plus d&apos;opportunités. Ensemble.
+                </div>
               </div>
             </div>
             <div

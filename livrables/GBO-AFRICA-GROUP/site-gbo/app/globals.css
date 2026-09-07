@@ -397,6 +397,34 @@ select {
 [data-partnerfoot] {
   flex-wrap: nowrap;
 }
+
+/* Grille des 4 cartes "Devenir partenaire" (accueil) : 2 colonnes tant qu'il y a la place,
+   mais sur téléphone (colonne déjà réduite par la grille extérieure à ~340px) 2 colonnes de
+   ~160px forçaient un retour à la ligne mot par mot et un léger débordement de titre. Une
+   seule colonne sous 560px règle les deux. */
+@media (max-width: 560px) {
+  [data-partnercards] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Grille principale de "Devenir partenaire" (texte / cartes / bouton) : sur bureau, intro et
+   bouton restent empilés dans la colonne de gauche, à côté des cartes. Sur mobile (colonne
+   unique, sous ~870px, seuil vérifié empiriquement), le bouton doit passer sous les cartes
+   plutôt que rester au-dessus — d'où l'usage de grid-template-areas, qui permet de réordonner
+   les blocs par breakpoint sans dupliquer le JSX. */
+[data-partnergrid] {
+  display: grid;
+  grid-template-columns: minmax(min(320px, 100%), 1fr) minmax(min(320px, 100%), 1fr);
+  grid-template-areas: 'intro cards' 'cta cards';
+  gap: clamp(32px, 5vw, 56px);
+}
+@media (max-width: 860px) {
+  [data-partnergrid] {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'intro' 'cards' 'cta';
+  }
+}
 @media (max-width: 680px) {
   [data-partnerfoot] {
     flex-wrap: wrap;
