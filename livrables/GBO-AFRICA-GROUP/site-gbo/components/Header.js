@@ -58,9 +58,6 @@ export default function Header() {
           <Link href="/careers" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             Recrutement
           </Link>
-          <Link href="/partners" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
-            Partenaires
-          </Link>
           <Link href="/about" onClick={closeAll} style={css('padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;cursor:pointer')}>
             À propos
           </Link>
@@ -173,9 +170,6 @@ export default function Header() {
             </Link>
             <Link href="/careers" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
               Recrutement
-            </Link>
-            <Link href="/partners" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
-              Partenaires
             </Link>
             <Link href="/about" onClick={closeAll} style={css("padding:14px 4px;font-size:18px;font-weight:600;border-bottom:1px solid var(--border,rgba(255,255,255,.08))")}>
               À propos

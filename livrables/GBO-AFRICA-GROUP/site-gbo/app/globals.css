@@ -390,6 +390,19 @@ select {
   }
 }
 
+/* Bandeau du bas de "Devenir partenaire" (accueil) : le repère "GBÔ AFRICA GROUP" reste sur
+   la même ligne que les 3 points forts tant qu'il y a la place, et ne repasse en dessous
+   que sur mobile (au lieu d'un flex-wrap qui le faisait sauter à la ligne dès que ça
+   devenait un peu juste, y compris sur des largeurs de bureau courantes). */
+[data-partnerfoot] {
+  flex-wrap: nowrap;
+}
+@media (max-width: 680px) {
+  [data-partnerfoot] {
+    flex-wrap: wrap;
+  }
+}
+
 /* Section "Ils nous font confiance" (accueil) : même logique que "Nos valeurs" ci-dessus
    — bandeau défilant sous 680px au lieu d'empiler/chevaucher les logos partenaires. */
 [data-partners-marquee] {

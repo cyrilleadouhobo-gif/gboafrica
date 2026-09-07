@@ -176,10 +176,10 @@ export const GYM_HOW_IT_WORKS = [
 ];
 
 export const PARTNER_TYPES = [
-  { t: 'Salles & espaces', d: 'Mettez vos infrastructures au service de la communauté GBÔ.' },
-  { t: 'Marques & nutrition', d: 'Distribuez vos produits via le futur GBÔ Shop.' },
-  { t: 'Entreprises & institutions', d: 'Programmes bien-être et événements sur mesure.' },
-  { t: 'Professionnels de santé', d: 'Nutritionnistes et praticiens partenaires du parcours.' },
+  { t: 'Salles de sport & espaces', d: 'Mettez vos infrastructures et vos services au service de l’écosystème GBÔ.' },
+  { t: 'Marques & équipements', d: 'Associez votre marque à nos activités, événements et communautés sportives.' },
+  { t: 'Entreprises & institutions', d: 'Construisons des programmes sportifs, bien-être et des initiatives adaptées à vos enjeux.' },
+  { t: 'Professionnels & experts', d: 'Intégrez notre réseau de professionnels et contribuez à l’accompagnement de notre communauté.' },
 ];
 
 export const CORPORATE_SOLUTIONS = [

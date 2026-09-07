@@ -8,7 +8,7 @@ import GlowBlobs from '../components/GlowBlobs.js';
 import VideoIntro from '../components/VideoIntro.js';
 import HeroCarousel from '../components/HeroCarousel.js';
 import { stockPhoto } from '../lib/stockPhoto.js';
-import { PARTNERS } from '../data/content.js';
+import { PARTNERS, PARTNER_TYPES } from '../data/content.js';
 
 // Carrousel plein écran du hero : vrais visuels GBÔ fournis par Cyrille (Documents/Hero
 // accueil), mis à jour le 02/09. Casting et logos de marques tierces visibles sur les 2
@@ -177,6 +177,71 @@ const GYM_SOLUTION_POINTS = [
         <path d="M11 18h2" />
       </>
     ),
+  },
+];
+
+// Icônes des 4 cartes "Devenir partenaire" (trait, viewBox 24x24) — dans l'ordre de
+// PARTNER_TYPES (data/content.js) : salles, marques, entreprises, professionnels.
+const PARTNER_CARD_ICONS = [
+  (
+    <>
+      <rect x="2" y="9" width="3" height="6" rx="1" />
+      <rect x="19" y="9" width="3" height="6" rx="1" />
+      <path d="M5 12h14" />
+      <rect x="7" y="7" width="2" height="10" rx="1" />
+      <rect x="15" y="7" width="2" height="10" rx="1" />
+    </>
+  ),
+  (
+    <>
+      <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
+      <path d="M4 7.5l8 4.5 8-4.5M12 12v9" />
+    </>
+  ),
+  (
+    <>
+      <path d="M4 21V7l8-4 8 4v14" />
+      <path d="M9 21v-6h6v6" />
+    </>
+  ),
+  (
+    <>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+    </>
+  ),
+];
+
+// Bandeau "Un objectif commun / Des partenariats durables / Une Afrique plus active" en
+// bas de la section "Devenir partenaire".
+const PARTNER_HIGHLIGHTS = [
+  {
+    t: 'Un objectif commun',
+    d: 'Un monde en meilleure santé',
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="12" cy="12" r="1" />
+      </>
+    ),
+  },
+  {
+    t: 'Des partenariats durables',
+    d: 'Pour un impact réel',
+    icon: (
+      <>
+        <circle cx="9" cy="8" r="3" />
+        <circle cx="17" cy="8" r="2.5" />
+        <path d="M2 21c0-3.5 3-6 7-6s7 2.5 7 6" />
+        <path d="M16.5 15.2c2.6.5 4.5 2.7 4.5 5.8" />
+      </>
+    ),
+  },
+  {
+    t: 'Une Afrique plus active',
+    d: "Aujourd'hui et demain",
+    icon: <path d="M4 19V9M11 19V4M18 19v-7" />,
   },
 ];
 
@@ -510,6 +575,113 @@ export default function HomePage() {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" style={css('position:relative;overflow:hidden;padding:clamp(20px,3vw,32px) clamp(20px,5vw,64px) clamp(56px,9vw,110px)')}>
+        {/* Lumière ambiante derrière la section : halo en bas à droite. */}
+        <div className="glow-blobs" aria-hidden="true">
+          <span className="glow-blob" style={{ bottom: -140, right: -110, width: 420, height: 420, animationDelay: '-7s' }} />
+        </div>
+        <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative' }}>
+          <div
+            style={css(
+              'position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);padding:clamp(32px,5vw,56px)'
+            )}
+          >
+            <div
+              style={css(
+                'position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(32px,5vw,56px);align-items:center'
+              )}
+            >
+              <div>
+                <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
+                  Devenir partenaire
+                </div>
+                <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4.5vw,40px);letter-spacing:-1px;line-height:1.1;margin-bottom:16px")}>
+                  Construisons ensemble <span style={{ color: 'var(--lime,#C6F202)' }}>l&apos;écosystème du mouvement.</span>
+                </h2>
+                <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:24px;max-width:52ch')}>
+                  Salles de sport, marques, entreprises, institutions et professionnels : construisons ensemble des initiatives qui font avancer le sport et
+                  le bien-être en Afrique.
+                </p>
+                <Link
+                  href="/partners"
+                  className="btn-cta"
+                  style={css('display:inline-flex;padding:15px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14.5px')}
+                >
+                  Devenir partenaire →
+                </Link>
+                <div style={css('margin-top:22px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600')}>
+                  Plus d&apos;impact. Plus d&apos;opportunités. Ensemble.
+                </div>
+              </div>
+              <div style={css('display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px')}>
+                {PARTNER_TYPES.map((p, i) => (
+                  <div
+                    key={p.t}
+                    className="hover-card"
+                    style={css('padding:20px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.08));background:var(--glass,rgba(255,255,255,.03))')}
+                  >
+                    <div style={css('display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px')}>
+                      <span
+                        style={css(
+                          'width:42px;height:42px;border-radius:50%;background:rgba(198,242,2,.12);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;flex:0 0 auto'
+                        )}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          {PARTNER_CARD_ICONS[i]}
+                        </svg>
+                      </span>
+                      <span
+                        style={css(
+                          'width:30px;height:30px;border-radius:50%;border:1px solid var(--border,rgba(255,255,255,.2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex:0 0 auto'
+                        )}
+                      >
+                        →
+                      </span>
+                    </div>
+                    <div style={{ fontWeight: 700, fontSize: 15.5, marginBottom: 6 }}>{p.t}</div>
+                    <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>{p.d}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div
+              data-partnerfoot=""
+              style={css(
+                'position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:28px;margin-top:32px;border-top:1px solid var(--border,rgba(255,255,255,.1))'
+              )}
+            >
+              <div style={css('display:flex;flex-wrap:wrap;gap:16px;min-width:0')}>
+                {PARTNER_HIGHLIGHTS.map((h) => (
+                  <div key={h.t} style={css('display:flex;align-items:center;gap:8px')}>
+                    <span
+                      style={css(
+                        'width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.05);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;flex:0 0 auto'
+                      )}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        {h.icon}
+                      </svg>
+                    </span>
+                    <div>
+                      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 0.3, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{h.t}</div>
+                      <div style={css('font-size:11.5px;color:var(--muted,#8a8a8a);white-space:nowrap')}>{h.d}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div
+                style={css(
+                  'display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;flex:0 0 auto;white-space:nowrap'
+                )}
+              >
+                <span style={{ width: 26, height: 1, background: 'rgba(255,255,255,.3)', display: 'inline-block' }} />
+                GBÔ AFRICA GROUP
+              </div>
             </div>
           </div>
         </div>
