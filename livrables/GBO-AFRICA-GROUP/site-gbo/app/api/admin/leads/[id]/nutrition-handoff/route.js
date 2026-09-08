@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../../../../lib/db.js';
 import { getCurrentStaffAdmin, logAudit } from '../../../../../../lib/auth.js';
 import { isSameOrigin } from '../../../../../../lib/security.js';
@@ -27,25 +27,28 @@ export async function POST(request, { params }) {
   await logAudit({ adminUserId: admin.id, action: 'nutrition_handoff', targetType: 'Lead', targetId: id, detail: { followUpId: followUp.id } });
 
   // Best-effort notification — the handoff itself already succeeded above, so a delivery
-  // failure here must never turn a successful transmission into an error response.
-  const partner = await prisma.adminUser.findFirst({ where: { role: 'nutrition_partner' } });
-  if (partner) {
-    await sendEmail({
-      to: partner.email,
-      subject: 'GBÔ AFRICA GROUP — Nouveau client à suivre',
-      html: `
-        <p>Bonjour,</p>
-        <p>Un nouveau client vous a été transmis par GBÔ AFRICA GROUP pour un suivi nutritionnel :</p>
-        <ul>
-          <li><strong>Nom :</strong> ${lead.name}</li>
-          <li><strong>E-mail :</strong> ${lead.contactEmail || '—'}</li>
-          <li><strong>Téléphone :</strong> ${lead.contactPhone || '—'}</li>
-          <li><strong>Objectif :</strong> ${lead.nutritionObjective || '—'}</li>
-        </ul>
-        <p><a href="${SITE_URL}/partenaires/nutrition">Voir dans votre espace partenaire</a></p>
-      `,
-    }).catch(() => {});
-  }
+  // failure here must never turn a successful transmission into an error response. Sent via
+  // after() (see app/api/leads/route.js) so it doesn't ride on the admin's connection either.
+  after(async () => {
+    const partner = await prisma.adminUser.findFirst({ where: { role: 'nutrition_partner' } });
+    if (partner) {
+      await sendEmail({
+        to: partner.email,
+        subject: 'GBÔ AFRICA GROUP — Nouveau client à suivre',
+        html: `
+          <p>Bonjour,</p>
+          <p>Un nouveau client vous a été transmis par GBÔ AFRICA GROUP pour un suivi nutritionnel :</p>
+          <ul>
+            <li><strong>Nom :</strong> ${lead.name}</li>
+            <li><strong>E-mail :</strong> ${lead.contactEmail || '—'}</li>
+            <li><strong>Téléphone :</strong> ${lead.contactPhone || '—'}</li>
+            <li><strong>Objectif :</strong> ${lead.nutritionObjective || '—'}</li>
+          </ul>
+          <p><a href="${SITE_URL}/partenaires/nutrition">Voir dans votre espace partenaire</a></p>
+        `,
+      }).catch(() => {});
+    }
+  });
 
   return NextResponse.json({ ok: true });
 }

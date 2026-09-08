@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { newsletterSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
@@ -23,10 +23,14 @@ export async function POST(request) {
   if (!existing) {
     await prisma.message.create({ data: { type: 'NEWSLETTER', email: d.email } });
   }
-  await sendEmail({
-    to: d.email,
-    subject: 'Confirmez votre inscription à la newsletter GBÔ',
-    html: `<p>Merci de votre intérêt — cliquez pour confirmer votre inscription (double opt-in) [lien à intégrer une fois le fournisseur e-mail branché].</p>`,
+
+  // Réponse immédiate — voir app/api/leads/route.js pour le pourquoi de after().
+  after(async () => {
+    await sendEmail({
+      to: d.email,
+      subject: 'Confirmez votre inscription à la newsletter GBÔ',
+      html: `<p>Merci de votre intérêt — cliquez pour confirmer votre inscription (double opt-in) [lien à intégrer une fois le fournisseur e-mail branché].</p>`,
+    });
   });
 
   return NextResponse.json({ ok: true });

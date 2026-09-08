@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { gymPartnerSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
@@ -38,10 +38,13 @@ export async function POST(request) {
   });
   const gymPartner = await prisma.gymPartner.update({ where: { id: created.id }, data: { code: gymPartnerCode(created.id) } });
 
-  await sendEmail({
-    to: CONTACT_EMAIL,
-    subject: `GBÔ Partner Gym — Nouvelle candidature : ${d.gymName}`,
-    html: `<p>Salle : ${d.gymName}</p><p>Responsable : ${d.managerName}</p><p>Contact : ${d.phone} · ${d.email}</p><p>Adresse : ${d.address}, ${d.commune}</p><p>Raisons : ${d.reasons.join(', ') || '—'}</p>`,
+  // Réponse immédiate — voir app/api/leads/route.js pour le pourquoi de after().
+  after(async () => {
+    await sendEmail({
+      to: CONTACT_EMAIL,
+      subject: `GBÔ Partner Gym — Nouvelle candidature : ${d.gymName}`,
+      html: `<p>Salle : ${d.gymName}</p><p>Responsable : ${d.managerName}</p><p>Contact : ${d.phone} · ${d.email}</p><p>Adresse : ${d.address}, ${d.commune}</p><p>Raisons : ${d.reasons.join(', ') || '—'}</p>`,
+    });
   });
 
   return NextResponse.json({ ok: true, code: gymPartner.code });

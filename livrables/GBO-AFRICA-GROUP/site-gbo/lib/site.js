@@ -5,6 +5,13 @@ export const SITE_URL = (process.env.SITE_URL || 'http://localhost:5300').replac
 
 export const SITE_NAME = 'GBÔ AFRICA GROUP';
 
-// Destination for every form notification (contact, partenariats, candidatures, salles
-// partenaires) — see .env.example. One env var so Cyrille can change it in one place.
-export const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'contact@gboafrica.com';
+// Destination des notifications de formulaire, une boîte Hostinger dédiée par usage
+// (décidé avec Cyrille le 08/09 plutôt qu'une seule boîte pour tout) — voir .env.example.
+// CONTACT_EMAIL reste la valeur par défaut pour tout ce qui n'a pas sa propre boîte
+// (ex. Salles partenaires, pas mentionné explicitement).
+export const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'contact@gboafricagroup.com';
+export const CAREERS_EMAIL = process.env.CAREERS_EMAIL || 'recrutement@gboafricagroup.com';
+export const PARTNERS_EMAIL = process.env.PARTNERS_EMAIL || 'partenariats@gboafricagroup.com';
+// Formulaire Particulier (/fitness/tunnel, /deux-seances-gratuites) ET Entreprise
+// (/corporate, lien "Solutions Entreprises" présent sur la page Fitness).
+export const FITNESS_EMAIL = process.env.FITNESS_EMAIL || 'fitness@gboafricagroup.com';

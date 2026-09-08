@@ -1,10 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../../lib/db.js';
 import { companyLeadSchema, parseOrError } from '../../../../lib/validation.js';
 import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../../lib/security.js';
 import { leadCode } from '../../../../lib/constants.js';
 import { sendEmail } from '../../../../lib/email.js';
 import { sendWhatsAppConfirmation } from '../../../../lib/whatsapp.js';
+import { FITNESS_EMAIL } from '../../../../lib/site.js';
 
 export async function POST(request) {
   if (!isSameOrigin(request)) {
@@ -41,12 +42,21 @@ export async function POST(request) {
   });
   const lead = await prisma.lead.update({ where: { id: created.id }, data: { code: leadCode('ENTREPRISE', created.id) } });
 
-  await sendEmail({
-    to: d.email,
-    subject: 'GBÔ AFRICA GROUP — Votre demande entreprise',
-    html: `<p>Bonjour,</p><p>Votre demande pour <strong>${d.entreprise}</strong> a bien été reçue. Un conseiller Entreprise GBÔ vous recontacte pour établir une proposition sur mesure.</p>`,
+  // Réponse immédiate — voir app/api/leads/route.js pour le pourquoi de after().
+  after(async () => {
+    await sendEmail({
+      to: d.email,
+      subject: 'GBÔ AFRICA GROUP — Votre demande entreprise',
+      html: `<p>Bonjour,</p><p>Votre demande pour <strong>${d.entreprise}</strong> a bien été reçue. Un conseiller Entreprise GBÔ vous recontacte pour établir une proposition sur mesure.</p>`,
+    });
+    await sendWhatsAppConfirmation({ to: d.tel, templateName: 'company_confirmation', params: { company: d.entreprise } });
+    // Notification interne — jusqu'ici ce formulaire ne prévenait personne côté GBÔ non plus.
+    await sendEmail({
+      to: FITNESS_EMAIL,
+      subject: `Nouveau prospect Entreprise — ${lead.code}`,
+      html: `<p><strong>${d.entreprise}</strong></p><p>Besoin : ${d.besoin || 'Solution corporate'}</p><p>Contact : ${d.contact} · ${d.email} / ${d.tel}</p>`,
+    });
   });
-  await sendWhatsAppConfirmation({ to: d.tel, templateName: 'company_confirmation', params: { company: d.entreprise } });
 
   return NextResponse.json({ ok: true, code: lead.code });
 }

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { contactSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
@@ -21,7 +21,11 @@ export async function POST(request) {
   const d = parsed.data;
 
   await prisma.message.create({ data: { type: 'CONTACT', name: d.nom, email: d.email, phone: d.tel, body: d.msg } });
-  await sendEmail({ to: CONTACT_EMAIL, subject: `Nouveau message de ${d.nom}`, html: `<p>${d.msg}</p><p>Contact : ${d.email} / ${d.tel}</p>` });
+
+  // Réponse immédiate — voir app/api/leads/route.js pour le pourquoi de after().
+  after(async () => {
+    await sendEmail({ to: CONTACT_EMAIL, subject: `Nouveau message de ${d.nom}`, html: `<p>${d.msg}</p><p>Contact : ${d.email} / ${d.tel}</p>` });
+  });
 
   return NextResponse.json({ ok: true });
 }

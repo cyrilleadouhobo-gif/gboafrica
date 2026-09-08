@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { waitlistSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
@@ -39,10 +39,13 @@ export async function POST(request) {
   });
   const lead = await prisma.lead.update({ where: { id: created.id }, data: { code: leadCode('WAITLIST', created.id) } });
 
-  await sendEmail({
-    to: d.email,
-    subject: `GBÔ ${d.pole} — Vous êtes sur la liste d'attente`,
-    html: `<p>Merci ! Vous serez notifié en priorité à l'ouverture de GBÔ ${d.pole}.</p>`,
+  // Réponse immédiate — voir app/api/leads/route.js pour le pourquoi de after().
+  after(async () => {
+    await sendEmail({
+      to: d.email,
+      subject: `GBÔ ${d.pole} — Vous êtes sur la liste d'attente`,
+      html: `<p>Merci ! Vous serez notifié en priorité à l'ouverture de GBÔ ${d.pole}.</p>`,
+    });
   });
 
   return NextResponse.json({ ok: true, code: lead.code });
