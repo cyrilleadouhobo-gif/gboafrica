@@ -21,7 +21,7 @@ export function proxy(request) {
   if (pathname.startsWith('/partenaires/nutrition') && pathname !== '/partenaires/nutrition/login' && !request.cookies.get(SESSION_COOKIE)) {
     return NextResponse.redirect(new URL('/partenaires/nutrition/login', request.url));
   }
-  if (pathname.startsWith('/api/partner') && !request.cookies.get(SESSION_COOKIE)) {
+  if (pathname.startsWith('/api/partner/') && !request.cookies.get(SESSION_COOKIE)) {
     return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
   }
 
