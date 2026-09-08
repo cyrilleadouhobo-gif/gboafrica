@@ -20,12 +20,17 @@ export async function POST(request) {
   if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 });
   const d = parsed.data;
 
-  const note = [d.spec && `Spécialité : ${d.spec}`, d.msg].filter(Boolean).join('\n');
+  const note = [d.spec && `Spécialité : ${d.spec}`, d.msg, d.cv && `(CV joint : ${d.cv.filename})`].filter(Boolean).join('\n');
   await prisma.message.create({ data: { type: 'CAREER', name: d.nom, email: d.email, phone: d.tel, body: note || null } });
 
   // Réponse immédiate — voir app/api/leads/route.js pour le pourquoi de after().
   after(async () => {
-    await sendEmail({ to: CAREERS_EMAIL, subject: `Candidature — ${d.nom}`, html: `<p>${note.replace(/\n/g, '<br>')}</p><p>Contact : ${d.email} / ${d.tel}</p>` });
+    await sendEmail({
+      to: CAREERS_EMAIL,
+      subject: `Candidature — ${d.nom}`,
+      html: `<p>${note.replace(/\n/g, '<br>')}</p><p>Contact : ${d.email} / ${d.tel}</p>`,
+      attachments: d.cv ? [{ filename: d.cv.filename, content: d.cv.base64, contentType: d.cv.contentType }] : undefined,
+    });
   });
 
   return NextResponse.json({ ok: true });

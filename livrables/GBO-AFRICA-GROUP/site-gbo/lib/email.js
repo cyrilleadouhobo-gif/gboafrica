@@ -6,7 +6,11 @@
  * free account at https://resend.com and add RESEND_API_KEY (+ EMAIL_FROM, a verified
  * sender) to your environment, real e-mails start going out with no code changes.
  */
-export async function sendEmail({ to, subject, html }) {
+// `attachments`: [{ filename, content, contentType }] — `content` is a base64 string (no
+// data: URI prefix). Passed straight through to Resend; see app/api/careers/route.js for
+// the CV-upload use case. Resend's own cap is 40 Mo/e-mail after encodage Base64, mais la
+// vraie limite pratique est le corps de requête Vercel (~4.5 Mo) — voir careerSchema.
+export async function sendEmail({ to, subject, html, attachments }) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM;
 
@@ -22,7 +26,15 @@ export async function sendEmail({ to, subject, html }) {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ from, to, subject, html }),
+      body: JSON.stringify({
+        from,
+        to,
+        subject,
+        html,
+        ...(attachments?.length
+          ? { attachments: attachments.map((a) => ({ filename: a.filename, content: a.content, content_type: a.contentType })) }
+          : {}),
+      }),
     });
     if (!res.ok) {
       console.error('[email] Échec envoi', res.status, await res.text().catch(() => ''));

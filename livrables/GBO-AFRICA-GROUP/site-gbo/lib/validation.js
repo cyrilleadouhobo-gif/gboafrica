@@ -58,12 +58,25 @@ export const contactSchema = z.object({
   website: honeypot,
 });
 
+// CV joint au format base64 (encodé côté client) — voir components/CoachApplicationForm.js.
+// 4 Mo de base64 ≈ 3 Mo de fichier réel, plafonné pour rester sous la limite de taille de
+// requête de Vercel (~4.5 Mo) une fois le reste du formulaire ajouté.
+const cvFile = z
+  .object({
+    filename: z.string().trim().min(1).max(150),
+    contentType: z.enum(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']),
+    base64: z.string().min(1).max(4_000_000, 'Le fichier est trop volumineux (3 Mo maximum).'),
+  })
+  .optional()
+  .nullable();
+
 export const careerSchema = z.object({
   nom: shortText('Nom'),
   tel: phone,
   email,
   spec: optionalText(200),
   msg: optionalText(2000),
+  cv: cvFile,
   website: honeypot,
 });
 

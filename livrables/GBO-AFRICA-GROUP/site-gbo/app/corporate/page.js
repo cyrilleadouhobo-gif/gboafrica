@@ -57,9 +57,6 @@ export default function CorporatePage() {
       <section style={css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(40px,5vw,60px);border-bottom:1px solid var(--border,rgba(255,255,255,.08));position:relative;overflow:hidden')}>
         <GlowBlobs />
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-bottom:20px')}>
-            <Link href="/fitness">GBÔ Fitness</Link> <span style={{ opacity: 0.5 }}>/</span> Entreprise
-          </div>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,5.5vw,50px);letter-spacing:-1.5px;line-height:1.02;max-width:20ch")}>
             Le sport, moteur de performance de vos équipes.
           </h1>

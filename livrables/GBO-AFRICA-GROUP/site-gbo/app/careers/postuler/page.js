@@ -1,7 +1,6 @@
 'use client';
 
 import { Suspense } from 'react';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import CoachApplicationForm from '../../../components/CoachApplicationForm.js';
@@ -12,9 +11,6 @@ function PostulerContent() {
 
   return (
     <div style={{ maxWidth: 760, margin: '0 auto', padding: 'clamp(80px,10vw,120px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
-      <div style={css('font-size:13px;color:var(--muted,#8a8a8a);margin-bottom:20px')}>
-        <Link href="/careers">Carrières</Link> <span style={{ opacity: 0.5 }}>/</span> Postuler
-      </div>
       {poste && (
         <div style={css('display:inline-block;padding:5px 12px;border-radius:20px;background:var(--lime,#C6F202);color:#000;font-size:12px;font-weight:700;margin-bottom:16px')}>
           {poste}
