@@ -89,10 +89,62 @@ export const ARTICLE_CAT_PHOTO = {
 };
 
 export const NEWS_ITEMS = [
-  { id: 'n1', date: 'Août 2026', tag: 'Marque', title: 'GBÔ AFRICA GROUP dévoile sa plateforme digitale officielle' },
-  { id: 'n2', date: 'Juillet 2026', tag: 'Pôle', title: 'GBÔ Fitness ouvre les inscriptions à Abidjan' },
-  { id: 'n3', date: 'Juin 2026', tag: 'Communauté', title: 'Lancement du Club GBÔ et de son programme de points' },
+  {
+    id: 'n1',
+    date: 'Août 2026',
+    tag: 'Marque',
+    title: 'GBÔ AFRICA GROUP dévoile sa plateforme digitale officielle',
+    excerpt: 'Une nouvelle étape dans le développement de l’écosystème GBÔ. Plus de services, plus de connexions, plus d’opportunités pour faire avancer le sport en Afrique.',
+  },
+  {
+    id: 'n2',
+    date: 'Juillet 2026',
+    tag: 'Fitness',
+    title: 'GBÔ Fitness ouvre les inscriptions à Abidjan',
+    excerpt: 'Des programmes adaptés à tous les niveaux, encadrés par des coachs professionnels.',
+  },
+  {
+    id: 'n4',
+    date: 'Mai 2026',
+    tag: 'Academy',
+    title: 'Première cohorte de formation : cap sur l’excellence.',
+    excerpt: 'GBÔ Academy lance ses premières sessions de formation pour les futurs professionnels du sport en Afrique.',
+  },
+  {
+    id: 'n5',
+    date: 'Avril 2026',
+    tag: 'Events',
+    title: 'GBÔ Run : le sport rassemble à Abidjan.',
+    excerpt: 'Une journée sportive et solidaire pour promouvoir un mode de vie actif.',
+  },
+  {
+    id: 'n3',
+    date: 'Juin 2026',
+    tag: 'Communauté',
+    title: 'Le Club GBÔ prend vie.',
+    excerpt: 'Un espace dédié aux membres pour partager, progresser et vivre le sport autrement.',
+  },
+  {
+    id: 'n6',
+    date: 'Mars 2026',
+    tag: 'Partenariats',
+    title: 'GBÔ renforce son écosystème avec de nouveaux partenaires.',
+    excerpt: 'Des collaborations stratégiques pour développer ensemble le sport en Afrique.',
+  },
 ];
+// Regroupement large utilisé par les filtres de /news (Sport & Afrique n'a pas encore
+// d'actualité associée — le filtre existe mais reste vide pour l'instant, comme
+// "Actualités GBÔ" sur /blog).
+export const NEWS_CATS = ['Tous', 'Marque', 'Fitness', 'Academy', 'Events', 'Communauté', 'Partenariats', 'Sport & Afrique'];
+export const NEWS_CAT_PHOTO = {
+  Marque: 'gymInterior',
+  Fitness: 'fitnessWomen',
+  Academy: 'team',
+  Events: 'fitnessMen',
+  Communauté: 'community',
+  Partenariats: 'team',
+  'Sport & Afrique': 'fitnessMen',
+};
 
 // pole : clé de filtre (correspond aux pôles de data/poles.js + 'groupe' pour les postes
 // transverses non rattachés à un pôle en particulier). icon : voir JOB_ICONS (app/careers/page.js).
