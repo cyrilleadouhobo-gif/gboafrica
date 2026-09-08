@@ -44,16 +44,35 @@ export const SOCIALS = [
   { label: 'in', name: 'LinkedIn', href: 'https://www.linkedin.com/company/gb%C3%B4-officiel/' },
 ];
 
+// `pillar` : regroupement large utilisé par les filtres de la page /blog (moins nombreux
+// que les catégories affichées sur chaque carte, ex. Prénatal et Senior se rangent tous les
+// deux sous le pilier Bien-être) — voir BLOG_CATS.
 export const ARTICLES = [
-  { id: 'a1', cat: 'Nutrition', read: '5 min', title: 'Bien manger à Abidjan : 7 réflexes simples', excerpt: 'Des choix concrets, adaptés au marché local, pour soutenir vos objectifs.' },
-  { id: 'a2', cat: 'Prénatal', read: '6 min', title: 'Bouger enceinte, en toute sécurité', excerpt: 'Ce que dit la prudence et comment un coach adapte chaque séance.' },
-  { id: 'a3', cat: 'Entreprise', read: '4 min', title: 'Le sport en entreprise, vrai levier de performance', excerpt: 'Pourquoi les organisations investissent dans le bien-être des équipes.' },
-  { id: 'a4', cat: 'Senior', read: '5 min', title: 'Rester actif après 60 ans : par où commencer', excerpt: "Mobilité, équilibre, force : les priorités d'un programme senior." },
-  { id: 'a5', cat: 'Fitness', read: '7 min', title: 'Débuter la musculation sans se blesser', excerpt: 'Les fondamentaux pour progresser durablement et sereinement.' },
-  { id: 'a6', cat: 'Bien-être', read: '4 min', title: 'Gérer le stress par le mouvement', excerpt: "Comment l'activité physique régule l'humeur et le sommeil." },
+  { id: 'a1', cat: 'Nutrition', pillar: 'Nutrition', read: '5 min', title: 'Bien manger à Abidjan : 7 réflexes simples', excerpt: 'Des choix concrets, adaptés au marché local, pour soutenir vos objectifs.' },
+  { id: 'a2', cat: 'Prénatal', pillar: 'Bien-être', read: '6 min', title: 'Bouger enceinte, en toute sécurité', excerpt: 'Ce que dit la prudence et comment un coach adapte chaque séance.' },
+  { id: 'a3', cat: 'Entreprise', pillar: 'Entreprise', read: '4 min', title: "Le sport en entreprise : un investissement qui paie", excerpt: 'Pourquoi les organisations investissent dans le bien-être des équipes.' },
+  { id: 'a4', cat: 'Senior', pillar: 'Bien-être', read: '5 min', title: 'Rester actif après 60 ans : par où commencer', excerpt: "Mobilité, équilibre, force : les priorités d'un programme senior." },
+  { id: 'a5', cat: 'Fitness', pillar: 'Fitness', read: '7 min', title: 'Débuter la musculation sans se blesser', excerpt: 'Les fondamentaux pour progresser durablement et sereinement.' },
+  { id: 'a6', cat: 'Bien-être', pillar: 'Bien-être', read: '4 min', title: 'Gérer le stress par le mouvement', excerpt: "Comment l'activité physique régule l'humeur et le sommeil." },
+  {
+    id: 'a7',
+    cat: 'Sport & Afrique',
+    pillar: 'Sport & Afrique',
+    read: '6 min',
+    title: 'Pourquoi le sport doit devenir un levier majeur en Afrique ?',
+    excerpt: "Une analyse des opportunités, des défis et des solutions pour faire du sport un véritable moteur de développement.",
+  },
+  {
+    id: 'a8',
+    cat: 'Professionnels',
+    pillar: 'Professionnels',
+    read: '5 min',
+    title: 'Quel rôle pour le coach sportif en Afrique ?',
+    excerpt: "Compétences, opportunités et perspectives d'avenir pour les professionnels du secteur.",
+  },
 ];
 export const BLOG_PREVIEW = ARTICLES.slice(0, 3).map(({ id, cat, read, title, excerpt }) => ({ id: 'bp-' + id, cat, read, title, excerpt }));
-export const BLOG_CATS = ['Tous', 'Fitness', 'Nutrition', 'Santé', 'Lifestyle', 'Entreprise', 'Prénatal', 'Senior'];
+export const BLOG_CATS = ['Tous', 'Fitness', 'Nutrition', 'Bien-être', 'Entreprise', 'Sport & Afrique', 'Professionnels', 'Actualités GBÔ'];
 
 // Catégorie d'article -> catégorie stockPhoto correspondante. Centralisé ici pour que la
 // page blog et l'aperçu blog de l'accueil affichent toujours un visuel cohérent avec le
@@ -65,6 +84,8 @@ export const ARTICLE_CAT_PHOTO = {
   Senior: 'senior',
   Fitness: 'fitnessMen',
   'Bien-être': 'fitnessWomen',
+  'Sport & Afrique': 'fitnessMen',
+  Professionnels: 'fitnessMen',
 };
 
 export const NEWS_ITEMS = [
@@ -224,7 +245,7 @@ export const FAQ_GROUPS = [
     cat: 'Données',
     items: [
       { q: 'Que faites-vous de mes données ?', a: 'Elles servent uniquement à traiter votre demande. Conformité Loi n° 2013-450 / ARTCI, minimisation et droit à la suppression.' },
-      { q: 'Comment exercer mes droits ?', a: "Écrivez à privacy@gboafrica.com pour l'accès, la rectification ou la suppression." },
+      { q: 'Comment exercer mes droits ?', a: "Écrivez à privacy@gboafricagroup.com pour l'accès, la rectification ou la suppression." },
     ],
   },
 ];

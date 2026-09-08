@@ -481,3 +481,14 @@ select {
     display: none !important;
   }
 }
+
+/* "À la une" (/blog) : grande carte + 2 cartes empilées à côté sur desktop, tout repasse
+   en une seule colonne sous 760px (la grande carte perd son span de 2 lignes). */
+@media (max-width: 760px) {
+  [data-featgrid] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-featgrid] > div:first-child {
+    grid-row: auto !important;
+  }
+}

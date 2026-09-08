@@ -18,8 +18,11 @@ const BANK = {
   ],
   // Team / corporate / community
   team: ['photo-1573164574511-73c773193279', 'photo-1573164574397-dd250bc8a598', 'photo-1584365132623-e273491c69d2'],
-  // Nutrition / food
-  nutrition: ['photo-1605552981700-68484762d021', 'photo-1578121786255-aa255d1cff6f'],
+  // Nutrition / food — bols de repas sains, sans personne visible (donc pas de contrainte
+  // de casting). Remplace 2 IDs posés à l'origine qui ne montraient pas de nourriture
+  // (un plan de mains jointes, un plan flou d'œufs en train d'être battus) — repéré en
+  // vérifiant le rendu de la page /blog.
+  nutrition: ['photo-1512621776951-a57141f2eefd', 'photo-1490645935967-10de6ba17061'],
   // Senior
   senior: ['photo-1590697442615-a381b5b557c7'],
   // Gym interior / equipment (modern, bright)
