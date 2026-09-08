@@ -104,7 +104,7 @@ export default function ContactPage() {
             </span>
             <div>
               <div style={{ fontWeight: 700, fontSize: 15 }}>E-mail</div>
-              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>contact@gboafrica.com</div>
+              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>contact@gboafricagroup.com</div>
             </div>
           </div>
           <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1))')}>

@@ -10,7 +10,7 @@ export const LEGAL = {
       { h: 'Directeur de la publication', p: 'Frédéric TIEMON, Gérant.' },
       { h: 'Hébergeur', p: "[À COMPLÉTER — dénomination, adresse et contact de l'hébergeur]." },
       { h: 'Propriété intellectuelle', p: "La marque GBÔ, le logotype, le slogan « Plus qu'une pratique, un style de vie » et l'ensemble des contenus sont protégés. Toute reproduction sans autorisation est interdite." },
-      { h: 'Contact', p: "Pour toute question relative au site : contact@gboafrica.com · Abidjan, Côte d'Ivoire." },
+      { h: 'Contact', p: "Pour toute question relative au site : contact@gboafricagroup.com · Abidjan, Côte d'Ivoire." },
     ],
   },
   cgu: {
@@ -41,11 +41,11 @@ export const LEGAL = {
     title: 'Politique de confidentialité',
     updated: 'Conforme Loi n° 2013-450 · ARTCI',
     sections: [
-      { h: 'Responsable de traitement', p: "GBÔ AFRICA GROUP, Abidjan, Côte d'Ivoire. Contact DPO : dpo@gboafrica.com [À CONFIRMER]." },
+      { h: 'Responsable de traitement', p: "GBÔ AFRICA GROUP, Abidjan, Côte d'Ivoire. Contact DPO : dpo@gboafricagroup.com [À CONFIRMER]." },
       { h: 'Données collectées', p: 'Coordonnées (nom, prénom, téléphone/WhatsApp, e-mail), objectif sportif, commune, disponibilités, et données de compte le cas échéant. Principe de minimisation appliqué.' },
       { h: 'Finalités & base légale', p: 'Traitement des demandes d\'accompagnement, gestion de la relation, envoi de confirmations (e-mail/WhatsApp) et, sur consentement explicite, prospection et newsletter.' },
       { h: 'Durées de conservation', p: 'Les données sont conservées le temps nécessaire aux finalités, puis supprimées ou anonymisées. Durées précises définies au registre des traitements.' },
-      { h: 'Vos droits', p: 'Accès, rectification, opposition, suppression. Exercez vos droits à privacy@gboafrica.com. Autorité de contrôle : ARTCI.' },
+      { h: 'Vos droits', p: 'Accès, rectification, opposition, suppression. Exercez vos droits à privacy@gboafricagroup.com. Autorité de contrôle : ARTCI.' },
       { h: 'Cookies', p: "Une bannière de consentement recueille votre accord préalable pour les traceurs non essentiels. Les mesures d'audience respectueuses de la vie privée sont privilégiées." },
     ],
   },
