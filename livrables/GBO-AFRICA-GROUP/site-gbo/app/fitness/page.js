@@ -4,7 +4,6 @@ import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import HeroCarousel from '../../components/HeroCarousel.js';
-import { stockPhoto } from '../../lib/stockPhoto.js';
 import { METHOD_STEPS } from '../../data/content.js';
 
 export const metadata = {
@@ -52,7 +51,7 @@ const TRUST_ITEMS = [
 ];
 
 // Bandeaux des cartes offres (voir section « Choisissez votre accompagnement »).
-const PARTICULIER_BANNER = 'https://images.pexels.com/photos/34043589/pexels-photo-34043589.jpeg?auto=compress&cs=tinysrgb&w=1200'; // effort individuel
+const PARTICULIER_BANNER = '/images/hero-fitness/particulier-coaching-salle.jpg'; // photo fournie par Cyrille
 const ENTREPRISE_BANNER = 'https://images.pexels.com/photos/30688593/pexels-photo-30688593.jpeg?auto=compress&cs=tinysrgb&w=1200'; // équipe de professionnels, Lagos — code vestimentaire entreprise
 
 // Icônes des 4 étapes (voir section « Notre approche »).
@@ -428,7 +427,7 @@ export default function FitnessPage() {
             border: '1px solid rgba(255,255,255,.1)',
           }}
         >
-          <ImageSlot placeholder="Des personnes plus fortes, un quotidien plus beau" src={stockPhoto('gymInterior', 'fitness-final-cta', '1600x600')} />
+          <ImageSlot placeholder="Des personnes plus fortes, un quotidien plus beau" src="/images/hero-fitness/cta-finale-dumbbell.jpg" />
           <div
             style={css(
               'position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.75) 50%,rgba(0,0,0,.35) 100%);pointer-events:none'

@@ -212,7 +212,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
-            <ImageSlot placeholder="Engagement GBÔ" src={stockPhoto('fitnessMen', 'about-engagement', '1000x750')} />
+            <ImageSlot placeholder="Engagement GBÔ" src="/images/hero-fitness/about-engagement.jpg" />
           </div>
         </div>
       </Reveal>

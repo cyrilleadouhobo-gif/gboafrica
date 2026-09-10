@@ -3,7 +3,6 @@ import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
-import { stockPhoto } from '../../lib/stockPhoto.js';
 
 export const metadata = {
   title: 'Mise à disposition de personnel — GBÔ AFRICA GROUP',
@@ -280,7 +279,7 @@ export default function MiseADispositionDePersonnelPage() {
 
       <Reveal as="section" style={css('position:relative;overflow:hidden;padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);border-top:1px solid var(--border,rgba(255,255,255,.08))')}>
         <div style={{ position: 'absolute', inset: 0 }}>
-          <ImageSlot placeholder="Coach GBÔ en séance" src={stockPhoto('fitnessMen', 'personnel-cta-bg', '1600x900')} />
+          <ImageSlot placeholder="Coach GBÔ en séance" src="/images/hero-fitness/personnel-cta-bg.jpg" />
         </div>
         <div
           style={css(
