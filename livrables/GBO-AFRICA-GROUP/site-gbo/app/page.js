@@ -429,7 +429,7 @@ export default function HomePage() {
                 i > 0 && (
                   <span key={`sep-${s.l}`} aria-hidden="true" data-statsep="" style={{ background: 'rgba(255,255,255,.25)', flex: '0 0 auto' }} />
                 ),
-                <div key={s.l}>
+                <div key={s.l} data-statitem="">
                   <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,4vw,40px);color:var(--lime,#C6F202)")}>{s.n}</div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,.75)', whiteSpace: 'nowrap' }}>{s.l}</div>
                 </div>,

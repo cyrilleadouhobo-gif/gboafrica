@@ -345,18 +345,35 @@ select {
   }
 }
 
-/* Séparateurs entre les chiffres du bandeau stats : barres verticales tant que les
-   chiffres restent sur une ligne, barres horizontales courtes dès que [data-statsrow]
-   peut passer en colonne (même seuil, 1220px) — sinon une barre verticale se retrouve
-   à pendre seule en bout de ligne quand un chiffre est renvoyé à la ligne suivante. */
+/* Séparateurs entre les chiffres du bandeau stats. Desktop (une seule ligne, pas de
+   wrap) : barres verticales entre chaque chiffre, ça marche bien car l'ordre visuel
+   est garanti par le flex nowrap. Dès que ça peut s'empiler (<=1220px), on abandonne
+   ces barres verticales "flottantes" : en flex-wrap, leur position dépend du nombre
+   d'éléments qui tiennent sur chaque ligne à la largeur exacte de l'écran, ce qui les
+   fait parfois atterrir seules en bout de ligne, parfois collées au mauvais chiffre —
+   résultat imprévisible et différent à chaque largeur. On les cache et on rattache
+   plutôt un trait sous chaque chiffre (sauf le dernier) via ::after : la ligne suit
+   alors toujours son propre chiffre, quelle que soit la façon dont ça s'empile. */
 [data-statsep] {
   width: 1px;
   height: 30px;
 }
 @media (max-width: 1220px) {
   [data-statsep] {
+    display: none;
+  }
+  [data-statitem]:not(:last-child) {
+    position: relative;
+    padding-bottom: 16px;
+  }
+  [data-statitem]:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
     width: 90px;
     height: 1px;
+    background: rgba(255, 255, 255, 0.25);
   }
 }
 
