@@ -346,15 +346,16 @@ select {
 }
 
 /* Séparateurs entre les chiffres du bandeau stats : barres verticales tant que les
-   chiffres restent sur une ligne, barres horizontales sous 680px une fois qu'ils
-   s'empilent (une barre verticale entre deux lignes n'a plus de sens). */
+   chiffres restent sur une ligne, barres horizontales courtes dès que [data-statsrow]
+   peut passer en colonne (même seuil, 1220px) — sinon une barre verticale se retrouve
+   à pendre seule en bout de ligne quand un chiffre est renvoyé à la ligne suivante. */
 [data-statsep] {
   width: 1px;
   height: 30px;
 }
-@media (max-width: 680px) {
+@media (max-width: 1220px) {
   [data-statsep] {
-    width: 100%;
+    width: 90px;
     height: 1px;
   }
 }
