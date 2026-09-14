@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { css } from '../../../../lib/css.js';
+import PasswordInput from '../../../../components/PasswordInput.js';
 
 export default function NutritionPartnerLoginPage() {
   const router = useRouter();
@@ -62,16 +63,12 @@ export default function NutritionPartnerLoginPage() {
               "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
             )}
           />
-          <input
-            type="password"
+          <PasswordInput
             required
             autoComplete="current-password"
             placeholder="Mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={css(
-              "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
-            )}
           />
           {error && (
             <div style={css('padding:12px;border-radius:10px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;font-size:13.5px')}>
