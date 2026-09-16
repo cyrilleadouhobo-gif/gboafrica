@@ -139,32 +139,12 @@ export default function BlogPage() {
               </div>
             </div>
             <div style={{ position: 'relative', borderRadius: 24, overflow: 'hidden', aspectRatio: '3/4', minHeight: 280 }}>
-              <ImageSlot placeholder="Sportive GBÔ" src={stockPhoto('fitnessWomen', 'blog-hero', '900x1100')} />
+              <ImageSlot placeholder="Sportive GBÔ" src="/images/blog/hero.jpg" />
               <div
                 style={css(
                   'position:absolute;inset:0;background:linear-gradient(200deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,0) 42%);pointer-events:none'
                 )}
               />
-              <div style={{ position: 'absolute', right: 20, top: 20, textAlign: 'right' }}>
-                <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(15px,2vw,19px);line-height:1.25;color:#fff")}>
-                  PLUS QU&apos;UNE
-                  <br />
-                  PRATIQUE,
-                  <br />
-                  <span style={{ color: 'var(--lime,#C6F202)' }}>UN STYLE</span>
-                  <br />
-                  <span style={{ color: 'var(--lime,#C6F202)' }}>DE VIE.</span>
-                </div>
-                <div style={css('margin-top:14px;font-size:11px;letter-spacing:1.5px;color:rgba(255,255,255,.8);line-height:1.9')}>
-                  SPORT
-                  <br />
-                  BIEN-ÊTRE
-                  <br />
-                  COMMUNAUTÉ
-                  <br />
-                  AFRIQUE
-                </div>
-              </div>
             </div>
           </div>
         </div>
