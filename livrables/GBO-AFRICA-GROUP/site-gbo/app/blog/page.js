@@ -27,24 +27,25 @@ function ArrowCircle({ size = 30 }) {
 
 function ArticleCard({ a, i }) {
   return (
-    <Reveal
-      key={a.id}
-      delay={i * 60}
-      className="hover-card"
-      style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}
-    >
-      <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-        <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[a.cat] || 'fitnessMen', a.id, '600x375')} />
-      </div>
-      <div style={{ padding: 20 }}>
-        <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
-          {a.cat} · {a.read}
+    <Link key={a.id} href={`/blog/${a.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+      <Reveal
+        delay={i * 60}
+        className="hover-card"
+        style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}
+      >
+        <div style={{ aspectRatio: '16/10', position: 'relative' }}>
+          <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[a.cat] || 'fitnessMen', a.id, '600x375')} />
         </div>
-        <div style={{ fontWeight: 700, fontSize: 19, margin: '8px 0 6px', lineHeight: 1.3 }}>{a.title}</div>
-        <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:12px')}>{a.excerpt}</div>
-        <div style={css('display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--lime,#C6F202)')}>Lire l&apos;article →</div>
-      </div>
-    </Reveal>
+        <div style={{ padding: 20 }}>
+          <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
+            {a.cat} · {a.read}
+          </div>
+          <div style={{ fontWeight: 700, fontSize: 19, margin: '8px 0 6px', lineHeight: 1.3 }}>{a.title}</div>
+          <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:12px')}>{a.excerpt}</div>
+          <div style={css('display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--lime,#C6F202)')}>Lire l&apos;article →</div>
+        </div>
+      </Reveal>
+    </Link>
   );
 }
 
@@ -225,7 +226,10 @@ export default function BlogPage() {
           </div>
 
           <div data-featgrid="" style={css('display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px')}>
-            <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', gridRow: 'span 2', minHeight: 360 }}>
+            <Link
+              href={`/blog/${featured[0].slug}`}
+              style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', gridRow: 'span 2', minHeight: 360, color: 'inherit', textDecoration: 'none' }}
+            >
               <ImageSlot placeholder="Article à la une" src={stockPhoto(ARTICLE_CAT_PHOTO[featured[0].cat] || 'fitnessMen', featured[0].id, '900x900')} />
               <div
                 style={css(
@@ -249,13 +253,16 @@ export default function BlogPage() {
                   Lire l&apos;article
                 </div>
               </div>
-            </div>
+            </Link>
 
             {featured.slice(1).map((a) => (
-              <div
+              <Link
                 key={a.id}
+                href={`/blog/${a.slug}`}
                 className="hover-card"
-                style={css('display:flex;gap:14px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09));overflow:hidden')}
+                style={css(
+                  'display:flex;gap:14px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.09));overflow:hidden;color:inherit;text-decoration:none'
+                )}
               >
                 <div style={{ position: 'relative', width: 'clamp(90px,26vw,150px)', flex: '0 0 auto' }}>
                   <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[a.cat] || 'fitnessMen', a.id, '400x400')} />
@@ -268,7 +275,7 @@ export default function BlogPage() {
                   <div style={css('font-size:13px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:8px')}>{a.excerpt}</div>
                   <div style={css('font-size:12.5px;font-weight:700;color:var(--lime,#C6F202)')}>Lire l&apos;article →</div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
