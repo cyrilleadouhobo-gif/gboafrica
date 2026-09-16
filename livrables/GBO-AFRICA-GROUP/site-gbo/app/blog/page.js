@@ -53,6 +53,7 @@ export default function BlogPage() {
   const { showToast } = useAppData();
   const [activeFilter, setActiveFilter] = useState('Tous');
   const [search, setSearch] = useState('');
+  const [showAllArticles, setShowAllArticles] = useState(false);
   const [featOffset, setFeatOffset] = useState(0);
   const [nlEmail, setNlEmail] = useState('');
   const [nlSubmitting, setNlSubmitting] = useState(false);
@@ -286,18 +287,21 @@ export default function BlogPage() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px')}>
             <div style={eyebrow}>Derniers articles</div>
-            <button
-              onClick={() => {
-                setActiveFilter('Tous');
-                setSearch('');
-              }}
-              style={css('font-size:13px;font-weight:700;color:var(--lime,#C6F202);cursor:pointer')}
-            >
-              Voir tous les articles →
-            </button>
+            {!showAllArticles && filteredArticles.length > 4 && (
+              <button
+                onClick={() => {
+                  setActiveFilter('Tous');
+                  setSearch('');
+                  setShowAllArticles(true);
+                }}
+                style={css('font-size:13px;font-weight:700;color:var(--lime,#C6F202);cursor:pointer')}
+              >
+                Voir tous les articles →
+              </button>
+            )}
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:16px')}>
-            {filteredArticles.map((a, i) => (
+            {(showAllArticles ? filteredArticles : filteredArticles.slice(0, 4)).map((a, i) => (
               <ArticleCard key={a.id} a={a} i={i} />
             ))}
           </div>
