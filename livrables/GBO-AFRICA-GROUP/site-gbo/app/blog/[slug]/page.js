@@ -19,7 +19,7 @@ export default async function ArticlePage({ params }) {
       </Link>
 
       <div style={css('font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:700;margin-bottom:12px')}>
-        {article.cat} · {article.read}
+        {article.cat}
       </div>
       <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,5vw,42px);letter-spacing:-1px;line-height:1.1;margin-bottom:18px")}>
         {article.title}

@@ -38,7 +38,7 @@ function ArticleCard({ a, i }) {
         </div>
         <div style={{ padding: 20 }}>
           <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
-            {a.cat} · {a.read}
+            {a.cat}
           </div>
           <div style={{ fontWeight: 700, fontSize: 19, margin: '8px 0 6px', lineHeight: 1.3 }}>{a.title}</div>
           <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:12px')}>{a.excerpt}</div>
@@ -242,7 +242,7 @@ export default function BlogPage() {
                   'position:absolute;left:20px;top:20px;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:var(--lime,#C6F202)'
                 )}
               >
-                {featured[0].cat} · {featured[0].read}
+                {featured[0].cat}
               </div>
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(20px,3vw,30px)' }}>
                 <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(19px,2.6vw,26px);line-height:1.25;margin-bottom:10px;max-width:22ch")}>
@@ -270,7 +270,7 @@ export default function BlogPage() {
                 </div>
                 <div style={{ padding: '16px 18px 16px 0', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
-                    {a.cat} · {a.read}
+                    {a.cat}
                   </div>
                   <div style={{ fontWeight: 700, fontSize: 15.5, margin: '6px 0 4px', lineHeight: 1.3 }}>{a.title}</div>
                   <div style={css('font-size:13px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:8px')}>{a.excerpt}</div>
