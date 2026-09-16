@@ -470,36 +470,6 @@ select {
   }
 }
 
-/* Section "Ils nous font confiance" (accueil) : même logique que "Nos valeurs" ci-dessus
-   — bandeau défilant sous 680px au lieu d'empiler/chevaucher les logos partenaires. */
-[data-partners-marquee] {
-  display: none;
-}
-.partners-marquee-track {
-  animation: marquee 22s linear infinite;
-}
-@media (max-width: 680px) {
-  [data-partners-grid] {
-    display: none !important;
-  }
-  [data-partners-marquee] {
-    display: block !important;
-  }
-}
-/* Si l'appareil a "Réduire les animations" activé, l'animation marquee est coupée
-   globalement (règle plus haut) et le bandeau resterait figé avec seulement les
-   2-3 premiers logos visibles. On revient alors à la grille classique (qui affiche
-   tous les logos, quitte à s'empiler) plutôt que de laisser un bandeau immobile
-   et incomplet. */
-@media (max-width: 680px) and (prefers-reduced-motion: reduce) {
-  [data-partners-grid] {
-    display: flex !important;
-  }
-  [data-partners-marquee] {
-    display: none !important;
-  }
-}
-
 /* "À la une" (/blog) : grande carte + 2 cartes empilées à côté sur desktop, tout repasse
    en une seule colonne sous 760px (la grande carte perd son span de 2 lignes). */
 @media (max-width: 760px) {

@@ -8,7 +8,7 @@ import GlowBlobs from '../components/GlowBlobs.js';
 import VideoIntro from '../components/VideoIntro.js';
 import HeroCarousel from '../components/HeroCarousel.js';
 import { stockPhoto } from '../lib/stockPhoto.js';
-import { PARTNERS, PARTNER_TYPES } from '../data/content.js';
+import { PARTNER_TYPES } from '../data/content.js';
 
 // Carrousel plein écran du hero : vrais visuels GBÔ fournis par Cyrille (Documents/Hero
 // accueil), mis à jour le 02/09. Casting et logos de marques tierces visibles sur les 2
@@ -37,66 +37,6 @@ const COACHES_PREVIEW = [
 
 // Avatars de la rangée de confiance du hero — réutilise 4 photos déjà vérifiées (coachs).
 const TRUST_AVATARS = COACHES_PREVIEW.slice(0, 4).map((c) => c.photo);
-
-// Bandeau de segments juste sous le hero (qui fait quoi chez GBÔ, en un coup d'œil).
-const SEGMENTS = [
-  {
-    label: 'Pratiquants',
-    sub: 'Forme & bien-être',
-    href: '/fitness',
-    icon: (
-      <>
-        <path d="M2 10v4M22 10v4M6 9v6M18 9v6" />
-        <path d="M6 12h12" />
-      </>
-    ),
-  },
-  {
-    label: 'Formation',
-    sub: 'Compétences & carrière',
-    href: '/poles/academy',
-    icon: (
-      <>
-        <path d="M2 9l10-5 10 5-10 5-10-5z" />
-        <path d="M6 11v4c0 1.5 2.7 3 6 3s6-1.5 6-3v-4" />
-      </>
-    ),
-  },
-  {
-    label: 'Événements',
-    sub: 'Expériences sportives',
-    href: '/poles/events',
-    icon: (
-      <>
-        <rect x="3" y="5" width="18" height="16" rx="2" />
-        <path d="M16 3v4M8 3v4M3 10h18" />
-      </>
-    ),
-  },
-  {
-    label: 'Entreprises',
-    sub: 'Performance & QVT',
-    href: '/pour-les-salles',
-    icon: (
-      <>
-        <circle cx="9" cy="8" r="3" />
-        <circle cx="17" cy="8" r="2.5" />
-        <path d="M2 21c0-3.5 3-6 7-6s7 2.5 7 6" />
-        <path d="M16.5 15.2c2.6.5 4.5 2.7 4.5 5.8" />
-      </>
-    ),
-  },
-  {
-    label: 'Sécurité',
-    sub: 'Des espaces plus sûrs',
-    href: '/poles/security',
-    icon: (
-      <>
-        <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
-      </>
-    ),
-  },
-];
 
 // Aperçu de 4 des 6 pôles GBÔ sur la home. Photos Pexels vérifiées individuellement
 // (sujets noirs/africains, pas de logo de marque tierce visible).
@@ -271,7 +211,7 @@ export default function HomePage() {
               NOUS FAISONS AVANCER <span style={{ color: '#C6F202' }}>LE SPORT.</span>
             </h1>
             <p style={css("font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.82);max-width:56ch;margin-top:22px;line-height:1.5;animation:fadeUp .7s .12s both")}>
-              Nous développons des solutions dans le sport et le bien-être pour accompagner les pratiquants, les entreprises et les acteurs du secteur.
+              Des solutions concrètes pour accompagner celles et ceux qui pratiquent, développent et font vivre le sport.
             </p>
             <div style={css('display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;animation:fadeUp .7s .2s both')}>
               <Link
@@ -316,7 +256,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px)')}>
+      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px) clamp(20px,3vw,36px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', maxWidth: 700, margin: '0 auto 40px' }}>
             <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-1px;margin-bottom:16px")}>
@@ -332,27 +272,7 @@ export default function HomePage() {
         </div>
       </Reveal>
 
-      <Reveal as="section" style={css('padding:clamp(28px,4vw,44px) clamp(20px,5vw,64px);border-top:1px solid var(--border,rgba(255,255,255,.08));border-bottom:1px solid var(--border,rgba(255,255,255,.08))')}>
-        <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:22px')}>
-          {SEGMENTS.map((s) => (
-            <Link key={s.label} href={s.href} style={css('display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;color:#fff')}>
-              <span
-                style={css(
-                  'width:44px;height:44px;border-radius:50%;background:rgba(198,242,2,.1);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center'
-                )}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  {s.icon}
-                </svg>
-              </span>
-              <span style={{ fontWeight: 700, fontSize: 14.5 }}>{s.label}</span>
-              <span style={css('font-size:12px;color:var(--muted,#8a8a8a)')}>{s.sub}</span>
-            </Link>
-          ))}
-        </div>
-      </Reveal>
-
-      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px) clamp(14px,2vw,24px)')}>
+      <Reveal as="section" style={css('padding:clamp(28px,4vw,44px) clamp(20px,5vw,64px) clamp(14px,2vw,24px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:clamp(20px,4vw,40px);align-items:end;margin-bottom:34px')}>
             <div>
@@ -365,7 +285,7 @@ export default function HomePage() {
             </div>
             <div>
               <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:14px')}>
-                GBÔ AFRICA GROUP réunit des solutions complémentaires pour rendre le sport plus accessible, plus professionnel et plus impactant en Afrique.
+                GBÔ AFRICA GROUP réunit plusieurs solutions pour rendre le sport plus accessible, plus structuré et plus impactant en Afrique.
               </p>
               <Link href="/about" style={css('font-weight:700;font-size:14px;color:var(--lime,#C6F202)')}>
                 En savoir plus →
@@ -478,7 +398,7 @@ export default function HomePage() {
               Gérer votre salle <span style={{ color: 'var(--lime,#C6F202)' }}>plus simplement.</span>
             </h2>
             <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:24px')}>
-              E-Gym est une solution complète pour gérer vos membres, vos abonnements, vos paiements et bien plus encore.
+              E-Gym est une solution digitale complète conçue pour simplifier, centraliser et piloter votre activité.
             </p>
             <div style={css('display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px')}>
               <Link
@@ -521,60 +441,28 @@ export default function HomePage() {
         </div>
       </Reveal>
 
-      <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b);overflow:hidden')}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:26px')}>Ils nous font confiance</div>
-
-          {/* Desktop/tablette : grille classique. Remplacée sous 680px par un bandeau
-              défilant en boucle (liste dupliquée + animation marquee de globals.css) plutôt
-              que de laisser les logos se chevaucher en s'empilant. */}
-          <div data-partners-grid="" style={css('display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:center')}>
-            {PARTNERS.map((p) => (
-              <div
-                key={p.name}
-                title={p.name}
-                style={{
-                  width: 140,
-                  height: 90,
-                  borderRadius: 14,
-                  background: '#fff',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  flex: '0 0 auto',
-                }}
-              >
-                <img
-                  src={p.logo}
-                  alt={p.name}
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 12 }}
-                />
-              </div>
-            ))}
+      <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
+        <div style={{ maxWidth: 780, margin: '0 auto' }}>
+          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:22px;text-align:center')}>
+            Notre partenaire nutrition
           </div>
-
-          <div data-partners-marquee="" style={{ overflow: 'hidden' }}>
-            <div className="partners-marquee-track" style={css('display:flex;gap:24px;width:max-content')}>
-              {[...PARTNERS, ...PARTNERS].map((p, i) => (
-                <div
-                  key={`${p.name}-${i}`}
-                  title={p.name}
-                  style={{
-                    width: 140,
-                    height: 90,
-                    borderRadius: 14,
-                    background: '#fff',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    flex: '0 0 auto',
-                  }}
-                >
-                  <img
-                    src={p.logo}
-                    alt={p.name}
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 12 }}
-                  />
-                </div>
-              ))}
+          <div
+            style={css(
+              'display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;padding:clamp(24px,4vw,36px);border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03))'
+            )}
+          >
+            <div style={{ width: 160, height: 100, borderRadius: 14, background: '#fff', position: 'relative', overflow: 'hidden', flex: '0 0 auto' }}>
+              <img
+                src="/images/logos/cabinet-medico-nutrition.jpg"
+                alt="Cabinet Médico-Nutrition SARL"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 14 }}
+              />
+            </div>
+            <div style={{ maxWidth: 380 }}>
+              <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 6 }}>Cabinet Médico-Nutrition SARL</div>
+              <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5')}>
+                Le suivi nutritionnel proposé aux clients GBÔ est assuré par des professionnels de santé de ce cabinet partenaire.
+              </div>
             </div>
           </div>
         </div>
@@ -643,7 +531,7 @@ export default function HomePage() {
                   Devenir partenaire →
                 </Link>
                 <div style={css('margin-top:22px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600')}>
-                  Plus d&apos;impact. Plus d&apos;opportunités. Ensemble.
+                  Plus d&apos;impact. Plus d&apos;opportunités.
                 </div>
               </div>
             </div>
