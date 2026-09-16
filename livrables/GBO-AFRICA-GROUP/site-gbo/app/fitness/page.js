@@ -4,6 +4,7 @@ import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import HeroCarousel from '../../components/HeroCarousel.js';
+import VideoIntro from '../../components/VideoIntro.js';
 import { METHOD_STEPS } from '../../data/content.js';
 
 export const metadata = {
@@ -283,6 +284,22 @@ export default function FitnessPage() {
                 </Link>
               </div>
             </Reveal>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" style={css('padding:clamp(56px,9vw,110px) clamp(20px,5vw,64px)')}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', maxWidth: 700, margin: '0 auto 40px' }}>
+            <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-1px;margin-bottom:16px")}>
+              GBÔ en mouvement.
+            </h2>
+            <p style={css('font-size:16px;color:var(--muted,#8a8a8a);line-height:1.55')}>
+              Un aperçu de l&apos;énergie qu&apos;on met dans chaque séance.
+            </p>
+          </div>
+          <div data-video-shrink="">
+            <VideoIntro src="/videos/fitness-pompes.mp4" label="Vidéo — GBÔ Fitness" />
           </div>
         </div>
       </Reveal>
