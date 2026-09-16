@@ -8,7 +8,7 @@ import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import Honeypot from '../../components/Honeypot.js';
 import { useAppData } from '../../context/AppData.js';
-import { stockPhoto } from '../../lib/stockPhoto.js';
+import { stockPhoto, articlePhoto } from '../../lib/stockPhoto.js';
 import { ARTICLES, BLOG_CATS, ARTICLE_CAT_PHOTO } from '../../data/content.js';
 
 const eyebrow = css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700');
@@ -34,7 +34,7 @@ function ArticleCard({ a, i }) {
         style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}
       >
         <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-          <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[a.cat] || 'fitnessMen', a.id, '600x375')} />
+          <ImageSlot placeholder="Visuel article" src={articlePhoto(a, ARTICLE_CAT_PHOTO, '600x375')} />
         </div>
         <div style={{ padding: 20 }}>
           <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
@@ -231,7 +231,7 @@ export default function BlogPage() {
               href={`/blog/${featured[0].slug}`}
               style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', gridRow: 'span 2', minHeight: 360, color: 'inherit', textDecoration: 'none' }}
             >
-              <ImageSlot placeholder="Article à la une" src={stockPhoto(ARTICLE_CAT_PHOTO[featured[0].cat] || 'fitnessMen', featured[0].id, '900x900')} />
+              <ImageSlot placeholder="Article à la une" src={articlePhoto(featured[0], ARTICLE_CAT_PHOTO, '900x900')} />
               <div
                 style={css(
                   'position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.15) 55%,rgba(0,0,0,.05) 100%);pointer-events:none'
@@ -266,7 +266,7 @@ export default function BlogPage() {
                 )}
               >
                 <div style={{ position: 'relative', width: 'clamp(90px,26vw,150px)', flex: '0 0 auto' }}>
-                  <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[a.cat] || 'fitnessMen', a.id, '400x400')} />
+                  <ImageSlot placeholder="Visuel article" src={articlePhoto(a, ARTICLE_CAT_PHOTO, '400x400')} />
                 </div>
                 <div style={{ padding: '16px 18px 16px 0', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>

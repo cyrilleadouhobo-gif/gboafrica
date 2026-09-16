@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import ImageSlot from '../../../components/ImageSlot.js';
-import { stockPhoto } from '../../../lib/stockPhoto.js';
+import { articlePhoto } from '../../../lib/stockPhoto.js';
 import { ARTICLES, ARTICLE_CAT_PHOTO } from '../../../data/content.js';
 
 export default async function ArticlePage({ params }) {
@@ -27,7 +27,7 @@ export default async function ArticlePage({ params }) {
       <p style={css('font-size:16px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:30px')}>{article.excerpt}</p>
 
       <div style={{ position: 'relative', aspectRatio: '16/9', borderRadius: 20, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))', marginBottom: 36 }}>
-        <ImageSlot placeholder="Visuel article" src={stockPhoto(ARTICLE_CAT_PHOTO[article.cat] || 'fitnessMen', article.id, '1200x675')} />
+        <ImageSlot placeholder="Visuel article" src={articlePhoto(article, ARTICLE_CAT_PHOTO, '1200x675')} />
       </div>
 
       <div style={{ display: 'grid', gap: 26 }}>

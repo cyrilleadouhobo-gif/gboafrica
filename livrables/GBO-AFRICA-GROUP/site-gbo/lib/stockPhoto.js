@@ -55,3 +55,13 @@ export function stockPhotoDirect(id, size = '800x600') {
   const [w, h] = size.split('x');
   return `https://images.unsplash.com/${id}?w=${w}&h=${h}&q=75&auto=format&fit=crop`;
 }
+
+// Picks an article's hand-chosen photo when set, otherwise falls back to the generic
+// category pool. Used across /blog and /blog/[slug] so the override lives in one place
+// per article. `photo` (a local /images/... path or any direct URL) wins over `photoId`
+// (an Unsplash id run through stockPhotoDirect), which wins over the category pool.
+export function articlePhoto(article, catMap, size = '800x600') {
+  if (article.photo) return article.photo;
+  if (article.photoId) return stockPhotoDirect(article.photoId, size);
+  return stockPhoto(catMap[article.cat] || 'fitnessMen', article.id, size);
+}

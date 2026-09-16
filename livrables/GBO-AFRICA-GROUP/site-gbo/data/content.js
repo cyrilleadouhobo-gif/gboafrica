@@ -58,6 +58,9 @@ export const ARTICLES = [
     read: '5 min',
     title: 'Bien manger à Abidjan : 7 réflexes simples',
     excerpt: 'Des choix concrets, adaptés au marché local, pour soutenir vos objectifs.',
+    // Photo fournie par Cyrille (poulet frit, semoule, salade) plutôt que le pool générique
+    // ARTICLE_CAT_PHOTO.nutrition (bols de repas sains, sans ancrage local).
+    photo: '/images/blog/nutrition-plat-ivoirien.jpg',
     body: [
       { p: "Bien manger ne veut pas dire suivre un régime importé, coupé de ce qu'on trouve réellement sur nos marchés. Voici sept réflexes simples, pensés pour le quotidien à Abidjan." },
       { h: '1. Partez du marché, pas du supermarché', p: "Attiéké, igname, banane plantain, poisson frais, légumes de saison : la base locale est déjà équilibrée si on surveille les quantités et les modes de cuisson. Pas besoin de produits importés pour bien manger." },
@@ -77,6 +80,7 @@ export const ARTICLES = [
     read: '6 min',
     title: 'Bouger enceinte, en toute sécurité',
     excerpt: 'Ce que dit la prudence et comment un coach adapte chaque séance.',
+    photo: '/images/blog/prenatal.jpg',
     body: [
       { p: "La grossesse n'est pas une raison de tout arrêter. Bien encadrée, l'activité physique reste bénéfique à chaque trimestre, à condition d'adapter l'intensité et les mouvements." },
       { h: 'Pourquoi continuer à bouger', p: "Un corps actif pendant la grossesse dort souvent mieux, gère mieux les tensions du dos et du bassin, et arrive plus préparé physiquement au jour de l'accouchement. Le mouvement reste aussi un vrai soutien pour le moral." },
@@ -94,6 +98,9 @@ export const ARTICLES = [
     read: '4 min',
     title: 'Le sport en entreprise : un investissement qui paie',
     excerpt: 'Pourquoi les organisations investissent dans le bien-être des équipes.',
+    // Photo fournie par Cyrille — logo "alto giro" (marque tierce) visible sur les sacs et
+    // tapis au sol, signalé avant intégration ; gardée sur demande explicite.
+    photo: '/images/blog/entreprise.jpg',
     body: [
       { p: "La sédentarité au bureau a un coût réel, même s'il est rarement visible sur une feuille de calcul : fatigue, tensions, désengagement progressif des équipes." },
       { h: 'Le coût caché de l’inactivité', p: "Une équipe qui bouge peu accumule plus de fatigue physique et de tensions, ce qui se traduit à terme par plus d'absentéisme et moins d'énergie collective, même quand tout semble fonctionner normalement." },
@@ -111,6 +118,7 @@ export const ARTICLES = [
     read: '5 min',
     title: 'Rester actif après 60 ans : par où commencer',
     excerpt: "Mobilité, équilibre, force : les priorités d'un programme senior.",
+    photo: '/images/blog/senior-actif.jpg',
     body: [
       { p: "Rester actif après 60 ans ne demande pas de viser la performance. Trois priorités suffisent pour construire un programme utile et sûr : l'équilibre, la force, la mobilité." },
       { h: 'Pourquoi ces trois priorités', p: "Les chutes restent le premier risque à cet âge. Travailler l'équilibre et la force des jambes réduit ce risque directement, tandis que la mobilité articulaire garde les gestes du quotidien plus faciles." },
@@ -127,6 +135,7 @@ export const ARTICLES = [
     read: '7 min',
     title: 'Débuter la musculation sans se blesser',
     excerpt: 'Les fondamentaux pour progresser durablement et sereinement.',
+    photo: '/images/blog/musculation-debutant.jpg',
     body: [
       { p: "La musculation progresse vite quand les bases sont posées correctement dès le début. Voici les fondamentaux qui évitent les blessures et les faux départs." },
       { h: 'La technique avant la charge', p: "Ajouter du poids sur un mouvement mal maîtrisé ne fait qu'accélérer le risque de blessure. Le bon ordre est toujours : d'abord le mouvement propre, ensuite la charge." },
@@ -143,6 +152,7 @@ export const ARTICLES = [
     read: '4 min',
     title: 'Gérer le stress par le mouvement',
     excerpt: "Comment l'activité physique régule l'humeur et le sommeil.",
+    photo: '/images/blog/gestion-stress.jpg',
     body: [
       { p: "Le stress chronique s'installe souvent en silence, entre fatigue persistante et sommeil de moins bonne qualité. Le mouvement reste l'un des leviers les plus accessibles pour le réguler." },
       { h: 'Ce qui se passe sous stress prolongé', p: "Un corps sous tension continue mobilise de l'énergie en permanence, ce qui affecte peu à peu le sommeil, la concentration et l'humeur générale." },
