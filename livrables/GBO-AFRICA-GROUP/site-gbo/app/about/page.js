@@ -53,7 +53,7 @@ export default function AboutPage() {
         )}
       >
         <div style={{ position: 'absolute', inset: 0 }}>
-          <ImageSlot placeholder="Visuel équipe GBÔ" src={stockPhoto('fitnessWomen', 'about-hero', '1600x900')} />
+          <ImageSlot placeholder="Visuel équipe GBÔ" src="/images/hero-fitness/about-hero.jpg" />
         </div>
         <div
           style={css(
@@ -147,7 +147,7 @@ export default function AboutPage() {
             <p style={css('font-size:16px;color:var(--muted,#c8c8c8);line-height:1.65')}>Devenir un acteur de référence du sport et du bien-être en Afrique.</p>
           </div>
           <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
-            <ImageSlot placeholder="Vision GBÔ" src={stockPhoto('fitnessMen', 'about-vision', '1000x750')} />
+            <ImageSlot placeholder="Vision GBÔ" src="/images/hero-fitness/about-vision-bw.jpg" />
             <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.2) 55%,transparent 100%);pointer-events:none')} />
             <div
               style={css(
