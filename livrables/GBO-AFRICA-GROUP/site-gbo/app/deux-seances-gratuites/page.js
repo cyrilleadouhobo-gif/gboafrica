@@ -27,11 +27,11 @@ const PROCESS_STEPS = [
   {
     n: '1',
     title: 'Votre demande est qualifiée',
-    desc: 'Vous indiquez votre objectif, votre commune et vos disponibilités. Elle entre directement dans le CRM GBÔ.',
+    desc: 'Vous indiquez votre objectif, votre commune et vos disponibilités.',
   },
   {
     n: '2',
-    title: 'Un conseiller GBÔ vous contacte',
+    title: 'Un conseiller vous contacte',
     desc: 'Pour affiner votre besoin et vous proposer un coach sélectionné selon sa compétence et sa zone.',
   },
   {
@@ -209,7 +209,7 @@ export default function DeuxSeancesGratuitesPage() {
                 ● Offre de bienvenue
               </span>
               <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,5vw,46px);letter-spacing:-1.5px;line-height:1.05")}>
-                Trouvez l&apos;accompagnement GBÔ adapté à votre objectif.
+                Trouvez l&apos;accompagnement adapté à votre objectif.
               </h1>
               <p style={css('font-size:clamp(16px,2vw,18px);color:var(--muted,#8a8a8a);margin-top:18px;line-height:1.55;max-width:48ch')}>
                 Complétez vos coordonnées, votre commune et votre objectif. Un conseiller vérifie la disponibilité d&apos;un coach près de chez vous et vous
@@ -262,7 +262,7 @@ export default function DeuxSeancesGratuitesPage() {
                 </div>
               ) : (
                 <form onSubmit={submit}>
-                  <h2 style={css("font-family:'Broaven';font-weight:700;font-size:22px;margin-bottom:20px")}>Parlons de votre objectif</h2>
+                  <h2 style={css("font-family:'Broaven';font-weight:700;font-size:22px;margin-bottom:20px")}>COMMENÇONS VOTRE ACCOMPAGNEMENT</h2>
 
                   <div style={{ display: 'grid', gap: 16 }}>
                     <label style={{ display: 'block' }}>

@@ -12,6 +12,6 @@ export const SITE_NAME = 'GBÔ AFRICA GROUP';
 export const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'contact@gboafricagroup.com';
 export const CAREERS_EMAIL = process.env.CAREERS_EMAIL || 'recrutement@gboafricagroup.com';
 export const PARTNERS_EMAIL = process.env.PARTNERS_EMAIL || 'partenariats@gboafricagroup.com';
-// Formulaire Particulier (/fitness/tunnel, /deux-seances-gratuites) ET Entreprise
+// Formulaire Particulier (/deux-seances-gratuites) ET Entreprise
 // (/corporate, lien "Solutions Entreprises" présent sur la page Fitness).
 export const FITNESS_EMAIL = process.env.FITNESS_EMAIL || 'fitness@gboafricagroup.com';

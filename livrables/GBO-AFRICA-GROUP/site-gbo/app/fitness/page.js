@@ -163,9 +163,9 @@ export default function FitnessPage() {
 
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;line-height:1.02;max-width:14ch")}>
-            BOUGEZ.
+            BOUGEZ ET
             <br />
-            PROGRESSEZ.
+            PROGRESSEZ
             <br />
             À VOTRE RYTHME.
           </h1>
@@ -228,8 +228,7 @@ export default function FitnessPage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 8, flex: 1 }}>
                   {[
                     'Coaching à domicile',
-                    'Coaching en salle partenaire',
-                    'Suivi de progression',
+                    'Coaching en salle de sport',
                     'Option suivi nutritionnel',
                   ].map((f) => (
                     <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
@@ -408,7 +407,7 @@ export default function FitnessPage() {
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px')}>
             {GOALS.map((g, i) => (
-              <Link key={g.label} href="/fitness/tunnel" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link key={g.label} href="/deux-seances-gratuites" style={{ color: 'inherit', textDecoration: 'none' }}>
                 <Reveal
                   delay={i * 40}
                   className="hover-card"
@@ -462,16 +461,16 @@ export default function FitnessPage() {
                 Choisissez votre accompagnement et présentez-nous votre objectif. GBÔ vous orientera vers la formule et le coach adaptés.
               </p>
               <Link
-                href="/fitness/tunnel"
+                href="/deux-seances-gratuites"
                 className="btn-cta"
                 style={css('display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15px')}
               >
-                Commencer maintenant →
+                Deux séances gratuites →
               </Link>
             </div>
-            <Link href="/deux-seances-gratuites" style={css('font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8);text-align:right;max-width:220px;line-height:1.5')}>
+            <div style={css('font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8);text-align:right;max-width:220px;line-height:1.5')}>
               Deux séances gratuites pour découvrir l&apos;expérience GBÔ
-            </Link>
+            </div>
           </div>
         </div>
       </Reveal>

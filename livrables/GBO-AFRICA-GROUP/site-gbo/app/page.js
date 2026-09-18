@@ -43,25 +43,25 @@ const TRUST_AVATARS = COACHES_PREVIEW.slice(0, 4).map((c) => c.photo);
 const HOME_POLES = [
   {
     accent: 'FITNESS',
-    desc: 'Coaching, suivi et solutions pour une meilleure pratique.',
+    desc: 'Coaching & accompagnement sportif.',
     href: '/fitness',
     photo: 'https://images.pexels.com/photos/34043595/pexels-photo-34043595.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     accent: 'ACADEMY',
-    desc: 'Formations pour développer les compétences du secteur.',
+    desc: 'Formation et développement des compétences dans les métiers du sport.',
     href: '/poles/academy',
     photo: 'https://images.pexels.com/photos/6740171/pexels-photo-6740171.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     accent: 'EVENTS',
-    desc: "Organisation d'événements sportifs et expérientiels.",
+    desc: "Conception, organisation et animation d'événements sportifs et d'expériences de marque.",
     href: '/poles/events',
     photo: 'https://images.pexels.com/photos/30278406/pexels-photo-30278406.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     accent: 'SECURITY',
-    desc: 'Des solutions pour des espaces sportifs plus sûrs.',
+    desc: 'Solutions de sécurité pour les événements, les espaces et les organisations.',
     href: '/poles/security',
     photo: 'https://images.pexels.com/photos/34585117/pexels-photo-34585117.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
@@ -150,6 +150,21 @@ const PARTNER_CARD_ICONS = [
       <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
     </>
   ),
+];
+
+// Section "Nos partenaires" (accueil) : partenaire nutrition (Cabinet Médico-Nutrition) +
+// salle partenaire (BEST-GYM, voir aussi PARTNER_GYMS dans data/content.js).
+const HOME_PARTNERS = [
+  {
+    name: 'Cabinet Médico-Nutrition SARL',
+    logo: '/images/logos/cabinet-medico-nutrition.jpg',
+    desc: 'Le suivi nutritionnel proposé aux clients GBÔ est assuré par des professionnels de santé de ce cabinet partenaire.',
+  },
+  {
+    name: 'BEST-GYM',
+    logo: '/images/best-gym-mark.png',
+    desc: 'Salle de sport partenaire GBÔ, ouverte à nos pratiquants à Abidjan.',
+  },
 ];
 
 // Bandeau "Un objectif commun / Des partenariats durables / Une Afrique plus active" en
@@ -374,7 +389,7 @@ export default function HomePage() {
           )}
         >
           <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
-            <ImageSlot placeholder="Salle GBÔ équipée" src={stockPhoto('gymInterior', 'home-gym-solution', '1000x750')} />
+            <ImageSlot placeholder="Salle GBÔ équipée" src="/images/hero/egym-section.jpg" />
             <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.6) 100%);pointer-events:none')} />
             <div
               style={css(
@@ -442,28 +457,31 @@ export default function HomePage() {
       </Reveal>
 
       <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
-        <div style={{ maxWidth: 780, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:22px;text-align:center')}>
-            Notre partenaire nutrition
+            Nos partenaires
           </div>
-          <div
-            style={css(
-              'display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;padding:clamp(24px,4vw,36px);border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03))'
-            )}
-          >
-            <div style={{ width: 160, height: 100, borderRadius: 14, background: '#fff', position: 'relative', overflow: 'hidden', flex: '0 0 auto' }}>
-              <img
-                src="/images/logos/cabinet-medico-nutrition.jpg"
-                alt="Cabinet Médico-Nutrition SARL"
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 14 }}
-              />
-            </div>
-            <div style={{ maxWidth: 380 }}>
-              <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 6 }}>Cabinet Médico-Nutrition SARL</div>
-              <div style={css('font-size:14px;color:var(--muted,#8a8a8a);line-height:1.5')}>
-                Le suivi nutritionnel proposé aux clients GBÔ est assuré par des professionnels de santé de ce cabinet partenaire.
+          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:20px')}>
+            {HOME_PARTNERS.map((p) => (
+              <div
+                key={p.name}
+                style={css(
+                  'display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px;padding:clamp(24px,4vw,32px);border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03))'
+                )}
+              >
+                <div style={{ width: 140, height: 90, borderRadius: 14, background: '#fff', position: 'relative', overflow: 'hidden', flex: '0 0 auto' }}>
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 12 }}
+                  />
+                </div>
+                <div style={{ maxWidth: 320 }}>
+                  <div style={{ fontWeight: 700, fontSize: 16.5, marginBottom: 6 }}>{p.name}</div>
+                  <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>{p.desc}</div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </Reveal>

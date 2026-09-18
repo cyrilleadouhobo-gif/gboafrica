@@ -13,7 +13,7 @@ const STATIC_ROUTES = [
   { path: '/corporate', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/faq', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/fitness', priority: 0.9, changeFrequency: 'weekly' },
-  { path: '/fitness/tunnel', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/deux-seances-gratuites', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/news', priority: 0.5, changeFrequency: 'weekly' },
   { path: '/partners', priority: 0.5, changeFrequency: 'monthly' },
 ];

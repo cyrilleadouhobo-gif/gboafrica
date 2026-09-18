@@ -355,7 +355,7 @@ select {
    plutôt un trait sous chaque chiffre (sauf le dernier) via ::after : la ligne suit
    alors toujours son propre chiffre, quelle que soit la façon dont ça s'empile. */
 [data-statsep] {
-  width: 1px;
+  width: 1px; 
   height: 30px;
 }
 @media (max-width: 1220px) {

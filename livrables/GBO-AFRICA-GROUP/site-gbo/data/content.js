@@ -397,7 +397,7 @@ export const FAQ_GROUPS = [
   {
     cat: 'Fitness',
     items: [
-      { q: 'Faut-il créer un compte pour commencer ?', a: 'Non. Le tunnel Particulier ne demande aucun compte : vous laissez vos coordonnées et un conseiller vous rappelle.' },
+      { q: 'Faut-il créer un compte pour commencer ?', a: 'Non. Le formulaire Particulier ne demande aucun compte : vous laissez vos coordonnées et un conseiller vous rappelle.' },
       { q: 'Où se déroulent les séances ?', a: 'À domicile, en salle partenaire, en entreprise ou en extérieur, selon votre programme.' },
       { q: 'Le premier bilan est-il payant ?', a: 'Le premier bilan permet d\'évaluer vos objectifs et votre condition. Les modalités vous sont précisées par votre conseiller.' },
     ],
