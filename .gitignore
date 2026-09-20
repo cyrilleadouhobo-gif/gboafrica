@@ -1,3 +1,8 @@
 # Fichiers système
 .DS_Store
 Thumbs.db
+
+# Skills tiers installés localement (dépôts git complets à part entière, pas du contenu
+# à versionner ici) : dépôt officiel Anthropic + code source de Strix.
+.claude/skills/anthropic-skills/
+.claude/skills/strix/

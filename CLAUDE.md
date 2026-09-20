@@ -144,6 +144,12 @@ Skill de veille intelligente qui filtre les actualités selon mon contexte perso
 
 L'avantage : pas de bruit. Seulement ce qui me concerne vraiment, vu mes objectifs et projets actuels.
 
+### audit-securite-projets
+
+Skill d'ingénieur sécurité pour mes propres sites et applications. Activée quand je demande "teste la sécurité de [projet]", "trouve les failles de [app]", "lance un pentest sur [cible]", ou "corrige les failles trouvées".
+
+Oriente vers les skills de pentest Strix déjà installées (code source, site web, API, OWASP Top 10...) selon la cible, restitue un rapport de vulnérabilités priorisé avec preuve d'exploitation, et corrige sur ma validation en revérifiant que chaque faille est bien fermée. Ne teste jamais une cible dont je ne suis pas propriétaire ou explicitement autorisé.
+
 ---
 
 ## Getting Started
