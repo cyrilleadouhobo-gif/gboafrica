@@ -2,7 +2,11 @@ import { prisma } from './db.js';
 
 export function getClientIp(request) {
   const fwd = request.headers.get('x-forwarded-for');
-  if (fwd) return fwd.split(',')[0].trim();
+  // The leftmost entry is whatever the client sent and is trivially spoofable — a visitor
+  // can set their own X-Forwarded-For to a fresh value on every request to dodge
+  // rate limiting. The rightmost entry is the one appended by our own trusted reverse
+  // proxy right before reaching this app, so that's the one to trust.
+  if (fwd) return fwd.split(',').pop().trim();
   return request.headers.get('x-real-ip') || '0.0.0.0';
 }
 
