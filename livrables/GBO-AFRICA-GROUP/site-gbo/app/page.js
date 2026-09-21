@@ -458,30 +458,37 @@ export default function HomePage() {
 
       <Reveal as="section" style={css('padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:22px;text-align:center')}>
-            Nos partenaires
-          </div>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:20px')}>
-            {HOME_PARTNERS.map((p) => (
-              <div
-                key={p.name}
-                style={css(
-                  'display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px;padding:clamp(24px,4vw,32px);border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03))'
-                )}
-              >
-                <div style={{ width: 140, height: 90, borderRadius: 14, background: '#fff', position: 'relative', overflow: 'hidden', flex: '0 0 auto' }}>
-                  <img
-                    src={p.logo}
-                    alt={p.name}
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 12 }}
-                  />
-                </div>
-                <div style={{ maxWidth: 320 }}>
-                  <div style={{ fontWeight: 700, fontSize: 16.5, marginBottom: 6 }}>{p.name}</div>
-                  <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>{p.desc}</div>
-                </div>
+          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:clamp(28px,5vw,56px)')}>
+            <div>
+              <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600;margin-bottom:14px')}>
+                Nos partenaires
               </div>
-            ))}
+              <p style={css('font-size:14.5px;color:var(--muted,#8a8a8a);line-height:1.6;max-width:34ch')}>
+                Des experts qui complètent notre accompagnement au quotidien.
+              </p>
+            </div>
+            <div style={css('border-top:1px solid var(--border,rgba(255,255,255,.1))')}>
+              {HOME_PARTNERS.map((p) => (
+                <div
+                  key={p.name}
+                  style={css(
+                    'display:flex;flex-wrap:wrap;align-items:center;gap:20px;padding:22px 0;border-bottom:1px solid var(--border,rgba(255,255,255,.1))'
+                  )}
+                >
+                  <div style={{ width: 64, height: 64, borderRadius: 12, background: '#fff', position: 'relative', overflow: 'hidden', flex: '0 0 auto' }}>
+                    <img
+                      src={p.logo}
+                      alt={p.name}
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', padding: 8 }}
+                    />
+                  </div>
+                  <div style={{ flex: '1 1 240px' }}>
+                    <div style={{ fontWeight: 700, fontSize: 16 }}>{p.name}</div>
+                    <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5;margin-top:4px')}>{p.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Reveal>
