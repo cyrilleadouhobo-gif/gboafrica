@@ -211,62 +211,70 @@ export const ARTICLE_CAT_PHOTO = {
   Professionnels: 'fitnessMen',
 };
 
+// Contenu (lede/body/facts) rédigé comme brouillon, à valider par Cyrille avant publication
+// finale, même statut que le corps des articles de ARTICLES ci-dessus.
 export const NEWS_ITEMS = [
   {
     id: 'n1',
+    slug: 'plateforme-digitale-officielle',
     date: 'Août 2026',
     tag: 'Marque',
     title: 'GBÔ AFRICA GROUP dévoile sa plateforme digitale officielle',
     excerpt: 'Une nouvelle étape dans le développement de l’écosystème GBÔ. Plus de services, plus de connexions, plus d’opportunités pour faire avancer le sport en Afrique.',
+    facts: [
+      { label: 'Statut', value: 'En ligne' },
+      { label: 'Portée', value: 'Tout l’écosystème GBÔ' },
+    ],
+    body: [
+      {
+        h: 'Un accès direct à tout l’écosystème GBÔ',
+        p: 'Fitness, Academy, Events, Security : chaque pôle du groupe est désormais réuni au même endroit, avec des parcours pensés pour chaque profil, du particulier qui cherche un coach à l’entreprise qui veut sécuriser un événement.',
+      },
+      {
+        h: 'Réserver en quelques clics',
+        p: 'Les formulaires de contact, de candidature et de prise de rendez-vous sont désormais en ligne. Chaque demande arrive directement à l’équipe concernée, sans passer par plusieurs intermédiaires.',
+      },
+      {
+        h: 'Une base pour la suite',
+        p: 'Cette plateforme est un point de départ. Elle évoluera avec de nouveaux contenus et de nouvelles fonctionnalités au fil de la croissance du groupe.',
+      },
+    ],
+    cta: { label: 'Explorer la plateforme', href: '/' },
   },
   {
     id: 'n2',
+    slug: 'ouverture-inscriptions-fitness-abidjan',
     date: 'Juillet 2026',
     tag: 'Fitness',
     title: 'GBÔ Fitness ouvre les inscriptions à Abidjan',
     excerpt: 'Des programmes adaptés à tous les niveaux, encadrés par des coachs professionnels.',
-  },
-  {
-    id: 'n4',
-    date: 'Mai 2026',
-    tag: 'Academy',
-    title: 'Première cohorte de formation : cap sur l’excellence.',
-    excerpt: 'GBÔ Academy lance ses premières sessions de formation pour les futurs professionnels du sport en Afrique.',
-  },
-  {
-    id: 'n5',
-    date: 'Avril 2026',
-    tag: 'Events',
-    title: 'GBÔ Run : le sport rassemble à Abidjan.',
-    excerpt: 'Une journée sportive et solidaire pour promouvoir un mode de vie actif.',
-  },
-  {
-    id: 'n3',
-    date: 'Juin 2026',
-    tag: 'Communauté',
-    title: 'Le Club GBÔ prend vie.',
-    excerpt: 'Un espace dédié aux membres pour partager, progresser et vivre le sport autrement.',
-  },
-  {
-    id: 'n6',
-    date: 'Mars 2026',
-    tag: 'Partenariats',
-    title: 'GBÔ renforce son écosystème avec de nouveaux partenaires.',
-    excerpt: 'Des collaborations stratégiques pour développer ensemble le sport en Afrique.',
+    facts: [
+      { label: 'Lieu', value: 'Abidjan' },
+      { label: 'Formule découverte', value: '2 séances gratuites' },
+    ],
+    body: [
+      {
+        h: 'Des programmes pour chaque profil',
+        p: 'Adultes, femmes, femmes enceintes, jeunes mamans, seniors : chaque parcours est construit autour d’un objectif précis, avec un accompagnement encadré par des coachs professionnels.',
+      },
+      {
+        h: 'À domicile, en salle partenaire ou en extérieur',
+        p: 'Les séances s’organisent selon vos disponibilités et votre lieu de préférence à Abidjan, avec la possibilité d’un suivi nutritionnel en complément.',
+      },
+      {
+        h: 'Commencer sans engagement',
+        p: 'Les deux premières séances sont gratuites. L’occasion de rencontrer un coach et de définir un objectif clair avant toute décision.',
+      },
+    ],
+    cta: { label: 'Réserver mes deux séances gratuites', href: '/deux-seances-gratuites' },
   },
 ];
-// Regroupement large utilisé par les filtres de /news (Sport & Afrique n'a pas encore
-// d'actualité associée — le filtre existe mais reste vide pour l'instant, comme
-// "Actualités GBÔ" sur /blog).
-export const NEWS_CATS = ['Tous', 'Marque', 'Fitness', 'Academy', 'Events', 'Communauté', 'Partenariats', 'Sport & Afrique'];
+// Regroupement utilisé par les filtres de /news, limité aux tags réellement présents
+// dans NEWS_ITEMS ci-dessus.
+export const NEWS_CATS = ['Tous', 'Marque', 'Fitness'];
 export const NEWS_CAT_PHOTO = {
   Marque: 'gymInterior',
   Fitness: 'fitnessWomen',
-  Academy: 'team',
-  Events: 'fitnessMen',
-  Communauté: 'community',
-  Partenariats: 'team',
-  'Sport & Afrique': 'fitnessMen',
 };
 
 // pole : clé de filtre (correspond aux pôles de data/poles.js + 'groupe' pour les postes

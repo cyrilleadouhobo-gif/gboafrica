@@ -46,23 +46,24 @@ const FEATURE_HIGHLIGHTS = [
 
 function NewsCard({ n, i }) {
   return (
-    <Reveal
-      key={n.id}
-      delay={i * 60}
-      className="hover-card"
-      style={css('border-radius:18px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.09))')}
-    >
-      <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-        <ImageSlot placeholder="Visuel actualité" src={stockPhoto(NEWS_CAT_PHOTO[n.tag] || 'fitnessMen', n.id, '600x375')} />
-      </div>
-      <div style={{ padding: 20 }}>
-        <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
-          {n.tag} · {n.date}
+    <Reveal key={n.id} delay={i * 60}>
+      <Link
+        href={`/news/${n.slug}`}
+        className="hover-card"
+        style={{ display: 'block', borderRadius: 18, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.09))', color: 'inherit', textDecoration: 'none' }}
+      >
+        <div style={{ aspectRatio: '16/10', position: 'relative' }}>
+          <ImageSlot placeholder="Visuel actualité" src={stockPhoto(NEWS_CAT_PHOTO[n.tag] || 'fitnessMen', n.id, '600x375')} />
         </div>
-        <div style={{ fontWeight: 700, fontSize: 18, margin: '8px 0 6px', lineHeight: 1.3 }}>{n.title}</div>
-        <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:12px')}>{n.excerpt}</div>
-        <div style={css('font-size:13px;font-weight:700;color:var(--lime,#C6F202)')}>Lire →</div>
-      </div>
+        <div style={{ padding: 20 }}>
+          <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
+            {n.tag} · {n.date}
+          </div>
+          <div style={{ fontWeight: 700, fontSize: 18, margin: '8px 0 6px', lineHeight: 1.3 }}>{n.title}</div>
+          <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:12px')}>{n.excerpt}</div>
+          <div style={css('font-size:13px;font-weight:700;color:var(--lime,#C6F202)')}>Lire →</div>
+        </div>
+      </Link>
     </Reveal>
   );
 }
@@ -174,14 +175,15 @@ export default function NewsPage() {
                   {featured.title}
                 </h2>
                 <p style={css('font-size:14.5px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:24px;max-width:48ch')}>{featured.excerpt}</p>
-                <div
+                <Link
+                  href={`/news/${featured.slug}`}
                   className="btn-cta"
                   style={css(
-                    'display:inline-flex;align-self:flex-start;padding:14px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14.5px;cursor:pointer'
+                    'display:inline-flex;align-self:flex-start;padding:14px 26px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14.5px'
                   )}
                 >
                   Lire l&apos;article →
-                </div>
+                </Link>
               </div>
               <div style={{ position: 'relative', minHeight: 260 }}>
                 <ImageSlot placeholder="Plateforme GBÔ" src={stockPhoto('gymInterior', 'news-featured', '700x800')} />
@@ -225,11 +227,8 @@ export default function NewsPage() {
       {/* Dernières actualités */}
       <Reveal as="section" style={css('padding:clamp(40px,6vw,60px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={css('display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px')}>
+          <div style={{ marginBottom: 22 }}>
             <div style={eyebrow}>Dernières actualités</div>
-            <button onClick={() => setActiveFilter('Tous')} style={css('font-size:13px;font-weight:700;color:var(--lime,#C6F202);cursor:pointer')}>
-              Voir toutes les actualités →
-            </button>
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:16px')}>
             {filtered.map((n, i) => (
