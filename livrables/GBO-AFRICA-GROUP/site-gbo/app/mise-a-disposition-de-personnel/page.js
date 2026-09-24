@@ -11,8 +11,10 @@ export const metadata = {
 // Reproduction adaptée (couleurs GBÔ) d'une maquette de référence fournie par Cyrille.
 // Photos Pexels vetted lors de la session « Nos coachs » (sujets noirs/africains confirmés
 // visuellement, pas de logo de marque tierce) : mêmes IDs réutilisés ici pour cohérence.
-const COACH_PHOTO = 'https://images.pexels.com/photos/8612491/pexels-photo-8612491.jpeg?auto=compress&cs=tinysrgb&w=600';
+const COACH_PHOTO = '/images/hero-fitness/coach-aliya.jpg'; // Photo fournie par Cyrille (Coach Aliya)
 const MANAGER_PHOTO = 'https://images.pexels.com/photos/23366059/pexels-photo-23366059.jpeg?auto=compress&cs=tinysrgb&w=600';
+// Photo fournie par Cyrille (équipe de coachs GBÔ), remplace le visuel générique du hero.
+const HERO_PHOTO = '/images/hero-fitness/personnel-hero.jpg';
 
 const TRUST_POINTS = [
   {
@@ -123,7 +125,7 @@ export default function MiseADispositionDePersonnelPage() {
                 RENFORCEZ VOTRE <span style={{ color: '#C6F202' }}>ÉQUIPE.</span>
               </h1>
               <p style={css('font-size:clamp(16px,2.2vw,20px);color:rgba(255,255,255,.8);max-width:56ch;margin-top:20px;line-height:1.5')}>
-                GBÔ recrute et met à votre disposition des profils adaptés aux besoins de votre salle, tout en assurant leur gestion et leur suivi.
+                Nous recrutons et mettons à votre disposition des profils adaptés aux besoins de votre salle, tout en assurant leur gestion et leur suivi.
               </p>
               <Link
                 href="/contact"
@@ -144,7 +146,7 @@ export default function MiseADispositionDePersonnelPage() {
               </div>
             </div>
             <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 28, overflow: 'hidden', border: '1px solid rgba(255,255,255,.1)' }}>
-              <ImageSlot placeholder="Coach GBÔ" src={COACH_PHOTO} />
+              <ImageSlot placeholder="Équipe de coachs GBÔ" src={HERO_PHOTO} />
               <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.55) 100%);pointer-events:none')} />
             </div>
           </div>
@@ -221,14 +223,14 @@ export default function MiseADispositionDePersonnelPage() {
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:clamp(20px,4vw,40px);align-items:end;margin-bottom:34px')}>
             <div>
               <div style={css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600;margin-bottom:14px')}>
-                Vous avez le besoin. GBÔ gère le reste.
+                Vous avez le besoin, nous gérons le reste.
               </div>
               <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(26px,4.5vw,40px);letter-spacing:-1px;line-height:1.1")}>
                 Un service complet, pour une collaboration sereine.
               </h2>
             </div>
             <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6')}>
-              De la recherche du profil à son suivi, GBÔ prend en charge les principales étapes liées à la gestion du personnel mis à disposition.
+              De la recherche du profil à son suivi, nous prenons en charge les principales étapes liées à la gestion du personnel mis à disposition.
             </p>
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:24px')}>

@@ -53,7 +53,11 @@ function NewsCard({ n, i }) {
         style={{ display: 'block', borderRadius: 18, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.09))', color: 'inherit', textDecoration: 'none' }}
       >
         <div style={{ aspectRatio: '16/10', position: 'relative' }}>
-          <ImageSlot placeholder="Visuel actualité" src={stockPhoto(NEWS_CAT_PHOTO[n.tag] || 'fitnessMen', n.id, '600x375')} />
+          <ImageSlot
+            placeholder="Visuel actualité"
+            src={n.photo || stockPhoto(NEWS_CAT_PHOTO[n.tag] || 'fitnessMen', n.id, '600x375')}
+            style={n.photoPosition ? { objectPosition: n.photoPosition } : undefined}
+          />
         </div>
         <div style={{ padding: 20 }}>
           <div style={css('font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--lime,#C6F202);font-weight:600')}>
@@ -118,7 +122,9 @@ export default function NewsPage() {
               </div>
             </div>
             <div style={{ position: 'relative', borderRadius: 24, overflow: 'hidden', aspectRatio: '3/4', minHeight: 280 }}>
-              <ImageSlot placeholder="Sportive GBÔ" src={stockPhoto('fitnessWomen', 'news-hero', '900x1100')} />
+              {/* Photo fournie par Cyrille — petite inscription "DFYNE" (marque tierce) visible sur
+                  la tenue, signalée avant intégration ; gardée sur demande explicite. */}
+              <ImageSlot placeholder="Sportive GBÔ" src="/images/news-hero.jpg" />
               <div
                 style={css(
                   'position:absolute;inset:0;background:linear-gradient(200deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,0) 42%);pointer-events:none'
@@ -186,7 +192,11 @@ export default function NewsPage() {
                 </Link>
               </div>
               <div style={{ position: 'relative', minHeight: 260 }}>
-                <ImageSlot placeholder="Plateforme GBÔ" src={stockPhoto('gymInterior', 'news-featured', '700x800')} />
+                <ImageSlot
+                  placeholder="Plateforme GBÔ"
+                  src={featured.photo || '/images/news-featured.jpg'}
+                  style={featured.photoPosition ? { objectPosition: featured.photoPosition } : undefined}
+                />
                 <div
                   style={css(
                     'position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,12,12,.5) 0%,rgba(12,12,12,0) 30%);pointer-events:none'

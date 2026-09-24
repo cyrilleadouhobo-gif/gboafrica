@@ -52,7 +52,11 @@ export default async function NewsDetailPage({ params }) {
         )}
 
         <div style={{ position: 'relative', aspectRatio: '16/9', borderRadius: 20, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))', marginBottom: 40 }}>
-          <ImageSlot placeholder="Visuel actualité" src={stockPhoto(NEWS_CAT_PHOTO[item.tag] || 'fitnessMen', item.id, '1200x675')} />
+          <ImageSlot
+            placeholder="Visuel actualité"
+            src={item.photo || stockPhoto(NEWS_CAT_PHOTO[item.tag] || 'fitnessMen', item.id, '1200x675')}
+            style={item.photoPosition ? { objectPosition: item.photoPosition } : undefined}
+          />
         </div>
 
         <div style={{ maxWidth: 640, margin: '0 auto' }}>

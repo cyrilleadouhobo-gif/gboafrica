@@ -21,7 +21,7 @@ const TWO_SOLUTIONS = [
   {
     label: 'Mise à disposition de personnel',
     title: 'Les profils dont votre salle a besoin.',
-    desc: 'GBÔ recrute, sélectionne et met à votre disposition des profils adaptés à votre activité, tout en prenant en charge leur gestion contractuelle, administrative et leur suivi.',
+    desc: 'Nous recrutons, sélectionnons et mettons à votre disposition des profils adaptés à votre activité, tout en prenant en charge leur gestion contractuelle, administrative et leur suivi.',
     cta: 'Découvrir la solution',
     href: '/mise-a-disposition-de-personnel',
   },

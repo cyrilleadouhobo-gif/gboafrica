@@ -24,12 +24,16 @@ export async function POST(request) {
   if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 });
   const d = parsed.data;
 
+  // availability porte fréquence + période (deux questions facultatives réunies en un seul
+  // champ texte libre côté modèle), comment porte le message libre — voir schema.prisma.
+  const availability = [d.frequence, d.periode].filter(Boolean).join(' · ') || null;
+
   const created = await prisma.lead.create({
     data: {
       code: 'TEMP',
       type: 'ENTREPRISE',
       name: d.entreprise,
-      objective: d.besoin || 'Solution corporate',
+      objective: `${d.effectifConcerne} collaborateurs concernés`,
       profile: '—',
       source: 'Corporate',
       status: 'NOUVEAU',
@@ -37,6 +41,9 @@ export async function POST(request) {
       contactEmail: d.email,
       contactPhone: d.tel,
       contactName: d.contact,
+      practiceLocation: d.lieu,
+      availability,
+      comment: d.message || null,
       consentAt: new Date(),
     },
   });
@@ -54,7 +61,9 @@ export async function POST(request) {
     await sendEmail({
       to: FITNESS_EMAIL,
       subject: `Nouveau prospect Entreprise — ${lead.code}`,
-      html: `<p><strong>${d.entreprise}</strong></p><p>Besoin : ${d.besoin || 'Solution corporate'}</p><p>Contact : ${d.contact} · ${d.email} / ${d.tel}</p>`,
+      html: `<p><strong>${d.entreprise}</strong></p><p>${d.effectifConcerne} collaborateurs concernés · Lieu : ${d.lieu}${availability ? ` · ${availability}` : ''}</p>${
+        d.message ? `<p>Message : ${d.message}</p>` : ''
+      }<p>Contact : ${d.contact} · ${d.email} / ${d.tel}</p>`,
     });
   });
 

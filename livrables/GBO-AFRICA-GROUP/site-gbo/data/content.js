@@ -45,22 +45,21 @@ export const SOCIALS = [
 ];
 
 // `pillar` : regroupement large utilisé par les filtres de la page /blog (moins nombreux
-// que les catégories affichées sur chaque carte, ex. Prénatal et Senior se rangent tous les
-// deux sous le pilier Bien-être) — voir BLOG_CATS.
+// que les catégories affichées sur chaque carte, ex. Nutrition, Prénatal, Senior et
+// Bien-être se rangent tous sous le pilier Nutrition & Bien-être) — voir BLOG_CATS.
 // `body` : brouillon rédigé pour lancer les pages /blog/[slug] (voir la page elle-même) —
 // à relire et corriger par Cyrille avant de considérer ce contenu comme définitif.
 export const ARTICLES = [
   {
     id: 'a1',
     slug: 'bien-manger-a-abidjan',
-    cat: 'Nutrition',
-    pillar: 'Nutrition',
+    cat: 'Nutrition & Bien-être',
+    pillar: 'Nutrition & Bien-être',
     read: '5 min',
-    title: 'Bien manger à Abidjan : 7 réflexes simples',
-    excerpt: 'Des choix concrets, adaptés au marché local, pour soutenir vos objectifs.',
-    // Photo fournie par Cyrille (poulet frit, semoule, salade) plutôt que le pool générique
-    // ARTICLE_CAT_PHOTO.nutrition (bols de repas sains, sans ancrage local).
-    photo: '/images/blog/nutrition-plat-ivoirien.jpg',
+    title: '7 habitudes simples pour mieux manger au quotidien',
+    excerpt: 'Des habitudes accessibles pour améliorer son alimentation au quotidien.',
+    // Photo fournie par Cyrille (salade).
+    photo: '/images/blog/nutrition-salade.jpg',
     body: [
       { p: "Bien manger ne veut pas dire suivre un régime importé, coupé de ce qu'on trouve réellement sur nos marchés. Voici sept réflexes simples, pensés pour le quotidien à Abidjan." },
       { h: '1. Partez du marché, pas du supermarché', p: "Attiéké, igname, banane plantain, poisson frais, légumes de saison : la base locale est déjà équilibrée si on surveille les quantités et les modes de cuisson. Pas besoin de produits importés pour bien manger." },
@@ -75,10 +74,10 @@ export const ARTICLES = [
   {
     id: 'a2',
     slug: 'bouger-enceinte-en-securite',
-    cat: 'Prénatal',
-    pillar: 'Bien-être',
+    cat: 'Entraînement & Éducation',
+    pillar: 'Entraînement & Éducation',
     read: '6 min',
-    title: 'Bouger enceinte, en toute sécurité',
+    title: 'Sport et grossesse : les bons réflexes pour rester active',
     excerpt: 'Ce que dit la prudence et comment un coach adapte chaque séance.',
     photo: '/images/blog/prenatal.jpg',
     body: [
@@ -93,11 +92,11 @@ export const ARTICLES = [
   {
     id: 'a3',
     slug: 'sport-en-entreprise-investissement',
-    cat: 'Entreprise',
-    pillar: 'Entreprise',
+    cat: 'Sport & Société',
+    pillar: 'Sport & Société',
     read: '4 min',
-    title: 'Le sport en entreprise : un investissement qui paie',
-    excerpt: 'Pourquoi les organisations investissent dans le bien-être des équipes.',
+    title: 'Faire bouger ses équipes : pourquoi le sport a sa place en entreprise',
+    excerpt: 'Les bénéfices et les clés pour intégrer davantage d’activité physique dans la vie professionnelle.',
     // Photo fournie par Cyrille — logo "alto giro" (marque tierce) visible sur les sacs et
     // tapis au sol, signalé avant intégration ; gardée sur demande explicite.
     photo: '/images/blog/entreprise.jpg',
@@ -113,11 +112,11 @@ export const ARTICLES = [
   {
     id: 'a4',
     slug: 'rester-actif-apres-60-ans',
-    cat: 'Senior',
-    pillar: 'Bien-être',
+    cat: 'Transformation',
+    pillar: 'Transformation',
     read: '5 min',
-    title: 'Rester actif après 60 ans : par où commencer',
-    excerpt: "Mobilité, équilibre, force : les priorités d'un programme senior.",
+    title: 'Après 60 ans : comment rester actif et en forme ?',
+    excerpt: 'Mobilité, force et régularité : les clés pour continuer à bouger.',
     photo: '/images/blog/senior-actif.jpg',
     body: [
       { p: "Rester actif après 60 ans ne demande pas de viser la performance. Trois priorités suffisent pour construire un programme utile et sûr : l'équilibre, la force, la mobilité." },
@@ -130,8 +129,8 @@ export const ARTICLES = [
   {
     id: 'a5',
     slug: 'debuter-musculation-sans-se-blesser',
-    cat: 'Fitness',
-    pillar: 'Fitness',
+    cat: 'Entraînement & Éducation',
+    pillar: 'Entraînement & Éducation',
     read: '7 min',
     title: 'Débuter la musculation sans se blesser',
     excerpt: 'Les fondamentaux pour progresser durablement et sereinement.',
@@ -147,8 +146,8 @@ export const ARTICLES = [
   {
     id: 'a6',
     slug: 'gerer-stress-par-le-mouvement',
-    cat: 'Bien-être',
-    pillar: 'Bien-être',
+    cat: 'Nutrition & Bien-être',
+    pillar: 'Nutrition & Bien-être',
     read: '4 min',
     title: 'Gérer le stress par le mouvement',
     excerpt: "Comment l'activité physique régule l'humeur et le sommeil.",
@@ -164,8 +163,8 @@ export const ARTICLES = [
   {
     id: 'a7',
     slug: 'sport-levier-majeur-afrique',
-    cat: 'Sport & Afrique',
-    pillar: 'Sport & Afrique',
+    cat: 'Sport & Société',
+    pillar: 'Sport & Société',
     read: '6 min',
     title: 'Pourquoi le sport doit devenir un levier majeur en Afrique ?',
     excerpt: "Une analyse des opportunités, des défis et des solutions pour faire du sport un véritable moteur de développement.",
@@ -180,11 +179,11 @@ export const ARTICLES = [
   {
     id: 'a8',
     slug: 'role-coach-sportif-afrique',
-    cat: 'Professionnels',
-    pillar: 'Professionnels',
+    cat: 'Métiers du Sport',
+    pillar: 'Métiers du Sport',
     read: '5 min',
-    title: 'Quel rôle pour le coach sportif en Afrique ?',
-    excerpt: "Compétences, opportunités et perspectives d'avenir pour les professionnels du secteur.",
+    title: 'Travailler dans le sport : quels métiers pour construire sa carrière ?',
+    excerpt: 'Coaching, management, événementiel : découvrez les métiers qui font vivre l’écosystème sportif.',
     body: [
       { p: "Le métier de coach sportif est en train de se structurer en Afrique, porté par une demande croissante pour un accompagnement encadré plutôt qu'improvisé." },
       { h: 'Un métier en pleine structuration', p: "Longtemps informel, le coaching sportif gagne en reconnaissance à mesure que la demande pour un accompagnement sérieux et suivi progresse, notamment dans les grandes villes." },
@@ -195,20 +194,17 @@ export const ARTICLES = [
   },
 ];
 export const BLOG_PREVIEW = ARTICLES.slice(0, 3).map(({ id, cat, read, title, excerpt }) => ({ id: 'bp-' + id, cat, read, title, excerpt }));
-export const BLOG_CATS = ['Tous', 'Fitness', 'Nutrition', 'Bien-être', 'Entreprise', 'Sport & Afrique', 'Professionnels', 'Actualités GBÔ'];
+export const BLOG_CATS = ['Tous', 'Transformation', 'Entraînement & Éducation', 'Nutrition & Bien-être', 'Sport & Société', 'Métiers du Sport'];
 
 // Catégorie d'article -> catégorie stockPhoto correspondante. Centralisé ici pour que la
 // page blog et l'aperçu blog de l'accueil affichent toujours un visuel cohérent avec le
 // sujet de l'article (au lieu d'une seule catégorie fixe pour tous les articles).
 export const ARTICLE_CAT_PHOTO = {
-  Nutrition: 'nutrition',
-  Prénatal: 'portrait',
-  Entreprise: 'team',
-  Senior: 'senior',
-  Fitness: 'fitnessMen',
-  'Bien-être': 'fitnessWomen',
-  'Sport & Afrique': 'fitnessMen',
-  Professionnels: 'fitnessMen',
+  'Nutrition & Bien-être': 'nutrition',
+  'Entraînement & Éducation': 'fitnessMen',
+  'Sport & Société': 'team',
+  Transformation: 'senior',
+  'Métiers du Sport': 'fitnessMen',
 };
 
 // Contenu (lede/body/facts) rédigé comme brouillon, à valider par Cyrille avant publication
@@ -219,6 +215,12 @@ export const NEWS_ITEMS = [
     slug: 'plateforme-digitale-officielle',
     date: 'Août 2026',
     tag: 'Marque',
+    // Même photo que le bloc "À la une" (au-dessus), pour rester cohérent quand cette
+    // actualité réapparaît dans la grille "Dernières actualités".
+    photo: '/images/news-featured.jpg',
+    // Recadrage vers le haut pour garder les visages visibles (photo portrait, recadrée en
+    // format large ailleurs sur la page).
+    photoPosition: 'center 32%',
     title: 'GBÔ AFRICA GROUP dévoile sa plateforme digitale officielle',
     excerpt: 'Une nouvelle étape dans le développement de l’écosystème GBÔ. Plus de services, plus de connexions, plus d’opportunités pour faire avancer le sport en Afrique.',
     facts: [
@@ -244,8 +246,14 @@ export const NEWS_ITEMS = [
   {
     id: 'n2',
     slug: 'ouverture-inscriptions-fitness-abidjan',
-    date: 'Juillet 2026',
+    date: 'Octobre 2026',
     tag: 'Fitness',
+    // Photo fournie par Cyrille — logos Nike (débardeur, chaussures) et MATRIX (appareil de
+    // musculation en fond) visibles, signalés avant intégration ; gardée sur demande explicite.
+    photo: '/images/news-fitness-card.jpg',
+    // Recadrage vers le haut pour garder le visage visible (photo portrait, recadrée en
+    // format large sur la carte).
+    photoPosition: 'center 25%',
     title: 'GBÔ Fitness ouvre les inscriptions à Abidjan',
     excerpt: 'Des programmes adaptés à tous les niveaux, encadrés par des coachs professionnels.',
     facts: [
@@ -281,11 +289,10 @@ export const NEWS_CAT_PHOTO = {
 // transverses non rattachés à un pôle en particulier). icon : voir JOB_ICONS (app/careers/page.js).
 export const JOBS = [
   { t: 'Coach sportif certifié', pole: 'fitness', loc: 'Abidjan', mode: 'Terrain · Réseau partenaire', icon: 'person' },
-  { t: 'Coach prénatal / postnatal', pole: 'fitness', loc: 'Cocody', mode: 'Terrain · Réseau partenaire', icon: 'baby' },
   { t: 'Conseiller relation client', pole: 'groupe', loc: 'Plateau', mode: 'Bureau · Temps plein', icon: 'headset' },
   { t: 'Community manager', pole: 'groupe', loc: 'Abidjan', mode: 'Hybride · Temps plein', icon: 'megaphone' },
   { t: 'Chargé de partenariats & sponsoring', pole: 'events', loc: 'Abidjan', mode: 'Hybride · Temps plein', icon: 'handshake' },
-  { t: 'Formateur Sport & Fitness', pole: 'academy', loc: 'Abidjan', mode: 'Terrain · Temps plein', icon: 'graduation' },
+  { t: 'Formateur Musculation & Fitness', pole: 'academy', loc: 'Abidjan', mode: 'Terrain · Temps plein', icon: 'graduation' },
   { t: 'Agent de sécurité', pole: 'security', loc: 'Abidjan', mode: 'Terrain · Temps plein', icon: 'shield' },
   { t: 'Commercial / Business Developer', pole: 'groupe', loc: 'Abidjan', mode: 'Terrain · Temps plein', icon: 'chart' },
 ];
@@ -390,15 +397,6 @@ export const PARTNER_TYPES = [
   { t: 'Marques & équipements', d: 'Associez votre marque à nos activités, événements et communautés sportives.' },
   { t: 'Entreprises & institutions', d: 'Construisons des programmes sportifs, bien-être et des initiatives adaptées à vos enjeux.' },
   { t: 'Professionnels & experts', d: 'Intégrez notre réseau de professionnels et contribuez à l’accompagnement de notre communauté.' },
-];
-
-export const CORPORATE_SOLUTIONS = [
-  { t: 'Coaching en entreprise', d: 'Séances individuelles & collectives, sur site ou à distance.' },
-  { t: 'Team building sportif', d: 'Renforcer la cohésion par le mouvement et le défi partagé.' },
-  { t: 'Challenges inter-équipes', d: 'Compétitions internes et inter-entreprises motivantes.' },
-  { t: 'Prévention santé', d: 'Lutte contre la sédentarité, gestion du stress, prévention des TMS.' },
-  { t: 'Fitness en entreprise', d: 'Sessions régulières intégrées au rythme de vos équipes.' },
-  { t: 'Événements corporate', d: 'Journées bien-être et temps forts sur mesure.' },
 ];
 
 export const FAQ_GROUPS = [

@@ -8,7 +8,7 @@ import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import Honeypot from '../../components/Honeypot.js';
 import { useAppData } from '../../context/AppData.js';
-import { stockPhoto, articlePhoto } from '../../lib/stockPhoto.js';
+import { articlePhoto } from '../../lib/stockPhoto.js';
 import { ARTICLES, BLOG_CATS, ARTICLE_CAT_PHOTO } from '../../data/content.js';
 
 const eyebrow = css('font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700');
@@ -300,7 +300,7 @@ export default function BlogPage() {
         >
           <div style={css('position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))')}>
             <div style={{ position: 'relative', minHeight: 220 }}>
-              <ImageSlot placeholder="Restons en mouvement" src={stockPhoto('fitnessMen', 'newsletter-cta', '900x700')} />
+              <ImageSlot placeholder="Restons en mouvement" src="/images/blog/newsletter-cta.jpg" style={{ objectPosition: 'center 12%' }} />
               <div
                 style={css(
                   'position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.35) 0%,rgba(5,5,5,.8) 100%),linear-gradient(0deg,rgba(5,5,5,.6) 0%,rgba(5,5,5,0) 55%)'

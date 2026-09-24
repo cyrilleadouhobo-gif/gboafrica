@@ -45,7 +45,7 @@ const HOME_POLES = [
     accent: 'FITNESS',
     desc: 'Coaching & accompagnement sportif.',
     href: '/fitness',
-    photo: 'https://images.pexels.com/photos/34043595/pexels-photo-34043595.jpeg?auto=compress&cs=tinysrgb&w=800',
+    photo: '/images/hero-fitness/home-pole-fitness.jpg',
   },
   {
     accent: 'ACADEMY',
@@ -556,7 +556,7 @@ export default function HomePage() {
                   Devenir partenaire →
                 </Link>
                 <div style={css('margin-top:22px;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:600')}>
-                  Plus d&apos;impact. Plus d&apos;opportunités.
+                  Pour plus d&apos;impact et d&apos;opportunités.
                 </div>
               </div>
             </div>
@@ -602,7 +602,7 @@ export default function HomePage() {
         <div style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(34px,6vw,64px);letter-spacing:-2px;line-height:1")}>Prêt à commencer ?</h2>
           <p style={css('font-size:clamp(16px,2.2vw,20px);margin:18px auto 32px;max-width:52ch;opacity:.85;line-height:1.5')}>
-            Votre premier bilan est offert. Un conseiller GBÔ vous accompagne pas à pas.
+            Votre premier bilan est offert. Un conseiller vous accompagne pas à pas.
           </p>
           <Link
             href="/fitness"

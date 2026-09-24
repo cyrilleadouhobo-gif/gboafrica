@@ -12,6 +12,17 @@ export default function Reveal({ children, as: Tag = 'div', delay = 0, className
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // An element that mounts already inside (or nearly inside) the viewport — e.g. a card
+    // re-rendered in place after a filter click, not scrolled to — must not wait on the
+    // IntersectionObserver's first callback, which can lag behind a burst of DOM changes
+    // and leave it stuck invisible indefinitely since nothing will scroll to re-trigger it.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

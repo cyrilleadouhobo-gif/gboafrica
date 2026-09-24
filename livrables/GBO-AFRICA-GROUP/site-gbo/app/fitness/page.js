@@ -366,9 +366,6 @@ export default function FitnessPage() {
                 Le bon accompagnement commence par le bon coach.
               </h2>
             </div>
-            <Link href="/coachs" style={css('font-size:14px;font-weight:700;color:var(--lime,#C6F202);white-space:nowrap')}>
-              Voir tous nos coachs →
-            </Link>
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px')}>
             {FITNESS_COACHES.map((c, i) => (

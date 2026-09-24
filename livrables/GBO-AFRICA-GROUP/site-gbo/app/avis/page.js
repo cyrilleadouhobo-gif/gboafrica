@@ -39,7 +39,7 @@ export default async function ReviewsPage() {
             </div>
           ) : (
             <p style={css('font-size:16px;color:var(--muted,#8a8a8a);margin-top:20px;max-width:56ch;line-height:1.5')}>
-              Le programme démarre — soyez la première ou le premier à partager votre expérience avec GBÔ.
+              Le programme démarre, soyez la première ou le premier à partager votre expérience avec GBÔ AFRICA GROUP.
             </p>
           )}
         </div>
