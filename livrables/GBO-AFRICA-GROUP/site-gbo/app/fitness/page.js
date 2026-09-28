@@ -53,7 +53,7 @@ const TRUST_ITEMS = [
 
 // Bandeaux des cartes offres (voir section « Choisissez votre accompagnement »).
 const PARTICULIER_BANNER = '/images/hero-fitness/particulier-coaching-salle.jpg'; // photo fournie par Cyrille
-const ENTREPRISE_BANNER = 'https://images.pexels.com/photos/30688593/pexels-photo-30688593.jpeg?auto=compress&cs=tinysrgb&w=1200'; // équipe de professionnels, Lagos — code vestimentaire entreprise
+const ENTREPRISE_BANNER = '/images/hero-fitness/corporate-hero.jpg';
 
 // Icônes des 4 étapes (voir section « Notre approche »).
 const STEP_ICONS = [
@@ -82,9 +82,9 @@ const STEP_ICONS = [
 // Profils provisoires (noms/photos placeholder), en attendant que Cyrille fournisse les
 // vraies fiches coachs pour cette section — même logique que COACHES_PREVIEW sur l'accueil.
 const FITNESS_COACHES = [
-  { name: 'Koffi A.', spec: 'Renforcement musculaire', level: 'Expert', zone: 'Cocody', photo: 'https://images.pexels.com/photos/4908557/pexels-photo-4908557.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Awa D.', spec: 'Perte de poids', level: 'Confirmé', zone: 'Plateau', photo: 'https://images.pexels.com/photos/6455796/pexels-photo-6455796.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Moussa T.', spec: 'Préparation physique', level: 'Expert', zone: 'Marcory', photo: 'https://images.pexels.com/photos/5878697/pexels-photo-5878697.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Koffi A.', spec: 'Renforcement musculaire', level: 'Expert', zone: 'Cocody', photo: '/images/coachs/coach-bolo.jpg' },
+  { name: 'Awa D.', spec: 'Perte de poids', level: 'Confirmé', zone: 'Plateau', photo: '/images/coachs/coach-aliya.jpg' },
+  { name: 'Moussa T.', spec: 'Préparation physique', level: 'Expert', zone: 'Marcory', photo: '/images/coachs/coach-stephane.jpg' },
   { name: 'Sarah K.', spec: 'Remise en forme', level: 'Confirmé', zone: 'Yopougon', photo: 'https://images.pexels.com/photos/7113554/pexels-photo-7113554.jpeg?auto=compress&cs=tinysrgb&w=800' },
 ];
 
@@ -384,9 +384,6 @@ export default function FitnessPage() {
                       {c.zone}
                     </span>
                   </div>
-                  <Link href="/coachs" style={css('margin-top:14px;font-size:13px;font-weight:700;color:var(--lime,#C6F202);display:inline-block')}>
-                    Voir le profil →
-                  </Link>
                 </div>
               </Reveal>
             ))}
