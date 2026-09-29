@@ -216,14 +216,14 @@ export default function CorporatePage() {
             <a
               href="#proposition"
               className="btn-cta"
-              style={css('padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:15.5px')}
+              style={css('padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:clamp(13.5px,3.8vw,15.5px);white-space:nowrap')}
             >
               Demander une proposition
             </a>
             <Link
               href="/contact"
               className="btn-cta"
-              style={css('padding:16px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:15.5px')}
+              style={css('padding:16px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:clamp(13.5px,3.8vw,15.5px);white-space:nowrap')}
             >
               Parler à GBÔ
             </Link>
