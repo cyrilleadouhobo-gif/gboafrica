@@ -175,7 +175,7 @@ export default function FitnessPage() {
           <Link
             href="#accompagnement"
             className="btn-cta"
-            style={css('margin-top:28px;display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
+            style={css('margin-top:28px;display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:clamp(14px,4vw,16px);white-space:nowrap')}
           >
             Commencer maintenant →
           </Link>
