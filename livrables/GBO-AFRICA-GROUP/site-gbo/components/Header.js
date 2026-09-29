@@ -209,9 +209,6 @@ export default function Header() {
             <Link href="/news" onClick={closeAll} style={mobileLinkStyle(isActive('/news'))}>
               Actualités
             </Link>
-            <Link href="/coachs" onClick={closeAll} style={mobileLinkStyle(isActive('/coachs'))}>
-              Nos coachs
-            </Link>
             <Link href="/avis" onClick={closeAll} style={mobileLinkStyle(isActive('/avis'))}>
               Avis clients
             </Link>

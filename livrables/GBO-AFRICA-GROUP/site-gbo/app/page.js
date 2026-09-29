@@ -22,8 +22,8 @@ const HERO_SLIDES = [
 // Bandeaux photo des sections Valeurs / Méthode / Pôles — même collection Accra que le hero
 // (même photographe, casting confirmé visuellement), pour casser les blocs 100% texte.
 
-// Aperçu de 6 coachs sur la home (liste complète et à jour sur /coachs, alimentée par la
-// base). Photos Pexels choisies et vérifiées individuellement (sujets noirs/africains,
+// Avatars de coachs pour la rangée de confiance du hero. Photos Pexels choisies et
+// vérifiées individuellement (sujets noirs/africains,
 // tenue sport, pas de logo de marque tierce visible) — provisoire, à remplacer par les
 // vraies photos des coachs GBÔ dès que Cyrille les fournit.
 const COACHES_PREVIEW = [

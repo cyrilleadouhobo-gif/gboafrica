@@ -8,7 +8,6 @@ const STATIC_ROUTES = [
   { path: '/avis', priority: 0.6, changeFrequency: 'weekly' },
   { path: '/blog', priority: 0.6, changeFrequency: 'weekly' },
   { path: '/careers', priority: 0.5, changeFrequency: 'weekly' },
-  { path: '/coachs', priority: 0.7, changeFrequency: 'weekly' },
   { path: '/contact', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/corporate', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/faq', priority: 0.5, changeFrequency: 'monthly' },
