@@ -401,32 +401,50 @@ export const PARTNER_TYPES = [
 
 export const FAQ_GROUPS = [
   {
-    cat: 'Fitness',
+    cat: 'Particuliers',
     items: [
       { q: 'Faut-il créer un compte pour commencer ?', a: 'Non. Le formulaire Particulier ne demande aucun compte : vous laissez vos coordonnées et un conseiller vous rappelle.' },
-      { q: 'Où se déroulent les séances ?', a: 'À domicile, en salle partenaire, en entreprise ou en extérieur, selon votre programme.' },
+      { q: 'Où se déroulent les séances ?', a: 'À domicile, en salle partenaire ou en extérieur, selon le programme choisi.' },
+      { q: 'Qui peut suivre un programme GBÔ ?', a: "Nos accompagnements s'adressent aux adultes, aux femmes, aux femmes enceintes, aux nouvelles mamans et aux seniors, avec un programme adapté à chaque profil." },
+      { q: 'Puis-je ajouter un suivi nutritionnel ?', a: 'Oui, un accompagnement nutritionnel peut être ajouté en option lors de votre demande.' },
       { q: 'Le premier bilan est-il payant ?', a: 'Le premier bilan permet d\'évaluer vos objectifs et votre condition. Les modalités vous sont précisées par votre conseiller.' },
     ],
   },
   {
-    cat: 'Club & Premium',
+    cat: 'Entreprises',
     items: [
-      { q: 'Combien coûte le Club Premium ?', a: '2 000 FCFA / mois. Résiliable à tout moment, effet à l\'échéance en cours.' },
-      { q: "Qu'apporte le niveau gratuit ?", a: 'Accès à la communauté et à des contenus sélectionnés, sans engagement.' },
+      { q: 'Quels programmes proposez-vous aux entreprises ?', a: "Des séances collectives encadrées, adaptées à la taille de vos équipes, pour intégrer davantage d'activité physique dans le quotidien de vos collaborateurs." },
+      { q: 'Où se déroulent les séances entreprise ?', a: 'Dans vos locaux, dans un autre lieu de votre choix, ou à définir avec votre conseiller.' },
+      { q: 'Comment obtenir une proposition ?', a: 'Remplissez le formulaire dédié sur la page Entreprise : un conseiller GBÔ vous recontacte pour construire une offre sur mesure.' },
+    ],
+  },
+  {
+    cat: 'Salles de sport',
+    items: [
+      { q: 'Quelles solutions proposez-vous aux salles de sport ?', a: 'Deux solutions complémentaires : E-Gym, notre plateforme de gestion (clients, abonnements, paiements, stocks, indicateurs), et la mise à disposition de personnel qualifié.' },
+      { q: 'Faites-vous aussi de la mise à disposition de personnel ?', a: 'Oui. Nous recrutons, sélectionnons et mettons à votre disposition des profils qualifiés (coachs sportifs, gérants de salle), et prenons en charge leur gestion contractuelle et administrative.' },
+      { q: 'Comment devenir salle partenaire GBÔ ?', a: 'Faites votre demande depuis la page dédiée aux salles partenaires : vous rejoignez un réseau qui renforce votre visibilité et votre activité.' },
+    ],
+  },
+  {
+    cat: 'Recrutement',
+    items: [
+      { q: 'Comment postuler à une offre chez GBÔ ?', a: 'Consultez les postes ouverts sur la page Recrutement et envoyez votre candidature directement en ligne.' },
+      { q: 'Aucun poste ne correspond, puis-je postuler quand même ?', a: 'Oui. Envoyez une candidature spontanée, nous la conservons pour de futures opportunités.' },
     ],
   },
   {
     cat: 'Paiement',
     items: [
-      { q: 'Quels moyens de paiement acceptez-vous ?', a: 'Mobile money (Wave, Orange Money, MTN MoMo, Moov Money) et carte bancaire, via un prestataire agréé.' },
-      { q: 'Le paiement est-il sécurisé ?', a: 'Oui. Les paiements sont confirmés côté serveur via des webhooks signés ; devise XOF (FCFA).' },
+      { q: 'Combien coûte un accompagnement GBÔ ?', a: 'Le tarif dépend du programme choisi (particulier, entreprise, salle partenaire). Il vous est communiqué par votre conseiller une fois votre besoin précisé.' },
+      { q: 'Quels moyens de paiement acceptez-vous ?', a: "Le site ne propose pas encore de paiement en ligne. Le règlement se fait directement auprès de GBÔ, par mobile money (Wave, Orange Money, MTN MoMo, Moov Money) ou virement, selon les modalités communiquées par votre conseiller." },
     ],
   },
   {
-    cat: 'Données',
+    cat: 'Données personnelles',
     items: [
       { q: 'Que faites-vous de mes données ?', a: 'Elles servent uniquement à traiter votre demande. Conformité Loi n° 2013-450 / ARTCI, minimisation et droit à la suppression.' },
-      { q: 'Comment exercer mes droits ?', a: "Écrivez à privacy@gboafricagroup.com pour l'accès, la rectification ou la suppression." },
+      { q: 'Comment exercer mes droits ?', a: "Écrivez à contact@gboafricagroup.com pour l'accès, la rectification ou la suppression." },
     ],
   },
 ];

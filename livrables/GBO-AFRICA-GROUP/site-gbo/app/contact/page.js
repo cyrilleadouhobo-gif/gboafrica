@@ -7,9 +7,10 @@ import ImageSlot from '../../components/ImageSlot.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
+import { stockPhotoDirect } from '../../lib/stockPhoto.js';
 
 const fieldStyle = css(
-  "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
+  "min-width:0;width:100%;padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
 );
 
 export default function ContactPage() {
@@ -41,20 +42,33 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(80px,10vw,120px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
-      <div style={{ position: 'relative' }}>
-        <GlowBlobs compact />
-        <div style={{ position: 'relative' }}>
-          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:40px")}>Parlons de vos objectifs.</h1>
+    <div>
+      <section style={{ position: 'relative', overflow: 'hidden', ...css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(56px,8vw,90px)') }}>
+        <div style={{ position: 'absolute', inset: 0 }}>
+          <ImageSlot placeholder="GBÔ AFRICA GROUP" src={stockPhotoDirect('photo-1651525764791-3ae6ce60094c', '1600x700')} />
         </div>
-      </div>
-      <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px')}>
-        <div>
+        <div
+          style={css(
+            'position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.92) 0%,rgba(5,5,5,.8) 45%,rgba(5,5,5,.5) 100%),linear-gradient(180deg,rgba(5,5,5,.3) 0%,rgba(5,5,5,.75) 100%)'
+          )}
+        />
+        <GlowBlobs compact />
+        <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
+          <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:16px")}>Parlons de vos objectifs.</h1>
+          <p style={css('font-size:clamp(15px,1.8vw,17px);color:var(--muted,#c8c8c8);line-height:1.55')}>
+            Une question, un projet, une demande spécifique ? Écrivez-nous ou contactez-nous directement sur WhatsApp, un conseiller GBÔ vous répond rapidement.
+          </p>
+        </div>
+      </section>
+
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
+      <div style={css('display:flex;flex-wrap:wrap;gap:24px')}>
+        <div style={{ flex: '1 1 300px', minWidth: 0 }}>
           <form
             onSubmit={submitContact}
             style={css('display:grid;gap:12px;padding:28px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c)')}
           >
-            <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
+            <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;min-width:0')}>
               <input required name="nom" placeholder="Nom *" style={fieldStyle} />
               <input required name="tel" type="tel" placeholder="Téléphone *" style={fieldStyle} />
             </div>
@@ -65,17 +79,17 @@ export default function ContactPage() {
               type="submit"
               disabled={submitting}
               className="btn-cta"
-              style={css(`padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
+              style={css(`min-width:0;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
             >
               {submitting ? 'Envoi…' : 'Envoyer'}
             </button>
           </form>
         </div>
-        <div style={{ display: 'grid', gap: 12, alignContent: 'start' }}>
+        <div style={{ display: 'grid', gap: 12, alignContent: 'start', flex: '1 1 300px', minWidth: 0 }}>
           <a
-            href="https://wa.me/2250700000000"
+            href="https://wa.me/2250103161415"
             className="hover-card"
-            style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.02))')}
+            style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.02));min-width:0')}
           >
             <span
               style={css(
@@ -86,12 +100,12 @@ export default function ContactPage() {
                 <path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.4A10 10 0 1012 2z" />
               </svg>
             </span>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontWeight: 700, fontSize: 15 }}>WhatsApp</div>
-              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>+225 07 00 00 00 00</div>
+              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>+225 01 03 16 14 15</div>
             </div>
           </a>
-          <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1))')}>
+          <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));min-width:0')}>
             <span
               style={css(
                 'width:42px;height:42px;border-radius:12px;background:rgba(198,242,2,.14);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;flex:0 0 auto'
@@ -102,12 +116,12 @@ export default function ContactPage() {
                 <path d="M3 7l9 6 9-6" />
               </svg>
             </span>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontWeight: 700, fontSize: 15 }}>E-mail</div>
-              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>contact@gboafricagroup.com</div>
+              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);overflow-wrap:break-word')}>contact@gboafricagroup.com</div>
             </div>
           </div>
-          <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1))')}>
+          <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));min-width:0')}>
             <span
               style={css(
                 'width:42px;height:42px;border-radius:12px;background:rgba(198,242,2,.14);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;flex:0 0 auto'
@@ -118,15 +132,22 @@ export default function ContactPage() {
                 <circle cx="12" cy="10" r="3" />
               </svg>
             </span>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontWeight: 700, fontSize: 15 }}>Abidjan, Côte d&apos;Ivoire</div>
               <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>Lun–Sam · 8h–19h</div>
             </div>
           </div>
           <div style={{ aspectRatio: '16/10', borderRadius: 16, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))', position: 'relative' }}>
-            <ImageSlot placeholder="Carte Google Maps (localisation)" />
+            <iframe
+              title="Localisation GBÔ AFRICA GROUP"
+              src={`https://www.google.com/maps?q=${encodeURIComponent("Batim Star Building, Angré Djibi, Abidjan, Côte d'Ivoire")}&output=embed`}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

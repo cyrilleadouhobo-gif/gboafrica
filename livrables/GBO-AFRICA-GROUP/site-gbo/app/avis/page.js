@@ -46,7 +46,7 @@ export default async function ReviewsPage() {
       </section>
 
       <Reveal as="section" style={css('padding:clamp(20px,3vw,40px) clamp(20px,5vw,64px) clamp(64px,9vw,110px)')}>
-        <div style={css('max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(32px,5vw,56px)')}>
+        <div style={css('max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(32px,5vw,56px)')}>
           <div>
             {count === 0 ? (
               <div style={css('padding:28px;border-radius:16px;border:1px dashed var(--border,rgba(255,255,255,.18));color:var(--muted,#8a8a8a);font-size:14.5px;text-align:center')}>

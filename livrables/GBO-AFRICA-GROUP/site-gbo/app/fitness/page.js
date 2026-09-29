@@ -82,10 +82,10 @@ const STEP_ICONS = [
 // Profils provisoires (noms/photos placeholder), en attendant que Cyrille fournisse les
 // vraies fiches coachs pour cette section — même logique que COACHES_PREVIEW sur l'accueil.
 const FITNESS_COACHES = [
-  { name: 'Koffi A.', spec: 'Renforcement musculaire', level: 'Expert', zone: 'Cocody', photo: '/images/coachs/coach-bolo.jpg' },
-  { name: 'Awa D.', spec: 'Perte de poids', level: 'Confirmé', zone: 'Plateau', photo: '/images/coachs/coach-aliya.jpg' },
-  { name: 'Moussa T.', spec: 'Préparation physique', level: 'Expert', zone: 'Marcory', photo: '/images/coachs/coach-stephane.jpg' },
-  { name: 'Sarah K.', spec: 'Remise en forme', level: 'Confirmé', zone: 'Yopougon', photo: 'https://images.pexels.com/photos/7113554/pexels-photo-7113554.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Moussa DEMBELE', spec: 'Pluridisciplinaire', level: 'Expert', photo: '/images/coachs/coach-bolo.jpg' },
+  { name: 'Aliha SANOGO', spec: 'Fitness', level: 'Confirmé', photo: '/images/coachs/coach-aliya.jpg' },
+  { name: 'Stéphane DEZAI', spec: 'Fitness', level: 'Confirmé', photo: '/images/coachs/coach-stephane.jpg' },
+  { name: 'La begane K', spec: 'Remise en forme', level: 'Confirmé', photo: 'https://images.pexels.com/photos/7113554/pexels-photo-7113554.jpeg?auto=compress&cs=tinysrgb&w=800' },
 ];
 
 // Icônes des objectifs (voir section « Quel est votre objectif ? »).
@@ -175,7 +175,7 @@ export default function FitnessPage() {
           <Link
             href="#accompagnement"
             className="btn-cta"
-            style={css('margin-top:28px;display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:clamp(14px,4vw,16px);white-space:nowrap')}
+            style={css('margin-top:28px;display:inline-block;max-width:100%;padding:16px clamp(16px,6vw,30px);border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:clamp(13px,3.6vw,16px);white-space:nowrap')}
           >
             Commencer maintenant →
           </Link>
@@ -209,7 +209,7 @@ export default function FitnessPage() {
               Que vous soyez un particulier ou une entreprise, GBÔ vous propose des solutions adaptées à vos besoins.
             </p>
           </div>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px')}>
+          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:18px')}>
             <Reveal
               className="hover-card"
               style={css(
@@ -379,9 +379,6 @@ export default function FitnessPage() {
                   <div style={css('display:flex;gap:8px;margin-top:10px')}>
                     <span style={css('padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(198,242,2,.12);color:var(--lime,#C6F202);border:1px solid rgba(198,242,2,.3)')}>
                       {c.level}
-                    </span>
-                    <span style={css('padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;color:var(--muted,#8a8a8a);border:1px solid var(--border,rgba(255,255,255,.14))')}>
-                      {c.zone}
                     </span>
                   </div>
                 </div>

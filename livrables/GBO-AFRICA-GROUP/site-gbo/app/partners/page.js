@@ -6,10 +6,12 @@ import { useAppData } from '../../context/AppData.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
+import ImageSlot from '../../components/ImageSlot.js';
+import { stockPhotoDirect } from '../../lib/stockPhoto.js';
 import { PARTNER_TYPES } from '../../data/content.js';
 
 const fieldStyle = css(
-  "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
+  "min-width:0;width:100%;padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
 );
 
 export default function PartnersPage() {
@@ -42,11 +44,19 @@ export default function PartnersPage() {
 
   return (
     <div>
-      <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
+      <section style={{ position: 'relative', overflow: 'hidden', ...css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)') }}>
+        <div style={{ position: 'absolute', inset: 0 }}>
+          <ImageSlot placeholder="Salle GBÔ" src={stockPhotoDirect('photo-1633956287950-4a482f0356c8', '1600x700')} />
+        </div>
+        <div
+          style={css(
+            'position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.92) 0%,rgba(5,5,5,.82) 45%,rgba(5,5,5,.6) 100%),linear-gradient(180deg,rgba(5,5,5,.35) 0%,rgba(5,5,5,.8) 100%)'
+          )}
+        />
         <GlowBlobs />
         <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;max-width:16ch")}>Grandissons ensemble.</h1>
-          <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:58ch;margin-top:20px;line-height:1.5')}>
+          <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#c8c8c8);max-width:58ch;margin-top:20px;line-height:1.5')}>
             Salles, marques, entreprises, institutions et professionnels de santé : construisons l&apos;écosystème du mouvement.
           </p>
         </div>
@@ -77,7 +87,7 @@ export default function PartnersPage() {
               type="submit"
               disabled={submitting}
               className="btn-cta"
-              style={css(`padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
+              style={css(`min-width:0;padding:16px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px;opacity:${submitting ? 0.6 : 1}`)}
             >
               {submitting ? 'Envoi…' : 'Envoyer'}
             </button>

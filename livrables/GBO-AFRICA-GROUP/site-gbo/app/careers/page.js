@@ -294,7 +294,7 @@ export default function CareersPage() {
               </Link>
             </div>
             <div style={{ position: 'relative', minHeight: 220, alignSelf: 'stretch' }}>
-              <ImageSlot placeholder="Salle GBÔ" src={stockPhoto('gymInterior', 'careers-cta', '900x700')} />
+              <ImageSlot placeholder="Salle GBÔ" src="/images/careers/recrutement-cta.jpg" />
               <div
                 style={css(
                   'position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.5) 0%,rgba(5,5,5,.75) 100%);pointer-events:none'

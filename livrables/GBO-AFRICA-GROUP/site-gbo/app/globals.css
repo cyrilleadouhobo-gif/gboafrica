@@ -480,3 +480,24 @@ select {
     grid-row: auto !important;
   }
 }
+
+/* Pages article (/blog/[slug], /news/[slug]) : colonne de lecture + rail latéral collant
+   (sommaire, CTA) au-delà de 1080px. En dessous, le rail repasse sous le contenu principal
+   (ordre DOM : contenu d'abord) plutôt que de rester en colonne étroite avec un grand vide
+   à droite sur les écrans larges. */
+[data-article-aside] {
+  display: none;
+}
+@media (min-width: 1081px) {
+  [data-article-grid] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 780px) 280px !important;
+    gap: 56px !important;
+    align-items: start !important;
+  }
+  [data-article-aside] {
+    display: block;
+    position: sticky;
+    top: 96px;
+  }
+}

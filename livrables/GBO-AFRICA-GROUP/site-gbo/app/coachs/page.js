@@ -21,15 +21,24 @@ export default async function CoachsPage({ searchParams }) {
 
   return (
     <div>
-      <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)')}>
+      <section style={{ position: 'relative', overflow: 'hidden', ...css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(30px,4vw,50px)') }}>
+        <div style={{ position: 'absolute', inset: 0 }}>
+          <ImageSlot placeholder="Coachs GBÔ" src="/images/coachs-hero.jpg" />
+        </div>
+        <div
+          style={css(
+            'position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.92) 0%,rgba(5,5,5,.8) 45%,rgba(5,5,5,.55) 100%),linear-gradient(180deg,rgba(5,5,5,.3) 0%,rgba(5,5,5,.75) 100%)'
+          )}
+        />
         <GlowBlobs />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative' }}>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,54px);letter-spacing:-1.5px;max-width:16ch")}>
             Un réseau de coachs sélectionnés et formés.
           </h1>
-          <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#8a8a8a);max-width:58ch;margin-top:20px;line-height:1.5')}>
-            {allCoaches.length} coach{allCoaches.length > 1 ? 's' : ''} actif{allCoaches.length > 1 ? 's' : ''} sur {covered.size} commune
-            {covered.size > 1 ? 's' : ''} d&apos;Abidjan. Chaque coach est affecté selon sa spécialité, sa zone et vos disponibilités.
+          <p style={css('font-size:clamp(16px,2.2vw,20px);color:var(--muted,#c8c8c8);max-width:58ch;margin-top:20px;line-height:1.5')}>
+            {allCoaches.length > 0
+              ? `${allCoaches.length} coach${allCoaches.length > 1 ? 's' : ''} actif${allCoaches.length > 1 ? 's' : ''} sur ${covered.size} commune${covered.size > 1 ? 's' : ''} d'Abidjan. Chaque coach est affecté selon sa spécialité, sa zone et vos disponibilités.`
+              : "Notre réseau se construit. Laissez-nous vos coordonnées et un conseiller vous met en relation avec un coach dès qu'il est disponible dans votre zone."}
           </p>
         </div>
       </section>

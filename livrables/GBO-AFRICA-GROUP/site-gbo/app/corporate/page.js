@@ -216,7 +216,9 @@ export default function CorporatePage() {
             <a
               href="#proposition"
               className="btn-cta"
-              style={css('padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:clamp(13.5px,3.8vw,15.5px);white-space:nowrap')}
+              style={css(
+                'display:inline-block;min-width:0;padding:16px 28px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:clamp(13.5px,3.8vw,15.5px);text-align:center'
+              )}
             >
               Demander une proposition
             </a>
@@ -332,6 +334,19 @@ export default function CorporatePage() {
         </div>
       </Reveal>
 
+      {/* Photo — casse le rythme après 2 grilles de cartes d'affilée */}
+      <Reveal as="section" style={css('padding:clamp(24px,4vw,40px) clamp(20px,5vw,64px) 0')}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', aspectRatio: '21/8', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
+          <ImageSlot placeholder="Accompagnement GBÔ" src="/images/corporate-accompagnement.jpg" style={{ objectPosition: 'center 15%' }} />
+          <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.15) 55%,rgba(5,5,5,0) 100%)')} />
+          <div style={{ position: 'absolute', left: 'clamp(20px,4vw,40px)', top: '50%', transform: 'translateY(-50%)', maxWidth: 340 }}>
+            <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(17px,2.2vw,22px);line-height:1.25")}>
+              Un accompagnement porté par de vrais coachs, pas une app.
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
       {/* Ce que comprend l'accompagnement */}
       <Reveal as="section" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
@@ -389,6 +404,19 @@ export default function CorporatePage() {
                 <div style={{ fontWeight: 600, fontSize: 15.5 }}>{s.t}</div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Photo — casse à nouveau le rythme avant la section de conviction finale */}
+      <Reveal as="section" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px) 0')}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', aspectRatio: '21/8', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
+          <ImageSlot placeholder="Coachs GBÔ" src="/images/corporate-coachs.jpg" style={{ objectPosition: 'center 15%' }} />
+          <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.15) 55%,rgba(5,5,5,0) 100%)')} />
+          <div style={{ position: 'absolute', left: 'clamp(20px,4vw,40px)', top: '50%', transform: 'translateY(-50%)', maxWidth: 340 }}>
+            <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(17px,2.2vw,22px);line-height:1.25")}>
+              Des coachs sélectionnés et formés pour intervenir chez vous.
+            </div>
           </div>
         </div>
       </Reveal>

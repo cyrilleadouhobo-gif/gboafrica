@@ -117,7 +117,7 @@ export default function DevenirSallePartenairePage() {
               Nos salles partenaires
             </h2>
             {PARTNER_GYMS.map((g) => (
-              <div key={g.id} style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;align-items:center')}>
+              <div key={g.id} style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:24px;align-items:center')}>
                 <div
                   style={css(
                     'border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.02));overflow:hidden'

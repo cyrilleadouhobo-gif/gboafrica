@@ -52,6 +52,9 @@ export function proxy(request) {
     // Broaven is self-hosted (public/fonts/broaven) — no external font host needed.
     "font-src 'self'",
     isDev ? "connect-src 'self' ws:" : "connect-src 'self'", // ws: for the dev-mode HMR websocket
+    // Carte de localisation sur /contact, embarquée via iframe (pas d'API key nécessaire
+    // pour ce format q=...&output=embed).
+    "frame-src https://www.google.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

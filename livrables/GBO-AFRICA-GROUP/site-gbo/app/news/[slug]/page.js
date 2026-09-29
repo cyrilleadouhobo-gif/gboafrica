@@ -12,9 +12,13 @@ export default async function NewsDetailPage({ params }) {
   if (!item) notFound();
 
   const other = NEWS_ITEMS.find((n) => n.slug !== slug);
+  const sections = (item.body || []).filter((sec) => sec.h);
+  const anchor = (h) => h.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: 'clamp(70px,9vw,110px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
+    <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(70px,9vw,110px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
+    <div data-article-grid="">
+    <div style={{ maxWidth: 900 }}>
       <Reveal>
         {/* Masthead */}
         <div
@@ -62,7 +66,7 @@ export default async function NewsDetailPage({ params }) {
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
           <div style={{ display: 'grid', gap: 26 }}>
             {(item.body || []).map((sec, i) => (
-              <div key={i}>
+              <div key={i} id={sec.h ? anchor(sec.h) : undefined} style={{ scrollMarginTop: 96 }}>
                 {sec.h && <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(19px,2.4vw,23px);margin-bottom:10px")}>{sec.h}</h2>}
                 <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.7')}>{sec.p}</p>
               </div>
@@ -110,6 +114,38 @@ export default async function NewsDetailPage({ params }) {
           )}
         </div>
       </Reveal>
+    </div>
+
+    <aside data-article-aside="">
+      {sections.length > 1 && (
+        <div style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03));margin-bottom:20px')}>
+          <div style={css('font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:14px')}>
+            Dans cette actualité
+          </div>
+          <div style={{ display: 'grid', gap: 10 }}>
+            {sections.map((sec) => (
+              <a key={sec.h} href={`#${anchor(sec.h)}`} style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.4;text-decoration:none')}>
+                {sec.h}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+      <div style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.03))')}>
+        <div style={css("font-family:'Broaven';font-weight:700;font-size:16px;margin-bottom:8px")}>Restons en contact</div>
+        <div style={css('font-size:13px;color:var(--muted,#8a8a8a);line-height:1.5;margin-bottom:16px')}>
+          Suivez l&apos;actualité de l&apos;écosystème GBÔ et ses prochaines étapes.
+        </div>
+        <Link
+          href="/news"
+          className="btn-cta"
+          style={css('display:block;text-align:center;padding:12px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:13.5px')}
+        >
+          Toutes les actualités →
+        </Link>
+      </div>
+    </aside>
+    </div>
     </div>
   );
 }

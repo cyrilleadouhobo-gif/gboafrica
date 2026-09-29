@@ -6,7 +6,7 @@ import { useAppData } from '../context/AppData.js';
 import Honeypot from './Honeypot.js';
 
 const fieldStyle = css(
-  "padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
+  "min-width:0;width:100%;padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
 );
 
 // 3 Mo de fichier réel — une fois encodé en base64 (+33 %) et ajouté au reste du
@@ -93,7 +93,7 @@ export default function CoachApplicationForm({ jobTitle }) {
         <input required name="nom" placeholder="Nom complet *" style={fieldStyle} />
         <input required name="tel" type="tel" placeholder="Téléphone *" style={fieldStyle} />
         <input required name="email" type="email" placeholder="E-mail *" style={fieldStyle} />
-        <input name="spec" placeholder="Spécialité (ex. prénatal, senior…)" style={fieldStyle} />
+        <input name="spec" placeholder="Spécialité" style={fieldStyle} />
         <textarea
           name="msg"
           rows={3}

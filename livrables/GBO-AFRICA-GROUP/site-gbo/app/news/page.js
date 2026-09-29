@@ -75,8 +75,13 @@ function NewsCard({ n, i }) {
 export default function NewsPage() {
   const [activeFilter, setActiveFilter] = useState('Tous');
 
-  const filtered = useMemo(() => NEWS_ITEMS.filter((n) => activeFilter === 'Tous' || n.tag === activeFilter), [activeFilter]);
   const featured = NEWS_ITEMS[0];
+  // Le featured a déjà sa propre carte "à la une" juste au-dessus — on ne le réaffiche pas
+  // dans la grille "Dernières actualités" en dessous.
+  const filtered = useMemo(
+    () => NEWS_ITEMS.filter((n) => n.id !== featured.id).filter((n) => activeFilter === 'Tous' || n.tag === activeFilter),
+    [activeFilter, featured.id]
+  );
 
   return (
     <div>

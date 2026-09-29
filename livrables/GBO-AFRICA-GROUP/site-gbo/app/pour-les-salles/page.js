@@ -56,13 +56,10 @@ export default function PourLesSallesPage() {
       </section>
 
       <Reveal as="section" style={css('position:relative;padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px);overflow:hidden')}>
-        {/* Halos personnalisés (pas le composant GlowBlobs standard, qui n'en pose que 2 en
-            coins opposés) : un en bas à gauche, un au centre derrière le texte, un plus
-            grand en haut à droite. */}
+        {/* Halo personnalisé (pas le composant GlowBlobs standard, qui n'en pose que 2 en
+            coins opposés) : un seul, au centre derrière le texte. */}
         <div className="glow-blobs" aria-hidden="true">
-          <span className="glow-blob" style={{ bottom: -60, left: -60, width: 240, height: 240, animationDelay: '-4s' }} />
           <span className="glow-blob" style={{ top: '50%', left: '50%', width: 320, height: 320, marginTop: -160, marginLeft: -160 }} />
-          <span className="glow-blob" style={{ top: -100, right: -100, width: 380, height: 380, animationDelay: '-10s' }} />
         </div>
         <div style={{ maxWidth: 800, margin: '0 auto', position: 'relative' }}>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,4vw,36px);letter-spacing:-1px;line-height:1.15;margin-bottom:18px")}>
