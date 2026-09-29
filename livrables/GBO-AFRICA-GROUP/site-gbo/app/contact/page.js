@@ -3,11 +3,9 @@
 import { useState } from 'react';
 import { css } from '../../lib/css.js';
 import { useAppData } from '../../context/AppData.js';
-import ImageSlot from '../../components/ImageSlot.js';
 import Honeypot from '../../components/Honeypot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
-import { stockPhotoDirect } from '../../lib/stockPhoto.js';
 
 const fieldStyle = css(
   "min-width:0;width:100%;padding:15px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.14));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:15px"
@@ -43,19 +41,11 @@ export default function ContactPage() {
 
   return (
     <div>
-      <section style={{ position: 'relative', overflow: 'hidden', ...css('padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(56px,8vw,90px)') }}>
-        <div style={{ position: 'absolute', inset: 0 }}>
-          <ImageSlot placeholder="GBÔ AFRICA GROUP" src={stockPhotoDirect('photo-1651525764791-3ae6ce60094c', '1600x700')} />
-        </div>
-        <div
-          style={css(
-            'position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.92) 0%,rgba(5,5,5,.8) 45%,rgba(5,5,5,.5) 100%),linear-gradient(180deg,rgba(5,5,5,.3) 0%,rgba(5,5,5,.75) 100%)'
-          )}
-        />
+      <section style={css('position:relative;padding:clamp(80px,10vw,120px) clamp(20px,5vw,64px) clamp(56px,8vw,90px)')}>
         <GlowBlobs compact />
         <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:16px")}>Parlons de vos objectifs.</h1>
-          <p style={css('font-size:clamp(15px,1.8vw,17px);color:var(--muted,#c8c8c8);line-height:1.55')}>
+          <p style={css('font-size:clamp(15px,1.8vw,17px);color:var(--muted,#8a8a8a);line-height:1.55')}>
             Une question, un projet, une demande spécifique ? Écrivez-nous ou contactez-nous directement sur WhatsApp, un conseiller GBÔ vous répond rapidement.
           </p>
         </div>
