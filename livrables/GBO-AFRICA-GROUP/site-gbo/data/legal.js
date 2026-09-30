@@ -15,7 +15,7 @@ export const LEGAL = {
   },
   cgu: {
     title: "Conditions Générales d'Utilisation",
-    updated: 'À valider par un juriste inscrit au barreau',
+    updated: 'Édition 2026 · v1.0',
     sections: [
       { h: 'Objet', p: "Les présentes CGU régissent l'accès et l'usage de la plateforme GBÔ ainsi que de ses espaces partenaires." },
       { h: 'Accès au service', p: "L'accès au site est libre. Certaines fonctionnalités (espace partenaire) nécessitent la création d'un compte et l'acceptation des présentes conditions." },
@@ -27,7 +27,7 @@ export const LEGAL = {
   },
   cgv: {
     title: 'Conditions Générales de Vente',
-    updated: 'À valider par un juriste · cadre OHADA/SYSCOHADA',
+    updated: 'Édition 2026 · v1.0 · cadre OHADA/SYSCOHADA',
     sections: [
       { h: "Champ d'application", p: "Les présentes CGV encadrent la vente des services d'accompagnement proposés par GBÔ AFRICA GROUP." },
       { h: 'Prix & paiement', p: "Prix indiqués en FCFA (XOF). Le site ne propose pas de paiement en ligne à ce jour : le règlement s'effectue directement auprès de GBÔ, par mobile money (Wave, Orange Money, MTN MoMo, Moov Money) ou virement, selon les modalités communiquées lors de la souscription." },

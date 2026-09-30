@@ -1,7 +1,13 @@
 const { PrismaClient } = require('@prisma/client');
+const { PrismaLibSQL } = require('@prisma/adapter-libsql');
+const { createClient } = require('@libsql/client');
 const bcrypt = require('bcryptjs');
 
-const prisma = new PrismaClient();
+// Même adaptateur que lib/db.js : sans lui, ce script écrirait dans le fichier SQLite
+// local (DATABASE_URL) au lieu de la vraie base Turso utilisée par l'app en dev et prod.
+const libsql = createClient({ url: process.env.TURSO_DATABASE_URL });
+const adapter = new PrismaLibSQL(libsql);
+const prisma = new PrismaClient({ adapter });
 
 const COACHES = [
   { name: 'Coach Awa', spec: 'Prénatal / Postnatal', zones: 'Cocody, Plateau', dispo: 'DISPONIBLE', clients: 8 },
