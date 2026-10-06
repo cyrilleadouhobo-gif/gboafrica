@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../../lib/db.js';
 import { loginSchema, parseOrError } from '../../../../lib/validation.js';
-import { getClientIp, isSameOrigin, rateLimit } from '../../../../lib/security.js';
-import { verifyPassword, createSession, sessionCookieOptions, logAudit, SESSION_COOKIE } from '../../../../lib/auth.js';
+import { getClientIp, isSameOrigin, formRateLimit, GLOBAL_LOGIN_LIMIT } from '../../../../lib/security.js';
+import { verifyPassword, createSession, sessionCookieOptions, logAudit, SESSION_COOKIE, DUMMY_PASSWORD_HASH } from '../../../../lib/auth.js';
 
 export async function POST(request) {
   if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
 
   const ip = getClientIp(request);
   // Deliberately strict: this is the door to visitor data. 8 attempts / 15 min / IP.
-  const { allowed } = await rateLimit(`login:${ip}`, { max: 8, windowMs: 15 * 60 * 1000 });
+  const { allowed } = await formRateLimit('login', ip, { max: 8, windowMs: 15 * 60 * 1000 }, GLOBAL_LOGIN_LIMIT);
   if (!allowed) {
     return NextResponse.json({ error: 'Trop de tentatives. Réessayez plus tard.' }, { status: 429 });
   }
@@ -22,7 +22,7 @@ export async function POST(request) {
   const { email, password } = parsed.data;
 
   const admin = await prisma.adminUser.findUnique({ where: { email } });
-  const valid = admin ? await verifyPassword(password, admin.passwordHash) : false;
+  const valid = await verifyPassword(password, admin ? admin.passwordHash : DUMMY_PASSWORD_HASH);
 
   if (!admin || !valid) {
     await logAudit({ adminUserId: null, action: 'login_failed', targetType: 'AdminUser', targetId: email, detail: { ip } });

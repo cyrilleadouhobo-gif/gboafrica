@@ -3,7 +3,6 @@ import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
-import { stockPhoto } from '../../lib/stockPhoto.js';
 
 export const metadata = { title: 'À propos — GBÔ AFRICA GROUP' };
 
@@ -99,15 +98,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
-            <ImageSlot placeholder="Équipe GBÔ" src={stockPhoto('team', 'about-qui-sommes-nous', '1000x750')} />
-            <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.2) 55%,transparent 100%);pointer-events:none')} />
-            <div
-              style={css(
-                "position:absolute;top:18px;right:18px;left:18px;text-align:right;font-family:'Broaven';font-weight:700;font-size:clamp(11px,1.3vw,14px);color:rgba(255,255,255,.9);line-height:1.35"
-              )}
-            >
-              DES INDIVIDUS PLUS FORTS, DES COMMUNAUTÉS PLUS SOLIDES, UNE AFRIQUE PLUS ACTIVE.
-            </div>
+            <ImageSlot placeholder="Équipe GBÔ" src="/images/about/qsn-apropos.jpeg" style={{ objectPosition: 'center 20%' }} />
           </div>
         </div>
       </Reveal>

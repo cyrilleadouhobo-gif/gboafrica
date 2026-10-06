@@ -10,6 +10,10 @@ export async function hashPassword(plain) {
   return bcrypt.hash(plain, 12);
 }
 
+// Hash factice d'un secret aléatoire jetable : sert à faire le même travail bcrypt quand le
+// compte n'existe pas, pour que le temps de réponse ne révèle pas quelles adresses existent.
+export const DUMMY_PASSWORD_HASH = '$2b$12$GOHkRoblWQAdvChheaQJzOqo1/A98vNv6jReBArfVILTNKe9nq2wy';
+
 export async function verifyPassword(plain, hash) {
   return bcrypt.compare(plain, hash);
 }

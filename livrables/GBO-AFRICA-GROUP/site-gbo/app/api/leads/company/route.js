@@ -1,7 +1,7 @@
 import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../../lib/db.js';
 import { companyLeadSchema, parseOrError } from '../../../../lib/validation.js';
-import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../../lib/security.js';
+import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../../lib/security.js';
 import { leadCode } from '../../../../lib/constants.js';
 import { sendEmail } from '../../../../lib/email.js';
 import { sendWhatsAppConfirmation } from '../../../../lib/whatsapp.js';
@@ -13,7 +13,7 @@ export async function POST(request) {
   }
 
   const ip = getClientIp(request);
-  const { allowed } = await rateLimit(`leads-company:${ip}`, { max: 5, windowMs: 10 * 60 * 1000 });
+  const { allowed } = await formRateLimit('leads-company', ip, { max: 5, windowMs: 10 * 60 * 1000 });
   if (!allowed) return NextResponse.json({ error: 'Trop de demandes. Réessayez dans quelques minutes.' }, { status: 429 });
 
   const body = await request.json().catch(() => null);

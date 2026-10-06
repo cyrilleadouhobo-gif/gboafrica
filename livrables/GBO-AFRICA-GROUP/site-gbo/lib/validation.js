@@ -67,12 +67,24 @@ export const contactSchema = z.object({
 // CV joint au format base64 (encodé côté client) — voir components/CoachApplicationForm.js.
 // 4 Mo de base64 ≈ 3 Mo de fichier réel, plafonné pour rester sous la limite de taille de
 // requête de Vercel (~4.5 Mo) une fois le reste du formulaire ajouté.
+// Signatures d'en-tête réelles des formats autorisés : le type déclaré par le navigateur
+// peut être falsifié, le contenu, lui, doit commencer par la bonne signature.
+const CV_SIGNATURES = {
+  'application/pdf': [0x25, 0x50, 0x44, 0x46], // %PDF
+  'application/msword': [0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1], // OLE2 (.doc)
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': [0x50, 0x4b, 0x03, 0x04], // ZIP (.docx)
+};
+
 const cvFile = z
   .object({
     filename: z.string().trim().min(1).max(150),
     contentType: z.enum(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']),
     base64: z.string().min(1).max(4_000_000, 'Le fichier est trop volumineux (3 Mo maximum).'),
   })
+  .refine((cv) => {
+    const head = Buffer.from(cv.base64.slice(0, 16), 'base64');
+    return CV_SIGNATURES[cv.contentType].every((byte, i) => head[i] === byte);
+  }, 'Le fichier ne correspond pas à son format (PDF, DOC ou DOCX attendu).')
   .optional()
   .nullable();
 

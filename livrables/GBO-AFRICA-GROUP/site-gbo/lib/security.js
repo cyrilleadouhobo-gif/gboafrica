@@ -52,6 +52,18 @@ export async function rateLimit(bucketKey, { max, windowMs }) {
   return { allowed: true };
 }
 
+// Plafond global par formulaire, tous IP confondues : la limite par IP seule ne suffit pas
+// contre un bot qui change d'adresse à chaque requête. Assez haut pour ne jamais gêner des
+// visiteurs réels, mais bloque une vague de spam venue de partout.
+export const GLOBAL_FORM_LIMIT = { max: 100, windowMs: 60 * 60 * 1000 };
+export const GLOBAL_LOGIN_LIMIT = { max: 30, windowMs: 15 * 60 * 1000 };
+
+export async function formRateLimit(formKey, ip, perIp, globalLimit = GLOBAL_FORM_LIMIT) {
+  const byIp = await rateLimit(`${formKey}:${ip}`, perIp);
+  if (!byIp.allowed) return byIp;
+  return rateLimit(`global:${formKey}`, globalLimit);
+}
+
 /** A hidden field real users never fill; bots that auto-fill every field trip it. */
 export function honeypotTripped(formValue) {
   return typeof formValue === 'string' && formValue.trim().length > 0;

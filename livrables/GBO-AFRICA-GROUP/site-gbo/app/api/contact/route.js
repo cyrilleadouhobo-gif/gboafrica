@@ -1,7 +1,7 @@
 import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { contactSchema, parseOrError } from '../../../lib/validation.js';
-import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
+import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../lib/security.js';
 import { sendEmail } from '../../../lib/email.js';
 import { CONTACT_EMAIL } from '../../../lib/site.js';
 
@@ -9,7 +9,7 @@ export async function POST(request) {
   if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
 
   const ip = getClientIp(request);
-  const { allowed } = await rateLimit(`contact:${ip}`, { max: 5, windowMs: 10 * 60 * 1000 });
+  const { allowed } = await formRateLimit('contact', ip, { max: 5, windowMs: 10 * 60 * 1000 });
   if (!allowed) return NextResponse.json({ error: 'Trop de demandes. Réessayez dans quelques minutes.' }, { status: 429 });
 
   const body = await request.json().catch(() => null);

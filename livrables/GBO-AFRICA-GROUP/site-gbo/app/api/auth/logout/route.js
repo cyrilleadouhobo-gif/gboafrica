@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { destroySessionCookie, getCurrentAdmin, logAudit, SESSION_COOKIE } from '../../../../lib/auth.js';
+import { isSameOrigin } from '../../../../lib/security.js';
 
-export async function POST() {
+export async function POST(request) {
+  if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
+
   const admin = await getCurrentAdmin();
   const cookieStore = await cookies();
   const raw = cookieStore.get(SESSION_COOKIE)?.value;

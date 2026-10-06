@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { reviewSchema, parseOrError } from '../../../lib/validation.js';
-import { getClientIp, isSameOrigin, rateLimit, honeypotTripped } from '../../../lib/security.js';
+import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../lib/security.js';
 
 export async function POST(request) {
   if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
 
   const ip = getClientIp(request);
-  const { allowed } = await rateLimit(`reviews:${ip}`, { max: 5, windowMs: 60 * 60 * 1000 });
+  const { allowed } = await formRateLimit('reviews', ip, { max: 5, windowMs: 60 * 60 * 1000 });
   if (!allowed) return NextResponse.json({ error: 'Trop de demandes. Réessayez plus tard.' }, { status: 429 });
 
   const body = await request.json().catch(() => null);
