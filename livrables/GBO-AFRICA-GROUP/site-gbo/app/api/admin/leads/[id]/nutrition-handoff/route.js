@@ -30,10 +30,10 @@ export async function POST(request, { params }) {
   // failure here must never turn a successful transmission into an error response. Sent via
   // after() (see app/api/leads/route.js) so it doesn't ride on the admin's connection either.
   after(async () => {
-    const partner = await prisma.adminUser.findFirst({ where: { role: 'nutrition_partner' } });
-    if (partner) {
+    const to = process.env.NUTRITION_NOTIFY_EMAIL;
+    if (to) {
       await sendEmail({
-        to: partner.email,
+        to,
         subject: 'GBÔ AFRICA GROUP — Nouveau client à suivre',
         html: `
           <p>Bonjour,</p>
