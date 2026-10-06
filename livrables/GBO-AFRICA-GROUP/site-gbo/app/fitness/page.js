@@ -85,7 +85,7 @@ const FITNESS_COACHES = [
   { name: 'Moussa DEMBELE', spec: 'Pluridisciplinaire', level: 'Expert', photo: '/images/coachs/coach-bolo.jpg' },
   { name: 'Aliha SANOGO', spec: 'Fitness', level: 'Confirmé', photo: '/images/coachs/coach-aliya.jpg' },
   { name: 'Stéphane DEZAI', spec: 'Fitness', level: 'Confirmé', photo: '/images/coachs/coach-stephane.jpg' },
-  { name: 'La begane K', spec: 'Remise en forme', level: 'Confirmé', photo: 'https://images.pexels.com/photos/7113554/pexels-photo-7113554.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Samson GBAHI', spec: 'Remise en forme', level: 'Expert', photo: '/images/coachs/coach-samson.jpeg' },
 ];
 
 // Icônes des objectifs (voir section « Quel est votre objectif ? »).
