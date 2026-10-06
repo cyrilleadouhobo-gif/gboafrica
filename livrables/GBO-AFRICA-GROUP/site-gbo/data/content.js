@@ -248,11 +248,7 @@ export const NEWS_ITEMS = [
     slug: 'ouverture-inscriptions-fitness-abidjan',
     date: 'Octobre 2026',
     tag: 'Fitness',
-    // Photo fournie par Cyrille — logos Nike (débardeur, chaussures) et MATRIX (appareil de
-    // musculation en fond) visibles, signalés avant intégration ; gardée sur demande explicite.
-    photo: '/images/news-fitness-card.jpg',
-    // Recadrage vers le haut pour garder le visage visible (photo portrait, recadrée en
-    // format large sur la carte).
+    photo: '/images/news/bodje-fitness-card.jpeg',
     photoPosition: 'center 25%',
     title: 'GBÔ Fitness ouvre les inscriptions à Abidjan',
     excerpt: 'Des programmes adaptés à tous les niveaux, encadrés par des coachs professionnels.',

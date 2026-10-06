@@ -98,7 +98,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
-            <ImageSlot placeholder="Équipe GBÔ" src="/images/about/qsn-apropos.jpeg" style={{ objectPosition: 'center 20%' }} />
+            <ImageSlot placeholder="Équipe GBÔ" src="/images/about/qsn-apropos2.jpeg" style={{ objectPosition: 'center 20%' }} />
           </div>
         </div>
       </Reveal>
