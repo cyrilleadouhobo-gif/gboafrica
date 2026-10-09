@@ -22,7 +22,7 @@ function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
 }
 
-function hashIp(ip) {
+export function hashIp(ip) {
   if (!ip) return null;
   // Never store raw IPs — a salted hash still lets us rate-limit/audit without keeping PII we don't need.
   return crypto.createHash('sha256').update(ip + (process.env.SESSION_SECRET || 'dev-only-secret')).digest('hex');
