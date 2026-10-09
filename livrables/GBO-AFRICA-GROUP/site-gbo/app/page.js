@@ -417,7 +417,7 @@ export default function HomePage() {
             </p>
             <div style={css('display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px')}>
               <Link
-                href="https://saas-egym.vercel.app/"
+                href="https://salle-pro-gestion-fawn.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-cta"
