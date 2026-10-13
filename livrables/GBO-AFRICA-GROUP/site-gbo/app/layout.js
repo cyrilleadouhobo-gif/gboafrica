@@ -1,4 +1,5 @@
 import { headers } from 'next/headers';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { AppDataProvider } from '../context/AppData.js';
 import Header from '../components/Header.js';
@@ -53,6 +54,7 @@ export default async function RootLayout({ children }) {
           <Footer />
           <Toast />
           <CookieBanner />
+          <Analytics />
         </AppDataProvider>
       </body>
     </html>
