@@ -52,7 +52,7 @@ export default function AboutPage() {
         )}
       >
         <div style={{ position: 'absolute', inset: 0 }}>
-          <ImageSlot placeholder="Visuel équipe GBÔ" src="/images/hero-fitness/about-hero.jpg" />
+          <ImageSlot placeholder="Visuel équipe GBÔ" src="/images/hero-fitness/about-hero-2.jpeg" style={{ objectPosition: 'center 10%' }} />
         </div>
         <div
           style={css(

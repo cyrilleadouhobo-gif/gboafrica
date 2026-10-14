@@ -45,7 +45,7 @@ const HOME_POLES = [
     accent: 'FITNESS',
     desc: 'Coaching & accompagnement sportif.',
     href: '/fitness',
-    photo: '/images/hero-fitness/home-pole-fitness.jpg',
+    photo: '/images/hero-fitness/home-pole-fitness-2.jpeg',
   },
   {
     accent: 'ACADEMY',

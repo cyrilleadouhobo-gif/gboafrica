@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import ImageSlot from '../../../components/ImageSlot.js';
-import { stockPhotoDirect } from '../../../lib/stockPhoto.js';
 import CoachApplicationForm from '../../../components/CoachApplicationForm.js';
 
 function PostulerContent() {
@@ -15,7 +14,7 @@ function PostulerContent() {
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(80px,10vw,120px) clamp(20px,5vw,40px) clamp(64px,9vw,110px)' }}>
       <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(32px,5vw,48px);align-items:center')}>
         <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
-          <ImageSlot placeholder="Rejoindre GBÔ" src={stockPhotoDirect('photo-1554244933-d876deb6b2ff', '900x1100')} />
+          <ImageSlot placeholder="Rejoindre GBÔ" src="/images/careers/formulaire-postuler.jpeg" />
           <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0) 55%,rgba(5,5,5,.85) 100%)')} />
           <div style={{ position: 'absolute', left: 24, right: 24, bottom: 24 }}>
             <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(18px,2.4vw,24px);line-height:1.2")}>
