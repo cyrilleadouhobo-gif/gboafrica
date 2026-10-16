@@ -156,6 +156,34 @@ export const loginSchema = z.object({
   password: z.string().min(8, 'Mot de passe invalide').max(200),
 });
 
+const memberPassword = z
+  .string()
+  .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
+  .max(200)
+  .regex(/[a-zA-Z]/, 'Le mot de passe doit contenir au moins une lettre')
+  .regex(/[0-9]/, 'Le mot de passe doit contenir au moins un chiffre');
+
+export const memberRegisterSchema = z.object({
+  prenom: shortText('Prénom', 80),
+  nom: shortText('Nom', 80),
+  email,
+  tel: phone.optional().or(z.literal('')),
+  password: memberPassword,
+  consent: z.literal(true, { errorMap: () => ({ message: 'Le consentement est requis.' }) }),
+  website: honeypot,
+});
+
+export const memberLoginSchema = z.object({
+  email,
+  password: z.string().min(8, 'Identifiants incorrects.').max(200),
+});
+
+export const memberProfileUpdateSchema = z.object({
+  prenom: shortText('Prénom', 80),
+  nom: shortText('Nom', 80),
+  tel: phone.optional().or(z.literal('')),
+});
+
 export const statusUpdateSchema = z.object({
   direction: z.union([z.literal(1), z.literal(-1)]),
 });
