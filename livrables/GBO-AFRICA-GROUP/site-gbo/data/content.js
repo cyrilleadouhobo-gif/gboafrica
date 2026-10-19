@@ -192,6 +192,94 @@ export const ARTICLES = [
       { h: 'Comment GBÔ accompagne les coachs', p: "Via son pôle Academy, GBÔ forme et structure les compétences des coachs, puis les met en relation avec des clients et des salles partenaires pour un revenu plus régulier et un vrai cadre professionnel." },
     ],
   },
+  {
+    id: 'a9',
+    slug: 'pourquoi-pratiquer-activite-physique-regulierement',
+    cat: 'Sport & Société',
+    pillar: 'Sport & Société',
+    read: '7 min',
+    title: 'Pourquoi pratiquer une activité physique régulièrement ?',
+    excerpt: "Les bienfaits de l'activité physique sur la santé physique et mentale, les recommandations de l'OMS et des conseils pratiques pour passer à l'action.",
+    body: [
+      {
+        p: "Marcher, courir, nager, danser ou simplement monter un escalier : l'activité physique fait partie de notre quotidien. Pourtant, selon l'Organisation mondiale de la santé (OMS), près de 1,8 milliard d'adultes dans le monde n'en pratiquent pas suffisamment pour protéger leur santé. En Afrique, la sédentarité progresse, notamment en milieu urbain, alors que les maladies non transmissibles — diabète, hypertension, maladies cardiovasculaires — ne cessent de gagner du terrain. Pratiquer une activité physique régulière n'est donc pas un luxe : c'est un investissement accessible dans sa propre santé.",
+      },
+      {
+        h: "Qu'est-ce que l'activité physique ?",
+        p: "L'OMS la définit comme tout mouvement corporel produit par la contraction des muscles squelettiques, entraînant une dépense d'énergie supérieure à celle du repos. Contrairement à une idée reçue, elle ne se limite pas au sport : les déplacements à pied, les tâches domestiques, le jardinage ou le jeu comptent également. On distingue quatre grands domaines — loisirs et sport, déplacements actifs, activité professionnelle et tâches domestiques — qui contribuent tous au volume quotidien. À l'inverse, la sédentarité désigne le temps passé assis ou allongé éveillé (écran, transport, bureau) : on peut être actif et pourtant trop sédentaire.",
+      },
+      {
+        h: 'Un cœur plus fort, une tension mieux régulée',
+        p: "L'activité d'endurance — marche rapide, course, natation, vélo — renforce le cœur et améliore la circulation sanguine. Selon l'OMS, une pratique régulière réduit le risque de maladies cardiaques d'environ 30 % et aide à réguler la pression artérielle, un enjeu important en Côte d'Ivoire où la prévalence de l'hypertension chez les adultes de 25 ans et plus atteint 33,4 %.",
+      },
+      {
+        h: 'Un rempart contre le diabète',
+        p: "L'exercice améliore la sensibilité à l'insuline et aide l'organisme à mieux réguler le taux de sucre dans le sang : l'OMS estime qu'une activité physique régulière réduit le risque de diabète de type 2 d'environ 27 %. En Afrique subsaharienne, où la prévalence du diabète progresse rapidement, ce levier de prévention est particulièrement pertinent.",
+      },
+      {
+        h: 'Une protection contre certains cancers',
+        p: "Selon l'OMS, la pratique régulière d'une activité physique réduit le risque de cancer du sein et du côlon de 21 à 25 %, via la régulation hormonale, le renforcement du système immunitaire et la réduction de l'inflammation chronique.",
+      },
+      {
+        h: 'Un poids maîtrisé, des muscles et des os renforcés',
+        p: "L'activité physique contribue à l'équilibre énergétique et à la maîtrise du poids corporel, tout en renforçant muscles, articulations et capital osseux. L'OMS souligne qu'une activité d'intensité élevée au moins trois fois par semaine consolide le système musculaire et osseux, utile pour prévenir l'ostéoporose à long terme.",
+      },
+      {
+        h: 'Moins de douleurs, plus de mobilité',
+        p: "Le mouvement stimule les mécanorécepteurs articulaires et active la circulation sanguine, ce qui contribue à réduire l'inflammation et les gênes musculosquelettiques. Pour les personnes âgées, l'OMS recommande des exercices d'équilibre au moins trois jours par semaine pour prévenir les chutes.",
+      },
+      {
+        h: 'Moins de stress, moins d’anxiété',
+        p: "L'OMS souligne le rôle de l'activité physique dans la réduction du stress, de l'anxiété et des symptômes dépressifs : l'exercice déclenche la libération d'endorphines et aide à interrompre les pensées négatives liées au stress. Une pratique régulière peut avoir des effets comparables, dans certains cas, à une prise en charge médicamenteuse légère pour des troubles émotionnels modérés.",
+      },
+      {
+        h: 'Un sommeil de meilleure qualité',
+        p: "Les personnes physiquement actives dorment généralement mieux : l'effort favorise un endormissement plus rapide et un sommeil plus profond, à condition d'éviter une activité intense juste avant le coucher.",
+      },
+      {
+        h: 'Estime de soi et lien social',
+        p: "Atteindre ses objectifs sportifs, même modestes, renforce le sentiment de compétence et l'estime de soi. Les bienfaits sur la santé mentale sont encore plus marqués lorsque l'activité est pratiquée en groupe : le cadre collectif élargit le réseau social, réduit l'isolement et offre un espace de soutien mutuel.",
+      },
+      {
+        h: 'Mémoire et concentration',
+        p: "L'activité physique régulière contribue à la santé cérébrale à tout âge : elle améliore la mémoire, la concentration et les performances cognitives, et joue un rôle dans la prévention du déclin cognitif et de certaines maladies neurodégénératives.",
+      },
+      {
+        h: "Un enjeu de santé publique en Côte d'Ivoire et en Afrique",
+        p: "L'Afrique subsaharienne connaît une transition épidémiologique : les maladies non transmissibles augmentent rapidement, alors que les systèmes de santé restent encore organisés autour des maladies infectieuses. En Côte d'Ivoire, les maladies cardiovasculaires sont la première cause de mortalité liée à ces maladies. Selon le Pr Jacko Abodo, chef du service d'endocrinologie et diabétologie du CHU de Yopougon, la sédentarité croissante de la population ivoirienne, combinée à une transition alimentaire vers des produits plus gras, salés et sucrés, alimente une véritable épidémie de maladies métaboliques. Chez les jeunes, la situation est tout aussi préoccupante : selon l'OMS, environ quatre adolescents scolarisés sur cinq en Afrique n'atteignent pas le niveau d'activité physique recommandé pour leur santé.",
+      },
+      {
+        h: "Les recommandations de l'OMS par tranche d'âge",
+        p: "L'OMS a publié en 2020 ses dernières lignes directrices sur l'activité physique. L'essentiel à retenir par tranche d'âge :",
+        list: [
+          "Enfants et adolescents (5-17 ans) : au moins 60 minutes par jour d'activité modérée à élevée, avec du renforcement musculaire et osseux au moins 3 fois par semaine.",
+          "Adultes (18-64 ans) : 150 à 300 minutes par semaine d'activité aérobie modérée (ou 75 à 150 minutes d'intensité élevée), et du renforcement musculaire 2 jours ou plus par semaine.",
+          "Personnes âgées (65 ans et plus) : les mêmes recommandations que les adultes, avec des exercices d'équilibre et de prévention des chutes au moins 3 jours par semaine.",
+        ],
+      },
+      {
+        p: "L'OMS insiste sur un point essentiel : chaque mouvement compte. Même en dessous de ces seuils, toute activité physique apporte déjà des bénéfices pour la santé par rapport à l'inactivité totale.",
+      },
+      {
+        h: 'Comment commencer ? Conseils pratiques pour passer à l’action',
+        p: "Inutile d'être un athlète pour bénéficier des bienfaits de l'activité physique. Quelques principes pour démarrer ou reprendre en toute sérénité :",
+        list: [
+          "Choisir une activité qui plaît — marche, course, danse, natation, football, musculation… le meilleur sport est celui qu'on a envie de pratiquer.",
+          "Commencer progressivement — 30 minutes de marche rapide, deux à trois fois par semaine, sont un excellent point de départ.",
+          "Intégrer le mouvement au quotidien — escaliers, trajets courts à pied, pauses debout au bureau : chaque occasion compte.",
+          "Éviter plus de deux jours consécutifs sans activité, pour maintenir les bénéfices dans la durée.",
+          "Consulter un professionnel si besoin — un bilan avec un coach qualifié permet de définir un programme adapté, surtout après une longue période d'inactivité.",
+          "S'entourer — pratiquer à plusieurs augmente la motivation et les chances de tenir dans la durée.",
+        ],
+      },
+      {
+        p: "Pratiquer une activité physique régulière reste l'un des gestes les plus simples et les plus efficaces pour protéger sa santé, prévenir les maladies chroniques et améliorer sa qualité de vie. En Côte d'Ivoire comme partout en Afrique, face à la progression des maladies non transmissibles et de la sédentarité, chaque mouvement compte. Il n'est jamais trop tard pour commencer : l'essentiel est de choisir une activité adaptée, de démarrer à son rythme, et de s'inscrire dans la durée.",
+      },
+      {
+        p: "Cet article a un objectif d'information générale et ne remplace pas un avis médical personnalisé. En cas de condition de santé particulière, consultez un professionnel de santé avant de reprendre ou d'intensifier une activité physique.",
+      },
+    ],
+  },
 ];
 export const BLOG_PREVIEW = ARTICLES.slice(0, 3).map(({ id, cat, read, title, excerpt }) => ({ id: 'bp-' + id, cat, read, title, excerpt }));
 export const BLOG_CATS = ['Tous', 'Transformation', 'Entraînement & Éducation', 'Nutrition & Bien-être', 'Sport & Société', 'Métiers du Sport'];

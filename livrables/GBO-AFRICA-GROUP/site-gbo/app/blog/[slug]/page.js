@@ -38,7 +38,16 @@ export default async function ArticlePage({ params }) {
             {(article.body || []).map((sec, i) => (
               <div key={i} id={sec.h ? anchor(sec.h) : undefined} style={{ scrollMarginTop: 96 }}>
                 {sec.h && <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(19px,2.4vw,23px);margin-bottom:10px")}>{sec.h}</h2>}
-                <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.7')}>{sec.p}</p>
+                {sec.p && <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.7')}>{sec.p}</p>}
+                {sec.list && (
+                  <ul style={css(`display:grid;gap:10px;font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6${sec.p ? ';margin-top:14px' : ''}`)}>
+                    {sec.list.map((item, j) => (
+                      <li key={j} style={{ paddingLeft: 4 }}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
