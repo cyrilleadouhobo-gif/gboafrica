@@ -10,13 +10,15 @@ import HeroCarousel from '../components/HeroCarousel.js';
 import { stockPhoto } from '../lib/stockPhoto.js';
 import { PARTNER_TYPES } from '../data/content.js';
 
-// Carrousel plein écran du hero : vrais visuels GBÔ fournis par Cyrille (Documents/Hero
-// accueil), mis à jour le 02/09. Casting et logos de marques tierces visibles sur les 2
-// dernières photos assumés par Cyrille (voir échange du jour).
+// Carrousel plein écran du hero : vrais visuels GBÔ fournis par Cyrille (Pictures/Images
+// site GBÔ/Hero_accueil), mis à jour le 19/10. Seule la photo de salle (hero-salle.jpg) est
+// conservée de la version précédente. Logos de marques tierces (TechnoGym, Gymshark, Under
+// Armour, Adidas) visibles sur les 3 nouvelles photos, assumés par Cyrille (voir échange du jour).
 const HERO_SLIDES = [
   { src: '/images/hero/hero-salle.jpg' }, // salle bien équipée
-  { src: '/images/hero/hero-coaching.jpg', position: '68% 30%' }, // coach guidant un exercice, recentré sur le sportif au premier plan pour les écrans étroits
-  { src: '/images/hero/hero-group.jpg', position: '50% 25%' }, // trio à l'entraînement, recentré sur les visages pour les écrans étroits
+  { src: '/images/hero/hero-portrait-rouge.jpg', position: '50% 20%' }, // portrait debout, recentré sur le visage pour les écrans étroits
+  { src: '/images/hero/hero-musculation-salle.jpg', position: '60% 25%' }, // pose en salle, recentré sur le sportif au premier plan pour les écrans étroits
+  { src: '/images/hero/hero-duo-entrainement.jpg', position: '40% 25%' }, // coach et client à l'entraînement, recentré sur les deux sportifs pour les écrans étroits
 ];
 
 // Bandeaux photo des sections Valeurs / Méthode / Pôles — même collection Accra que le hero
@@ -51,7 +53,7 @@ const HOME_POLES = [
     accent: 'ACADEMY',
     desc: 'Formation et développement des compétences dans les métiers du sport.',
     href: '/poles/academy',
-    photo: 'https://images.pexels.com/photos/6740171/pexels-photo-6740171.jpeg?auto=compress&cs=tinysrgb&w=800',
+    photo: '/images/poles/academy-card.jpeg',
   },
   {
     accent: 'EVENTS',

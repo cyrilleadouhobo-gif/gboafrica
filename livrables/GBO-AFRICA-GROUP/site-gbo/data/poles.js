@@ -77,8 +77,7 @@ export const POLE_DETAIL = {
     headline: ['SE FORMER', 'POUR FAIRE', 'AVANCER LE SPORT.'],
     heroText:
       'GBÔ Academy développe des formations destinées aux professionnels, futurs professionnels et acteurs du secteur sportif, avec une approche orientée vers les compétences et la pratique.',
-    corner: ['PLUS DE COMPÉTENCES', 'POUR UN SPORT', 'PLUS FORT.'],
-    photo: 'https://images.pexels.com/photos/6740171/pexels-photo-6740171.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    photo: '/images/poles/academy-card.jpeg',
     features: [
       { label: 'Formations professionnelles', icon: ICONS.book },
       { label: 'Développement des compétences', icon: ICONS.people },
