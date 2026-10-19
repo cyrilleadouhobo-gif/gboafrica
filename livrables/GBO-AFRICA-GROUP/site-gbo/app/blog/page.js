@@ -310,7 +310,7 @@ export default function BlogPage() {
                 <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(20px,2.8vw,28px);line-height:1.2")}>
                   RESTONS
                   <br />
-                  EN <span style={{ color: 'var(--lime,#C6F202)' }}>MOUVEMENT.</span>
+                  EN <span style={{ color: 'var(--lime,#C6F202)' }}>MOUVEMENT</span>
                 </div>
               </div>
             </div>

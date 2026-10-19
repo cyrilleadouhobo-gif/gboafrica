@@ -168,6 +168,9 @@ export const ARTICLES = [
     read: '6 min',
     title: 'Pourquoi le sport doit devenir un levier majeur en Afrique ?',
     excerpt: "Une analyse des opportunités, des défis et des solutions pour faire du sport un véritable moteur de développement.",
+    // Photo fournie par Cyrille — logo Nike (débardeur) et t-shirt "EFFECT" (marque tierce)
+    // visibles, assumés sur demande explicite (voir échange du 19/10).
+    photo: '/images/blog/sport-levier-afrique.jpg',
     body: [
       { p: "Le potentiel sportif africain reste largement sous-exploité, malgré une démographie jeune et une culture du mouvement déjà bien présente au quotidien." },
       { h: 'Un potentiel sous-exploité', p: "Une population jeune, une énergie collective réelle autour du sport, et une demande croissante pour des solutions de bien-être structurées : les ingrédients sont là, mais encore trop peu organisés." },
@@ -200,17 +203,20 @@ export const ARTICLES = [
     read: '7 min',
     title: 'Pourquoi pratiquer une activité physique régulièrement ?',
     excerpt: "Les bienfaits de l'activité physique sur la santé physique et mentale, les recommandations de l'OMS et des conseils pratiques pour passer à l'action.",
+    // Photo fournie par Cyrille — logo Jordan et marquage "Bismack Biyombo Foundation"
+    // (événement hors GBÔ) visibles, assumés sur demande explicite (voir échange du 19/10).
+    photo: '/images/blog/activite-physique-reguliere.jpeg',
     body: [
       {
-        p: "Marcher, courir, nager, danser ou simplement monter un escalier : l'activité physique fait partie de notre quotidien. Pourtant, selon l'Organisation mondiale de la santé (OMS), près de 1,8 milliard d'adultes dans le monde n'en pratiquent pas suffisamment pour protéger leur santé. En Afrique, la sédentarité progresse, notamment en milieu urbain, alors que les maladies non transmissibles — diabète, hypertension, maladies cardiovasculaires — ne cessent de gagner du terrain. Pratiquer une activité physique régulière n'est donc pas un luxe : c'est un investissement accessible dans sa propre santé.",
+        p: "Marcher, courir, nager, danser ou simplement monter un escalier : l'activité physique fait partie de notre quotidien. Pourtant, selon l'Organisation mondiale de la santé (OMS), près de 1,8 milliard d'adultes dans le monde n'en pratiquent pas suffisamment pour protéger leur santé. En Afrique, la sédentarité progresse, notamment en milieu urbain, alors que les maladies non transmissibles (diabète, hypertension, maladies cardiovasculaires) ne cessent de gagner du terrain. Pratiquer une activité physique régulière n'est donc pas un luxe : c'est un investissement accessible dans sa propre santé.",
       },
       {
         h: "Qu'est-ce que l'activité physique ?",
-        p: "L'OMS la définit comme tout mouvement corporel produit par la contraction des muscles squelettiques, entraînant une dépense d'énergie supérieure à celle du repos. Contrairement à une idée reçue, elle ne se limite pas au sport : les déplacements à pied, les tâches domestiques, le jardinage ou le jeu comptent également. On distingue quatre grands domaines — loisirs et sport, déplacements actifs, activité professionnelle et tâches domestiques — qui contribuent tous au volume quotidien. À l'inverse, la sédentarité désigne le temps passé assis ou allongé éveillé (écran, transport, bureau) : on peut être actif et pourtant trop sédentaire.",
+        p: "L'OMS la définit comme tout mouvement corporel produit par la contraction des muscles squelettiques, entraînant une dépense d'énergie supérieure à celle du repos. Contrairement à une idée reçue, elle ne se limite pas au sport : les déplacements à pied, les tâches domestiques, le jardinage ou le jeu comptent également. On distingue quatre grands domaines (loisirs et sport, déplacements actifs, activité professionnelle et tâches domestiques) qui contribuent tous au volume quotidien. À l'inverse, la sédentarité désigne le temps passé assis ou allongé éveillé (écran, transport, bureau) : on peut être actif et pourtant trop sédentaire.",
       },
       {
         h: 'Un cœur plus fort, une tension mieux régulée',
-        p: "L'activité d'endurance — marche rapide, course, natation, vélo — renforce le cœur et améliore la circulation sanguine. Selon l'OMS, une pratique régulière réduit le risque de maladies cardiaques d'environ 30 % et aide à réguler la pression artérielle, un enjeu important en Côte d'Ivoire où la prévalence de l'hypertension chez les adultes de 25 ans et plus atteint 33,4 %.",
+        p: "L'activité d'endurance (marche rapide, course, natation, vélo) renforce le cœur et améliore la circulation sanguine. Selon l'OMS, une pratique régulière réduit le risque de maladies cardiaques d'environ 30 % et aide à réguler la pression artérielle, un enjeu important en Côte d'Ivoire où la prévalence de l'hypertension chez les adultes de 25 ans et plus atteint 33,4 %.",
       },
       {
         h: 'Un rempart contre le diabète',
@@ -264,19 +270,16 @@ export const ARTICLES = [
         h: 'Comment commencer ? Conseils pratiques pour passer à l’action',
         p: "Inutile d'être un athlète pour bénéficier des bienfaits de l'activité physique. Quelques principes pour démarrer ou reprendre en toute sérénité :",
         list: [
-          "Choisir une activité qui plaît — marche, course, danse, natation, football, musculation… le meilleur sport est celui qu'on a envie de pratiquer.",
-          "Commencer progressivement — 30 minutes de marche rapide, deux à trois fois par semaine, sont un excellent point de départ.",
-          "Intégrer le mouvement au quotidien — escaliers, trajets courts à pied, pauses debout au bureau : chaque occasion compte.",
+          "Choisir une activité qui plaît comme la marche, la course, la danse, la natation, le football, la musculation… le meilleur sport est celui qu'on a envie de pratiquer.",
+          "Commencer progressivement, 30 minutes de marche rapide, deux à trois fois par semaine, sont un excellent point de départ.",
+          "Intégrer le mouvement au quotidien, escaliers, trajets courts à pied, pauses debout au bureau : chaque occasion compte.",
           "Éviter plus de deux jours consécutifs sans activité, pour maintenir les bénéfices dans la durée.",
-          "Consulter un professionnel si besoin — un bilan avec un coach qualifié permet de définir un programme adapté, surtout après une longue période d'inactivité.",
-          "S'entourer — pratiquer à plusieurs augmente la motivation et les chances de tenir dans la durée.",
+          "Consulter un professionnel si besoin. Un bilan avec un coach qualifié permet de définir un programme adapté, surtout après une longue période d'inactivité.",
+          "S'entourer, pratiquer à plusieurs augmente la motivation et les chances de tenir dans la durée.",
         ],
       },
       {
         p: "Pratiquer une activité physique régulière reste l'un des gestes les plus simples et les plus efficaces pour protéger sa santé, prévenir les maladies chroniques et améliorer sa qualité de vie. En Côte d'Ivoire comme partout en Afrique, face à la progression des maladies non transmissibles et de la sédentarité, chaque mouvement compte. Il n'est jamais trop tard pour commencer : l'essentiel est de choisir une activité adaptée, de démarrer à son rythme, et de s'inscrire dans la durée.",
-      },
-      {
-        p: "Cet article a un objectif d'information générale et ne remplace pas un avis médical personnalisé. En cas de condition de santé particulière, consultez un professionnel de santé avant de reprendre ou d'intensifier une activité physique.",
       },
     ],
   },
