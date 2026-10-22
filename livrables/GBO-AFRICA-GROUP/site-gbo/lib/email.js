@@ -10,6 +10,15 @@
 // data: URI prefix). Passed straight through to Resend; see app/api/careers/route.js for
 // the CV-upload use case. Resend's own cap is 40 Mo/e-mail after encodage Base64, mais la
 // vraie limite pratique est le corps de requête Vercel (~4.5 Mo) — voir careerSchema.
+const HTML_ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+
+// Toute valeur saisie par un visiteur (nom, message, commentaire...) doit passer par ici
+// avant d'être interpolée dans un `html` d'e-mail — sinon un visiteur malveillant peut
+// injecter des balises (lien, image de tracking...) dans l'e-mail reçu par l'équipe GBÔ.
+export function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (c) => HTML_ESCAPES[c]);
+}
+
 export async function sendEmail({ to, subject, html, attachments }) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM;

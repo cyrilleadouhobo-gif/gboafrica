@@ -3,7 +3,7 @@ import { prisma } from '../../../lib/db.js';
 import { particulierLeadSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../lib/security.js';
 import { leadCode } from '../../../lib/constants.js';
-import { sendEmail } from '../../../lib/email.js';
+import { sendEmail, escapeHtml } from '../../../lib/email.js';
 import { sendWhatsAppConfirmation } from '../../../lib/whatsapp.js';
 import { FITNESS_EMAIL } from '../../../lib/site.js';
 
@@ -64,7 +64,7 @@ export async function POST(request) {
     await sendEmail({
       to: d.email,
       subject: 'GBÔ AFRICA GROUP — Votre demande est enregistrée',
-      html: `<p>Bonjour ${d.prenom},</p><p>Votre demande d'accompagnement a bien été enregistrée. Un conseiller GBÔ vous contactera rapidement afin de préparer votre premier bilan.</p>`,
+      html: `<p>Bonjour ${escapeHtml(d.prenom)},</p><p>Votre demande d'accompagnement a bien été enregistrée. Un conseiller GBÔ vous contactera rapidement afin de préparer votre premier bilan.</p>`,
     });
     await sendWhatsAppConfirmation({ to: d.tel, templateName: 'lead_confirmation', params: { name: d.prenom } });
     // Notification interne — jusqu'ici ce formulaire ne prévenait personne côté GBÔ, un
@@ -72,7 +72,7 @@ export async function POST(request) {
     await sendEmail({
       to: FITNESS_EMAIL,
       subject: `Nouveau prospect Particulier — ${lead.code}`,
-      html: `<p><strong>${d.prenom} ${d.nom}</strong> · ${PROFILE_LABELS[d.profile] || d.profile}</p><p>Objectif : ${d.objective}</p><p>Contact : ${d.email} / ${d.tel}</p><p>Commune : ${d.commune || '—'}</p>`,
+      html: `<p><strong>${escapeHtml(d.prenom)} ${escapeHtml(d.nom)}</strong> · ${escapeHtml(PROFILE_LABELS[d.profile] || d.profile)}</p><p>Objectif : ${escapeHtml(d.objective)}</p><p>Contact : ${escapeHtml(d.email)} / ${escapeHtml(d.tel)}</p><p>Commune : ${escapeHtml(d.commune || '—')}</p>`,
     });
   });
 

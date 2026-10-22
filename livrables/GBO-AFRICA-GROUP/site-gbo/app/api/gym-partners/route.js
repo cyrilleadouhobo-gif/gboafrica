@@ -3,7 +3,7 @@ import { prisma } from '../../../lib/db.js';
 import { gymPartnerSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../lib/security.js';
 import { gymPartnerCode } from '../../../lib/constants.js';
-import { sendEmail } from '../../../lib/email.js';
+import { sendEmail, escapeHtml } from '../../../lib/email.js';
 import { CONTACT_EMAIL } from '../../../lib/site.js';
 
 export async function POST(request) {
@@ -43,7 +43,7 @@ export async function POST(request) {
     await sendEmail({
       to: CONTACT_EMAIL,
       subject: `GBÔ Partner Gym — Nouvelle candidature : ${d.gymName}`,
-      html: `<p>Salle : ${d.gymName}</p><p>Responsable : ${d.managerName}</p><p>Contact : ${d.phone} · ${d.email}</p><p>Adresse : ${d.address}, ${d.commune}</p><p>Raisons : ${d.reasons.join(', ') || '—'}</p>`,
+      html: `<p>Salle : ${escapeHtml(d.gymName)}</p><p>Responsable : ${escapeHtml(d.managerName)}</p><p>Contact : ${escapeHtml(d.phone)} · ${escapeHtml(d.email)}</p><p>Adresse : ${escapeHtml(d.address)}, ${escapeHtml(d.commune)}</p><p>Raisons : ${d.reasons.map(escapeHtml).join(', ') || '—'}</p>`,
     });
   });
 

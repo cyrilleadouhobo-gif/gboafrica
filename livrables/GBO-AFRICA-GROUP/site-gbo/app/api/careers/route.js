@@ -2,7 +2,7 @@ import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { careerSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../lib/security.js';
-import { sendEmail } from '../../../lib/email.js';
+import { sendEmail, escapeHtml } from '../../../lib/email.js';
 import { CAREERS_EMAIL } from '../../../lib/site.js';
 
 export async function POST(request) {
@@ -28,7 +28,7 @@ export async function POST(request) {
     await sendEmail({
       to: CAREERS_EMAIL,
       subject: `Candidature — ${d.nom}`,
-      html: `<p>${note.replace(/\n/g, '<br>')}</p><p>Contact : ${d.email} / ${d.tel}</p>`,
+      html: `<p>${escapeHtml(note).replace(/\n/g, '<br>')}</p><p>Contact : ${escapeHtml(d.email)} / ${escapeHtml(d.tel)}</p>`,
       attachments: d.cv ? [{ filename: d.cv.filename, content: d.cv.base64, contentType: d.cv.contentType }] : undefined,
     });
   });

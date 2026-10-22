@@ -3,7 +3,7 @@ import { prisma } from '../../../lib/db.js';
 import { waitlistSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../lib/security.js';
 import { leadCode } from '../../../lib/constants.js';
-import { sendEmail } from '../../../lib/email.js';
+import { sendEmail, escapeHtml } from '../../../lib/email.js';
 import { CONTACT_EMAIL } from '../../../lib/site.js';
 
 export async function POST(request) {
@@ -45,12 +45,12 @@ export async function POST(request) {
     await sendEmail({
       to: d.email,
       subject: `GBÔ ${d.pole} — Vous êtes sur la liste d'attente`,
-      html: `<p>Merci ! Vous serez notifié en priorité à l'ouverture de GBÔ ${d.pole}.</p>`,
+      html: `<p>Merci ! Vous serez notifié en priorité à l'ouverture de GBÔ ${escapeHtml(d.pole)}.</p>`,
     });
     await sendEmail({
       to: CONTACT_EMAIL,
       subject: `Nouvelle inscription liste d'attente — GBÔ ${d.pole}`,
-      html: `<p>${d.email} vient de s'inscrire à la liste d'attente GBÔ ${d.pole}.</p>`,
+      html: `<p>${escapeHtml(d.email)} vient de s'inscrire à la liste d'attente GBÔ ${escapeHtml(d.pole)}.</p>`,
     });
   });
 

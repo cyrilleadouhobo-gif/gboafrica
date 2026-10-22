@@ -2,7 +2,7 @@ import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../lib/db.js';
 import { contactSchema, parseOrError } from '../../../lib/validation.js';
 import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../lib/security.js';
-import { sendEmail } from '../../../lib/email.js';
+import { sendEmail, escapeHtml } from '../../../lib/email.js';
 import { CONTACT_EMAIL } from '../../../lib/site.js';
 
 export async function POST(request) {
@@ -24,7 +24,11 @@ export async function POST(request) {
 
   // Réponse immédiate — voir app/api/leads/route.js pour le pourquoi de after().
   after(async () => {
-    await sendEmail({ to: CONTACT_EMAIL, subject: `Nouveau message de ${d.nom}`, html: `<p>${d.msg}</p><p>Contact : ${d.email} / ${d.tel}</p>` });
+    await sendEmail({
+      to: CONTACT_EMAIL,
+      subject: `Nouveau message de ${d.nom}`,
+      html: `<p>${escapeHtml(d.msg)}</p><p>Contact : ${escapeHtml(d.email)} / ${escapeHtml(d.tel)}</p>`,
+    });
   });
 
   return NextResponse.json({ ok: true });

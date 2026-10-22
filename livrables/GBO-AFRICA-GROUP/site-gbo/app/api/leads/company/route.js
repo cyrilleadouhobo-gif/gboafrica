@@ -3,7 +3,7 @@ import { prisma } from '../../../../lib/db.js';
 import { companyLeadSchema, parseOrError } from '../../../../lib/validation.js';
 import { getClientIp, isSameOrigin, formRateLimit, honeypotTripped } from '../../../../lib/security.js';
 import { leadCode } from '../../../../lib/constants.js';
-import { sendEmail } from '../../../../lib/email.js';
+import { sendEmail, escapeHtml } from '../../../../lib/email.js';
 import { sendWhatsAppConfirmation } from '../../../../lib/whatsapp.js';
 import { FITNESS_EMAIL } from '../../../../lib/site.js';
 
@@ -54,16 +54,16 @@ export async function POST(request) {
     await sendEmail({
       to: d.email,
       subject: 'GBÔ AFRICA GROUP — Votre demande entreprise',
-      html: `<p>Bonjour,</p><p>Votre demande pour <strong>${d.entreprise}</strong> a bien été reçue. Un conseiller Entreprise GBÔ vous recontacte pour établir une proposition sur mesure.</p>`,
+      html: `<p>Bonjour,</p><p>Votre demande pour <strong>${escapeHtml(d.entreprise)}</strong> a bien été reçue. Un conseiller Entreprise GBÔ vous recontacte pour établir une proposition sur mesure.</p>`,
     });
     await sendWhatsAppConfirmation({ to: d.tel, templateName: 'company_confirmation', params: { company: d.entreprise } });
     // Notification interne — jusqu'ici ce formulaire ne prévenait personne côté GBÔ non plus.
     await sendEmail({
       to: FITNESS_EMAIL,
       subject: `Nouveau prospect Entreprise — ${lead.code}`,
-      html: `<p><strong>${d.entreprise}</strong></p><p>${d.effectifConcerne} collaborateurs concernés · Lieu : ${d.lieu}${availability ? ` · ${availability}` : ''}</p>${
-        d.message ? `<p>Message : ${d.message}</p>` : ''
-      }<p>Contact : ${d.contact} · ${d.email} / ${d.tel}</p>`,
+      html: `<p><strong>${escapeHtml(d.entreprise)}</strong></p><p>${escapeHtml(d.effectifConcerne)} collaborateurs concernés · Lieu : ${escapeHtml(d.lieu)}${availability ? ` · ${escapeHtml(availability)}` : ''}</p>${
+        d.message ? `<p>Message : ${escapeHtml(d.message)}</p>` : ''
+      }<p>Contact : ${escapeHtml(d.contact)} · ${escapeHtml(d.email)} / ${escapeHtml(d.tel)}</p>`,
     });
   });
 

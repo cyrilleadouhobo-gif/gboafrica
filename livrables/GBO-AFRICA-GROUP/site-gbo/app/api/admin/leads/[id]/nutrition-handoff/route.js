@@ -2,7 +2,7 @@ import { NextResponse, after } from 'next/server';
 import { prisma } from '../../../../../../lib/db.js';
 import { getCurrentStaffAdmin, logAudit } from '../../../../../../lib/auth.js';
 import { isSameOrigin } from '../../../../../../lib/security.js';
-import { sendEmail } from '../../../../../../lib/email.js';
+import { sendEmail, escapeHtml } from '../../../../../../lib/email.js';
 import { SITE_URL } from '../../../../../../lib/site.js';
 
 // Deliberate one-way gate: this is the only place a NutritionFollowUp row gets created,
@@ -39,10 +39,10 @@ export async function POST(request, { params }) {
           <p>Bonjour,</p>
           <p>Un nouveau client vous a été transmis par GBÔ AFRICA GROUP pour un suivi nutritionnel :</p>
           <ul>
-            <li><strong>Nom :</strong> ${lead.name}</li>
-            <li><strong>E-mail :</strong> ${lead.contactEmail || '—'}</li>
-            <li><strong>Téléphone :</strong> ${lead.contactPhone || '—'}</li>
-            <li><strong>Objectif :</strong> ${lead.nutritionObjective || '—'}</li>
+            <li><strong>Nom :</strong> ${escapeHtml(lead.name)}</li>
+            <li><strong>E-mail :</strong> ${escapeHtml(lead.contactEmail || '—')}</li>
+            <li><strong>Téléphone :</strong> ${escapeHtml(lead.contactPhone || '—')}</li>
+            <li><strong>Objectif :</strong> ${escapeHtml(lead.nutritionObjective || '—')}</li>
           </ul>
           <p><a href="${SITE_URL}/partenaires/nutrition">Voir dans votre espace partenaire</a></p>
         `,
