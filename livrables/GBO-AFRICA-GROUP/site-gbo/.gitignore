@@ -12,3 +12,7 @@ out
 prisma/dev.db
 prisma/dev.db-journal
 
+# Sauvegardes de la base (voir scripts/backup-database.mjs) — écrites hors du dépôt par
+# défaut, cette ligne est une sécurité si jamais un dossier backups/ apparaît ici.
+backups/
+
