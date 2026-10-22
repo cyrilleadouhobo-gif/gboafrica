@@ -10,6 +10,13 @@ const TABS = [
   { key: 'privacy', label: 'Confidentialité' },
 ];
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const legal = LEGAL[slug];
+  if (!legal) return {};
+  return { title: `${legal.title} — GBÔ AFRICA GROUP` };
+}
+
 export default async function LegalPage({ params }) {
   const { slug } = await params;
   const legal = LEGAL[slug];

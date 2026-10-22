@@ -5,6 +5,13 @@ import ImageSlot from '../../../components/ImageSlot.js';
 import { articlePhoto } from '../../../lib/stockPhoto.js';
 import { ARTICLES, ARTICLE_CAT_PHOTO } from '../../../data/content.js';
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
+  if (!article) return {};
+  return { title: `${article.title} — GBÔ AFRICA GROUP`, description: article.excerpt };
+}
+
 export default async function ArticlePage({ params }) {
   const { slug } = await params;
   const article = ARTICLES.find((a) => a.slug === slug);

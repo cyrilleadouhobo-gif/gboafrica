@@ -6,6 +6,13 @@ import Reveal from '../../../components/Reveal.js';
 import { stockPhoto } from '../../../lib/stockPhoto.js';
 import { NEWS_ITEMS, NEWS_CAT_PHOTO } from '../../../data/content.js';
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const item = NEWS_ITEMS.find((n) => n.slug === slug);
+  if (!item) return {};
+  return { title: `${item.title} — GBÔ AFRICA GROUP`, description: item.excerpt };
+}
+
 export default async function NewsDetailPage({ params }) {
   const { slug } = await params;
   const item = NEWS_ITEMS.find((n) => n.slug === slug);
