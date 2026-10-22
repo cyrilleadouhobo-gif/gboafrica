@@ -6,6 +6,7 @@ import GlowBlobs from '../../components/GlowBlobs.js';
 
 export const metadata = {
   title: 'Mise à disposition de personnel — GBÔ AFRICA GROUP',
+  description: 'Du coach sportif au responsable de salle, GBÔ vous permet de disposer de profils sélectionnés selon vos besoins.',
 };
 
 // Reproduction adaptée (couleurs GBÔ) d'une maquette de référence fournie par Cyrille.

@@ -4,7 +4,10 @@ import ReviewForm from '../../components/ReviewForm.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 
-export const metadata = { title: 'Avis clients — GBÔ AFRICA GROUP' };
+export const metadata = {
+  title: 'Avis clients — GBÔ AFRICA GROUP',
+  description: 'Découvrez les avis et témoignages des membres GBÔ sur leur accompagnement sportif.',
+};
 export const dynamic = 'force-dynamic';
 
 function Stars({ rating }) {

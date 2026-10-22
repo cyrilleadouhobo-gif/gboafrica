@@ -9,6 +9,7 @@ import { METHOD_STEPS } from '../../data/content.js';
 
 export const metadata = {
   title: 'GBÔ Fitness — Un accompagnement sportif, pensé pour vous.',
+  description: 'Un accompagnement sportif adapté à vos objectifs, votre niveau et votre quotidien. Coaching personnalisé à domicile, en salle ou en entreprise.',
 };
 
 // Carrousel du hero Fitness — visuels GBÔ fournis par Cyrille (Documents/hero fitness).

@@ -4,7 +4,10 @@ import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 
-export const metadata = { title: 'À propos — GBÔ AFRICA GROUP' };
+export const metadata = {
+  title: 'À propos — GBÔ AFRICA GROUP',
+  description: 'GBÔ AFRICA GROUP est une entreprise spécialisée dans le développement de solutions dans le sport et le bien-être en Afrique.',
+};
 
 const ABOUT_VALUES = [
   {

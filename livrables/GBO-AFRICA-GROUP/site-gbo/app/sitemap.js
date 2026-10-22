@@ -1,6 +1,7 @@
 import { SITE_URL } from '../lib/site.js';
 import { POLE_DETAIL } from '../data/poles.js';
 import { LEGAL } from '../data/legal.js';
+import { ARTICLES, NEWS_ITEMS } from '../data/content.js';
 
 const STATIC_ROUTES = [
   { path: '/', priority: 1, changeFrequency: 'weekly' },
@@ -41,5 +42,19 @@ export default function sitemap() {
     priority: 0.3,
   }));
 
-  return [...staticEntries, ...poleEntries, ...legalEntries];
+  const blogEntries = ARTICLES.map((a) => ({
+    url: `${SITE_URL}/blog/${a.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.5,
+  }));
+
+  const newsEntries = NEWS_ITEMS.map((n) => ({
+    url: `${SITE_URL}/news/${n.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.4,
+  }));
+
+  return [...staticEntries, ...poleEntries, ...legalEntries, ...blogEntries, ...newsEntries];
 }

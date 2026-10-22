@@ -4,7 +4,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const detail = POLE_DETAIL[slug];
   if (!detail) return {};
-  return { title: `${detail.name} — GBÔ AFRICA GROUP` };
+  return { title: `${detail.name} — GBÔ AFRICA GROUP`, description: detail.heroText };
 }
 
 export default function PoleLayout({ children }) {

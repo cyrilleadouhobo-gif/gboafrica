@@ -10,11 +10,18 @@ const TABS = [
   { key: 'privacy', label: 'Confidentialité' },
 ];
 
+const LEGAL_DESCRIPTIONS = {
+  mentions: "Identité de l'éditeur, hébergeur et informations légales du site GBÔ AFRICA GROUP.",
+  cgu: "Conditions générales d'utilisation du site et du compte membre GBÔ AFRICA GROUP.",
+  cgv: 'Conditions générales de vente des services et abonnements GBÔ AFRICA GROUP.',
+  privacy: 'Politique de confidentialité et protection des données personnelles chez GBÔ AFRICA GROUP.',
+};
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const legal = LEGAL[slug];
   if (!legal) return {};
-  return { title: `${legal.title} — GBÔ AFRICA GROUP` };
+  return { title: `${legal.title} — GBÔ AFRICA GROUP`, description: LEGAL_DESCRIPTIONS[slug] };
 }
 
 export default async function LegalPage({ params }) {

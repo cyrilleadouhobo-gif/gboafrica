@@ -7,6 +7,7 @@ import { stockPhoto } from '../../lib/stockPhoto.js';
 
 export const metadata = {
   title: 'Pour les salles — GBÔ accompagne les acteurs du fitness',
+  description: 'Simplifiez la gestion de votre salle et disposez des profils dont vous avez besoin pour développer votre activité.',
 };
 
 const TWO_SOLUTIONS = [

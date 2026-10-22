@@ -3,7 +3,10 @@ import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import { FAQ_GROUPS } from '../../data/content.js';
 
-export const metadata = { title: 'FAQ — GBÔ AFRICA GROUP' };
+export const metadata = {
+  title: 'FAQ — GBÔ AFRICA GROUP',
+  description: "Les réponses aux questions fréquentes sur l'accompagnement GBÔ, le coaching, le Club et les paiements.",
+};
 
 const anchor = (cat) => cat.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
