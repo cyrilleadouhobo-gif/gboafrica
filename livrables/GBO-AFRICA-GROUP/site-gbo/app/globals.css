@@ -499,5 +499,7 @@ select {
     display: block;
     position: sticky;
     top: 96px;
+    max-height: calc(100vh - 116px);
+    overflow-y: auto;
   }
 }

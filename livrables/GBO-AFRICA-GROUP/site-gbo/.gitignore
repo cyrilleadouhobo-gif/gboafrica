@@ -3,6 +3,10 @@ node_modules
 out
 .DS_Store
 
+# Logs du serveur de dev local — jamais commités
+devserver.log
+devserver.err.log
+
 # Secrets — never commit
 .env
 .env.local

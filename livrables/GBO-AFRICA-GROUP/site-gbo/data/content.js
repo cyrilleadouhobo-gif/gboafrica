@@ -283,6 +283,140 @@ export const ARTICLES = [
       },
     ],
   },
+  {
+    id: 'a10',
+    slug: 'sport-emploi-du-temps-charge',
+    cat: 'Entraînement & Éducation',
+    pillar: 'Entraînement & Éducation',
+    read: '8 min',
+    title: 'Comment faire du sport régulièrement avec un emploi du temps chargé ?',
+    excerpt: "Des stratégies concrètes pour construire une routine sportive qui tient, même avec les contraintes du quotidien à Abidjan.",
+    // Photo fournie par Cyrille (blog2.jpeg).
+    photo: '/images/blog/sport-emploi-du-temps-charge.jpeg',
+    body: [
+      {
+        p: "On connaît tous cette phrase : « Je commencerai lundi. » Et lundi arrive, la journée déborde, et tout est reporté à la semaine suivante. À Abidjan, où un trajet Plateau-Cocody peut prendre deux heures aux heures de pointe, trouver du temps pour bouger n'a rien d'évident.",
+      },
+      {
+        quote: "31 % des adultes dans le monde n'atteignaient pas les niveaux d'activité physique recommandés en 2022 selon l'OMS, soit environ 1,8 milliard de personnes, un chiffre en hausse de 5 points en douze ans.",
+      },
+      {
+        p: "Mais la solution ne passe pas par des séances de deux heures en salle. Elle passe par de petits ajustements réguliers, adaptés à votre vie telle qu'elle est, pas telle qu'elle devrait être.",
+      },
+      {
+        h: 'Peu et souvent vaut mieux que beaucoup et rarement',
+        p: "Les recommandations de l'OMS sont claires : pas besoin de s'épuiser une heure pour en tirer des bénéfices.",
+        list: [
+          "150 à 300 minutes par semaine d'activité modérée (marche rapide, vélo, danse), ou 75 à 150 minutes d'intensité soutenue.",
+          "Du renforcement musculaire au moins deux jours par semaine (squats, pompes, gainage, port de charges).",
+        ],
+      },
+      {
+        p: "Cela revient à environ 22 minutes par jour en moyenne, un objectif accessible même avec un emploi du temps serré. Et l'OMS le rappelle : chaque mouvement compte, les courtes périodes d'activité s'additionnent au total de la semaine.",
+      },
+      {
+        p: "Côté régularité, une étude de l'University College London a suivi 96 volontaires adoptant de nouveaux comportements quotidiens : il fallait en moyenne 66 jours pour qu'un geste devienne automatique, avec de fortes variations selon les personnes (de 18 à 254 jours). Il n'y a donc pas de délai magique. Un jour manqué n'efface pas les progrès : c'est la tendance qui compte, pas la perfection.",
+      },
+      {
+        h: 'Les freins bien réels du quotidien à Abidjan',
+        p: 'Avant de parler solutions, autant regarder les obstacles en face.',
+      },
+      {
+        h: 'Les embouteillages',
+        p: "C'est le frein numéro un. Les trajets domicile-travail comptent parmi les plus longs d'Afrique de l'Ouest, et le temps de transport grignote directement les créneaux disponibles pour soi.",
+      },
+      {
+        h: 'Les journées à rallonge',
+        p: "Dans le formel comme l'informel, les journées dépassent souvent huit heures. Ajoutez les responsabilités familiales, et il reste peu de marge pour une activité structurée. C'est humain de renoncer quand on est fatigué.",
+      },
+      {
+        h: 'Un accès aux infrastructures encore inégal',
+        p: "Les salles de fitness se multiplient à Cocody, Marcory ou Zone 4, et des initiatives publiques émergent comme l'Agora d'Abobo, un complexe multisport de 1,6 hectare. Mais l'offre reste inégale selon les communes.",
+      },
+      {
+        h: 'Le coût perçu',
+        p: "Abonnement, tenue, coach : le sport est souvent vu comme réservé à ceux qui en ont les moyens. C'est un frein psychologique réel, alors que de nombreuses formes d'activité efficaces ne coûtent rien du tout.",
+      },
+      {
+        h: '1. Traiter ses séances comme des rendez-vous',
+        p: "Ce qui n'est pas dans l'agenda a peu de chances d'arriver. Bloquer deux à trois créneaux par semaine, au même titre qu'une réunion, change la donne.",
+        list: [
+          "Tôt le matin (5h30-6h30), avant les embouteillages : le créneau préféré de beaucoup d'Abidjanais actifs.",
+          'La pause déjeuner, pour une marche rapide ou un circuit court.',
+          'Le soir, si le trajet de retour le permet.',
+        ],
+      },
+      {
+        h: '2. Commencer petit, mais commencer',
+        p: "Les courtes périodes d'activité s'additionnent et comptent pour le total hebdomadaire. L'erreur classique, c'est d'attendre d'avoir une heure libre pour s'y mettre.",
+        list: [
+          '10 minutes de renforcement au réveil, sans matériel ni déplacement.',
+          '15 minutes de marche rapide pendant la pause déjeuner.',
+          'Un circuit de 20 minutes à la maison en fin de journée.',
+        ],
+      },
+      {
+        p: "Dix minutes aujourd'hui valent mieux qu'une heure qui n'arrivera jamais.",
+      },
+      {
+        h: '3. Choisir une activité qui fait plaisir',
+        p: "On ne tient pas longtemps dans une activité qu'on fait par obligation. À Abidjan, les options ne manquent pas : marche ou jogging à la Corniche, football ou basketball dans les agoras, danse, ou exercices au poids du corps à domicile. Le meilleur sport, c'est celui qu'on pratique réellement.",
+      },
+      {
+        h: '4. Ne pas rester seul',
+        p: "Pratiquer à deux ou en groupe crée un engagement mutuel : quand la motivation faiblit, c'est le rendez-vous avec l'autre qui fait bouger quand même. Un partenaire d'entraînement, un groupe de quartier, ou un coach qui structure le programme et maintient la dynamique dans le temps : à Abidjan, le coaching à domicile se développe rapidement. C'est l'approche de GBÔ FITNESS, un accompagnement adapté à votre emploi du temps pour que la régularité ne repose pas uniquement sur votre volonté.",
+      },
+      {
+        h: '5. Glisser le mouvement dans les gestes du quotidien',
+        p: "Il ne s'agit pas toujours de « faire une séance ».",
+        list: [
+          "Prendre les escaliers plutôt que l'ascenseur.",
+          'Descendre un arrêt plus tôt du bus ou du wôrô-wôrô et finir à pied.',
+          'Marcher pour les courses de proximité.',
+          "Se lever et s'étirer toutes les heures au bureau.",
+        ],
+      },
+      {
+        p: "Chaque geste semble insignifiant, mais cumulés sur une semaine, ils comptent dans le volume total recommandé.",
+      },
+      {
+        h: '6. Se fixer des objectifs progressifs',
+        p: 'Un objectif flou a peu de chances de tenir. Un objectif précis donne un cap.',
+        list: [
+          'Semaines 1-2 : trois marches rapides de 15 minutes.',
+          'Semaines 3-4 : deux séances de 30 minutes (marche et renforcement).',
+          'Mois 2 : trois séances structurées par semaine.',
+        ],
+      },
+      {
+        p: "Tenir un journal sportif permet de visualiser ses progrès, l'un des moteurs de motivation les plus puissants. Et si construire ce programme seul est difficile, un coach peut aider à définir un plan adapté à vos contraintes : un investissement dans votre santé, pas un luxe.",
+      },
+      {
+        h: 'Le sport en entreprise, un levier encore sous-exploité',
+        p: "En France, des études menées par Gymlib et relayées par Generali montrent que la pratique sportive en entreprise améliore la productivité (de 2,5 % à 9,1 % selon les conditions) et que 8 salariés sur 10 rapportent de meilleures relations avec leurs collègues. Ces résultats restent à confirmer en contexte africain, mais la tendance est parlante. En Côte d'Ivoire, cette dimension reste largement inexploitée, alors que des actions simples suffisent : un espace pour les étirements, des challenges entre équipes, des pauses actives de 10 à 15 minutes, ou un coach sportif une à deux fois par semaine. C'est précisément ce que propose GBÔ CORPORATE, l'offre de GBÔ AFRICA GROUP dédiée au bien-être en entreprise.",
+      },
+      {
+        h: 'Un exemple de semaine type à Abidjan',
+        p: 'Un planning à adapter selon vos contraintes, pas un programme figé :',
+        list: [
+          'Lundi, 6h00-6h30 : renforcement au poids du corps à domicile (30 min).',
+          'Mercredi, 12h30-13h00 : marche rapide pendant la pause déjeuner (30 min).',
+          'Vendredi, 6h00-6h45 : jogging ou séance collective en extérieur (45 min).',
+          'Samedi, 8h00-9h00 : football, danse, natation ou activité en groupe (1h).',
+          'Au quotidien : escaliers, marche, étirements au bureau.',
+        ],
+      },
+      {
+        p: "Soit environ 165 minutes d'activité structurée par semaine, auxquelles s'ajoutent les micro-activités. L'essentiel est de progresser vers une intensité au moins modérée, à son rythme.",
+      },
+      {
+        p: "La régularité sportive n'est pas une question de temps disponible, c'est une question de choix et d'organisation. Avec des séances courtes, des activités qui font plaisir, un entourage qui motive et des objectifs à sa mesure, une routine durable est possible, même à Abidjan, même avec un emploi du temps chargé.",
+      },
+      {
+        p: "Les premières semaines sont les plus difficiles, c'est normal. Mais avec la répétition, le geste devient naturel. N'attendez pas d'avoir le planning parfait : le meilleur moment pour commencer, c'est maintenant.",
+      },
+    ],
+  },
 ];
 export const BLOG_PREVIEW = ARTICLES.slice(0, 3).map(({ id, cat, read, title, excerpt }) => ({ id: 'bp-' + id, cat, read, title, excerpt }));
 export const BLOG_CATS = ['Tous', 'Transformation', 'Entraînement & Éducation', 'Nutrition & Bien-être', 'Sport & Société', 'Métiers du Sport'];
