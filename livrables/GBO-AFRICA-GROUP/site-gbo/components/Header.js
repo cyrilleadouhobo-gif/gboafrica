@@ -215,12 +215,6 @@ export default function Header() {
             <Link href="/contact" onClick={closeAll} style={mobileLinkStyle(isActive('/contact'))}>
               Contact
             </Link>
-            <Link href="/admin" onClick={closeAll} style={mobileLinkStyle(isActive('/admin'))}>
-              Back-office
-            </Link>
-            <Link href="/partenaires/nutrition/login" onClick={closeAll} style={mobileLinkStyle(isActive('/partenaires/nutrition/login'))}>
-              Espace partenaire nutrition
-            </Link>
           </div>
           <Link
             href="/deux-seances-gratuites"
