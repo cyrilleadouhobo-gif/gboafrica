@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import { LEGAL } from '../../../data/legal.js';
+import { pageMetadata } from '../../../lib/site.js';
 
 const TABS = [
   { key: 'mentions', label: 'Mentions légales' },
@@ -21,7 +22,11 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const legal = LEGAL[slug];
   if (!legal) return {};
-  return { title: `${legal.title} — GBÔ AFRICA GROUP`, description: LEGAL_DESCRIPTIONS[slug] };
+  return pageMetadata({
+    title: `${legal.title} — GBÔ AFRICA GROUP`,
+    description: LEGAL_DESCRIPTIONS[slug],
+    path: `/legal/${slug}`,
+  });
 }
 
 export default async function LegalPage({ params }) {

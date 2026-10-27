@@ -5,12 +5,18 @@ import ImageSlot from '../../../components/ImageSlot.js';
 import Reveal from '../../../components/Reveal.js';
 import { stockPhoto } from '../../../lib/stockPhoto.js';
 import { NEWS_ITEMS, NEWS_CAT_PHOTO } from '../../../data/content.js';
+import { pageMetadata } from '../../../lib/site.js';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const item = NEWS_ITEMS.find((n) => n.slug === slug);
   if (!item) return {};
-  return { title: `${item.title} — GBÔ AFRICA GROUP`, description: item.excerpt };
+  return pageMetadata({
+    title: `${item.title} — GBÔ AFRICA GROUP`,
+    description: item.excerpt,
+    path: `/news/${slug}`,
+    images: item.photo ? [item.photo] : undefined,
+  });
 }
 
 export default async function NewsDetailPage({ params }) {

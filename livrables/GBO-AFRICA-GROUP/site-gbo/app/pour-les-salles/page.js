@@ -4,11 +4,13 @@ import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import { stockPhoto } from '../../lib/stockPhoto.js';
+import { pageMetadata } from '../../lib/site.js';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Pour les salles — GBÔ accompagne les acteurs du fitness',
   description: 'Simplifiez la gestion de votre salle et disposez des profils dont vous avez besoin pour développer votre activité.',
-};
+  path: '/pour-les-salles',
+});
 
 const TWO_SOLUTIONS = [
   {

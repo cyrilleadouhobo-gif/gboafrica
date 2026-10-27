@@ -8,13 +8,18 @@ import Toast from '../components/Toast.js';
 import CookieBanner from '../components/CookieBanner.js';
 import { SITE_URL, SITE_NAME } from '../lib/site.js';
 
-const TITLE = 'GBÔ AFRICA GROUP — Plus qu\'une pratique, un style de vie.';
+// Le H1 de la home ("Nous faisons avancer le sport.") est un slogan de marque, volontairement
+// gardé tel quel — mais un slogan seul comme <title> ne contient aucun des mots que les gens
+// tapent réellement. On ajoute donc le terme de recherche principal devant, en gardant le
+// même thème que le H1 (audit du 27/10).
+const TITLE = 'Coaching sportif à Abidjan | GBÔ AFRICA GROUP';
 const DESCRIPTION = "Sport, fitness et bien-être accessibles à tous. Coaching personnalisé, méthode propriétaire, communauté GBÔ. Abidjan, Côte d'Ivoire.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -22,6 +27,13 @@ export const metadata = {
     siteName: SITE_NAME,
     locale: 'fr_FR',
     type: 'website',
+    images: [`${SITE_URL}/opengraph-image`],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [`${SITE_URL}/opengraph-image`],
   },
 };
 

@@ -11,7 +11,7 @@ const fieldStyle = css(
 
 export default function ReviewForm() {
   const { showToast } = useAppData();
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -37,7 +37,7 @@ export default function ReviewForm() {
         return;
       }
       e.target.reset();
-      setRating(5);
+      setRating(0);
       setSent(true);
     } catch {
       showToast('Connexion impossible. Réessayez.');

@@ -6,11 +6,15 @@ import GlowBlobs from '../../components/GlowBlobs.js';
 import HeroCarousel from '../../components/HeroCarousel.js';
 import VideoIntro from '../../components/VideoIntro.js';
 import { METHOD_STEPS } from '../../data/content.js';
+import { pageMetadata } from '../../lib/site.js';
 
-export const metadata = {
-  title: 'GBÔ Fitness — Un accompagnement sportif, pensé pour vous.',
-  description: 'Un accompagnement sportif adapté à vos objectifs, votre niveau et votre quotidien. Coaching personnalisé à domicile, en salle ou en entreprise.',
-};
+// Titre repris de l'exemple fourni par l'audit du 27/10 : inclut le terme recherché
+// ("coaching sportif à Abidjan") plutôt que le seul nom de la marque.
+export const metadata = pageMetadata({
+  title: 'Coaching sportif à Abidjan | GBÔ Fitness',
+  description: 'Coaching à domicile, en salle ou en entreprise à Abidjan. Deux séances gratuites pour découvrir GBÔ.',
+  path: '/fitness',
+});
 
 // Carrousel du hero Fitness — visuels GBÔ fournis par Cyrille (Documents/hero fitness).
 // Casting mixte et bannière floutée assumés par Cyrille sur 2 des 4 photos (voir échange

@@ -15,3 +15,39 @@ export const PARTNERS_EMAIL = process.env.PARTNERS_EMAIL || 'partenariats@gboafr
 // Formulaire Particulier (/deux-seances-gratuites) ET Entreprise
 // (/corporate, lien "Solutions Entreprises" présent sur la page Fitness).
 export const FITNESS_EMAIL = process.env.FITNESS_EMAIL || 'fitness@gboafricagroup.com';
+
+// Construit un objet metadata Next.js complet et cohérent (title, description, canonical,
+// openGraph, twitter) à partir du strict minimum — évite que chaque page ne définisse que
+// title/description et laisse og:title / og:url hériter (en silence) de la home (audit du
+// 27/10 : toutes les pages partageaient les mêmes balises og:, pointant vers /).
+// `images`, optionnel, remplace l'image sociale par défaut (app/opengraph-image.js) par une
+// vraie photo déjà disponible pour cette page (article de blog, actu, pôle...). On fixe
+// explicitement l'image par défaut ici plutôt que de compter sur l'héritage automatique du
+// fichier opengraph-image.js : dès qu'une page définit son propre `openGraph` (même sans
+// `images`), Next.js ne va plus chercher l'image du segment parent.
+const DEFAULT_OG_IMAGE = `${SITE_URL}/opengraph-image`;
+
+export function pageMetadata({ title, description, path, images }) {
+  const url = `${SITE_URL}${path}`;
+  const resolvedImages = images || [DEFAULT_OG_IMAGE];
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: SITE_NAME,
+      locale: 'fr_FR',
+      type: 'website',
+      images: resolvedImages,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: resolvedImages,
+    },
+  };
+}

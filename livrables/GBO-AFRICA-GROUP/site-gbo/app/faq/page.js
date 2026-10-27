@@ -2,11 +2,13 @@ import { css } from '../../lib/css.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
 import { FAQ_GROUPS } from '../../data/content.js';
+import { pageMetadata } from '../../lib/site.js';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'FAQ — GBÔ AFRICA GROUP',
   description: "Les réponses aux questions fréquentes sur l'accompagnement GBÔ, le coaching, le Club et les paiements.",
-};
+  path: '/faq',
+});
 
 const anchor = (cat) => cat.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 

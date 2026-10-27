@@ -4,12 +4,18 @@ import { css } from '../../../lib/css.js';
 import ImageSlot from '../../../components/ImageSlot.js';
 import { articlePhoto } from '../../../lib/stockPhoto.js';
 import { ARTICLES, ARTICLE_CAT_PHOTO } from '../../../data/content.js';
+import { pageMetadata } from '../../../lib/site.js';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const article = ARTICLES.find((a) => a.slug === slug);
   if (!article) return {};
-  return { title: `${article.title} — GBÔ AFRICA GROUP`, description: article.excerpt };
+  return pageMetadata({
+    title: `${article.title} — GBÔ AFRICA GROUP`,
+    description: article.excerpt,
+    path: `/blog/${slug}`,
+    images: article.photo ? [article.photo] : undefined,
+  });
 }
 
 export default async function ArticlePage({ params }) {

@@ -37,10 +37,13 @@ export const PARTNERS = [
   { name: 'Scoops Blêblê de Tanguelan', logo: '/images/logos/scoops-blebe.jpg' },
   { name: 'Servo Africa Group', logo: '/images/logos/servo-africa-group.jpg' },
 ];
+// URLs nettoyées des paramètres de tracking (mibextid, igsi, utm_source, _r, _t) ajoutés
+// automatiquement par les apps au moment du partage — inutiles et superflus sur un lien
+// permanent affiché publiquement (audit du 27/10).
 export const SOCIALS = [
-  { label: 'FB', name: 'Facebook', href: 'https://www.facebook.com/share/18FUm2fkS1/?mibextid=wwXIfr' },
-  { label: 'IG', name: 'Instagram', href: 'https://www.instagram.com/gbo_africa?igsi=MTE3YWMyeWI4c3V1aQ%3D%3D&utm_source=qr' },
-  { label: 'TT', name: 'TikTok', href: 'https://www.tiktok.com/@gbo.africa?_r=1&_t=ZS-999IW8QPldE' },
+  { label: 'FB', name: 'Facebook', href: 'https://www.facebook.com/share/18FUm2fkS1/' },
+  { label: 'IG', name: 'Instagram', href: 'https://www.instagram.com/gbo_africa/' },
+  { label: 'TT', name: 'TikTok', href: 'https://www.tiktok.com/@gbo.africa' },
   { label: 'in', name: 'LinkedIn', href: 'https://www.linkedin.com/company/gb%C3%B4-officiel/' },
 ];
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import { useAppData } from '../../context/AppData.js';
 import Honeypot from '../../components/Honeypot.js';
@@ -64,6 +65,16 @@ export default function ContactPage() {
             </div>
             <input required name="email" type="email" placeholder="E-mail *" style={fieldStyle} />
             <textarea required name="msg" rows={4} placeholder="Votre message *" style={{ ...fieldStyle, resize: 'vertical' }} />
+            <label style={css('display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--muted,#8a8a8a);line-height:1.5')}>
+              <input required type="checkbox" name="consent" style={{ marginTop: 3, flex: '0 0 auto' }} />
+              <span>
+                J&apos;accepte que mes informations soient utilisées pour traiter ma demande, conformément à la{' '}
+                <Link href="/legal/privacy" style={{ color: 'var(--lime,#C6F202)' }}>
+                  politique de confidentialité
+                </Link>
+                .
+              </span>
+            </label>
             <Honeypot />
             <button
               type="submit"

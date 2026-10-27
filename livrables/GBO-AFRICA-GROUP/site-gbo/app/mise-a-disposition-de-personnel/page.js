@@ -3,11 +3,13 @@ import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
+import { pageMetadata } from '../../lib/site.js';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Mise à disposition de personnel — GBÔ AFRICA GROUP',
   description: 'Du coach sportif au responsable de salle, GBÔ vous permet de disposer de profils sélectionnés selon vos besoins.',
-};
+  path: '/mise-a-disposition-de-personnel',
+});
 
 // Reproduction adaptée (couleurs GBÔ) d'une maquette de référence fournie par Cyrille.
 // Photos Pexels vetted lors de la session « Nos coachs » (sujets noirs/africains confirmés

@@ -3,11 +3,13 @@ import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
+import { pageMetadata } from '../../lib/site.js';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'À propos — GBÔ AFRICA GROUP',
   description: 'GBÔ AFRICA GROUP est une entreprise spécialisée dans le développement de solutions dans le sport et le bien-être en Afrique.',
-};
+  path: '/about',
+});
 
 const ABOUT_VALUES = [
   {

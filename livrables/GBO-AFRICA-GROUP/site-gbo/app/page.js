@@ -37,8 +37,8 @@ const COACHES_PREVIEW = [
   { name: 'Coach Kouassi', spec: 'Préparation physique', photo: 'https://images.pexels.com/photos/4908557/pexels-photo-4908557.jpeg?auto=compress&cs=tinysrgb&w=800' },
 ];
 
-// Avatars de la rangée de confiance du hero — réutilise 4 photos déjà vérifiées (coachs).
-const TRUST_AVATARS = COACHES_PREVIEW.slice(0, 4).map((c) => c.photo);
+// Avatars de la rangée de confiance du hero — réutilise 4 profils déjà vérifiés (coachs).
+const TRUST_AVATARS = COACHES_PREVIEW.slice(0, 4);
 
 // Aperçu de 4 des 6 pôles GBÔ sur la home. Photos Pexels vérifiées individuellement
 // (sujets noirs/africains, pas de logo de marque tierce visible).
@@ -72,7 +72,7 @@ const HOME_POLES = [
 // Chiffres réels communiqués par Cyrille (pas d'estimation) — à mettre à jour à mesure
 // que l'activité grandit.
 const HOME_STATS = [
-  { n: '200+', l: 'Participants' },
+  { n: '200+', l: 'Pratiquants' },
   { n: '3+', l: 'Événements réalisés' },
   { n: '5+', l: 'Entreprises partenaires' },
   { n: '4', l: "Pôles d'expertise" },
@@ -248,9 +248,9 @@ export default function HomePage() {
             </div>
             <div style={css('display:flex;align-items:center;gap:14px;margin-top:40px;animation:fadeUp .7s .26s both')}>
               <div style={css('display:flex')}>
-                {TRUST_AVATARS.map((src, i) => (
+                {TRUST_AVATARS.map((c, i) => (
                   <div
-                    key={src}
+                    key={c.photo}
                     style={{
                       width: 40,
                       height: 40,
@@ -261,7 +261,7 @@ export default function HomePage() {
                       marginLeft: i === 0 ? 0 : -12,
                     }}
                   >
-                    <ImageSlot placeholder="Pratiquant GBÔ" src={src} />
+                    <ImageSlot placeholder={`${c.name}, ${c.spec}`} src={c.photo} />
                   </div>
                 ))}
               </div>
@@ -419,7 +419,7 @@ export default function HomePage() {
             </p>
             <div style={css('display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px')}>
               <Link
-                href="https://salle-pro-gestion-fawn.vercel.app/"
+                href="https://saas-egym.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-cta"
@@ -607,7 +607,7 @@ export default function HomePage() {
             Votre premier bilan est offert. Un conseiller vous accompagne pas à pas.
           </p>
           <Link
-            href="/fitness"
+            href="/deux-seances-gratuites"
             className="btn-cta"
             style={css('padding:18px 40px;border-radius:14px;background:#000;color:#C6F202;font-weight:700;font-size:17px;display:inline-block')}
           >

@@ -3,11 +3,13 @@ import { prisma } from '../../lib/db.js';
 import ReviewForm from '../../components/ReviewForm.js';
 import Reveal from '../../components/Reveal.js';
 import GlowBlobs from '../../components/GlowBlobs.js';
+import { pageMetadata } from '../../lib/site.js';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Avis clients — GBÔ AFRICA GROUP',
   description: 'Découvrez les avis et témoignages des membres GBÔ sur leur accompagnement sportif.',
-};
+  path: '/avis',
+});
 export const dynamic = 'force-dynamic';
 
 function Stars({ rating }) {
