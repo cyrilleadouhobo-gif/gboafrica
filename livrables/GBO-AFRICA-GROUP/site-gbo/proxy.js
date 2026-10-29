@@ -15,7 +15,11 @@ export function proxy(request) {
   if (pathname.startsWith('/admin') && pathname !== '/admin/login' && !request.cookies.get(SESSION_COOKIE)) {
     return NextResponse.redirect(new URL('/admin/login', request.url));
   }
-  if (pathname.startsWith('/api/admin') && !request.cookies.get(SESSION_COOKIE)) {
+  // Exception : appelée par Vercel Cron (en-tête Authorization, jamais de cookie) — voir
+  // app/api/admin/cron/purge-retention/route.js, qui fait lui-même le vrai contrôle
+  // (CRON_SECRET ou session admin).
+  const isCronRoute = pathname === '/api/admin/cron/purge-retention';
+  if (pathname.startsWith('/api/admin') && !isCronRoute && !request.cookies.get(SESSION_COOKIE)) {
     return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
   }
   if (pathname.startsWith('/partenaires/nutrition') && pathname !== '/partenaires/nutrition/login' && !request.cookies.get(SESSION_COOKIE)) {

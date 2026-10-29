@@ -46,6 +46,14 @@ model Lead {
   coachId            Int?
   coach              Coach?     @relation(fields: [coachId], references: [id])
   nutritionFollowUp  NutritionFollowUp?
+  // Date à laquelle un admin a marqué la fin de l'accompagnement d'un client (status
+  // CLIENT) — déclenche le délai de conservation "3 ans après la fin de la relation" de
+  // data/legal.js. Reste null tant que le client est actif : aucune purge ne peut partir
+  // d'un simple statut CLIENT sans cette date, voir lib/retention.js.
+  relationEndedAt    DateTime?
+  // Posée par la purge automatisée (lib/retention.js) quand les délais de data/legal.js
+  // sont dépassés — marque la ligne comme déjà anonymisée pour ne pas la retraiter.
+  anonymizedAt       DateTime?
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
 

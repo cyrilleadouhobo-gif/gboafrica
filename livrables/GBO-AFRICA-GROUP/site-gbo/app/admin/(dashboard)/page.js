@@ -83,6 +83,13 @@ export default function AdminPage() {
     setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
   };
 
+  const endRelation = async (id) => {
+    const res = await fetch(`/api/admin/leads/${id}/relation-end`, { method: 'POST' });
+    if (!res.ok) return;
+    const { lead } = await res.json();
+    setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
+  };
+
   const transmitToNutritionPartner = async (id) => {
     const res = await fetch(`/api/admin/leads/${id}/nutrition-handoff`, { method: 'POST' });
     if (!res.ok) return;
@@ -559,6 +566,26 @@ export default function AdminPage() {
                 </option>
               ))}
             </select>
+
+            {selectedLead.status === 'CLIENT' && (
+              <>
+                <div style={css('font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin:20px 0 10px')}>
+                  Conservation des données
+                </div>
+                {selectedLead.relationEndedAt ? (
+                  <div style={css('padding:14px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));font-size:13.5px;color:var(--muted,#8a8a8a)')}>
+                    Relation terminée le {new Date(selectedLead.relationEndedAt).toLocaleDateString('fr-FR')}. Données anonymisées automatiquement 3 ans après cette date.
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => endRelation(selectedLead.id)}
+                    style={css('width:100%;padding:14px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.16));font-weight:700;font-size:14px;color:var(--fg,#fff)')}
+                  >
+                    Marquer la fin de la relation client
+                  </button>
+                )}
+              </>
+            )}
 
             {selectedLead.nutrition && (
               <>
