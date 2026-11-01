@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { css } from '../../lib/css.js';
 import ImageSlot from '../../components/ImageSlot.js';
@@ -212,6 +212,19 @@ export default function CorporatePage() {
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [hideWhatsapp, setHideWhatsapp] = useState(false);
+
+  // Le bouton WhatsApp flottant chevauche le texte de "Ce qui est inclus" dans cette section
+  // sur mobile (coin bas-droit toujours occupé) — on l'efface pendant qu'elle est à l'écran.
+  useEffect(() => {
+    const el = document.getElementById('offres');
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => setHideWhatsapp(entry.isIntersecting), {
+      rootMargin: '0px 0px -10% 0px',
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const submitCompany = async (e) => {
     e.preventDefault();
@@ -449,7 +462,7 @@ export default function CorporatePage() {
       </Reveal>
 
       {/* Nos offres commerciales */}
-      <Reveal as="section" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
+      <Reveal as="section" id="offres" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={eyebrow}>Nos offres commerciales</div>
           <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.8vw,36px);letter-spacing:-1px;margin-bottom:36px;max-width:28ch")}>
@@ -660,14 +673,15 @@ export default function CorporatePage() {
         </div>
       </Reveal>
 
-      {/* Bouton WhatsApp flottant */}
+      {/* Bouton WhatsApp flottant — masqué pendant que la section Offres (#offres) est à
+          l'écran, voir l'IntersectionObserver plus haut */}
       <a
         href={WHATSAPP_LINK}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contacter GBÔ sur WhatsApp"
         style={css(
-          'position:fixed;right:20px;bottom:20px;z-index:40;width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.35)'
+          `position:fixed;right:20px;bottom:20px;z-index:40;width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.35);transition:opacity .2s,transform .2s;opacity:${hideWhatsapp ? 0 : 1};transform:scale(${hideWhatsapp ? 0.8 : 1});pointer-events:${hideWhatsapp ? 'none' : 'auto'}`
         )}
       >
         <Icon name="whatsapp" size={26} />
