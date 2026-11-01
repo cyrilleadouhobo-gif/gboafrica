@@ -24,9 +24,9 @@ export async function POST(request) {
   if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 });
   const d = parsed.data;
 
-  // availability porte fréquence + période (deux questions facultatives réunies en un seul
-  // champ texte libre côté modèle), comment porte le message libre — voir schema.prisma.
-  const availability = [d.frequence, d.periode].filter(Boolean).join(' · ') || null;
+  // availability porte la fréquence (question facultative), comment porte le message libre —
+  // voir schema.prisma.
+  const availability = d.frequence || null;
 
   const created = await prisma.lead.create({
     data: {

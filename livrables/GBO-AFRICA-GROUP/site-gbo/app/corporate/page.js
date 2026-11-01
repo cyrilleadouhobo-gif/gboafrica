@@ -96,14 +96,12 @@ const TIERS = [
   { effectif: '31+ collaborateurs', format: 'Dispositif sur proposition' },
 ];
 
-const LIEU_OPTIONS = ['Dans nos locaux', 'Dans un autre lieu', 'À définir'];
-const FREQUENCE_OPTIONS = ['1 fois/semaine', '2 fois/semaine', 'À définir'];
-const PERIODE_OPTIONS = ['Ponctuelle', '1 mois', 'Plusieurs mois', 'À définir'];
+const LIEU_OPTIONS = ['Dans vos locaux', 'Dans un autre lieu', 'À définir'];
+const FREQUENCE_OPTIONS = ['1 séance/semaine', '2 séances/semaine', '3 séances/semaine'];
 
 export default function CorporatePage() {
   const [lieu, setLieu] = useState('');
   const [frequence, setFrequence] = useState('');
-  const [periode, setPeriode] = useState('');
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -130,7 +128,6 @@ export default function CorporatePage() {
           effectifConcerne: f.get('effectifConcerne'),
           lieu,
           frequence,
-          periode,
           message: f.get('message'),
           consent: f.get('consent') === 'on',
           website: f.get('website'),
@@ -428,22 +425,6 @@ export default function CorporatePage() {
                       type="button"
                       onClick={() => setFrequence((prev) => (prev === o ? '' : o))}
                       style={{ ...css(chip(frequence === o)), padding: '11px 18px', width: 'auto' }}
-                    >
-                      {o}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div style={{ marginTop: 20 }}>
-                <span style={labelStyle}>Période souhaitée</span>
-                <div style={css('display:flex;flex-wrap:wrap;gap:10px;margin-top:6px')}>
-                  {PERIODE_OPTIONS.map((o) => (
-                    <button
-                      key={o}
-                      type="button"
-                      onClick={() => setPeriode((prev) => (prev === o ? '' : o))}
-                      style={{ ...css(chip(periode === o)), padding: '11px 18px', width: 'auto' }}
                     >
                       {o}
                     </button>

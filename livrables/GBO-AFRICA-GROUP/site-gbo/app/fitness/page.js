@@ -284,7 +284,7 @@ export default function FitnessPage() {
                   className="btn-cta"
                   style={css('margin-top:18px;padding:15px 26px;border-radius:12px;border:1px solid var(--fg,#fff);color:var(--fg,#fff);font-weight:700;font-size:15px;background:transparent;display:inline-block;text-align:center')}
                 >
-                  Découvrir nos solutions →
+                  Découvrir notre offre →
                 </Link>
               </div>
             </Reveal>

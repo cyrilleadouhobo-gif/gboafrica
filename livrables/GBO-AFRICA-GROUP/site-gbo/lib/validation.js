@@ -34,17 +34,16 @@ export const particulierLeadSchema = z.object({
 });
 
 // Formulaire /corporate ("Parlons de votre projet sportif") — lieu est la seule question à
-// choix obligatoire, fréquence et période restent facultatives (l'entreprise peut ne pas
-// encore savoir, d'où l'option "À définir" sur les trois).
+// choix obligatoire, fréquence reste facultative (l'entreprise peut ne pas encore savoir,
+// d'où l'option "À définir").
 export const companyLeadSchema = z.object({
   entreprise: shortText('Entreprise'),
   contact: shortText('Nom et fonction du contact'),
   tel: phone,
   email,
   effectifConcerne: shortText('Nombre de collaborateurs concernés', 40),
-  lieu: z.enum(['Dans nos locaux', 'Dans un autre lieu', 'À définir'], { errorMap: () => ({ message: 'Merci de préciser le lieu souhaité.' }) }),
-  frequence: z.enum(['1 fois/semaine', '2 fois/semaine', 'À définir']).optional().or(z.literal('')),
-  periode: z.enum(['Ponctuelle', '1 mois', 'Plusieurs mois', 'À définir']).optional().or(z.literal('')),
+  lieu: z.enum(['Dans vos locaux', 'Dans un autre lieu', 'À définir'], { errorMap: () => ({ message: 'Merci de préciser le lieu souhaité.' }) }),
+  frequence: z.enum(['1 séance/semaine', '2 séances/semaine', '3 séances/semaine']).optional().or(z.literal('')),
   message: optionalText(1000),
   consent: z.literal(true, { errorMap: () => ({ message: 'Le consentement est requis.' }) }),
   website: honeypot,
