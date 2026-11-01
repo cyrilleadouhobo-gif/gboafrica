@@ -58,7 +58,6 @@ const ICONS = {
     </>
   ),
   chart: <path d="M4 19V9M11 19V4M18 19v-7" />,
-  check: <path d="M5 12l5 5L20 6" />,
 };
 
 function Icon({ name, size = 20 }) {
@@ -69,29 +68,11 @@ function Icon({ name, size = 20 }) {
   );
 }
 
-const PROMISE_STEPS = [
-  { n: '01', t: 'Identifier', d: 'Comprendre vos effectifs, vos besoins, vos objectifs, vos disponibilités et vos contraintes.' },
-  { n: '02', t: 'Organiser', d: 'Définir le format, la fréquence, les horaires, le lieu et les modalités des séances.' },
-  { n: '03', t: 'Encadrer', d: 'Un coach prépare et anime les séances collectives en tenant compte du niveau des participants.' },
-  { n: '04', t: 'Suivre', d: 'Nous suivons la réalisation des séances, recueillons les retours et établissons un bilan de la période.' },
-];
-
 const ADAPTED_FEATURES = [
   { t: 'Séances collectives', d: 'Pour différents niveaux et profils de collaborateurs.', icon: 'people' },
   { t: 'Sur site', d: 'Les séances peuvent être organisées directement dans l’environnement de l’entreprise lorsque les conditions le permettent.', icon: 'building' },
   { t: 'Dans un lieu convenu', d: 'Lorsque l’entreprise ne dispose pas d’un espace adapté, un autre lieu peut être défini avec GBÔ.', icon: 'pin' },
   { t: 'Rythme adapté', d: 'Une organisation selon les disponibilités et le rythme convenu avec l’entreprise.', icon: 'clock' },
-];
-
-const INCLUDED_ITEMS = [
-  'Analyse du besoin',
-  'Définition du format',
-  'Planification des séances',
-  'Affectation d’un coach',
-  'Animation des séances',
-  'Encadrement des participants',
-  'Suivi de l’activité',
-  'Bilan de fin de période',
 ];
 
 const HOW_STEPS = [
@@ -111,9 +92,7 @@ const WHY_GBO = [
 ];
 
 const TIERS = [
-  { effectif: '1–10 collaborateurs', format: 'Séance collective' },
-  { effectif: '11–20 collaborateurs', format: 'Séance collective' },
-  { effectif: '21–30 collaborateurs', format: 'Séance collective' },
+  { effectif: '1–30 collaborateurs', format: 'Séance collective' },
   { effectif: '31+ collaborateurs', format: 'Dispositif sur proposition' },
 ];
 
@@ -225,33 +204,6 @@ export default function CorporatePage() {
         </div>
       </Reveal>
 
-      {/* Promesse */}
-      <Reveal as="section" style={css('padding:clamp(40px,6vw,64px) clamp(20px,5vw,64px) clamp(56px,8vw,96px);background:var(--surface,#0b0b0b)')}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={eyebrow}>Notre promesse</div>
-          <h2
-            style={css(
-              "font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.8vw,36px);letter-spacing:-1px;line-height:1.15;max-width:22ch;margin-bottom:36px"
-            )}
-          >
-            Une solution sportive, de l’organisation à la séance.
-          </h2>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px')}>
-            {PROMISE_STEPS.map((s, i) => (
-              <Reveal
-                key={s.n}
-                delay={i * 70}
-                style={css('padding:26px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}
-              >
-                <div style={css("font-family:'Broaven';font-weight:700;font-size:26px;color:rgba(198,242,2,.5);margin-bottom:14px")}>{s.n}</div>
-                <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 8 }}>{s.t}</div>
-                <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.55')}>{s.d}</div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
       {/* Séances adaptées */}
       <Reveal as="section" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -282,7 +234,7 @@ export default function CorporatePage() {
       </Reveal>
 
       {/* Photo — casse le rythme après 2 grilles de cartes d'affilée */}
-      <Reveal as="section" style={css('padding:clamp(24px,4vw,40px) clamp(20px,5vw,64px) 0')}>
+      <Reveal as="section" style={css('padding:clamp(24px,4vw,40px) clamp(20px,5vw,64px) clamp(24px,4vw,40px)')}>
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', aspectRatio: '21/8', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
           <ImageSlot placeholder="Accompagnement GBÔ" src="/images/corporate-accompagnement.jpg" style={{ objectPosition: 'center 15%' }} />
           <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.15) 55%,rgba(5,5,5,0) 100%)')} />
@@ -290,34 +242,6 @@ export default function CorporatePage() {
             <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(17px,2.2vw,22px);line-height:1.25")}>
               Un accompagnement assuré par des coachs certifiés, passionnés et expérimentés.
             </div>
-          </div>
-        </div>
-      </Reveal>
-
-      {/* Ce que comprend l'accompagnement */}
-      <Reveal as="section" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px)')}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={eyebrow}>L’accompagnement</div>
-          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.8vw,36px);letter-spacing:-1px;margin-bottom:36px;max-width:22ch")}>
-            Nous prenons en charge l’organisation sportive.
-          </h2>
-          <div
-            style={css(
-              'padding:clamp(24px,4vw,36px);border-radius:22px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--glass,rgba(255,255,255,.02));display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px 28px'
-            )}
-          >
-            {INCLUDED_ITEMS.map((item) => (
-              <div key={item} style={css('display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600')}>
-                <span
-                  style={css(
-                    'width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:rgba(198,242,2,.12);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center'
-                  )}
-                >
-                  <Icon name="check" size={13} />
-                </span>
-                {item}
-              </div>
-            ))}
           </div>
         </div>
       </Reveal>
