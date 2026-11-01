@@ -33,17 +33,18 @@ export const particulierLeadSchema = z.object({
   website: honeypot,
 });
 
-// Formulaire /corporate ("Parlons de votre projet sportif") — lieu est la seule question à
-// choix obligatoire, fréquence reste facultative (l'entreprise peut ne pas encore savoir,
-// d'où l'option "À définir").
+// Formulaire /corporate ("Demander une proposition commerciale") — refonte du 01/11/2026
+// suite au brief entreprise validé avec le CEO (voir GBO_Proposition_complete_page_Entreprises.docx).
+// effectif est désormais une tranche fixe (plus simple à exploiter côté back-office), lieu
+// est devenu un champ texte libre (commune/site/adresse) au lieu d'un choix fixe.
 export const companyLeadSchema = z.object({
   entreprise: shortText('Entreprise'),
   contact: shortText('Nom et fonction du contact'),
   tel: phone,
   email,
-  effectifConcerne: shortText('Nombre de collaborateurs concernés', 40),
-  lieu: z.enum(['Dans vos locaux', 'Dans un autre lieu', 'À définir'], { errorMap: () => ({ message: 'Merci de préciser le lieu souhaité.' }) }),
-  frequence: z.enum(['1 séance/semaine', '2 séances/semaine', '3 séances/semaine']).optional().or(z.literal('')),
+  effectifConcerne: z.enum(['1 à 10', '11 à 20', '21 à 30', 'Plus de 30'], { errorMap: () => ({ message: 'Merci de préciser l’effectif concerné.' }) }),
+  lieu: shortText('Lieu d’intervention', 160),
+  frequence: z.enum(['À définir', '1 séance par semaine', '2 séances par semaine', '3 séances par semaine']).optional().or(z.literal('')),
   message: optionalText(1000),
   consent: z.literal(true, { errorMap: () => ({ message: 'Le consentement est requis.' }) }),
   website: honeypot,

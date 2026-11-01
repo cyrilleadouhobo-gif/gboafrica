@@ -33,7 +33,7 @@ export async function POST(request) {
       code: 'TEMP',
       type: 'ENTREPRISE',
       name: d.entreprise,
-      objective: `${d.effectifConcerne} collaborateurs concernés`,
+      objective: `Effectif ${d.effectifConcerne} collaborateurs`,
       profile: '—',
       source: 'Corporate',
       status: 'NOUVEAU',
@@ -61,7 +61,7 @@ export async function POST(request) {
     await sendEmail({
       to: FITNESS_EMAIL,
       subject: `Nouveau prospect Entreprise — ${lead.code}`,
-      html: `<p><strong>${escapeHtml(d.entreprise)}</strong></p><p>${escapeHtml(d.effectifConcerne)} collaborateurs concernés · Lieu : ${escapeHtml(d.lieu)}${availability ? ` · ${escapeHtml(availability)}` : ''}</p>${
+      html: `<p><strong>${escapeHtml(d.entreprise)}</strong></p><p>Effectif ${escapeHtml(d.effectifConcerne)} collaborateurs · Lieu : ${escapeHtml(d.lieu)}${availability ? ` · ${escapeHtml(availability)}` : ''}</p>${
         d.message ? `<p>Message : ${escapeHtml(d.message)}</p>` : ''
       }<p>Contact : ${escapeHtml(d.contact)} · ${escapeHtml(d.email)} / ${escapeHtml(d.tel)}</p>`,
     });
