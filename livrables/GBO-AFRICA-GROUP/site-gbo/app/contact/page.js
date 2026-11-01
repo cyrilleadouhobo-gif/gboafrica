@@ -47,7 +47,7 @@ export default function ContactPage() {
         <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
           <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(28px,6vw,50px);letter-spacing:-1.5px;margin-bottom:16px")}>Parlons de vos objectifs.</h1>
           <p style={css('font-size:clamp(15px,1.8vw,17px);color:var(--muted,#8a8a8a);line-height:1.55')}>
-            Une question, un projet, une demande spécifique ? Écrivez-nous ou contactez-nous directement sur WhatsApp, un conseiller GBÔ vous répond rapidement.
+            Une question, un projet, une demande spécifique ? Écrivez-nous ou contactez-nous directement sur WhatsApp, un conseiller vous répond rapidement.
           </p>
         </div>
       </section>
@@ -103,7 +103,7 @@ export default function ContactPage() {
             </span>
             <div style={{ minWidth: 0 }}>
               <div style={{ fontWeight: 700, fontSize: 15 }}>WhatsApp</div>
-              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>+225 01 03 16 14 15</div>
+              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>+225 01 03 16 14 15 / 07 48 41 48 03</div>
             </div>
           </a>
           <div className="hover-card" style={css('display:flex;gap:14px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));min-width:0')}>

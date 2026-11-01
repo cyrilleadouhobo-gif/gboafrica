@@ -41,24 +41,6 @@ const ICONS = {
       <path d="M12 7v5l3.5 2" />
     </>
   ),
-  briefcase: (
-    <>
-      <rect x="2" y="7" width="20" height="13" rx="2" />
-      <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2" />
-    </>
-  ),
-  compass: (
-    <>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M15 9l-2 6-6 2 2-6 6-2z" />
-    </>
-  ),
-  shield: (
-    <>
-      <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
-      <path d="M9 12l2 2 4-4" />
-    </>
-  ),
   bolt: <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />,
   headset: (
     <>
@@ -99,13 +81,6 @@ const ADAPTED_FEATURES = [
   { t: 'Sur site', d: 'Les séances peuvent être organisées directement dans l’environnement de l’entreprise lorsque les conditions le permettent.', icon: 'building' },
   { t: 'Dans un lieu convenu', d: 'Lorsque l’entreprise ne dispose pas d’un espace adapté, un autre lieu peut être défini avec GBÔ.', icon: 'pin' },
   { t: 'Rythme adapté', d: 'Une organisation selon les disponibilités et le rythme convenu avec l’entreprise.', icon: 'clock' },
-];
-
-const AUDIENCES = [
-  { t: 'DRH', d: 'Mettre en place une initiative sportive simple à intégrer dans la vie de l’entreprise.', icon: 'briefcase' },
-  { t: 'Direction', d: 'Structurer une démarche de bien-être et de cohésion autour d’une activité concrète.', icon: 'compass' },
-  { t: 'QHSE / Responsables concernés', d: 'Organiser des activités physiques adaptées au cadre de l’entreprise.', icon: 'shield' },
-  { t: 'Collaborateurs', d: 'Pratiquer une activité physique collective dans un cadre encadré.', icon: 'people' },
 ];
 
 const INCLUDED_ITEMS = [
@@ -306,34 +281,6 @@ export default function CorporatePage() {
         </div>
       </Reveal>
 
-      {/* Pour qui */}
-      <Reveal as="section" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px);background:var(--surface,#0b0b0b)')}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={eyebrow}>Pour qui ?</div>
-          <h2 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,3.8vw,36px);letter-spacing:-1px;margin-bottom:36px")}>
-            Une solution pensée pour vos collaborateurs.
-          </h2>
-          <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px')}>
-            {AUDIENCES.map((a) => (
-              <div
-                key={a.t}
-                style={css('padding:26px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.09));background:var(--glass,rgba(255,255,255,.02))')}
-              >
-                <span
-                  style={css(
-                    'width:42px;height:42px;border-radius:50%;background:rgba(198,242,2,.1);color:var(--lime,#C6F202);display:flex;align-items:center;justify-content:center;margin-bottom:16px'
-                  )}
-                >
-                  <Icon name={a.icon} />
-                </span>
-                <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{a.t}</div>
-                <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.55')}>{a.d}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
       {/* Photo — casse le rythme après 2 grilles de cartes d'affilée */}
       <Reveal as="section" style={css('padding:clamp(24px,4vw,40px) clamp(20px,5vw,64px) 0')}>
         <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', aspectRatio: '21/8', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
@@ -341,7 +288,7 @@ export default function CorporatePage() {
           <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.15) 55%,rgba(5,5,5,0) 100%)')} />
           <div style={{ position: 'absolute', left: 'clamp(20px,4vw,40px)', top: '50%', transform: 'translateY(-50%)', maxWidth: 340 }}>
             <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(17px,2.2vw,22px);line-height:1.25")}>
-              Un accompagnement porté par de vrais coachs, pas une app.
+              Un accompagnement assuré par des coachs certifiés, passionnés et expérimentés.
             </div>
           </div>
         </div>
@@ -404,19 +351,6 @@ export default function CorporatePage() {
                 <div style={{ fontWeight: 600, fontSize: 15.5 }}>{s.t}</div>
               </Reveal>
             ))}
-          </div>
-        </div>
-      </Reveal>
-
-      {/* Photo — casse à nouveau le rythme avant la section de conviction finale */}
-      <Reveal as="section" style={css('padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px) 0')}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', aspectRatio: '21/8', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border,rgba(255,255,255,.1))' }}>
-          <ImageSlot placeholder="Coachs GBÔ" src="/images/corporate-coachs.jpg" style={{ objectPosition: 'center 15%' }} />
-          <div style={css('position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.15) 55%,rgba(5,5,5,0) 100%)')} />
-          <div style={{ position: 'absolute', left: 'clamp(20px,4vw,40px)', top: '50%', transform: 'translateY(-50%)', maxWidth: 340 }}>
-            <div style={css("font-family:'Broaven';font-weight:700;font-size:clamp(17px,2.2vw,22px);line-height:1.25")}>
-              Des coachs sélectionnés et formés pour intervenir chez vous.
-            </div>
           </div>
         </div>
       </Reveal>
