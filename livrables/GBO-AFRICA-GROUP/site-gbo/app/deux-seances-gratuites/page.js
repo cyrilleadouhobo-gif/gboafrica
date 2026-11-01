@@ -269,7 +269,7 @@ export default function DeuxSeancesGratuitesPage() {
                       <span style={labelStyle}>Nom & prénom *</span>
                       <input required value={fullName} onChange={(e) => setFullName(e.target.value)} style={fieldStyle} />
                     </label>
-                    <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px')}>
+                    <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:16px')}>
                       <label style={{ display: 'block' }}>
                         <span style={labelStyle}>Téléphone *</span>
                         <input required type="tel" placeholder="+225 07 00 00 00 00" value={tel} onChange={(e) => setTel(e.target.value)} style={fieldStyle} />

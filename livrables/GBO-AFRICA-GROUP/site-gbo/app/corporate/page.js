@@ -558,7 +558,7 @@ export default function CorporatePage() {
               <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:24px;line-height:1.5')}>
                 Quelques informations pour comprendre votre organisation et vous proposer un dispositif adapté.
               </p>
-              <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
+              <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:12px')}>
                 <label style={{ display: 'block' }}>
                   <span style={labelStyle}>Entreprise *</span>
                   <input required name="entreprise" style={fieldStyle} />

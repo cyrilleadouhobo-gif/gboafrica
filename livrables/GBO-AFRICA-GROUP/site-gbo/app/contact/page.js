@@ -59,7 +59,7 @@ export default function ContactPage() {
             onSubmit={submitContact}
             style={css('display:grid;gap:12px;padding:28px;border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c)')}
           >
-            <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;min-width:0')}>
+            <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:12px;min-width:0')}>
               <input required name="nom" placeholder="Nom *" style={fieldStyle} />
               <input required name="tel" type="tel" placeholder="Téléphone *" style={fieldStyle} />
             </div>

@@ -226,7 +226,7 @@ export default function DevenirSallePartenairePage() {
                   <span style={labelStyle}>Nom du responsable *</span>
                   <input required name="managerName" style={fieldStyle} />
                 </label>
-                <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
+                <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:12px')}>
                   <label>
                     <span style={labelStyle}>Téléphone *</span>
                     <input required name="phone" type="tel" placeholder="+225 07 00 00 00 00" style={fieldStyle} />
@@ -240,7 +240,7 @@ export default function DevenirSallePartenairePage() {
                   <span style={labelStyle}>Email *</span>
                   <input required name="email" type="email" style={fieldStyle} />
                 </label>
-                <div style={css('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px')}>
+                <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:12px')}>
                   <label>
                     <span style={labelStyle}>Commune *</span>
                     <input required name="commune" style={fieldStyle} />
