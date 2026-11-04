@@ -23,43 +23,74 @@ export default function AdminPage() {
   const [funnel, setFunnel] = useState([]);
   const [recentLeads, setRecentLeads] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
 
   const loadAll = useCallback(async () => {
-    const [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes] = await Promise.all([
-      fetch('/api/auth/me'),
-      fetch('/api/admin/leads'),
-      fetch('/api/admin/coaches'),
-      fetch('/api/admin/stats'),
-      fetch('/api/admin/reviews'),
-      fetch('/api/admin/gym-partners'),
-    ]);
+    setLoadError(null);
+    try {
+      const [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes] = await Promise.all([
+        fetch('/api/auth/me'),
+        fetch('/api/admin/leads'),
+        fetch('/api/admin/coaches'),
+        fetch('/api/admin/stats'),
+        fetch('/api/admin/reviews'),
+        fetch('/api/admin/gym-partners'),
+      ]);
 
-    if (meRes.status === 401) {
-      router.replace('/admin/login');
-      return;
+      if (meRes.status === 401) {
+        router.replace('/admin/login');
+        return;
+      }
+
+      for (const res of [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes]) {
+        if (!res.ok) throw new Error(`${res.url} a répondu ${res.status}`);
+      }
+
+      const [meData, leadsData, coachesData, statsData, reviewsData, gymPartnersData] = await Promise.all([
+        meRes.json(),
+        leadsRes.json(),
+        coachesRes.json(),
+        statsRes.json(),
+        reviewsRes.json(),
+        gymPartnersRes.json(),
+      ]);
+
+      setMe(meData.admin);
+      setLeads(leadsData.leads || []);
+      setCoaches(coachesData.coaches || []);
+      setStats(statsData.stats);
+      setFunnel(statsData.funnel || []);
+      setRecentLeads(statsData.recent || []);
+      setReviews(reviewsData.reviews || []);
+      setGymPartners(gymPartnersData.gymPartners || []);
+      setLoading(false);
+    } catch (err) {
+      // Sans ce catch, un seul des 6 appels qui échoue (coupure réseau, Turso qui met du
+      // temps à répondre...) laissait loading bloqué à true pour toujours : écran
+      // "Chargement…" infini, sans aucune indication de ce qui s'est passé.
+      setLoadError(err.message || 'Une erreur est survenue.');
     }
-
-    const meData = await meRes.json();
-    const leadsData = await leadsRes.json();
-    const coachesData = await coachesRes.json();
-    const statsData = await statsRes.json();
-    const reviewsData = await reviewsRes.json();
-    const gymPartnersData = await gymPartnersRes.json();
-
-    setMe(meData.admin);
-    setLeads(leadsData.leads || []);
-    setCoaches(coachesData.coaches || []);
-    setStats(statsData.stats);
-    setFunnel(statsData.funnel || []);
-    setRecentLeads(statsData.recent || []);
-    setReviews(reviewsData.reviews || []);
-    setGymPartners(gymPartnersData.gymPartners || []);
-    setLoading(false);
   }, [router]);
 
   useEffect(() => {
     loadAll();
   }, [loadAll]);
+
+  if (loadError) {
+    return (
+      <div style={{ padding: 'clamp(24px,4vw,40px)', textAlign: 'center' }}>
+        <div style={{ color: 'var(--muted,#8a8a8a)', marginBottom: 14 }}>Impossible de charger le tableau de bord ({loadError}).</div>
+        <button
+          type="button"
+          onClick={loadAll}
+          className="btn-cta"
+          style={css('padding:12px 24px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14px')}
+        >
+          Réessayer
+        </button>
+      </div>
+    );
+  }
 
   const advanceStatus = async (id, direction) => {
     const res = await fetch(`/api/admin/leads/${id}/status`, {

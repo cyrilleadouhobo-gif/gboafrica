@@ -53,6 +53,10 @@ const ORGANIZATION_SCHEMA = {
 export default async function RootLayout({ children }) {
   const headerList = await headers();
   const nonce = headerList.get('x-nonce') || undefined;
+  const pathname = headerList.get('x-pathname') || '';
+  // Le back-office et l'espace partenaire nutrition ont leur propre chrome (barre
+  // "back-office", bouton déconnexion...) — le header/footer marketing n'y a pas sa place.
+  const isBackOffice = pathname.startsWith('/admin') || pathname.startsWith('/partenaires/nutrition');
 
   return (
     <html lang="fr">
@@ -61,9 +65,9 @@ export default async function RootLayout({ children }) {
       </head>
       <body>
         <AppDataProvider>
-          <Header />
+          {!isBackOffice && <Header />}
           <main style={{ minHeight: '60vh' }}>{children}</main>
-          <Footer />
+          {!isBackOffice && <Footer />}
           <Toast />
           <CookieBanner />
           <Analytics />

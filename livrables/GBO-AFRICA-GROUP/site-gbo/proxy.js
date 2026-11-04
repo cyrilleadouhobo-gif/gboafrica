@@ -31,6 +31,9 @@ export function proxy(request) {
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);
+  // Lu par app/layout.js pour masquer le header/footer publics sur le back-office et
+  // l'espace partenaire nutrition — ces espaces ont leur propre chrome, voir plus bas.
+  requestHeaders.set('x-pathname', pathname);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
 
