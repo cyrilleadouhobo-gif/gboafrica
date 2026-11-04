@@ -83,10 +83,7 @@ export default async function ReviewsPage() {
                 'padding:clamp(24px,3vw,32px);border-radius:20px;border:1px solid var(--border,rgba(255,255,255,.12));background:var(--surface,#0c0c0c);position:sticky;top:90px'
               )}
             >
-              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:22px;margin-bottom:6px")}>Votre avis compte</h2>
-              <p style={css('font-size:13.5px;color:var(--muted,#8a8a8a);margin-bottom:20px;line-height:1.5')}>
-                Chaque avis est relu par l&apos;équipe GBÔ avant publication.
-              </p>
+              <h2 style={css("font-family:'Broaven';font-weight:700;font-size:22px;margin-bottom:20px")}>Votre avis compte</h2>
               <ReviewForm />
             </div>
           </div>
