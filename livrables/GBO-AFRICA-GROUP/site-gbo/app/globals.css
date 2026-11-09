@@ -29,6 +29,11 @@
   --headerbg: rgba(0, 0, 0, 0.72);
   --footerbg: #050505;
   --inputbg: rgba(255, 255, 255, 0.04);
+  /* Courbes d'animation partagées (audit du 09/11/2026) — à utiliser pour toute entrée/sortie
+     ou tout mouvement à l'écran plutôt que le `ease`/`ease-in-out` par défaut du navigateur,
+     trop faibles pour un mouvement voulu. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 * {
@@ -71,7 +76,7 @@ a:hover {
 .reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
 .reveal.is-visible {
   opacity: 1;
@@ -244,6 +249,31 @@ select {
     transform: translateX(-50%);
   }
 }
+/* Pôles dropdown (components/Header.js) — remplace un fondu pur sans transform par un léger
+   mouvement + mise à l'échelle depuis le haut, pour que le panneau semble sortir de son
+   déclencheur plutôt que surgir de nulle part. */
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Menu mobile plein écran (components/Header.js) — léger glissement depuis la droite (le
+   bouton burger qui l'ouvre), en plus du fondu, pour donner une origine spatiale au panneau. */
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 @keyframes pop {
   0% {
     transform: scale(0.6);
@@ -258,11 +288,19 @@ select {
   }
 }
 
+/* Mouvement réduit = animations plus courtes, pas absentes (audit du 09/11/2026) : couper
+   purement et simplement `transition: none` sur tout le site privait aussi le retour visuel
+   au survol/clic (couleur, ombre...) qui aide à comprendre qu'une action a eu lieu — pas
+   seulement les déplacements qu'on cherche à éviter. En ramenant la durée à quasi zéro,
+   l'effet de déplacement disparaît tout en gardant le changement d'état perceptible. */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -387,6 +425,14 @@ select {
   [data-stepsrow] {
     flex-wrap: wrap;
     row-gap: 32px;
+  }
+}
+/* Sous 360px (ex. iPhone SE), le minWidth:140px des cartes fait encore déborder la ligne
+   dès que deux d'entre elles essaient de tenir côte à côte (140+140+gap > largeur
+   disponible) — une carte par ligne en dessous de ce seuil. */
+@media (max-width: 360px) {
+  [data-stepsrow] > div {
+    flex-basis: 100% !important;
   }
 }
 

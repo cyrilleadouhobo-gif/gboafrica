@@ -130,7 +130,7 @@ export default function Header() {
         <div
           data-desktopnav=""
           style={css(
-            "font-family:'Broaven',sans-serif;position:sticky;top:68px;z-index:55;background:var(--surface,#101010);border-bottom:1px solid var(--border,rgba(255,255,255,.1));padding:22px clamp(16px,4vw,48px);animation:fadeIn .2s both"
+            "font-family:'Broaven',sans-serif;position:sticky;top:68px;z-index:55;background:var(--surface,#101010);border-bottom:1px solid var(--border,rgba(255,255,255,.1));padding:22px clamp(16px,4vw,48px);transform-origin:top;animation:dropdownIn .18s var(--ease-out) both"
           )}
         >
           <div style={css('max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px')}>
@@ -162,7 +162,7 @@ export default function Header() {
       {menuOpen && (
         <div
           style={css(
-            "font-family:'Broaven',sans-serif;position:fixed;inset:0;z-index:80;background:var(--bg,#000);padding:20px clamp(16px,5vw,32px);overflow:auto;animation:fadeIn .2s both"
+            "font-family:'Broaven',sans-serif;position:fixed;inset:0;z-index:80;background:var(--bg,#000);padding:20px clamp(16px,5vw,32px);overflow:auto;animation:menuIn .22s var(--ease-out) both"
           )}
         >
           <div style={css('display:flex;justify-content:space-between;align-items:center;margin-bottom:28px')}>

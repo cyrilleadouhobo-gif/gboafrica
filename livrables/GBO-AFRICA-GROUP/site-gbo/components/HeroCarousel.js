@@ -45,26 +45,39 @@ export default function HeroCarousel({ slides, interval = 6000, dotsBottom = 64 
             // sans ça le sujet peut disparaître hors champ (cas vécu avec une photo carrée).
             objectPosition: s.position || 'center',
             opacity: i === active ? 1 : 0,
-            transition: 'opacity 1.4s ease',
+            // Léger flou pendant le fondu (sous la limite de 20px recommandée) pour masquer
+            // la double exposition visible quand deux photos différentes se chevauchent à
+            // l'écran pendant la transition — audit du 09/11/2026.
+            filter: i === active ? 'blur(0px)' : 'blur(6px)',
+            transition: 'opacity 1.4s var(--ease-in-out), filter 1.4s var(--ease-in-out)',
           }}
         />
       ))}
       <div style={{ position: 'absolute', bottom: dotsBottom, right: 'clamp(20px,5vw,64px)', display: 'flex', gap: 8, zIndex: 2 }}>
         {slides.map((s, i) => (
+          // Largeur fixe (22px) sur le bouton : la puce active grandit via `transform` plutôt
+          // que `width`, qui déclenchait un recalcul de mise en page à chaque bascule — audit
+          // du 09/11/2026. `transform-origin: left` garde le bord gauche fixe, comme avant.
           <button
             key={s.src}
             onClick={() => goTo(i)}
             aria-hidden="true"
             tabIndex={-1}
-            style={{
-              width: i === active ? 22 : 8,
-              height: 8,
-              borderRadius: 4,
-              background: i === active ? '#C6F202' : 'rgba(255,255,255,.4)',
-              transition: 'width .3s ease, background .3s ease',
-              cursor: 'pointer',
-            }}
-          />
+            style={{ width: 22, height: 8, padding: 0, background: 'none', cursor: 'pointer' }}
+          >
+            <span
+              style={{
+                display: 'block',
+                width: 22,
+                height: 8,
+                borderRadius: 4,
+                background: i === active ? '#C6F202' : 'rgba(255,255,255,.4)',
+                transform: i === active ? 'scaleX(1)' : 'scaleX(0.364)',
+                transformOrigin: 'left center',
+                transition: 'transform .3s ease, background .3s ease',
+              }}
+            />
+          </button>
         ))}
       </div>
     </div>

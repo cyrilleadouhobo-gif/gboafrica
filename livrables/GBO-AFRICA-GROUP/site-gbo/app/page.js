@@ -289,7 +289,7 @@ export default function HomePage() {
         </div>
       </Reveal>
 
-      <Reveal as="section" style={css('padding:clamp(28px,4vw,44px) clamp(20px,5vw,64px) clamp(14px,2vw,24px)')}>
+      <Reveal as="section" id="poles" style={{ scrollMarginTop: 90, ...css('padding:clamp(28px,4vw,44px) clamp(20px,5vw,64px) clamp(14px,2vw,24px)') }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:clamp(20px,4vw,40px);align-items:end;margin-bottom:34px')}>
             <div>
@@ -301,12 +301,9 @@ export default function HomePage() {
               </h2>
             </div>
             <div>
-              <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6;margin-bottom:14px')}>
+              <p style={css('font-size:15.5px;color:var(--muted,#8a8a8a);line-height:1.6')}>
                 GBÔ AFRICA GROUP réunit plusieurs solutions pour rendre le sport plus accessible, plus structuré et plus impactant en Afrique.
               </p>
-              <Link href="/about" style={css('font-weight:700;font-size:14px;color:var(--lime,#C6F202)')}>
-                En savoir plus →
-              </Link>
             </div>
           </div>
           <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px')}>

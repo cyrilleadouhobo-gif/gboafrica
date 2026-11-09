@@ -76,7 +76,7 @@ export default function AboutPage() {
             GBÔ AFRICA GROUP est une entreprise spécialisée dans le développement de solutions dans le sport et le bien-être en Afrique.
           </p>
           <Link
-            href="/"
+            href="/#poles"
             className="btn-cta"
             style={css('margin-top:28px;display:inline-block;padding:16px 30px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:16px')}
           >
