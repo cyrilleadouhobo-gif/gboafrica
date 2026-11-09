@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../../lib/db.js';
 import { loginSchema, parseOrError } from '../../../../lib/validation.js';
-import { getClientIp, isSameOrigin, formRateLimit, GLOBAL_LOGIN_LIMIT } from '../../../../lib/security.js';
+import { getClientIp, isSameOrigin, formRateLimit, GLOBAL_LOGIN_LIMIT, isAccountLocked, recordFailedLogin } from '../../../../lib/security.js';
 import { verifyPassword, createSession, sessionCookieOptions, logAudit, SESSION_COOKIE, DUMMY_PASSWORD_HASH, hashIp } from '../../../../lib/auth.js';
 
 export async function POST(request) {
@@ -21,10 +21,18 @@ export async function POST(request) {
   if (!parsed.ok) return NextResponse.json({ error: 'Identifiants incorrects.' }, { status: 401 });
   const { email, password } = parsed.data;
 
+  // Verrouillage par compte, indépendant de l'IP — voir lib/security.js. Vérifié avant même
+  // de comparer le mot de passe pour ne pas faire travailler bcrypt pour rien sur un compte
+  // déjà verrouillé.
+  if (await isAccountLocked(email)) {
+    return NextResponse.json({ error: 'Trop de tentatives. Réessayez plus tard.' }, { status: 429 });
+  }
+
   const admin = await prisma.adminUser.findUnique({ where: { email } });
   const valid = await verifyPassword(password, admin ? admin.passwordHash : DUMMY_PASSWORD_HASH);
 
   if (!admin || !valid) {
+    await recordFailedLogin(email);
     await logAudit({ adminUserId: null, action: 'login_failed', targetType: 'AdminUser', targetId: email, detail: { ipHash: hashIp(ip) } });
     // Same generic message whether the account exists or not — don't leak which part was wrong.
     return NextResponse.json({ error: 'Identifiants incorrects.' }, { status: 401 });

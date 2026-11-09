@@ -68,3 +68,25 @@ export async function formRateLimit(formKey, ip, perIp, globalLimit = GLOBAL_FOR
 export function honeypotTripped(formValue) {
   return typeof formValue === 'string' && formValue.trim().length > 0;
 }
+
+// Verrouillage par compte, en plus de la limite par IP ci-dessus : un attaquant qui change
+// d'adresse à chaque tentative ne doit pas pouvoir recommencer indéfiniment sur un même
+// compte (demande de Cyrille le 09/11/2026). Ne compte que les échecs — contrairement à
+// rateLimit()/formRateLimit() qui comptent chaque tentative — pour qu'un admin qui se
+// reconnecte plusieurs fois avec le bon mot de passe ne se fasse jamais bloquer par ça.
+// La clé est l'e-mail tel que soumis, que le compte existe ou non : un e-mail inconnu
+// "se verrouille" de la même façon qu'un compte réel, donc ce mécanisme ne révèle jamais
+// si une adresse correspond à un compte.
+export const ACCOUNT_LOCK_LIMIT = { max: 8, windowMs: 15 * 60 * 1000 };
+
+export async function isAccountLocked(email, { max, windowMs } = ACCOUNT_LOCK_LIMIT) {
+  const windowStart = new Date(Date.now() - windowMs);
+  const count = await prisma.rateLimitHit.count({
+    where: { bucketKey: `login-fail:${email}`, createdAt: { gte: windowStart } },
+  });
+  return count >= max;
+}
+
+export async function recordFailedLogin(email) {
+  await prisma.rateLimitHit.create({ data: { bucketKey: `login-fail:${email}` } });
+}
