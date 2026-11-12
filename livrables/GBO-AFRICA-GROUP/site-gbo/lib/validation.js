@@ -224,6 +224,10 @@ export const paiementSchema = z.object({
 });
 
 // --- GBÔ Fitness Digital — planning & séances ------------------------------------------
+export const compteRenduSchema = z.object({
+  contenu: z.string().trim().min(1, 'Le contenu est requis').max(4000),
+});
+
 export const createSeanceSchema = z.object({
   clientAccountId: z.number().int().positive(),
   datePrevue: z.coerce.date().refine((d) => d.getTime() > Date.now(), { message: 'La date doit être dans le futur.' }),

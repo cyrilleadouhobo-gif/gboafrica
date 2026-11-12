@@ -558,7 +558,15 @@ export default function AdminPage() {
                   {formatSeanceDateTime(s.datePrevue)}
                   {s.lieu ? ` · ${s.lieu}` : ''}
                 </div>
-                {s.contenuPrevu && <div style={css('font-size:13px;color:var(--fg,#fff)')}>{s.contenuPrevu}</div>}
+                {s.contenuPrevu && (
+                  <div style={css(`font-size:13px;color:var(--fg,#fff);margin-bottom:${s.compteRendu ? 8 : 0}px`)}>{s.contenuPrevu}</div>
+                )}
+                {s.compteRendu && (
+                  <div style={css('margin-top:8px;padding-top:8px;border-top:1px solid var(--border,rgba(255,255,255,.08));font-size:13px;color:var(--fg,#fff);overflow-wrap:break-word')}>
+                    <span style={{ color: 'var(--muted,#8a8a8a)', fontWeight: 700 }}>Compte rendu : </span>
+                    {s.compteRendu.contenu}
+                  </div>
+                )}
               </div>
             ))}
           </div>

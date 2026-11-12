@@ -9,7 +9,7 @@ export async function GET() {
 
   const seances = await prisma.seance.findMany({
     where: { clientAccountId: client.id },
-    include: { coachAccount: { include: { coach: { select: { name: true } } } } },
+    include: { coachAccount: { include: { coach: { select: { name: true } } } }, compteRendu: true },
     orderBy: { datePrevue: 'asc' },
   });
 

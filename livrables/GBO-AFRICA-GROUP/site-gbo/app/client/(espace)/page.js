@@ -7,13 +7,19 @@ export const metadata = { title: 'Mon espace — GBÔ', robots: { index: false, 
 
 export default async function ClientSpacePage() {
   const client = await getCurrentClient();
-  const [lead, abonnement, seances] = await Promise.all([
+  const [lead, abonnement, seances, seancesPassees] = await Promise.all([
     prisma.lead.findUnique({ where: { id: client.leadId }, select: { name: true } }),
     prisma.abonnement.findFirst({ where: { clientAccountId: client.id, statut: 'ACTIF' }, orderBy: { createdAt: 'desc' }, include: { formule: true } }),
     prisma.seance.findMany({
       where: { clientAccountId: client.id, statut: { not: 'ANNULEE' }, datePrevue: { gte: new Date() } },
       include: { coachAccount: { include: { coach: { select: { name: true } } } } },
       orderBy: { datePrevue: 'asc' },
+    }),
+    prisma.seance.findMany({
+      where: { clientAccountId: client.id, statut: 'REALISEE' },
+      include: { coachAccount: { include: { coach: { select: { name: true } } } }, compteRendu: true },
+      orderBy: { datePrevue: 'desc' },
+      take: 10,
     }),
   ]);
 
@@ -59,6 +65,26 @@ export default async function ClientSpacePage() {
             </div>
           ))}
         </div>
+      )}
+
+      {seancesPassees.length > 0 && (
+        <>
+          <h2 style={css('font-size:17px;font-weight:700;margin:32px 0 14px')}>Séances passées</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
+            {seancesPassees.map((s) => (
+              <div key={s.id} style={css('padding:18px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);max-width:480px')}>
+                <div style={{ fontWeight: 700, marginBottom: 2, overflowWrap: 'break-word' }}>Avec {s.coachAccount.coach.name}</div>
+                <div style={css('color:var(--muted,#8a8a8a);font-size:13.5px;margin-bottom:8px')}>{formatSeanceDateTime(s.datePrevue)}</div>
+                {s.compteRendu && (
+                  <div style={css('font-size:13.5px;overflow-wrap:break-word')}>
+                    <span style={{ color: 'var(--muted,#8a8a8a)', fontWeight: 700 }}>Compte rendu : </span>
+                    {s.compteRendu.contenu}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

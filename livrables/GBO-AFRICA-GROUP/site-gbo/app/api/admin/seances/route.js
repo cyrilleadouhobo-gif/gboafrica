@@ -10,6 +10,7 @@ export async function GET() {
     include: {
       clientAccount: { include: { lead: { select: { name: true } } } },
       coachAccount: { include: { coach: { select: { name: true } } } },
+      compteRendu: true,
     },
     orderBy: { datePrevue: 'desc' },
     take: 100,
