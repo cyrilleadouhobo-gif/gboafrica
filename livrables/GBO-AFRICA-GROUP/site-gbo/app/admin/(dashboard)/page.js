@@ -590,9 +590,9 @@ export default function AdminPage() {
               }}
               style={css('width:100%;padding:14px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:14px')}
             >
-              <option value="">— Sélectionner un coach —</option>
+              <option value="" style={{ background: '#0c0c0c', color: '#fff' }}>— Sélectionner un coach —</option>
               {coaches.map((co) => (
-                <option key={co.id} value={co.id}>
+                <option key={co.id} value={co.id} style={{ background: '#0c0c0c', color: '#fff' }}>
                   {co.name}
                 </option>
               ))}
@@ -614,6 +614,24 @@ export default function AdminPage() {
                   >
                     Marquer la fin de la relation client
                   </button>
+                )}
+              </>
+            )}
+
+            {selectedLead.status === 'CLIENT' && (
+              <>
+                <div style={css('font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin:20px 0 10px')}>
+                  Espace client (GBÔ Fitness Digital)
+                </div>
+                {selectedLead.clientAccount ? (
+                  <div style={css('padding:14px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));font-size:13.5px;color:var(--muted,#8a8a8a)')}>
+                    Compte actif — {selectedLead.clientAccount.email}
+                  </div>
+                ) : (
+                  <CreateClientAccountBlock
+                    lead={selectedLead}
+                    onCreated={(id, clientAccount) => setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, clientAccount } : l)))}
+                  />
                 )}
               </>
             )}
@@ -644,6 +662,89 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// Formulaire de création du compte client, dans la fiche détaillée d'un Lead au statut
+// CLIENT — voir la proposition d'architecture, décision 2 et décision sur la remise des
+// identifiants (mot de passe temporaire affiché une seule fois, à transmettre par l'admin).
+function CreateClientAccountBlock({ lead, onCreated }) {
+  const [email, setEmail] = useState(lead.contactEmail || '');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleCreate = async () => {
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch(`/api/admin/leads/${lead.id}/create-client-account`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Une erreur est survenue.');
+        return;
+      }
+      // On ne prévient pas encore le parent (onCreated) : ça ferait basculer l'affichage
+      // sur "Compte actif" et disparaître ce mot de passe avant que l'admin ait eu le temps
+      // de le lire — c'est exactement le bug observé le 12/11. On attend que l'admin ferme
+      // ce panneau lui-même.
+      setResult(data);
+    } catch {
+      setError('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (result) {
+    return (
+      <div style={css('padding:16px;border-radius:12px;background:rgba(198,242,2,.1);border:1px solid rgba(198,242,2,.35);font-size:13.5px')}>
+        <div style={{ fontWeight: 700, marginBottom: 8 }}>Compte créé</div>
+        <div style={{ marginBottom: 4 }}>E-mail : {result.clientAccount.email}</div>
+        <div style={{ marginBottom: 10 }}>
+          Mot de passe temporaire : <strong style={{ letterSpacing: 1 }}>{result.tempPassword}</strong>
+        </div>
+        <div style={css('color:var(--muted,#8a8a8a);font-size:12px;margin-bottom:12px')}>
+          Ce mot de passe ne s&apos;affiche qu&apos;une seule fois. Transmettez-le au client maintenant, il devra le changer à sa première connexion.
+        </div>
+        <button
+          onClick={() => onCreated(lead.id, result.clientAccount)}
+          style={css('width:100%;padding:12px;border-radius:10px;border:1px solid rgba(198,242,2,.4);color:var(--fg,#fff);font-weight:700;font-size:13.5px')}
+        >
+          J&apos;ai noté le mot de passe, fermer
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="E-mail du client"
+        style={css(
+          'width:100%;padding:14px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:14px;margin-bottom:10px'
+        )}
+      />
+      {error && (
+        <div style={css('padding:10px;border-radius:10px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;font-size:13px;margin-bottom:10px')}>
+          {error}
+        </div>
+      )}
+      <button
+        onClick={handleCreate}
+        disabled={submitting || !email}
+        style={css(`width:100%;padding:14px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14px;opacity:${submitting || !email ? 0.6 : 1}`)}
+      >
+        {submitting ? 'Création…' : 'Créer le compte client'}
+      </button>
     </div>
   );
 }

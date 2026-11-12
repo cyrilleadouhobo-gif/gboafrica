@@ -164,6 +164,35 @@ export const assignCoachSchema = z.object({
   coachId: z.number().int().positive(),
 });
 
+// --- GBÔ Fitness Digital — espace client ---------------------------------------------
+export const clientLoginSchema = z.object({
+  email,
+  password: z.string().min(8, 'Mot de passe invalide').max(200),
+});
+
+const strongPassword = z
+  .string()
+  .min(10, 'Le mot de passe doit contenir au moins 10 caractères')
+  .max(200)
+  .regex(/[a-z]/, 'Le mot de passe doit contenir au moins une minuscule')
+  .regex(/[A-Z]/, 'Le mot de passe doit contenir au moins une majuscule')
+  .regex(/[0-9]/, 'Le mot de passe doit contenir au moins un chiffre');
+
+export const clientChangePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, 'Mot de passe actuel requis').max(200),
+    newPassword: strongPassword,
+  })
+  .refine((data) => data.currentPassword !== data.newPassword, {
+    message: 'Le nouveau mot de passe doit être différent de l’actuel.',
+    path: ['newPassword'],
+  });
+
+export const createClientAccountSchema = z.object({
+  leadId: z.number().int().positive(),
+  email,
+});
+
 export function parseOrError(schema, data) {
   const result = schema.safeParse(data);
   if (!result.success) {

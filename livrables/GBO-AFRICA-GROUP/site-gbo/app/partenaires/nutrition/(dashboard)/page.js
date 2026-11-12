@@ -159,7 +159,7 @@ export default function NutritionPartnerPage() {
                   )}
                 >
                   {NUTRITION_FOLLOWUP_STATUSES.map((s) => (
-                    <option key={s} value={s}>
+                    <option key={s} value={s} style={{ background: '#0c0c0c', color: '#fff' }}>
                       {NUTRITION_FOLLOWUP_STATUS_LABELS[s]}
                     </option>
                   ))}

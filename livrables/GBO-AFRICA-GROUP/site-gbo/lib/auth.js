@@ -18,7 +18,7 @@ export async function verifyPassword(plain, hash) {
   return bcrypt.compare(plain, hash);
 }
 
-function sha256(value) {
+export function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
 }
 

@@ -1,8 +1,10 @@
 // Prisma 5.x's CLI refuses to `db push`/`migrate` directly against a libsql:// URL for the
 // "sqlite" provider (it requires the datasource url to start with "file:"). Workaround:
-// `npm run db:push` writes the schema to a local prisma/turso-init.db file, then this script
-// copies every CREATE TABLE/INDEX statement from that file onto the real Turso database.
-// Run after any schema.prisma change: npm run db:push && node scripts/push-schema-to-turso.mjs
+// `npx prisma db push` writes the schema to the local prisma/dev.db file (per DATABASE_URL
+// in .env — the app itself never reads this file, it always talks to Turso at runtime, see
+// lib/db.js), then this script copies every CREATE TABLE/INDEX statement from that file onto
+// the real Turso database. Run after any schema.prisma change:
+// npx prisma db push && node scripts/push-schema-to-turso.mjs
 import { createClient } from '@libsql/client';
 import { readFileSync, existsSync, unlinkSync } from 'node:fs';
 
@@ -10,9 +12,9 @@ const envText = readFileSync('.env', 'utf8');
 const match = envText.match(/^TURSO_DATABASE_URL="([^"]+)"/m);
 if (!match) throw new Error('TURSO_DATABASE_URL not found in .env');
 
-const localDbPath = 'prisma/turso-init.db';
+const localDbPath = 'prisma/dev.db';
 if (!existsSync(localDbPath)) {
-  throw new Error(`${localDbPath} not found — run "npm run db:push" first.`);
+  throw new Error(`${localDbPath} not found — run "npx prisma db push" first.`);
 }
 
 const local = createClient({ url: `file:./${localDbPath}` });

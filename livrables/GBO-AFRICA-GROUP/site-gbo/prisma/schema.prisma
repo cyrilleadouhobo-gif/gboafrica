@@ -22,6 +22,12 @@ datasource db {
 // and /api/partner/* only, and must never pass the role check on /api/admin/* routes.
 // NutritionFollowUpStatus = NOUVEAU | EN_SUIVI | A_RELANCER | TERMINE
 // GymPartnerStatus = NOUVEAU | A_CONTACTER | QUALIFIE | PARTENAIRE_ACTIF | PERDU
+//
+// --- GBÔ Fitness Digital (module coaching, phase 1 — voir proposition d'architecture) ---
+// Abonnement.statut  = ACTIF | EPUISE | EXPIRE | ANNULE
+// Seance.statut      = PLANIFIEE | REALISEE | ANNULEE | REPORTEE
+// Notification.canal = whatsapp | email
+// Notification.statut = EN_ATTENTE | ENVOYE | ECHEC
 
 model Lead {
   id                 Int        @id @default(autoincrement())
@@ -46,6 +52,7 @@ model Lead {
   coachId            Int?
   coach              Coach?     @relation(fields: [coachId], references: [id])
   nutritionFollowUp  NutritionFollowUp?
+  clientAccount      ClientAccount?
   // Date à laquelle un admin a marqué la fin de l'accompagnement d'un client (status
   // CLIENT) — déclenche le délai de conservation "3 ans après la fin de la relation" de
   // data/legal.js. Reste null tant que le client est actif : aucune purge ne peut partir
@@ -122,6 +129,7 @@ model Coach {
   clients  Int        @default(0)
   leads    Lead[]
   createdAt DateTime  @default(now())
+  coachAccount CoachAccount?
 }
 
 model Review {
@@ -177,4 +185,194 @@ model RateLimitHit {
   createdAt  DateTime @default(now())
 
   @@index([bucketKey, createdAt])
+}
+
+// --- GBÔ Fitness Digital — phase 1 --------------------------------------------------
+// Un Lead qui souscrit devient un ClientAccount (1-pour-1, pas de doublon de fiche —
+// voir la proposition d'architecture, décision 2). Identifiants de connexion séparés
+// de ceux de Lead : l'email de contact CRM n'est pas forcément celui utilisé pour se
+// connecter à l'espace client.
+model ClientAccount {
+  id            Int       @id @default(autoincrement())
+  leadId        Int       @unique
+  lead          Lead      @relation(fields: [leadId], references: [id])
+  email         String    @unique
+  passwordHash  String
+  // Vrai tant que le client n'a pas remplacé le mot de passe temporaire donné par l'admin
+  // à la création du compte — la page /client le redirige vers le changement obligatoire.
+  mustChangePassword Boolean @default(true)
+  actif         Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  lastLoginAt   DateTime?
+  sessions      ClientSession[]
+  abonnements   Abonnement[]
+  seances       Seance[]
+  notifications Notification[]
+}
+
+// Même logique côté Coach : la fiche Coach existe déjà (gérée par l'admin), le compte
+// de connexion est ajouté par-dessus plutôt que de dupliquer la personne.
+model CoachAccount {
+  id            Int       @id @default(autoincrement())
+  coachId       Int       @unique
+  coach         Coach     @relation(fields: [coachId], references: [id])
+  email         String    @unique
+  passwordHash  String
+  mustChangePassword Boolean @default(true)
+  actif         Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  lastLoginAt   DateTime?
+  sessions      CoachSession[]
+  seances       Seance[]
+  notifications Notification[]
+}
+
+// Miroir exact de Session (admin) — même mécanisme (token aléatoire, seul le hash
+// stocké, expiration courte) mais table dédiée : des comptes publics n'ont pas leur
+// place dans le périmètre de sécurité d'AdminUser (décision 3).
+model ClientSession {
+  id              String        @id
+  tokenHash       String        @unique
+  clientAccountId Int
+  clientAccount   ClientAccount @relation(fields: [clientAccountId], references: [id], onDelete: Cascade)
+  userAgent       String?
+  ipHash          String?
+  createdAt       DateTime      @default(now())
+  expiresAt       DateTime
+
+  @@index([clientAccountId])
+}
+
+model CoachSession {
+  id             String       @id
+  tokenHash      String       @unique
+  coachAccountId Int
+  coachAccount   CoachAccount @relation(fields: [coachAccountId], references: [id], onDelete: Cascade)
+  userAgent      String?
+  ipHash         String?
+  createdAt      DateTime     @default(now())
+  expiresAt      DateTime
+
+  @@index([coachAccountId])
+}
+
+// Grille tarifaire paramétrable par l'admin — le CDC exige explicitement de ne pas
+// coder les tarifs en dur (partie 6.4).
+model Formule {
+  id          Int          @id @default(autoincrement())
+  nom         String
+  nbSeances   Int
+  dureeJours  Int
+  prix        Int
+  actif       Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  abonnements Abonnement[]
+}
+
+// Souscription d'un client à une formule. seancesRestantes est le compteur central
+// (RG03 : jamais décrémenté deux fois pour une même séance — voir CompteRendu.valide).
+model Abonnement {
+  id               Int        @id @default(autoincrement())
+  clientAccountId  Int
+  clientAccount    ClientAccount @relation(fields: [clientAccountId], references: [id])
+  formuleId        Int
+  formule          Formule    @relation(fields: [formuleId], references: [id])
+  seancesRestantes Int
+  statut           String     @default("ACTIF")
+  demarreLe        DateTime   @default(now())
+  expireLe         DateTime?
+  paiements        Paiement[]
+  seances          Seance[]
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@index([clientAccountId])
+  @@index([statut])
+}
+
+// Historique des règlements — enregistrement manuel par l'admin, pas de paiement en
+// ligne en phase 1 (partie 5 du CDC, phase 3 pour le paiement en ligne).
+model Paiement {
+  id            Int        @id @default(autoincrement())
+  abonnementId  Int
+  abonnement    Abonnement @relation(fields: [abonnementId], references: [id])
+  montant       Int
+  methode       String
+  enregistreParAdminUserId Int?
+  createdAt     DateTime   @default(now())
+
+  @@index([abonnementId])
+}
+
+// Séance planifiée. contenuPrevu porte la décision 4 de la proposition : texte libre
+// rédigé par le coach, visible immédiatement par le client et l'admin (pas seulement
+// une fois la séance passée, contrairement au CompteRendu).
+model Seance {
+  id              Int           @id @default(autoincrement())
+  clientAccountId Int
+  clientAccount   ClientAccount @relation(fields: [clientAccountId], references: [id])
+  coachAccountId  Int
+  coachAccount    CoachAccount  @relation(fields: [coachAccountId], references: [id])
+  abonnementId    Int
+  abonnement      Abonnement    @relation(fields: [abonnementId], references: [id])
+  datePrevue      DateTime
+  lieu            String?
+  contenuPrevu    String?
+  statut          String        @default("PLANIFIEE")
+  historique      SeanceHistorique[]
+  compteRendu     CompteRendu?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([clientAccountId])
+  @@index([coachAccountId])
+  @@index([abonnementId])
+  @@index([statut])
+}
+
+// RG07 — chaque modification du planning (date, statut, contenu) laisse une trace :
+// qui a changé quoi, et depuis quelle valeur.
+model SeanceHistorique {
+  id             Int      @id @default(autoincrement())
+  seanceId       Int
+  seance         Seance   @relation(fields: [seanceId], references: [id], onDelete: Cascade)
+  champ          String
+  ancienneValeur String?
+  nouvelleValeur String?
+  modifiePar     String
+  createdAt      DateTime @default(now())
+
+  @@index([seanceId])
+}
+
+// RG05 — seul un compte rendu validé déclenche le décompte de la séance sur
+// l'abonnement. Un CR non validé n'a aucun effet sur seancesRestantes.
+model CompteRendu {
+  id        Int       @id @default(autoincrement())
+  seanceId  Int       @unique
+  seance    Seance    @relation(fields: [seanceId], references: [id])
+  contenu   String
+  valide    Boolean   @default(false)
+  valideLe  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// RG13 — trace de chaque notification envoyée (rappel de séance, confirmation...),
+// quel que soit le canal. Un envoi raté reste visible plutôt que silencieusement perdu.
+model Notification {
+  id              Int            @id @default(autoincrement())
+  clientAccountId Int?
+  clientAccount   ClientAccount? @relation(fields: [clientAccountId], references: [id])
+  coachAccountId  Int?
+  coachAccount    CoachAccount?  @relation(fields: [coachAccountId], references: [id])
+  canal           String
+  type            String
+  statut          String         @default("EN_ATTENTE")
+  detail          String?
+  createdAt       DateTime       @default(now())
+
+  @@index([clientAccountId])
+  @@index([coachAccountId])
 }

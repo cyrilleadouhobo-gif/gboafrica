@@ -7,6 +7,7 @@ import { NextResponse } from 'next/server';
 // middleware is a fast-fail convenience, never the sole security boundary.
 
 const SESSION_COOKIE = 'gbo_session';
+const CLIENT_SESSION_COOKIE = 'gbo_client_session';
 
 export function proxy(request) {
   const nonce = crypto.randomUUID().replace(/-/g, '');
@@ -26,6 +27,13 @@ export function proxy(request) {
     return NextResponse.redirect(new URL('/partenaires/nutrition/login', request.url));
   }
   if (pathname.startsWith('/api/partner/') && !request.cookies.get(SESSION_COOKIE)) {
+    return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
+  }
+  const isClientAuthRoute = pathname === '/client/login' || pathname === '/api/auth/client/login';
+  if (pathname.startsWith('/client') && !isClientAuthRoute && !request.cookies.get(CLIENT_SESSION_COOKIE)) {
+    return NextResponse.redirect(new URL('/client/login', request.url));
+  }
+  if (pathname.startsWith('/api/client') && !request.cookies.get(CLIENT_SESSION_COOKIE)) {
     return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
   }
 

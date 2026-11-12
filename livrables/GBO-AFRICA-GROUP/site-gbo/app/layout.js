@@ -56,7 +56,7 @@ export default async function RootLayout({ children }) {
   const pathname = headerList.get('x-pathname') || '';
   // Le back-office et l'espace partenaire nutrition ont leur propre chrome (barre
   // "back-office", bouton déconnexion...) — le header/footer marketing n'y a pas sa place.
-  const isBackOffice = pathname.startsWith('/admin') || pathname.startsWith('/partenaires/nutrition');
+  const isBackOffice = pathname.startsWith('/admin') || pathname.startsWith('/partenaires/nutrition') || pathname.startsWith('/client');
 
   return (
     <html lang="fr">

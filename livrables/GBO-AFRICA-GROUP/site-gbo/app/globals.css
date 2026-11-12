@@ -17,6 +17,11 @@
 }
 
 :root {
+  /* Site entièrement sombre, pas de thème clair — sans ça, les contrôles natifs du
+     navigateur (listes déroulantes <select>, scrollbars) s'affichent en blanc par
+     défaut : le texte blanc du site devient alors illisible dessus (ex. menu "Attribuer
+     un coach" en admin, trouvé le 12/11/2026). */
+  color-scheme: dark;
   --bg: #000000;
   --bg2: #0a0a0a;
   --surface: #0c0c0c;
