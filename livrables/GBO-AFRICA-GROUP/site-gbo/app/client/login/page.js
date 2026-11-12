@@ -54,7 +54,7 @@ export default function ClientLoginPage() {
           Retrouvez vos séances, votre coach et vos comptes rendus.
         </p>
 
-        <form onSubmit={handleLogin} style={{ display: 'grid', gap: 14 }}>
+        <form onSubmit={handleLogin} style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 14 }}>
           <input
             type="email"
             required

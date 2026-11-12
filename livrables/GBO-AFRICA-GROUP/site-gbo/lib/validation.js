@@ -202,6 +202,35 @@ export const createCoachAccountSchema = z.object({
   email,
 });
 
+// --- GBÔ Fitness Digital — formules & abonnements ------------------------------------
+export const formuleSchema = z.object({
+  nom: shortText('Nom de la formule', 80),
+  nbSeances: z.number().int().min(1, 'Au moins 1 séance').max(500),
+  dureeJours: z.number().int().min(1, 'Au moins 1 jour').max(3650),
+  prix: z.number().int().min(0, 'Le tarif ne peut pas être négatif').max(100_000_000),
+});
+
+export const formuleStatusSchema = z.object({
+  actif: z.boolean(),
+});
+
+export const createAbonnementSchema = z.object({
+  formuleId: z.number().int().positive(),
+});
+
+export const paiementSchema = z.object({
+  montant: z.number().int().min(1, 'Le montant doit être positif').max(100_000_000),
+  methode: z.enum(['Espèces', 'Mobile Money', 'Virement', 'Chèque', 'Autre']),
+});
+
+// --- GBÔ Fitness Digital — planning & séances ------------------------------------------
+export const createSeanceSchema = z.object({
+  clientAccountId: z.number().int().positive(),
+  datePrevue: z.coerce.date().refine((d) => d.getTime() > Date.now(), { message: 'La date doit être dans le futur.' }),
+  lieu: optionalText(160),
+  contenuPrevu: optionalText(2000),
+});
+
 export function parseOrError(schema, data) {
   const result = schema.safeParse(data);
   if (!result.success) {

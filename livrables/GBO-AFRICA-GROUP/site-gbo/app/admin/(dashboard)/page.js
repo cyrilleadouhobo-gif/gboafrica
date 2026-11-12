@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { css } from '../../../lib/css.js';
-import { leadBadge, tabStyle } from '../../../lib/styleHelpers.js';
+import { leadBadge, tabStyle, formatSeanceDateTime } from '../../../lib/styleHelpers.js';
 import { LEAD_STATUSES, LEAD_STATUS_LABELS, LEAD_TYPES, LEAD_TYPE_LABELS, REVIEW_STATUS_LABELS, PRACTICE_LOCATION_LABELS, GYM_PARTNER_STATUS_LABELS } from '../../../lib/constants.js';
 
 const FILTERS = ['Tous', ...LEAD_TYPES];
@@ -19,6 +19,8 @@ export default function AdminPage() {
   const [coaches, setCoaches] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [gymPartners, setGymPartners] = useState([]);
+  const [formules, setFormules] = useState([]);
+  const [seances, setSeances] = useState([]);
   const [stats, setStats] = useState(null);
   const [funnel, setFunnel] = useState([]);
   const [recentLeads, setRecentLeads] = useState([]);
@@ -28,13 +30,15 @@ export default function AdminPage() {
   const loadAll = useCallback(async () => {
     setLoadError(null);
     try {
-      const [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes] = await Promise.all([
+      const [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes, formulesRes, seancesRes] = await Promise.all([
         fetch('/api/auth/me'),
         fetch('/api/admin/leads'),
         fetch('/api/admin/coaches'),
         fetch('/api/admin/stats'),
         fetch('/api/admin/reviews'),
         fetch('/api/admin/gym-partners'),
+        fetch('/api/admin/formules'),
+        fetch('/api/admin/seances'),
       ]);
 
       if (meRes.status === 401) {
@@ -42,17 +46,19 @@ export default function AdminPage() {
         return;
       }
 
-      for (const res of [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes]) {
+      for (const res of [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes, formulesRes, seancesRes]) {
         if (!res.ok) throw new Error(`${res.url} a répondu ${res.status}`);
       }
 
-      const [meData, leadsData, coachesData, statsData, reviewsData, gymPartnersData] = await Promise.all([
+      const [meData, leadsData, coachesData, statsData, reviewsData, gymPartnersData, formulesData, seancesData] = await Promise.all([
         meRes.json(),
         leadsRes.json(),
         coachesRes.json(),
         statsRes.json(),
         reviewsRes.json(),
         gymPartnersRes.json(),
+        formulesRes.json(),
+        seancesRes.json(),
       ]);
 
       setMe(meData.admin);
@@ -63,9 +69,11 @@ export default function AdminPage() {
       setRecentLeads(statsData.recent || []);
       setReviews(reviewsData.reviews || []);
       setGymPartners(gymPartnersData.gymPartners || []);
+      setFormules(formulesData.formules || []);
+      setSeances(seancesData.seances || []);
       setLoading(false);
     } catch (err) {
-      // Sans ce catch, un seul des 6 appels qui échoue (coupure réseau, Turso qui met du
+      // Sans ce catch, un seul des appels qui échoue (coupure réseau, Turso qui met du
       // temps à répondre...) laissait loading bloqué à true pour toujours : écran
       // "Chargement…" infini, sans aucune indication de ce qui s'est passé.
       setLoadError(err.message || 'Une erreur est survenue.');
@@ -136,6 +144,17 @@ export default function AdminPage() {
     if (!res.ok) return;
     const { gymPartner } = await res.json();
     setGymPartners((prev) => prev.map((g) => (g.id === id ? gymPartner : g)));
+  };
+
+  const toggleFormuleStatus = async (id, actif) => {
+    const res = await fetch(`/api/admin/formules/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ actif }),
+    });
+    if (!res.ok) return;
+    const { formule } = await res.json();
+    setFormules((prev) => prev.map((f) => (f.id === id ? formule : f)));
   };
 
   const moderateReview = async (id, status) => {
@@ -226,6 +245,12 @@ export default function AdminPage() {
           </button>
           <button onClick={() => setAdminTab('gym-partners')} style={css(tabStyle(adminTab === 'gym-partners'))}>
             Salles partenaires
+          </button>
+          <button onClick={() => setAdminTab('formules')} style={css(tabStyle(adminTab === 'formules'))}>
+            Formules
+          </button>
+          <button onClick={() => setAdminTab('seances')} style={css(tabStyle(adminTab === 'seances'))}>
+            Planning
           </button>
           <button onClick={() => setAdminTab('reviews')} style={css(tabStyle(adminTab === 'reviews'))}>
             Avis {pendingReviews.length > 0 && `(${pendingReviews.length})`}
@@ -480,6 +505,65 @@ export default function AdminPage() {
           </div>
         )}
 
+        {adminTab === 'formules' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 20 }}>
+            <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px')}>
+              {formules.length === 0 && (
+                <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucune formule pour le moment.</div>
+              )}
+              {formules.map((f) => (
+                <div key={f.id} style={css(`padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);opacity:${f.actif ? 1 : 0.55}`)}>
+                  <div style={css('display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px')}>
+                    <div style={{ fontWeight: 700, fontSize: 16 }}>{f.nom}</div>
+                    <span
+                      style={css(
+                        f.actif
+                          ? 'padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:700;background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.4)'
+                          : 'padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:700;background:var(--surface2,#222);color:var(--muted,#8a8a8a);border:1px solid var(--border,rgba(255,255,255,.14))'
+                      )}
+                    >
+                      {f.actif ? 'Active' : 'Désactivée'}
+                    </span>
+                  </div>
+                  <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a);line-height:1.7;margin-bottom:14px')}>
+                    <div>{f.nbSeances} séances · {f.dureeJours} jours</div>
+                    <div style={{ color: 'var(--fg,#fff)', fontWeight: 700, fontSize: 18, marginTop: 4 }}>{f.prix.toLocaleString('fr-FR')} FCFA</div>
+                  </div>
+                  <button
+                    onClick={() => toggleFormuleStatus(f.id, !f.actif)}
+                    style={css('width:100%;padding:11px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));font-weight:700;font-size:13px;color:var(--fg,#fff)')}
+                  >
+                    {f.actif ? 'Désactiver' : 'Réactiver'}
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <FormuleCreateForm onCreated={(formule) => setFormules((prev) => [formule, ...prev])} />
+          </div>
+        )}
+
+        {adminTab === 'seances' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
+            {seances.length === 0 && <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucune séance planifiée pour le moment.</div>}
+            {seances.map((s) => (
+              <div key={s.id} style={css('padding:18px 20px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
+                <div style={css('display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:6px')}>
+                  <div style={{ fontWeight: 700, overflowWrap: 'break-word', minWidth: 0 }}>
+                    {s.clientAccount.lead.name} <span style={{ color: 'var(--muted,#8a8a8a)', fontWeight: 400 }}>avec</span> {s.coachAccount.coach.name}
+                  </div>
+                  <span style={css(leadBadge(s.statut))}>{s.statut}</span>
+                </div>
+                <div style={css('color:var(--muted,#8a8a8a);font-size:13px;margin-bottom:4px')}>
+                  {formatSeanceDateTime(s.datePrevue)}
+                  {s.lieu ? ` · ${s.lieu}` : ''}
+                </div>
+                {s.contenuPrevu && <div style={css('font-size:13px;color:var(--fg,#fff)')}>{s.contenuPrevu}</div>}
+              </div>
+            ))}
+          </div>
+        )}
+
         {adminTab === 'reviews' && (
           <div style={{ display: 'grid', gap: 12 }}>
             {reviews.length === 0 && <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucun avis pour le moment.</div>}
@@ -639,9 +723,21 @@ export default function AdminPage() {
                   Espace client (GBÔ Fitness Digital)
                 </div>
                 {selectedLead.clientAccount ? (
-                  <div style={css('padding:14px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));font-size:13.5px;color:var(--muted,#8a8a8a)')}>
-                    Compte actif — {selectedLead.clientAccount.email}
-                  </div>
+                  <>
+                    <div style={css('padding:14px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));font-size:13.5px;color:var(--muted,#8a8a8a);margin-bottom:16px')}>
+                      Compte actif — {selectedLead.clientAccount.email}
+                    </div>
+                    <div style={css('font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:10px')}>
+                      Abonnement
+                    </div>
+                    <AbonnementBlock
+                      lead={selectedLead}
+                      formules={formules}
+                      onCreated={(id, abonnement) =>
+                        setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, clientAccount: { ...l.clientAccount, abonnements: [abonnement] } } : l)))
+                      }
+                    />
+                  </>
                 ) : (
                   <CreateClientAccountBlock
                     lead={selectedLead}
@@ -837,6 +933,255 @@ function CreateCoachAccountBlock({ coach, onCreated }) {
         style={css(`width:100%;padding:12px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:13px;opacity:${submitting || !email ? 0.6 : 1}`)}
       >
         {submitting ? 'Création…' : 'Créer le compte coach'}
+      </button>
+    </div>
+  );
+}
+
+// Formulaire de création d'une formule — le CDC exige que les tarifs soient paramétrables
+// plutôt que codés en dur, voir la table Formule dans prisma/schema.prisma.
+function FormuleCreateForm({ onCreated }) {
+  const [nom, setNom] = useState('');
+  const [nbSeances, setNbSeances] = useState('');
+  const [dureeJours, setDureeJours] = useState('');
+  const [prix, setPrix] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/admin/formules', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom, nbSeances: Number(nbSeances), dureeJours: Number(dureeJours), prix: Number(prix) }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Une erreur est survenue.');
+        return;
+      }
+      onCreated(data.formule);
+      setNom('');
+      setNbSeances('');
+      setDureeJours('');
+      setPrix('');
+    } catch {
+      setError('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleCreate}
+      style={css('padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);max-width:420px')}
+    >
+      <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 14 }}>Nouvelle formule</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
+        <input
+          required
+          value={nom}
+          onChange={(e) => setNom(e.target.value)}
+          placeholder="Nom (ex. Pack 8 séances)"
+          style={css('padding:13px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:14px')}
+        />
+        <input
+          required
+          type="number"
+          min="1"
+          value={nbSeances}
+          onChange={(e) => setNbSeances(e.target.value)}
+          placeholder="Nombre de séances"
+          style={css('padding:13px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:14px')}
+        />
+        <input
+          required
+          type="number"
+          min="1"
+          value={dureeJours}
+          onChange={(e) => setDureeJours(e.target.value)}
+          placeholder="Durée de validité (jours)"
+          style={css('padding:13px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:14px')}
+        />
+        <input
+          required
+          type="number"
+          min="0"
+          value={prix}
+          onChange={(e) => setPrix(e.target.value)}
+          placeholder="Tarif (FCFA)"
+          style={css('padding:13px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:14px')}
+        />
+      </div>
+      {error && (
+        <div style={css('margin-top:10px;padding:10px;border-radius:9px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;font-size:12.5px')}>
+          {error}
+        </div>
+      )}
+      <button
+        type="submit"
+        disabled={submitting}
+        style={css(`width:100%;margin-top:14px;padding:13px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14px;opacity:${submitting ? 0.6 : 1}`)}
+      >
+        {submitting ? 'Création…' : 'Créer la formule'}
+      </button>
+    </form>
+  );
+}
+
+// Section abonnement dans la fiche d'un client, une fois son compte créé — propose une
+// formule active si aucun abonnement en cours, sinon affiche l'abonnement et ses paiements.
+function AbonnementBlock({ lead, formules, onCreated }) {
+  const [formuleId, setFormuleId] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  const abonnement = lead.clientAccount?.abonnements?.[0];
+
+  const handleCreate = async () => {
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch(`/api/admin/leads/${lead.id}/create-abonnement`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formuleId: Number(formuleId) }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Une erreur est survenue.');
+        return;
+      }
+      onCreated(lead.id, data.abonnement);
+    } catch {
+      setError('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (abonnement) {
+    return (
+      <div style={css('padding:14px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));font-size:13px')}>
+        <div style={{ fontWeight: 700, marginBottom: 6 }}>{abonnement.formule.nom}</div>
+        <div style={{ color: 'var(--muted,#8a8a8a)', marginBottom: 2 }}>
+          {abonnement.seancesRestantes} / {abonnement.formule.nbSeances} séances restantes
+        </div>
+        <div style={{ color: 'var(--muted,#8a8a8a)', marginBottom: 10 }}>
+          Expire le {new Date(abonnement.expireLe).toLocaleDateString('fr-FR')}
+        </div>
+        <PaiementForm abonnementId={abonnement.id} paiements={abonnement.paiements} />
+      </div>
+    );
+  }
+
+  const activeFormules = formules.filter((f) => f.actif);
+
+  return (
+    <div>
+      {activeFormules.length === 0 ? (
+        <div style={css('color:var(--muted,#8a8a8a);font-size:12.5px')}>Crée d&apos;abord une formule active dans l&apos;onglet "Formules".</div>
+      ) : (
+        <>
+          <select
+            value={formuleId}
+            onChange={(e) => setFormuleId(e.target.value)}
+            style={css(
+              'width:100%;padding:13px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:13.5px;margin-bottom:10px'
+            )}
+          >
+            <option value="" style={{ background: '#0c0c0c', color: '#fff' }}>— Sélectionner une formule —</option>
+            {activeFormules.map((f) => (
+              <option key={f.id} value={f.id} style={{ background: '#0c0c0c', color: '#fff' }}>
+                {f.nom} — {f.prix.toLocaleString('fr-FR')} FCFA
+              </option>
+            ))}
+          </select>
+          {error && (
+            <div style={css('padding:10px;border-radius:9px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;font-size:12.5px;margin-bottom:10px')}>
+              {error}
+            </div>
+          )}
+          <button
+            onClick={handleCreate}
+            disabled={submitting || !formuleId}
+            style={css(`width:100%;padding:12px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:13px;opacity:${submitting || !formuleId ? 0.6 : 1}`)}
+          >
+            {submitting ? 'Création…' : "Créer l'abonnement"}
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+function PaiementForm({ abonnementId, paiements }) {
+  const [montant, setMontant] = useState('');
+  const [methode, setMethode] = useState('Espèces');
+  const [submitting, setSubmitting] = useState(false);
+  const [localPaiements, setLocalPaiements] = useState(paiements || []);
+  const [error, setError] = useState('');
+
+  const total = localPaiements.reduce((sum, p) => sum + p.montant, 0);
+
+  const handleCreate = async () => {
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch(`/api/admin/abonnements/${abonnementId}/paiement`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ montant: Number(montant), methode }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Une erreur est survenue.');
+        return;
+      }
+      setLocalPaiements((prev) => [data.paiement, ...prev]);
+      setMontant('');
+    } catch {
+      setError('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div style={css('border-top:1px solid var(--border,rgba(255,255,255,.08));padding-top:10px;margin-top:4px')}>
+      <div style={{ color: 'var(--muted,#8a8a8a)', marginBottom: 8 }}>Total réglé : {total.toLocaleString('fr-FR')} FCFA</div>
+      <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+        <input
+          type="number"
+          min="1"
+          value={montant}
+          onChange={(e) => setMontant(e.target.value)}
+          placeholder="Montant"
+          style={css('flex:1;padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:12.5px')}
+        />
+        <select
+          value={methode}
+          onChange={(e) => setMethode(e.target.value)}
+          style={css('padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:12.5px')}
+        >
+          {['Espèces', 'Mobile Money', 'Virement', 'Chèque', 'Autre'].map((m) => (
+            <option key={m} value={m} style={{ background: '#0c0c0c', color: '#fff' }}>
+              {m}
+            </option>
+          ))}
+        </select>
+      </div>
+      {error && <div style={{ color: '#f87171', fontSize: 11.5, marginBottom: 8 }}>{error}</div>}
+      <button
+        onClick={handleCreate}
+        disabled={submitting || !montant}
+        style={css(`width:100%;padding:9px;border-radius:9px;border:1px solid rgba(198,242,2,.4);color:var(--fg,#fff);font-weight:700;font-size:12px;opacity:${submitting || !montant ? 0.6 : 1}`)}
+      >
+        {submitting ? 'Enregistrement…' : 'Enregistrer un paiement'}
       </button>
     </div>
   );

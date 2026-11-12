@@ -15,7 +15,13 @@ export async function GET(request) {
     include: {
       coach: { select: { name: true } },
       nutritionFollowUp: { select: { id: true, status: true } },
-      clientAccount: { select: { id: true, email: true } },
+      clientAccount: {
+        select: {
+          id: true,
+          email: true,
+          abonnements: { where: { statut: 'ACTIF' }, orderBy: { createdAt: 'desc' }, take: 1, include: { formule: true, paiements: { orderBy: { createdAt: 'desc' } } } },
+        },
+      },
     },
   });
 

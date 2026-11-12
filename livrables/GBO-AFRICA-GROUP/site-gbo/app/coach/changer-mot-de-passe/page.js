@@ -55,7 +55,7 @@ export default function CoachChangePasswordPage() {
           L&apos;équipe GBÔ vous a transmis un mot de passe temporaire. Remplacez-le par le vôtre pour continuer.
         </p>
 
-        <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 14 }}>
+        <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 14 }}>
           <PasswordInput
             required
             autoComplete="current-password"

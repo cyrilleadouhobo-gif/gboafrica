@@ -54,7 +54,7 @@ export default function CoachLoginPage() {
           Retrouvez votre planning et vos clients.
         </p>
 
-        <form onSubmit={handleLogin} style={{ display: 'grid', gap: 14 }}>
+        <form onSubmit={handleLogin} style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 14 }}>
           <input
             type="email"
             required

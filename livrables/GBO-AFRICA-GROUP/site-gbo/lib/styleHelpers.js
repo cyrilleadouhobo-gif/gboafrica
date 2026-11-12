@@ -7,6 +7,10 @@ export function leadBadge(statusCode) {
     CLIENT: '#34d399',
     PARTENAIRE_ACTIF: '#34d399',
     PERDU: '#f87171',
+    PLANIFIEE: '#7dd3fc',
+    REALISEE: '#34d399',
+    ANNULEE: '#f87171',
+    REPORTEE: '#fbbf24',
   };
   const c = map[statusCode] || '#8a8a8a';
   return 'display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:700;background:' + c + '1f;color:' + c + ';border:1px solid ' + c + '55';
@@ -21,6 +25,12 @@ export function tabStyle(active) {
     ';color:' +
     (active ? 'var(--lime,#C6F202)' : 'var(--muted,#8a8a8a)')
   );
+}
+
+// Format partagé pour l'affichage d'une séance (admin, espace client, espace coach) — évite
+// que les trois endroits dérivent s'il faut un jour ajuster le format.
+export function formatSeanceDateTime(date) {
+  return new Date(date).toLocaleString('fr-FR', { dateStyle: 'full', timeStyle: 'short' });
 }
 
 export function chip(selected) {
