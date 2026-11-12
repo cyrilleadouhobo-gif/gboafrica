@@ -8,6 +8,7 @@ import { NextResponse } from 'next/server';
 
 const SESSION_COOKIE = 'gbo_session';
 const CLIENT_SESSION_COOKIE = 'gbo_client_session';
+const COACH_SESSION_COOKIE = 'gbo_coach_session';
 
 export function proxy(request) {
   const nonce = crypto.randomUUID().replace(/-/g, '');
@@ -34,6 +35,13 @@ export function proxy(request) {
     return NextResponse.redirect(new URL('/client/login', request.url));
   }
   if (pathname.startsWith('/api/client') && !request.cookies.get(CLIENT_SESSION_COOKIE)) {
+    return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
+  }
+  const isCoachAuthRoute = pathname === '/coach/login' || pathname === '/api/auth/coach/login';
+  if (pathname.startsWith('/coach') && !isCoachAuthRoute && !request.cookies.get(COACH_SESSION_COOKIE)) {
+    return NextResponse.redirect(new URL('/coach/login', request.url));
+  }
+  if (pathname.startsWith('/api/coach') && !request.cookies.get(COACH_SESSION_COOKIE)) {
     return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
   }
 

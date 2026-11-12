@@ -406,6 +406,21 @@ export default function AdminPage() {
                     {c.dispo === 'DISPONIBLE' ? 'Disponible' : 'Complet'}
                   </span>
                 </div>
+                <div style={css('margin-top:16px;padding-top:16px;border-top:1px solid var(--border,rgba(255,255,255,.1))')}>
+                  <div style={css('font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:10px')}>
+                    Espace coach
+                  </div>
+                  {c.coachAccount ? (
+                    <div style={css('padding:12px;border-radius:10px;background:var(--surface2,#161616);font-size:12.5px;color:var(--muted,#8a8a8a)')}>
+                      Compte actif — {c.coachAccount.email}
+                    </div>
+                  ) : (
+                    <CreateCoachAccountBlock
+                      coach={c}
+                      onCreated={(id, coachAccount) => setCoaches((prev) => prev.map((co) => (co.id === id ? { ...co, coachAccount } : co)))}
+                    />
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -744,6 +759,84 @@ function CreateClientAccountBlock({ lead, onCreated }) {
         style={css(`width:100%;padding:14px;border-radius:12px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:14px;opacity:${submitting || !email ? 0.6 : 1}`)}
       >
         {submitting ? 'Création…' : 'Créer le compte client'}
+      </button>
+    </div>
+  );
+}
+
+// Même logique que CreateClientAccountBlock, pour les coachs — voir aussi le commentaire
+// sur le mot de passe temporaire là-bas.
+function CreateCoachAccountBlock({ coach, onCreated }) {
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleCreate = async () => {
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch(`/api/admin/coaches/${coach.id}/create-account`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Une erreur est survenue.');
+        return;
+      }
+      setResult(data);
+    } catch {
+      setError('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (result) {
+    return (
+      <div style={css('padding:14px;border-radius:10px;background:rgba(198,242,2,.1);border:1px solid rgba(198,242,2,.35);font-size:13px')}>
+        <div style={{ fontWeight: 700, marginBottom: 6 }}>Compte créé</div>
+        <div style={{ marginBottom: 4 }}>E-mail : {result.coachAccount.email}</div>
+        <div style={{ marginBottom: 10 }}>
+          Mot de passe temporaire : <strong style={{ letterSpacing: 1 }}>{result.tempPassword}</strong>
+        </div>
+        <div style={css('color:var(--muted,#8a8a8a);font-size:11.5px;margin-bottom:10px')}>
+          Ce mot de passe ne s&apos;affiche qu&apos;une seule fois. Transmettez-le au coach maintenant.
+        </div>
+        <button
+          onClick={() => onCreated(coach.id, result.coachAccount)}
+          style={css('width:100%;padding:10px;border-radius:9px;border:1px solid rgba(198,242,2,.4);color:var(--fg,#fff);font-weight:700;font-size:12.5px')}
+        >
+          J&apos;ai noté le mot de passe, fermer
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="E-mail du coach"
+        style={css(
+          'width:100%;padding:12px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:13px;margin-bottom:8px'
+        )}
+      />
+      {error && (
+        <div style={css('padding:9px;border-radius:9px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;font-size:12px;margin-bottom:8px')}>
+          {error}
+        </div>
+      )}
+      <button
+        onClick={handleCreate}
+        disabled={submitting || !email}
+        style={css(`width:100%;padding:12px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:13px;opacity:${submitting || !email ? 0.6 : 1}`)}
+      >
+        {submitting ? 'Création…' : 'Créer le compte coach'}
       </button>
     </div>
   );

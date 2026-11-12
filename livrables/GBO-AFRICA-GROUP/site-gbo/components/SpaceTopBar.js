@@ -3,12 +3,15 @@
 import { useRouter } from 'next/navigation';
 import { css } from '../lib/css.js';
 
-export default function ClientTopBar({ email }) {
+// Barre du haut partagée par les espaces connectés grand public (client, coach) — mêmes
+// identité visuelle et mécanique, seuls l'endpoint de déconnexion et la page de connexion
+// à laquelle revenir changent.
+export default function SpaceTopBar({ email, logoutUrl, loginUrl }) {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await fetch('/api/auth/client/logout', { method: 'POST' });
-    router.replace('/client/login');
+    await fetch(logoutUrl, { method: 'POST' });
+    router.replace(loginUrl);
     router.refresh();
   };
 

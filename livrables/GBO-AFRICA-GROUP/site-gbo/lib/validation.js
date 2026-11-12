@@ -193,6 +193,15 @@ export const createClientAccountSchema = z.object({
   email,
 });
 
+// --- GBÔ Fitness Digital — espace coach ----------------------------------------------
+export const coachLoginSchema = clientLoginSchema;
+export const coachChangePasswordSchema = clientChangePasswordSchema;
+
+export const createCoachAccountSchema = z.object({
+  coachId: z.number().int().positive(),
+  email,
+});
+
 export function parseOrError(schema, data) {
   const result = schema.safeParse(data);
   if (!result.success) {

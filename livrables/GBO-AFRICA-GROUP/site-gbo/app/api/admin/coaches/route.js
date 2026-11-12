@@ -6,6 +6,6 @@ export async function GET() {
   const admin = await getCurrentStaffAdmin();
   if (!admin) return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
 
-  const coaches = await prisma.coach.findMany({ orderBy: { name: 'asc' } });
+  const coaches = await prisma.coach.findMany({ orderBy: { name: 'asc' }, include: { coachAccount: { select: { id: true, email: true } } } });
   return NextResponse.json({ coaches });
 }
