@@ -5,8 +5,11 @@ import { useRouter } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import { leadBadge, tabStyle, formatSeanceDateTime } from '../../../lib/styleHelpers.js';
 import { LEAD_STATUSES, LEAD_STATUS_LABELS, LEAD_TYPES, LEAD_TYPE_LABELS, REVIEW_STATUS_LABELS, PRACTICE_LOCATION_LABELS, GYM_PARTNER_STATUS_LABELS } from '../../../lib/constants.js';
+import AdminNotificationsBanner from '../../../components/AdminNotificationsBanner.js';
 
 const FILTERS = ['Tous', ...LEAD_TYPES];
+const SEANCE_FILTERS = ['Toutes', 'PLANIFIEE', 'REALISEE', 'ANNULEE', 'EN_REATTRIBUTION'];
+const SEANCE_FILTER_LABELS = { Toutes: 'Toutes', PLANIFIEE: 'Planifiées', REALISEE: 'Réalisées', ANNULEE: 'Annulées', EN_REATTRIBUTION: 'En réattribution' };
 
 export default function AdminPage() {
   const router = useRouter();
@@ -14,6 +17,7 @@ export default function AdminPage() {
   const [adminTab, setAdminTab] = useState('dashboard');
   const [selectedLeadId, setSelectedLeadId] = useState(null);
   const [adminFilter, setAdminFilter] = useState('Tous');
+  const [seanceFilter, setSeanceFilter] = useState('Toutes');
 
   const [leads, setLeads] = useState([]);
   const [coaches, setCoaches] = useState([]);
@@ -229,6 +233,8 @@ export default function AdminPage() {
           </div>
         </div>
 
+        <AdminNotificationsBanner />
+
         <div
           style={css(
             'display:flex;gap:6px;padding:6px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);width:max-content;max-width:100%;overflow:auto;margin-bottom:26px'
@@ -433,6 +439,12 @@ export default function AdminPage() {
                 </div>
                 <div style={css('margin-top:16px;padding-top:16px;border-top:1px solid var(--border,rgba(255,255,255,.1))')}>
                   <div style={css('font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:10px')}>
+                    Contact
+                  </div>
+                  <CoachContactBlock coach={c} onUpdated={(updated) => setCoaches((prev) => prev.map((co) => (co.id === updated.id ? { ...co, ...updated } : co)))} />
+                </div>
+                <div style={css('margin-top:16px;padding-top:16px;border-top:1px solid var(--border,rgba(255,255,255,.1))')}>
+                  <div style={css('font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:10px')}>
                     Espace coach
                   </div>
                   {c.coachAccount ? (
@@ -544,9 +556,27 @@ export default function AdminPage() {
         )}
 
         {adminTab === 'seances' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
-            {seances.length === 0 && <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucune séance planifiée pour le moment.</div>}
-            {seances.map((s) => (
+          <div>
+            <div style={css('display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px')}>
+              {SEANCE_FILTERS.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setSeanceFilter(f)}
+                  style={css(
+                    `padding:8px 15px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid ${
+                      seanceFilter === f ? 'var(--lime,#C6F202)' : 'var(--border,rgba(255,255,255,.14))'
+                    };color:${seanceFilter === f ? 'var(--lime,#C6F202)' : 'var(--muted,#8a8a8a)'};background:${seanceFilter === f ? 'rgba(198,242,2,.1)' : 'transparent'}`
+                  )}
+                >
+                  {SEANCE_FILTER_LABELS[f]}
+                </button>
+              ))}
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
+            {seances.filter((s) => seanceFilter === 'Toutes' || s.statut === seanceFilter).length === 0 && (
+              <div style={{ padding: 24, textAlign: 'center', color: 'var(--muted,#8a8a8a)' }}>Aucune séance pour ce filtre.</div>
+            )}
+            {seances.filter((s) => seanceFilter === 'Toutes' || s.statut === seanceFilter).map((s) => (
               <div key={s.id} style={css('padding:18px 20px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
                 <div style={css('display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:6px')}>
                   <div style={{ fontWeight: 700, overflowWrap: 'break-word', minWidth: 0 }}>
@@ -567,8 +597,26 @@ export default function AdminPage() {
                     {s.compteRendu.contenu}
                   </div>
                 )}
+                {s.statut === 'ANNULEE' && s.annulePar && (
+                  <div style={css('margin-top:8px;padding-top:8px;border-top:1px solid var(--border,rgba(255,255,255,.08));font-size:13px;overflow-wrap:break-word')}>
+                    <span style={{ color: '#f87171', fontWeight: 700 }}>
+                      Annulée par {s.annulePar === 'CLIENT' ? 'le client' : 'le coach'}
+                      {s.decompteeMalgreAnnulation ? ' (décomptée — moins de 24h de préavis)' : ' (non décomptée)'}
+                    </span>
+                    {s.motifAnnulation && <div style={css('color:var(--muted,#8a8a8a);margin-top:3px')}>Motif : {s.motifAnnulation}</div>}
+                  </div>
+                )}
+                {s.statut === 'EN_REATTRIBUTION' && (
+                  <div style={css('margin-top:8px;padding-top:8px;border-top:1px solid var(--border,rgba(255,255,255,.08));font-size:13px')}>
+                    <div style={{ color: '#fbbf24', fontWeight: 700, marginBottom: 6 }}>
+                      Annulée par le coach{s.motifAnnulation ? ` — ${s.motifAnnulation}` : ''}. En attente d&apos;un nouveau coach.
+                    </div>
+                    <CoachPickerBlock seanceId={s.id} />
+                  </div>
+                )}
               </div>
             ))}
+            </div>
           </div>
         )}
 
@@ -946,6 +994,99 @@ function CreateCoachAccountBlock({ coach, onCreated }) {
   );
 }
 
+// RG06 — téléphone et photo, affichés au client quand ce coach lui est automatiquement
+// attribué suite à l'annulation d'un autre coach (lib/seanceAnnulation.js). Pas d'upload de
+// fichier pour l'instant : l'admin colle un lien d'image déjà hébergé.
+function CoachContactBlock({ coach, onUpdated }) {
+  const [editing, setEditing] = useState(false);
+  const [phone, setPhone] = useState(coach.phone || '');
+  const [photoUrl, setPhotoUrl] = useState(coach.photoUrl || '');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSave = async () => {
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch(`/api/admin/coaches/${coach.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, photoUrl }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Une erreur est survenue.');
+        return;
+      }
+      onUpdated(data.coach);
+      setEditing(false);
+    } catch {
+      setError('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (!editing) {
+    return (
+      <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a)')}>
+        <div style={{ marginBottom: 6 }}>
+          {coach.phone || coach.photoUrl ? (
+            <>
+              {coach.phone && <div>Téléphone : {coach.phone}</div>}
+              {coach.photoUrl && <div>Photo renseignée</div>}
+            </>
+          ) : (
+            'Téléphone et photo non renseignés'
+          )}
+        </div>
+        <button
+          type="button"
+          onClick={() => setEditing(true)}
+          style={css('padding:7px 12px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));color:var(--fg,#fff);font-weight:600;font-size:12px')}
+        >
+          Modifier contact
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 8 }}>
+      <input
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        placeholder="Téléphone"
+        style={css('padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:13px')}
+      />
+      <input
+        value={photoUrl}
+        onChange={(e) => setPhotoUrl(e.target.value)}
+        placeholder="Lien de la photo (https://…)"
+        style={css('padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:13px')}
+      />
+      {error && <div style={{ color: '#f87171', fontSize: 12 }}>{error}</div>}
+      <div style={{ display: 'flex', gap: 8 }}>
+        <button
+          type="button"
+          onClick={() => setEditing(false)}
+          style={css('flex:1;padding:9px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));color:var(--fg,#fff);font-weight:600;font-size:12px')}
+        >
+          Annuler
+        </button>
+        <button
+          type="button"
+          disabled={submitting}
+          onClick={handleSave}
+          style={css(`flex:1;padding:9px;border-radius:9px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:12px;opacity:${submitting ? 0.6 : 1}`)}
+        >
+          {submitting ? 'Envoi…' : 'Enregistrer'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // Formulaire de création d'une formule — le CDC exige que les tarifs soient paramétrables
 // plutôt que codés en dur, voir la table Formule dans prisma/schema.prisma.
 function FormuleCreateForm({ onCreated }) {
@@ -1120,6 +1261,105 @@ function AbonnementBlock({ lead, formules, onCreated }) {
             style={css(`width:100%;padding:12px;border-radius:10px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:13px;opacity:${submitting || !formuleId ? 0.6 : 1}`)}
           >
             {submitting ? 'Création…' : "Créer l'abonnement"}
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+// RG06 — réattribution manuelle (décision du 13/11/2026) : affiché sur une séance
+// EN_REATTRIBUTION, propose la liste live des coachs libres sur ce créneau et laisse
+// l'admin en choisir un. Bloqué tant qu'une proposition est en cours (coach ou client n'a
+// pas encore répondu) — voir lib/seanceReattribution.js.
+function CoachPickerBlock({ seanceId }) {
+  const [coachs, setCoachs] = useState([]);
+  const [propositionEnCours, setPropositionEnCours] = useState(null);
+  const [selected, setSelected] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [proposed, setProposed] = useState(false);
+
+  const charger = () => {
+    setLoading(true);
+    fetch(`/api/admin/seances/${seanceId}/coachs-disponibles`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCoachs(data.coachs || []);
+        setPropositionEnCours(data.propositionEnCours || null);
+      })
+      .catch(() => setError('Impossible de charger les coachs disponibles.'))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(charger, [seanceId]);
+
+  const proposer = async () => {
+    setSubmitting(true);
+    setError('');
+    try {
+      const res = await fetch(`/api/admin/seances/${seanceId}/proposer-coach`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ coachAccountId: Number(selected) }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Une erreur est survenue.');
+        return;
+      }
+      setProposed(true);
+      charger();
+    } catch {
+      setError('Connexion impossible. Vérifiez votre réseau et réessayez.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (loading) {
+    return <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a)')}>Chargement des coachs disponibles…</div>;
+  }
+
+  if (propositionEnCours) {
+    return (
+      <div style={css('padding:10px;border-radius:9px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);font-size:12.5px')}>
+        Proposition en cours chez <strong>{propositionEnCours.coachNom}</strong> — en attente de{' '}
+        {propositionEnCours.statut === 'PROPOSEE_AU_COACH' ? 'sa réponse' : 'la réponse du client'}.
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 8 }}>
+      {proposed && <div style={{ color: '#34d399', fontSize: 12.5 }}>Proposition envoyée.</div>}
+      {coachs.length === 0 ? (
+        <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a)')}>Aucun coach libre sur ce créneau pour le moment.</div>
+      ) : (
+        <>
+          <select
+            value={selected}
+            onChange={(e) => setSelected(e.target.value)}
+            style={css('padding:9px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:13px;color-scheme:dark')}
+          >
+            <option value="" style={{ background: '#0c0c0c', color: '#fff' }}>
+              Choisir un coach libre…
+            </option>
+            {coachs.map((c) => (
+              <option key={c.id} value={c.id} style={{ background: '#0c0c0c', color: '#fff' }}>
+                {c.nom} — {c.spec}
+              </option>
+            ))}
+          </select>
+          {error && <div style={{ color: '#f87171', fontSize: 12 }}>{error}</div>}
+          <button
+            type="button"
+            disabled={!selected || submitting}
+            onClick={proposer}
+            style={css(`padding:9px;border-radius:9px;background:var(--lime,#C6F202);color:#000;font-weight:700;font-size:12.5px;opacity:${!selected || submitting ? 0.6 : 1}`)}
+          >
+            {submitting ? 'Envoi…' : 'Proposer ce coach'}
           </button>
         </>
       )}

@@ -25,9 +25,13 @@ datasource db {
 //
 // --- GBÔ Fitness Digital (module coaching, phase 1 — voir proposition d'architecture) ---
 // Abonnement.statut  = ACTIF | EPUISE | EXPIRE | ANNULE
-// Seance.statut      = PLANIFIEE | REALISEE | ANNULEE | REPORTEE
-// Notification.canal = whatsapp | email
-// Notification.statut = EN_ATTENTE | ENVOYE | ECHEC
+// Seance.statut      = PLANIFIEE | REALISEE | ANNULEE | EN_REATTRIBUTION
+//   (REPORTEE n'est jamais écrit : un report ne change que datePrevue, voir reporterSeance
+//   dans lib/seanceAnnulation.js — le statut reste PLANIFIEE)
+// PropositionCoach.statut = PROPOSEE_AU_COACH | ACCEPTEE_PAR_COACH | REFUSEE_PAR_COACH |
+//   ACCEPTEE_PAR_CLIENT | REFUSEE_PAR_CLIENT
+// Notification.canal = whatsapp | email | admin
+// Notification.statut = EN_ATTENTE | ENVOYE | ECHEC | LUE
 
 model Lead {
   id                 Int        @id @default(autoincrement())
@@ -127,6 +131,10 @@ model Coach {
   zones    String
   dispo    String     @default("DISPONIBLE")
   clients  Int        @default(0)
+  // RG06 — affichés au client quand un nouveau coach lui est automatiquement attribué
+  // suite à une annulation par son coach habituel (lib/seanceAnnulation.js).
+  phone    String?
+  photoUrl String?
   leads    Lead[]
   createdAt DateTime  @default(now())
   coachAccount CoachAccount?
@@ -225,6 +233,7 @@ model CoachAccount {
   sessions      CoachSession[]
   seances       Seance[]
   notifications Notification[]
+  propositions  PropositionCoach[]
 }
 
 // Miroir exact de Session (admin) — même mécanisme (token aléatoire, seul le hash
@@ -320,8 +329,16 @@ model Seance {
   lieu            String?
   contenuPrevu    String?
   statut          String        @default("PLANIFIEE")
+  // RG06 — annulation/report. motifAnnulation et annulePar ('CLIENT'|'COACH') ne sont
+  // renseignés que si statut='ANNULEE'. decompteeMalgreAnnulation=true signifie que
+  // l'annulation est arrivée à moins de 24h de datePrevue et a donc consommé une séance
+  // du forfait malgré l'absence de compte rendu (seancesRestantes déjà décrémenté).
+  motifAnnulation String?
+  annulePar       String?
+  decompteeMalgreAnnulation Boolean @default(false)
   historique      SeanceHistorique[]
   compteRendu     CompteRendu?
+  propositions    PropositionCoach[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
@@ -329,6 +346,27 @@ model Seance {
   @@index([coachAccountId])
   @@index([abonnementId])
   @@index([statut])
+}
+
+// RG06 — réattribution manuelle d'un coach après annulation par le coach habituel
+// (décision du 13/11/2026) : l'admin propose un coach libre sur le créneau, ce coach
+// accepte ou refuse, et si il accepte, c'est le CLIENT qui accepte ou refuse à son tour.
+// Seule une acceptation du client finalise la réattribution (Seance.coachAccountId mis à
+// jour). Un refus (coach ou client) exclut ce coach des candidats pour cette séance et
+// l'admin doit en proposer un autre — voir lib/seanceReattribution.js.
+model PropositionCoach {
+  id               Int          @id @default(autoincrement())
+  seanceId         Int
+  seance           Seance       @relation(fields: [seanceId], references: [id], onDelete: Cascade)
+  coachAccountId   Int
+  coachAccount     CoachAccount @relation(fields: [coachAccountId], references: [id])
+  statut           String       @default("PROPOSEE_AU_COACH")
+  motifRefusClient String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([seanceId])
+  @@index([coachAccountId])
 }
 
 // RG07 — chaque modification du planning (date, statut, contenu) laisse une trace :

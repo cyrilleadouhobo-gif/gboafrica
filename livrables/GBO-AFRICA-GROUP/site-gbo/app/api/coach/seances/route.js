@@ -48,7 +48,7 @@ export async function POST(request) {
   try {
     const seance = await prisma.$transaction(async (tx) => {
       const conflict = await tx.seance.findFirst({
-        where: { coachAccountId: coach.id, datePrevue: parsed.data.datePrevue, statut: { not: 'ANNULEE' } },
+        where: { coachAccountId: coach.id, datePrevue: parsed.data.datePrevue, statut: { notIn: ['ANNULEE', 'EN_REATTRIBUTION'] } },
       });
       if (conflict) {
         throw new Error('CONFLICT');

@@ -11,6 +11,7 @@ export function leadBadge(statusCode) {
     REALISEE: '#34d399',
     ANNULEE: '#f87171',
     REPORTEE: '#fbbf24',
+    EN_REATTRIBUTION: '#fbbf24',
   };
   const c = map[statusCode] || '#8a8a8a';
   return 'display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:700;background:' + c + '1f;color:' + c + ';border:1px solid ' + c + '55';

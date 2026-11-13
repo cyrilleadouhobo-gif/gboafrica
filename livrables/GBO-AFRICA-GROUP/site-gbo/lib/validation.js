@@ -235,6 +235,44 @@ export const createSeanceSchema = z.object({
   contenuPrevu: optionalText(2000),
 });
 
+// RG06 — annulation/report. Le motif est obligatoire dans les deux cas : c'est ce que
+// l'admin voit affiché dans le back-office (pas de dépendance à l'activation WhatsApp).
+export const annulerSeanceSchema = z.object({
+  motif: z.string().trim().min(1, 'Le motif est requis').max(1000),
+});
+
+export const proposerCoachSchema = z.object({
+  coachAccountId: z.number().int().positive(),
+});
+
+export const coachRepondPropositionSchema = z.object({
+  reponse: z.enum(['ACCEPTER', 'REFUSER']),
+});
+
+export const clientRepondPropositionSchema = z.object({
+  reponse: z.enum(['ACCEPTER', 'REFUSER']),
+  motif: optionalText(1000),
+}).refine((d) => d.reponse === 'ACCEPTER' || (d.motif && d.motif.trim().length > 0), {
+  message: 'Le motif est requis en cas de refus.',
+  path: ['motif'],
+});
+
+export const coachContactSchema = z.object({
+  phone: optionalText(40),
+  photoUrl: z
+    .string()
+    .trim()
+    .max(2000)
+    .refine((v) => v === '' || /^https?:\/\//i.test(v), { message: "L'URL de la photo doit commencer par http:// ou https://" })
+    .optional()
+    .or(z.literal('')),
+});
+
+export const reporterSeanceSchema = z.object({
+  motif: z.string().trim().min(1, 'Le motif est requis').max(1000),
+  nouvelleDatePrevue: z.coerce.date().refine((d) => d.getTime() > Date.now(), { message: 'La nouvelle date doit être dans le futur.' }),
+});
+
 export function parseOrError(schema, data) {
   const result = schema.safeParse(data);
   if (!result.success) {

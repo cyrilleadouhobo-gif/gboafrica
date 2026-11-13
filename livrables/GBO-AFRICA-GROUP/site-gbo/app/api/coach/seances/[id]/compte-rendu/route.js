@@ -66,3 +66,44 @@ export async function POST(request, { params }) {
 
   return NextResponse.json({ compteRendu });
 }
+
+// RG04 — décision du 13/11/2026 : le coach peut corriger le texte d'un compte rendu déjà
+// validé pour ses propres séances, à condition que chaque correction laisse une trace. Le
+// statut de la séance et le décompte sur l'abonnement (déjà appliqué à la 1ère validation)
+// ne sont pas touchés.
+export async function PATCH(request, { params }) {
+  if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
+
+  const coach = await getCurrentCoach();
+  if (!coach) return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
+
+  const { id: idParam } = await params;
+  const id = Number(idParam);
+  if (!Number.isInteger(id)) return NextResponse.json({ error: 'Identifiant invalide.' }, { status: 400 });
+
+  const body = await request.json().catch(() => null);
+  const parsed = parseOrError(compteRenduSchema, body || {});
+  if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 });
+
+  const seance = await prisma.seance.findUnique({ where: { id }, include: { compteRendu: true } });
+  if (!seance || seance.coachAccountId !== coach.id) {
+    return NextResponse.json({ error: 'Séance introuvable.' }, { status: 404 });
+  }
+  if (!seance.compteRendu) {
+    return NextResponse.json({ error: 'Aucun compte rendu à corriger pour cette séance.' }, { status: 409 });
+  }
+
+  const ancienContenu = seance.compteRendu.contenu;
+
+  const compteRendu = await prisma.$transaction(async (tx) => {
+    const updated = await tx.compteRendu.update({ where: { seanceId: id }, data: { contenu: parsed.data.contenu } });
+    await tx.seanceHistorique.create({
+      data: { seanceId: id, champ: 'compteRendu', ancienneValeur: ancienContenu, nouvelleValeur: parsed.data.contenu, modifiePar: `coach:${coach.id}` },
+    });
+    return updated;
+  });
+
+  await logAudit({ adminUserId: null, action: 'compte_rendu_corrige', targetType: 'CompteRendu', targetId: compteRendu.id, detail: { seanceId: id, coachAccountId: coach.id } });
+
+  return NextResponse.json({ compteRendu });
+}

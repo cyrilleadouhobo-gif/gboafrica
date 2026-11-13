@@ -2,16 +2,18 @@ import { getCurrentClient } from '../../../lib/clientAuth.js';
 import { prisma } from '../../../lib/db.js';
 import { css } from '../../../lib/css.js';
 import { formatSeanceDateTime } from '../../../lib/styleHelpers.js';
+import AnnulerReporterSeance from '../../../components/AnnulerReporterSeance.js';
+import NotificationsBanner from '../../../components/NotificationsBanner.js';
 
 export const metadata = { title: 'Mon espace — GBÔ', robots: { index: false, follow: false } };
 
 export default async function ClientSpacePage() {
   const client = await getCurrentClient();
-  const [lead, abonnement, seances, seancesPassees] = await Promise.all([
+  const [lead, abonnement, seances, seancesPassees, seancesAnnulees] = await Promise.all([
     prisma.lead.findUnique({ where: { id: client.leadId }, select: { name: true } }),
     prisma.abonnement.findFirst({ where: { clientAccountId: client.id, statut: 'ACTIF' }, orderBy: { createdAt: 'desc' }, include: { formule: true } }),
     prisma.seance.findMany({
-      where: { clientAccountId: client.id, statut: { not: 'ANNULEE' }, datePrevue: { gte: new Date() } },
+      where: { clientAccountId: client.id, statut: { notIn: ['ANNULEE', 'EN_REATTRIBUTION'] }, datePrevue: { gte: new Date() } },
       include: { coachAccount: { include: { coach: { select: { name: true } } } } },
       orderBy: { datePrevue: 'asc' },
     }),
@@ -21,6 +23,12 @@ export default async function ClientSpacePage() {
       orderBy: { datePrevue: 'desc' },
       take: 10,
     }),
+    prisma.seance.findMany({
+      where: { clientAccountId: client.id, statut: 'ANNULEE' },
+      include: { coachAccount: { include: { coach: { select: { name: true } } } } },
+      orderBy: { updatedAt: 'desc' },
+      take: 5,
+    }),
   ]);
 
   return (
@@ -28,6 +36,10 @@ export default async function ClientSpacePage() {
       <h1 style={css("font-family:'Broaven';font-weight:700;font-size:28px;margin-bottom:8px")}>
         Bonjour{lead?.name ? ` ${lead.name}` : ''}
       </h1>
+
+      <div style={{ marginTop: 20 }}>
+        <NotificationsBanner basePath="/api/client/notifications" propositionsPath="/api/client/propositions" />
+      </div>
 
       {abonnement ? (
         <div
@@ -62,6 +74,7 @@ export default async function ClientSpacePage() {
                 {s.lieu ? ` · ${s.lieu}` : ''}
               </div>
               {s.contenuPrevu && <div style={css('font-size:13.5px')}>{s.contenuPrevu}</div>}
+              <AnnulerReporterSeance seanceId={s.id} datePrevue={s.datePrevue} basePath="/api/client/seances" />
             </div>
           ))}
         </div>
@@ -81,6 +94,25 @@ export default async function ClientSpacePage() {
                     {s.compteRendu.contenu}
                   </div>
                 )}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {seancesAnnulees.length > 0 && (
+        <>
+          <h2 style={css('font-size:17px;font-weight:700;margin:32px 0 14px')}>Séances annulées récemment</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
+            {seancesAnnulees.map((s) => (
+              <div key={s.id} style={css('padding:16px;border-radius:14px;border:1px solid rgba(248,113,113,.25);background:var(--surface,#0c0c0c);max-width:480px;opacity:.85')}>
+                <div style={{ fontWeight: 700, marginBottom: 2, overflowWrap: 'break-word' }}>Avec {s.coachAccount.coach.name}</div>
+                <div style={css('color:var(--muted,#8a8a8a);font-size:13px;margin-bottom:4px')}>{formatSeanceDateTime(s.datePrevue)}</div>
+                <div style={css('font-size:12.5px;color:#f87171')}>
+                  Annulée par {s.annulePar === 'COACH' ? 'le coach' : 'vous'}
+                  {s.decompteeMalgreAnnulation ? ' — décomptée du forfait (moins de 24h de préavis)' : ' — non décomptée'}
+                </div>
+                {s.motifAnnulation && <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);margin-top:4px')}>Motif : {s.motifAnnulation}</div>}
               </div>
             ))}
           </div>
