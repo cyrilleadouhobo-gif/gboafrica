@@ -22,10 +22,19 @@ export function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
 }
 
+// Pas de secret de repli en dur : un déploiement où SESSION_SECRET serait oublié doit
+// échouer bruyamment plutôt que saler silencieusement avec une valeur connue publiquement
+// (ce qui réduirait le hash d'IP à un simple SHA-256 non salé, cassable par rainbow table).
+function sessionSecret() {
+  const value = process.env.SESSION_SECRET;
+  if (!value) throw new Error('SESSION_SECRET manquant — voir .env.example.');
+  return value;
+}
+
 export function hashIp(ip) {
   if (!ip) return null;
   // Never store raw IPs — a salted hash still lets us rate-limit/audit without keeping PII we don't need.
-  return crypto.createHash('sha256').update(ip + (process.env.SESSION_SECRET || 'dev-only-secret')).digest('hex');
+  return crypto.createHash('sha256').update(ip + sessionSecret()).digest('hex');
 }
 
 export async function createSession(adminUserId, { userAgent, ip } = {}) {

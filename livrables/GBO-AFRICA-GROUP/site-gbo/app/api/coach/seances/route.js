@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '../../../../lib/db.js';
 import { getCurrentCoach } from '../../../../lib/coachAuth.js';
 import { isSameOrigin } from '../../../../lib/security.js';
+import { logAudit } from '../../../../lib/auth.js';
 import { createSeanceSchema, parseOrError } from '../../../../lib/validation.js';
 
 export async function GET() {
@@ -75,6 +76,8 @@ export async function POST(request) {
 
       return created;
     });
+
+    await logAudit({ adminUserId: null, action: 'seance_planifiee', targetType: 'Seance', targetId: seance.id, detail: { par: 'COACH', coachAccountId: coach.id, clientAccountId: client.id } });
 
     return NextResponse.json({ seance });
   } catch (err) {
