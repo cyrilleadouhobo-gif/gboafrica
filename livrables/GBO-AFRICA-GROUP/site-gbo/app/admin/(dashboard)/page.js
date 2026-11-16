@@ -104,6 +104,10 @@ export default function AdminPage() {
     );
   }
 
+  // Ces trois routes ne renvoient que le Lead lui-même (pas clientAccount / nutritionFollowUp
+  // / coach selon le cas) — un remplacement complet de l'entrée effacerait ces relations du
+  // state tant qu'un loadAll() complet n'a pas lieu. On fusionne donc avec l'entrée existante
+  // plutôt que de la remplacer.
   const advanceStatus = async (id, direction) => {
     const res = await fetch(`/api/admin/leads/${id}/status`, {
       method: 'PATCH',
@@ -112,7 +116,7 @@ export default function AdminPage() {
     });
     if (!res.ok) return;
     const { lead } = await res.json();
-    setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
+    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, ...lead } : l)));
   };
 
   const assignCoach = async (id, coachId) => {
@@ -123,14 +127,14 @@ export default function AdminPage() {
     });
     if (!res.ok) return;
     const { lead } = await res.json();
-    setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
+    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, ...lead } : l)));
   };
 
   const endRelation = async (id) => {
     const res = await fetch(`/api/admin/leads/${id}/relation-end`, { method: 'POST' });
     if (!res.ok) return;
     const { lead } = await res.json();
-    setLeads((prev) => prev.map((l) => (l.id === id ? lead : l)));
+    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, ...lead } : l)));
   };
 
   const transmitToNutritionPartner = async (id) => {
@@ -402,7 +406,7 @@ export default function AdminPage() {
         {adminTab === 'coaches' && (
           <div style={css('display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px')}>
             {coaches.map((c) => (
-              <div key={c.id} style={css('padding:24px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c)')}>
+              <div key={c.id} style={css('padding:24px;border-radius:18px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);min-width:0')}>
                 <div style={css('display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px')}>
                   <div style={css('display:flex;gap:12px;align-items:center')}>
                     <span
@@ -448,7 +452,7 @@ export default function AdminPage() {
                     Espace coach
                   </div>
                   {c.coachAccount ? (
-                    <div style={css('padding:12px;border-radius:10px;background:var(--surface2,#161616);font-size:12.5px;color:var(--muted,#8a8a8a)')}>
+                    <div style={css('padding:12px;border-radius:10px;background:var(--surface2,#161616);font-size:12.5px;color:var(--muted,#8a8a8a);overflow-wrap:break-word')}>
                       Compte actif — {c.coachAccount.email}
                     </div>
                   ) : (
@@ -780,7 +784,7 @@ export default function AdminPage() {
                 </div>
                 {selectedLead.clientAccount ? (
                   <>
-                    <div style={css('padding:14px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));font-size:13.5px;color:var(--muted,#8a8a8a);margin-bottom:16px')}>
+                    <div style={css('padding:14px;border-radius:12px;background:var(--surface,#0c0c0c);border:1px solid var(--border,rgba(255,255,255,.08));font-size:13.5px;color:var(--muted,#8a8a8a);margin-bottom:16px;overflow-wrap:break-word')}>
                       Compte actif — {selectedLead.clientAccount.email}
                     </div>
                     <div style={css('font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:10px')}>
@@ -1402,19 +1406,19 @@ function PaiementForm({ abonnementId, paiements }) {
   return (
     <div style={css('border-top:1px solid var(--border,rgba(255,255,255,.08));padding-top:10px;margin-top:4px')}>
       <div style={{ color: 'var(--muted,#8a8a8a)', marginBottom: 8 }}>Total réglé : {total.toLocaleString('fr-FR')} FCFA</div>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+      <div style={{ display: 'flex', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
         <input
           type="number"
           min="1"
           value={montant}
           onChange={(e) => setMontant(e.target.value)}
           placeholder="Montant"
-          style={css('flex:1;padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:12.5px')}
+          style={css('flex:1 1 100px;min-width:0;padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:12.5px')}
         />
         <select
           value={methode}
           onChange={(e) => setMethode(e.target.value)}
-          style={css('padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:12.5px')}
+          style={css('flex:1 1 130px;min-width:0;max-width:100%;box-sizing:border-box;padding:10px;border-radius:9px;border:1px solid var(--border,rgba(255,255,255,.16));background:var(--inputbg,rgba(255,255,255,.04));color:var(--fg,#fff);font-size:12.5px')}
         >
           {['Espèces', 'Mobile Money', 'Virement', 'Chèque', 'Autre'].map((m) => (
             <option key={m} value={m} style={{ background: '#0c0c0c', color: '#fff' }}>
