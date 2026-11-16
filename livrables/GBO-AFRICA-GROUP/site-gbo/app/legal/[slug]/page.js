@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
   const legal = LEGAL[slug];
   if (!legal) return {};
   return pageMetadata({
-    title: `${legal.title} — GBÔ AFRICA GROUP`,
+    title: `${legal.title} · GBÔ AFRICA GROUP`,
     description: LEGAL_DESCRIPTIONS[slug],
     path: `/legal/${slug}`,
   });

@@ -170,7 +170,7 @@ export const ARTICLES = [
     pillar: 'Sport & Société',
     read: '6 min',
     title: 'Pourquoi le sport doit devenir un levier majeur en Afrique ?',
-    excerpt: "Une analyse des opportunités, des défis et des solutions pour faire du sport un véritable moteur de développement.",
+    excerpt: "Une analyse des opportunités, des défis et des solutions pour faire du sport un moteur de développement.",
     // Photo fournie par Cyrille — logo Nike (débardeur) et t-shirt "EFFECT" (marque tierce)
     // visibles, assumés sur demande explicite (voir échange du 19/10).
     photo: '/images/blog/sport-levier-afrique.jpg',
@@ -231,7 +231,7 @@ export const ARTICLES = [
       },
       {
         h: 'Un poids maîtrisé, des muscles et des os renforcés',
-        p: "L'activité physique contribue à l'équilibre énergétique et à la maîtrise du poids corporel, tout en renforçant muscles, articulations et capital osseux. L'OMS souligne qu'une activité d'intensité élevée au moins trois fois par semaine consolide le système musculaire et osseux, utile pour prévenir l'ostéoporose à long terme.",
+        p: "L'activité physique contribue à l'équilibre énergétique et à la maîtrise du poids corporel, tout en renforçant muscles, articulations et capital osseux. Selon l'OMS, une activité d'intensité élevée au moins trois fois par semaine consolide le système musculaire et osseux, utile pour prévenir l'ostéoporose à long terme.",
       },
       {
         h: 'Moins de douleurs, plus de mobilité',
@@ -239,7 +239,7 @@ export const ARTICLES = [
       },
       {
         h: 'Moins de stress, moins d’anxiété',
-        p: "L'OMS souligne le rôle de l'activité physique dans la réduction du stress, de l'anxiété et des symptômes dépressifs : l'exercice déclenche la libération d'endorphines et aide à interrompre les pensées négatives liées au stress. Une pratique régulière peut avoir des effets comparables, dans certains cas, à une prise en charge médicamenteuse légère pour des troubles émotionnels modérés.",
+        p: "L'activité physique aide à réduire le stress, l'anxiété et les symptômes dépressifs : l'exercice déclenche la libération d'endorphines et aide à interrompre les pensées négatives liées au stress. Une pratique régulière peut avoir des effets comparables, dans certains cas, à une prise en charge médicamenteuse légère pour des troubles émotionnels modérés.",
       },
       {
         h: 'Un sommeil de meilleure qualité',
@@ -255,7 +255,7 @@ export const ARTICLES = [
       },
       {
         h: "Un enjeu de santé publique en Côte d'Ivoire et en Afrique",
-        p: "L'Afrique subsaharienne connaît une transition épidémiologique : les maladies non transmissibles augmentent rapidement, alors que les systèmes de santé restent encore organisés autour des maladies infectieuses. En Côte d'Ivoire, les maladies cardiovasculaires sont la première cause de mortalité liée à ces maladies. Selon le Pr Jacko Abodo, chef du service d'endocrinologie et diabétologie du CHU de Yopougon, la sédentarité croissante de la population ivoirienne, combinée à une transition alimentaire vers des produits plus gras, salés et sucrés, alimente une véritable épidémie de maladies métaboliques. Chez les jeunes, la situation est tout aussi préoccupante : selon l'OMS, environ quatre adolescents scolarisés sur cinq en Afrique n'atteignent pas le niveau d'activité physique recommandé pour leur santé.",
+        p: "L'Afrique subsaharienne connaît une transition épidémiologique : les maladies non transmissibles augmentent rapidement, alors que les systèmes de santé restent encore organisés autour des maladies infectieuses. En Côte d'Ivoire, les maladies cardiovasculaires sont la première cause de mortalité liée à ces maladies. Selon le Pr Jacko Abodo, chef du service d'endocrinologie et diabétologie du CHU de Yopougon, la sédentarité croissante de la population ivoirienne, combinée à une transition alimentaire vers des produits plus gras, salés et sucrés, alimente une épidémie de maladies métaboliques. Chez les jeunes, la situation est tout aussi préoccupante : selon l'OMS, environ quatre adolescents scolarisés sur cinq en Afrique n'atteignent pas le niveau d'activité physique recommandé pour leur santé.",
       },
       {
         h: "Les recommandations de l'OMS par tranche d'âge",
@@ -586,7 +586,7 @@ export const GYM_PILLARS = [
     lever: 'Développer',
     title: 'Donnez plus de visibilité à votre salle.',
     product: null,
-    detail: "Visibilité · Acquisition · Orientation de clients · Développement commercial — GBÔ vous aide à accroître votre visibilité, créer des opportunités d'acquisition et orienter des prospects vers les salles partenaires lorsque cela correspond à leur besoin.",
+    detail: "GBÔ vous aide à gagner en visibilité, générer des opportunités d'acquisition et orienter des prospects vers les salles partenaires quand ça correspond à leur besoin.",
     cta: 'Développer ma salle',
     href: '/devenir-salle-partenaire',
   },
@@ -595,7 +595,7 @@ export const GYM_PILLARS = [
     lever: 'Animer',
     title: "Créez une salle où l'on a envie de revenir.",
     product: null,
-    detail: "Challenges · Événements · Animations · Communauté — Créez des expériences qui renforcent l'engagement de vos adhérents et donnent vie à votre communauté.",
+    detail: "Challenges, événements, animations : on vous aide à créer des expériences qui renforcent l'engagement de vos adhérents.",
     cta: 'Découvrir GBÔ Events',
     href: '/poles/events',
   },

@@ -5,10 +5,10 @@ export const LEGAL = {
     sections: [
       {
         h: 'Éditeur du site',
-        p: "GBÔ AFRICA GROUP — SARL au capital social de 1 000 000 FCFA · RCCM CI-ABJ-03-2026-B12-04057 · Compte Contribuable 2604002Q. Siège social : Abidjan Cocody, Angré Djibi, Immeuble Batim Star Building 1 et 2, dans le prolongement de la pharmacie des Allées, Lot D379 Îlot 29, Section HI, Parcelle 4, Côte d'Ivoire.",
+        p: "GBÔ AFRICA GROUP, SARL au capital social de 1 000 000 FCFA · RCCM CI-ABJ-03-2026-B12-04057 · Compte Contribuable 2604002Q. Siège social : Abidjan Cocody, Angré Djibi, Immeuble Batim Star Building 1 et 2, dans le prolongement de la pharmacie des Allées, Lot D379 Îlot 29, Section HI, Parcelle 4, Côte d'Ivoire.",
       },
       { h: 'Directeur de la publication', p: 'Frédéric TIEMON, Gérant.' },
-      { h: 'Hébergeur', p: 'Vercel Inc. — 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.' },
+      { h: 'Hébergeur', p: 'Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.' },
       { h: 'Propriété intellectuelle', p: "La marque GBÔ, le logotype, le slogan « Plus qu'une pratique, un style de vie » et l'ensemble des contenus sont protégés. Toute reproduction sans autorisation est interdite." },
       { h: 'Contact', p: "Pour toute question relative au site : contact@gboafricagroup.com · Abidjan, Côte d'Ivoire." },
     ],

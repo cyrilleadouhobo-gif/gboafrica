@@ -29,7 +29,7 @@ const ABOUT_VALUES = [
   },
   {
     title: 'Communauté',
-    desc: 'Créer des liens autour du sport et favoriser une dynamique collective.',
+    desc: 'Créer des liens autour du sport, dans une dynamique collective.',
     icon: (
       <>
         <circle cx="9" cy="8" r="3" />
