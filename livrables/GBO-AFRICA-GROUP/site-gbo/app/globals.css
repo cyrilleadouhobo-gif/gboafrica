@@ -312,6 +312,28 @@ select {
 [data-mobileonly] {
   display: none !important;
 }
+
+/* Navigation des espaces client/coach (components/SpaceNav.js) : barre horizontale sous
+   le topbar sur tablette/desktop, barre fixe en bas façon app mobile en dessous de 681px.
+   `[data-space-main]` ajoute l'espace nécessaire en bas pour que le contenu ne passe pas
+   sous la barre fixe sur mobile. */
+[data-space-nav-desktop] {
+  display: flex;
+}
+[data-space-nav-mobile] {
+  display: none;
+}
+@media (max-width: 680px) {
+  [data-space-nav-desktop] {
+    display: none;
+  }
+  [data-space-nav-mobile] {
+    display: grid;
+  }
+  [data-space-main] {
+    padding-bottom: 86px !important;
+  }
+}
 /* Seuil relevé à 1360px (au lieu de 880px) : avec le CTA "Deux séances gratuites" (plus long
    que l'ancien "Commencer"), le header plein (logo + nav 7 items + CTA) a besoin d'environ
    1300px pour ne pas déborder hors écran silencieusement (overflow-x caché sur le body). */

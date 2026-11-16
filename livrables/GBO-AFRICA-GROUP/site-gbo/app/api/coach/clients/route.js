@@ -17,7 +17,7 @@ export async function GET() {
         select: {
           id: true,
           email: true,
-          abonnements: { where: { statut: 'ACTIF' }, orderBy: { createdAt: 'desc' }, take: 1, include: { formule: { select: { nom: true } } } },
+          abonnements: { where: { statut: 'ACTIF' }, orderBy: { createdAt: 'desc' }, take: 1, include: { formule: { select: { nom: true, nbSeances: true } } } },
         },
       },
     },

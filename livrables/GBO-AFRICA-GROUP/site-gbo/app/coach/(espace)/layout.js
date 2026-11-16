@@ -1,6 +1,15 @@
 import { redirect } from 'next/navigation';
 import { getCurrentCoach } from '../../../lib/coachAuth.js';
 import SpaceTopBar from '../../../components/SpaceTopBar.js';
+import SpaceNav from '../../../components/SpaceNav.js';
+import { IconHome, IconUsers, IconCalendar, IconSettings } from '../../../components/DashboardKit.js';
+
+const NAV_ITEMS = [
+  { href: '/coach', label: 'Accueil', icon: <IconHome /> },
+  { href: '/coach/clients', label: 'Clients', icon: <IconUsers /> },
+  { href: '/coach/seances', label: 'Séances', icon: <IconCalendar /> },
+  { href: '/coach/profil', label: 'Profil', icon: <IconSettings /> },
+];
 
 // Le contrôle qui fait foi : proxy.js ne vérifie que la présence du cookie (Edge, pas
 // d'accès base de données), ce Server Component vérifie réellement la session avant de
@@ -13,7 +22,10 @@ export default async function CoachSpaceLayout({ children }) {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg,#000)' }}>
       <SpaceTopBar email={coach.email} logoutUrl="/api/auth/coach/logout" loginUrl="/coach/login" />
-      <main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 64px' }}>{children}</main>
+      <SpaceNav items={NAV_ITEMS} />
+      <main data-space-main style={{ maxWidth: 960, margin: '0 auto', padding: '32px 20px 64px' }}>
+        {children}
+      </main>
     </div>
   );
 }

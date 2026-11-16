@@ -18,11 +18,11 @@ export default function SpaceTopBar({ email, logoutUrl, loginUrl }) {
   return (
     <div
       style={css(
-        'display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border,rgba(255,255,255,.12))'
+        'display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border,rgba(255,255,255,.12))'
       )}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/logo-full.png" alt="GBÔ" width={83} height={30} style={{ height: 30, width: 'auto', flexShrink: 0 }} />
+      <img src="/logo-full.png" alt="GBÔ" width={83} height={30} style={{ height: 30, width: 'auto', flexShrink: 0, marginLeft: 70 }} />
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, minWidth: 0 }}>
         {/* min-width:0 + ellipsis : un e-mail long ne doit jamais repousser le bouton
             hors de l'écran sur mobile (trouvé le 12/11/2026, overflow mesuré sur /client). */}

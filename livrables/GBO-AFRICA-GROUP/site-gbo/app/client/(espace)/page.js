@@ -1,122 +1,143 @@
+import Link from 'next/link';
 import { getCurrentClient } from '../../../lib/clientAuth.js';
 import { prisma } from '../../../lib/db.js';
 import { css } from '../../../lib/css.js';
 import { formatSeanceDateTime } from '../../../lib/styleHelpers.js';
-import AnnulerReporterSeance from '../../../components/AnnulerReporterSeance.js';
 import NotificationsBanner from '../../../components/NotificationsBanner.js';
+import SessionCard from '../../../components/SessionCard.js';
+import { Avatar, StatTile, ProgressRing, Badge, countdownLabel, IconCalendar, IconCheck, IconClock } from '../../../components/DashboardKit.js';
 
 export const metadata = { title: 'Mon espace — GBÔ', robots: { index: false, follow: false } };
 
 export default async function ClientSpacePage() {
   const client = await getCurrentClient();
-  const [lead, abonnement, seances, seancesPassees, seancesAnnulees] = await Promise.all([
-    prisma.lead.findUnique({ where: { id: client.leadId }, select: { name: true } }),
+  const [lead, abonnement, seances, totalRealisees] = await Promise.all([
+    prisma.lead.findUnique({ where: { id: client.leadId }, select: { name: true, coach: { select: { name: true, photoUrl: true } } } }),
     prisma.abonnement.findFirst({ where: { clientAccountId: client.id, statut: 'ACTIF' }, orderBy: { createdAt: 'desc' }, include: { formule: true } }),
     prisma.seance.findMany({
       where: { clientAccountId: client.id, statut: { notIn: ['ANNULEE', 'EN_REATTRIBUTION'] }, datePrevue: { gte: new Date() } },
       include: { coachAccount: { include: { coach: { select: { name: true } } } } },
       orderBy: { datePrevue: 'asc' },
+      take: 2,
     }),
-    prisma.seance.findMany({
-      where: { clientAccountId: client.id, statut: 'REALISEE' },
-      include: { coachAccount: { include: { coach: { select: { name: true } } } }, compteRendu: true },
-      orderBy: { datePrevue: 'desc' },
-      take: 10,
-    }),
-    prisma.seance.findMany({
-      where: { clientAccountId: client.id, statut: 'ANNULEE' },
-      include: { coachAccount: { include: { coach: { select: { name: true } } } } },
-      orderBy: { updatedAt: 'desc' },
-      take: 5,
-    }),
+    prisma.seance.count({ where: { clientAccountId: client.id, statut: 'REALISEE' } }),
   ]);
+
+  const prochaine = seances[0];
+  const joursRestants = abonnement ? Math.max(0, Math.ceil((new Date(abonnement.expireLe).getTime() - Date.now()) / 86400000)) : null;
+  const pctRestant = abonnement ? Math.round((abonnement.seancesRestantes / abonnement.formule.nbSeances) * 100) : 0;
 
   return (
     <div>
-      <h1 style={css("font-family:'Broaven';font-weight:700;font-size:28px;margin-bottom:8px")}>
+      <h1 style={css("font-family:'Broaven';font-weight:700;font-size:clamp(24px,4vw,32px);margin-bottom:6px")}>
         Bonjour{lead?.name ? ` ${lead.name}` : ''}
       </h1>
+      <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-bottom:24px')}>Voici l&apos;essentiel de votre accompagnement.</p>
 
-      <div style={{ marginTop: 20 }}>
-        <NotificationsBanner basePath="/api/client/notifications" propositionsPath="/api/client/propositions" />
+      <NotificationsBanner basePath="/api/client/notifications" propositionsPath="/api/client/propositions" />
+
+      <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px')}>
+        <StatTile
+          icon={<IconCalendar />}
+          value={prochaine ? new Date(prochaine.datePrevue).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : '—'}
+          label="Prochaine séance"
+        />
+        <StatTile icon={<IconCheck />} value={totalRealisees} label="Séances réalisées" />
+        <StatTile icon={<IconClock />} value={joursRestants ?? '—'} label="Jours restants" />
       </div>
 
-      {abonnement ? (
-        <div
+      <div style={css('display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:28px')}>
+        <Link
+          href="/client/forfait"
+          className="hover-card"
           style={css(
-            'margin-top:20px;padding:22px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);max-width:420px'
+            'display:flex;gap:16px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);min-width:0'
           )}
         >
-          <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 8 }}>{abonnement.formule.nom}</div>
-          <div style={css('color:var(--muted,#8a8a8a);font-size:14px;margin-bottom:4px')}>
-            {abonnement.seancesRestantes} séance{abonnement.seancesRestantes > 1 ? 's' : ''} restante{abonnement.seancesRestantes > 1 ? 's' : ''} sur {abonnement.formule.nbSeances}
-          </div>
-          <div style={css('color:var(--muted,#8a8a8a);font-size:14px')}>
-            Valable jusqu&apos;au {new Date(abonnement.expireLe).toLocaleDateString('fr-FR')}
-          </div>
-        </div>
-      ) : (
-        <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px;margin-top:12px')}>
-          Vous n&apos;avez pas encore d&apos;abonnement actif. Contactez votre coach ou l&apos;équipe GBÔ.
-        </p>
-      )}
+          {abonnement ? (
+            <>
+              <ProgressRing size={64} pct={pctRestant} value={abonnement.seancesRestantes} />
+              <div style={{ minWidth: 0 }}>
+                <div style={css('font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:4px')}>
+                  Mon forfait
+                </div>
+                <div style={{ fontWeight: 700, overflowWrap: 'break-word' }}>{abonnement.formule.nom}</div>
+                <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a)')}>{abonnement.seancesRestantes} séance(s) restante(s)</div>
+              </div>
+            </>
+          ) : (
+            <div style={{ minWidth: 0 }}>
+              <div style={css('font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:4px')}>
+                Mon forfait
+              </div>
+              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>Pas d&apos;abonnement actif pour le moment.</div>
+            </div>
+          )}
+        </Link>
 
-      <h2 style={css('font-size:17px;font-weight:700;margin:32px 0 14px')}>Prochaines séances</h2>
+        <Link
+          href="/client/coach"
+          className="hover-card"
+          style={css(
+            'display:flex;gap:16px;align-items:center;padding:20px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);min-width:0'
+          )}
+        >
+          {lead?.coach ? (
+            <>
+              {lead.coach.photoUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={lead.coach.photoUrl} alt={lead.coach.name} style={{ width: 52, height: 52, borderRadius: 14, objectFit: 'cover', flexShrink: 0 }} />
+              ) : (
+                <Avatar name={lead.coach.name} size={52} />
+              )}
+              <div style={{ minWidth: 0 }}>
+                <div style={css('font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:4px')}>
+                  Mon coach
+                </div>
+                <div style={{ fontWeight: 700, overflowWrap: 'break-word' }}>{lead.coach.name}</div>
+                <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a)')}>Voir le profil</div>
+              </div>
+            </>
+          ) : (
+            <div style={{ minWidth: 0 }}>
+              <div style={css('font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted,#8a8a8a);font-weight:700;margin-bottom:4px')}>
+                Mon coach
+              </div>
+              <div style={css('font-size:13.5px;color:var(--muted,#8a8a8a)')}>Pas encore de coach attribué.</div>
+            </div>
+          )}
+        </Link>
+      </div>
+
+      <div style={css('display:flex;justify-content:space-between;align-items:center;margin-bottom:14px')}>
+        <h2 style={css('font-size:17px;font-weight:700')}>Prochaines séances</h2>
+        <Link href="/client/seances" style={css('font-size:13px;font-weight:700;color:var(--lime,#C6F202)')}>
+          Voir tout →
+        </Link>
+      </div>
       {seances.length === 0 ? (
         <p style={css('color:var(--muted,#8a8a8a);font-size:14.5px')}>Aucune séance planifiée pour le moment.</p>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
-          {seances.map((s) => (
-            <div key={s.id} style={css('padding:18px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);max-width:480px')}>
-              <div style={{ fontWeight: 700, marginBottom: 2, overflowWrap: 'break-word' }}>Avec {s.coachAccount.coach.name}</div>
-              <div style={css('color:var(--muted,#8a8a8a);font-size:13.5px;margin-bottom:6px')}>
-                {formatSeanceDateTime(s.datePrevue)}
-                {s.lieu ? ` · ${s.lieu}` : ''}
-              </div>
-              {s.contenuPrevu && <div style={css('font-size:13.5px')}>{s.contenuPrevu}</div>}
-              <AnnulerReporterSeance seanceId={s.id} datePrevue={s.datePrevue} basePath="/api/client/seances" />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {seancesPassees.length > 0 && (
-        <>
-          <h2 style={css('font-size:17px;font-weight:700;margin:32px 0 14px')}>Séances passées</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
-            {seancesPassees.map((s) => (
-              <div key={s.id} style={css('padding:18px;border-radius:14px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,#0c0c0c);max-width:480px')}>
-                <div style={{ fontWeight: 700, marginBottom: 2, overflowWrap: 'break-word' }}>Avec {s.coachAccount.coach.name}</div>
-                <div style={css('color:var(--muted,#8a8a8a);font-size:13.5px;margin-bottom:8px')}>{formatSeanceDateTime(s.datePrevue)}</div>
-                {s.compteRendu && (
-                  <div style={css('font-size:13.5px;overflow-wrap:break-word')}>
-                    <span style={{ color: 'var(--muted,#8a8a8a)', fontWeight: 700 }}>Compte rendu : </span>
-                    {s.compteRendu.contenu}
+          {seances.map((s) => {
+            const countdown = countdownLabel(s.datePrevue);
+            return (
+              <SessionCard
+                key={s.id}
+                accent="lime"
+                title={
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <Avatar name={s.coachAccount.coach.name} size={32} />
+                    <span>Avec {s.coachAccount.coach.name}</span>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {seancesAnnulees.length > 0 && (
-        <>
-          <h2 style={css('font-size:17px;font-weight:700;margin:32px 0 14px')}>Séances annulées récemment</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: 10 }}>
-            {seancesAnnulees.map((s) => (
-              <div key={s.id} style={css('padding:16px;border-radius:14px;border:1px solid rgba(248,113,113,.25);background:var(--surface,#0c0c0c);max-width:480px;opacity:.85')}>
-                <div style={{ fontWeight: 700, marginBottom: 2, overflowWrap: 'break-word' }}>Avec {s.coachAccount.coach.name}</div>
-                <div style={css('color:var(--muted,#8a8a8a);font-size:13px;margin-bottom:4px')}>{formatSeanceDateTime(s.datePrevue)}</div>
-                <div style={css('font-size:12.5px;color:#f87171')}>
-                  Annulée par {s.annulePar === 'COACH' ? 'le coach' : 'vous'}
-                  {s.decompteeMalgreAnnulation ? ' — décomptée du forfait (moins de 24h de préavis)' : ' — non décomptée'}
-                </div>
-                {s.motifAnnulation && <div style={css('font-size:12.5px;color:var(--muted,#8a8a8a);margin-top:4px')}>Motif : {s.motifAnnulation}</div>}
-              </div>
-            ))}
-          </div>
-        </>
+                }
+                meta={`${formatSeanceDateTime(s.datePrevue)}${s.lieu ? ` · ${s.lieu}` : ''}`}
+                badge={countdown && <Badge tone="lime">{countdown}</Badge>}
+                body={s.contenuPrevu && <div style={css('font-size:13.5px;margin-top:2px')}>{s.contenuPrevu}</div>}
+              />
+            );
+          })}
+        </div>
       )}
     </div>
   );
