@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { css } from '../../../../lib/css.js';
 import { NUTRITION_FOLLOWUP_STATUSES, NUTRITION_FOLLOWUP_STATUS_LABELS } from '../../../../lib/constants.js';
 
@@ -111,6 +112,12 @@ export default function NutritionPartnerPage() {
           </div>
           <div style={css('display:flex;align-items:center;gap:10px')}>
             <div style={{ fontSize: 13, textAlign: 'right' }}>{me?.email}</div>
+            <Link
+              href="/partenaires/nutrition/parametres"
+              style={css('padding:9px 16px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));font-weight:700;font-size:13px;color:var(--fg,#fff)')}
+            >
+              Paramètres
+            </Link>
             <button
               onClick={logout}
               style={css('padding:9px 16px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.16));font-weight:700;font-size:13px;color:var(--fg,#fff)')}

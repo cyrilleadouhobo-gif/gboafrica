@@ -61,3 +61,40 @@ export async function getCurrentCoach() {
 export function coachSessionCookieOptions(expiresAt) {
   return sessionCookieOptions(expiresAt);
 }
+
+const COACH_RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1h — lien "mot de passe oublié"
+
+// Même mécanisme que createCoachSession/verifyCoachSessionCookie mais à usage unique —
+// voir lib/auth.js createPasswordResetToken pour le détail du raisonnement.
+export async function createCoachPasswordResetToken(coachAccountId) {
+  await prisma.coachPasswordResetToken.deleteMany({ where: { coachAccountId } });
+  const id = crypto.randomUUID();
+  const rawToken = crypto.randomBytes(32).toString('base64url');
+  const tokenHash = sha256(rawToken);
+  const expiresAt = new Date(Date.now() + COACH_RESET_TOKEN_TTL_MS);
+  await prisma.coachPasswordResetToken.create({ data: { id, tokenHash, coachAccountId, expiresAt } });
+  return `${id}.${rawToken}`;
+}
+
+export async function consumeCoachPasswordResetToken(tokenValue) {
+  if (!tokenValue || !tokenValue.includes('.')) return null;
+  const [id, rawToken] = tokenValue.split('.');
+  if (!id || !rawToken) return null;
+
+  const token = await prisma.coachPasswordResetToken.findUnique({ where: { id }, include: { coachAccount: true } });
+  if (!token) return null;
+
+  if (token.expiresAt < new Date()) {
+    await prisma.coachPasswordResetToken.delete({ where: { id } }).catch(() => {});
+    return null;
+  }
+
+  const expectedHash = Buffer.from(token.tokenHash, 'hex');
+  const actualHash = Buffer.from(sha256(rawToken), 'hex');
+  if (expectedHash.length !== actualHash.length || !crypto.timingSafeEqual(expectedHash, actualHash)) {
+    return null;
+  }
+
+  await prisma.coachPasswordResetToken.delete({ where: { id } }).catch(() => {});
+  return token.coachAccount;
+}

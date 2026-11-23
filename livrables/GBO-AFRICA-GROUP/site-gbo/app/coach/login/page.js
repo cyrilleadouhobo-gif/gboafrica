@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { css } from '../../../lib/css.js';
 import PasswordInput from '../../../components/PasswordInput.js';
 
@@ -73,6 +74,9 @@ export default function CoachLoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <Link href="/coach/mot-de-passe-oublie" style={css('text-align:center;color:var(--muted,#8a8a8a);font-size:12.5px;margin-top:-6px')}>
+            Mot de passe oublié ?
+          </Link>
           {error && (
             <div style={css('padding:12px;border-radius:10px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;font-size:13.5px')}>
               {error}
@@ -88,7 +92,7 @@ export default function CoachLoginPage() {
         </form>
 
         <p style={css('text-align:center;color:var(--muted,#8a8a8a);font-size:12.5px;margin-top:22px')}>
-          Identifiants oubliés ou pas encore reçus ? Contactez l&apos;équipe GBÔ.
+          Pas encore reçu vos identifiants ? Contactez l&apos;équipe GBÔ.
         </p>
       </div>
     </div>

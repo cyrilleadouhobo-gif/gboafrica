@@ -14,7 +14,11 @@ export function proxy(request) {
   const nonce = crypto.randomUUID().replace(/-/g, '');
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login' && !request.cookies.get(SESSION_COOKIE)) {
+  // Partagées admin + partenaire nutrition (même table AdminUser) — voir
+  // app/admin/mot-de-passe-oublie/page.js.
+  const isAdminPublicRoute =
+    pathname === '/admin/login' || pathname === '/admin/mot-de-passe-oublie' || pathname === '/admin/reinitialiser-mot-de-passe';
+  if (pathname.startsWith('/admin') && !isAdminPublicRoute && !request.cookies.get(SESSION_COOKIE)) {
     return NextResponse.redirect(new URL('/admin/login', request.url));
   }
   // Exception : appelée par Vercel Cron (en-tête Authorization, jamais de cookie) — voir
@@ -30,14 +34,22 @@ export function proxy(request) {
   if (pathname.startsWith('/api/partner/') && !request.cookies.get(SESSION_COOKIE)) {
     return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
   }
-  const isClientAuthRoute = pathname === '/client/login' || pathname === '/api/auth/client/login';
+  const isClientAuthRoute =
+    pathname === '/client/login' ||
+    pathname === '/api/auth/client/login' ||
+    pathname === '/client/mot-de-passe-oublie' ||
+    pathname === '/client/reinitialiser-mot-de-passe';
   if (pathname.startsWith('/client') && !isClientAuthRoute && !request.cookies.get(CLIENT_SESSION_COOKIE)) {
     return NextResponse.redirect(new URL('/client/login', request.url));
   }
   if (pathname.startsWith('/api/client') && !request.cookies.get(CLIENT_SESSION_COOKIE)) {
     return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
   }
-  const isCoachAuthRoute = pathname === '/coach/login' || pathname === '/api/auth/coach/login';
+  const isCoachAuthRoute =
+    pathname === '/coach/login' ||
+    pathname === '/api/auth/coach/login' ||
+    pathname === '/coach/mot-de-passe-oublie' ||
+    pathname === '/coach/reinitialiser-mot-de-passe';
   if (pathname.startsWith('/coach') && !isCoachAuthRoute && !request.cookies.get(COACH_SESSION_COOKIE)) {
     return NextResponse.redirect(new URL('/coach/login', request.url));
   }

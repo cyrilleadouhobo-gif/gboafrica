@@ -117,6 +117,44 @@ export async function getCurrentNutritionPartner() {
   return admin && admin.role === 'nutrition_partner' ? admin : null;
 }
 
+const RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1h — lien "mot de passe oublié"
+
+// Même mécanisme que createSession/verifySessionCookie (token aléatoire, seul le hash
+// stocké) mais à usage unique : supprimé dès qu'il est consommé avec succès.
+export async function createPasswordResetToken(adminUserId) {
+  // Un seul lien valable à la fois : un nouvel envoi invalide les précédents.
+  await prisma.passwordResetToken.deleteMany({ where: { adminUserId } });
+  const id = crypto.randomUUID();
+  const rawToken = crypto.randomBytes(32).toString('base64url');
+  const tokenHash = sha256(rawToken);
+  const expiresAt = new Date(Date.now() + RESET_TOKEN_TTL_MS);
+  await prisma.passwordResetToken.create({ data: { id, tokenHash, adminUserId, expiresAt } });
+  return `${id}.${rawToken}`;
+}
+
+export async function consumePasswordResetToken(tokenValue) {
+  if (!tokenValue || !tokenValue.includes('.')) return null;
+  const [id, rawToken] = tokenValue.split('.');
+  if (!id || !rawToken) return null;
+
+  const token = await prisma.passwordResetToken.findUnique({ where: { id }, include: { adminUser: true } });
+  if (!token) return null;
+
+  if (token.expiresAt < new Date()) {
+    await prisma.passwordResetToken.delete({ where: { id } }).catch(() => {});
+    return null;
+  }
+
+  const expectedHash = Buffer.from(token.tokenHash, 'hex');
+  const actualHash = Buffer.from(sha256(rawToken), 'hex');
+  if (expectedHash.length !== actualHash.length || !crypto.timingSafeEqual(expectedHash, actualHash)) {
+    return null;
+  }
+
+  await prisma.passwordResetToken.delete({ where: { id } }).catch(() => {});
+  return token.adminUser;
+}
+
 export async function logAudit({ adminUserId, action, targetType, targetId, detail }) {
   await prisma.auditLog.create({
     data: { adminUserId: adminUserId ?? null, action, targetType, targetId: String(targetId), detail: detail ? JSON.stringify(detail) : null },

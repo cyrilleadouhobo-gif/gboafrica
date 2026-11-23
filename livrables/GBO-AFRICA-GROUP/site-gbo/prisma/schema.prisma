@@ -161,6 +161,21 @@ model AdminUser {
   lastLoginAt   DateTime?
   sessions      Session[]
   auditLogs     AuditLog[]
+  resetTokens   PasswordResetToken[]
+}
+
+// Jeton de réinitialisation "Mot de passe oublié", même mécanisme que Session (token
+// aléatoire, seul le hash stocké, comparaison en temps constant) mais à usage unique et
+// courte durée de vie. Couvre admin ET nutrition_partner, qui partagent déjà AdminUser.
+model PasswordResetToken {
+  id          String    @id
+  tokenHash   String    @unique
+  adminUserId Int
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  expiresAt   DateTime
+
+  @@index([adminUserId])
 }
 
 model Session {
@@ -216,6 +231,20 @@ model ClientAccount {
   abonnements   Abonnement[]
   seances       Seance[]
   notifications Notification[]
+  resetTokens   ClientPasswordResetToken[]
+}
+
+// Même mécanisme que PasswordResetToken (admin), table dédiée pour rester cohérent avec
+// la séparation ClientAccount/ClientSession déjà en place.
+model ClientPasswordResetToken {
+  id              String        @id
+  tokenHash       String        @unique
+  clientAccountId Int
+  clientAccount   ClientAccount @relation(fields: [clientAccountId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  expiresAt       DateTime
+
+  @@index([clientAccountId])
 }
 
 // Même logique côté Coach : la fiche Coach existe déjà (gérée par l'admin), le compte
@@ -234,6 +263,19 @@ model CoachAccount {
   seances       Seance[]
   notifications Notification[]
   propositions  PropositionCoach[]
+  resetTokens   CoachPasswordResetToken[]
+}
+
+// Même mécanisme que PasswordResetToken (admin) / ClientPasswordResetToken.
+model CoachPasswordResetToken {
+  id             String       @id
+  tokenHash      String       @unique
+  coachAccountId Int
+  coachAccount   CoachAccount @relation(fields: [coachAccountId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+  expiresAt      DateTime
+
+  @@index([coachAccountId])
 }
 
 // Miroir exact de Session (admin) — même mécanisme (token aléatoire, seul le hash

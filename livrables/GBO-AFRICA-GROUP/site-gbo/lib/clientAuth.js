@@ -67,3 +67,40 @@ export async function getCurrentClient() {
 export function clientSessionCookieOptions(expiresAt) {
   return sessionCookieOptions(expiresAt);
 }
+
+const CLIENT_RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1h — lien "mot de passe oublié"
+
+// Même mécanisme que createClientSession/verifyClientSessionCookie mais à usage unique —
+// voir lib/auth.js createPasswordResetToken pour le détail du raisonnement.
+export async function createClientPasswordResetToken(clientAccountId) {
+  await prisma.clientPasswordResetToken.deleteMany({ where: { clientAccountId } });
+  const id = crypto.randomUUID();
+  const rawToken = crypto.randomBytes(32).toString('base64url');
+  const tokenHash = sha256(rawToken);
+  const expiresAt = new Date(Date.now() + CLIENT_RESET_TOKEN_TTL_MS);
+  await prisma.clientPasswordResetToken.create({ data: { id, tokenHash, clientAccountId, expiresAt } });
+  return `${id}.${rawToken}`;
+}
+
+export async function consumeClientPasswordResetToken(tokenValue) {
+  if (!tokenValue || !tokenValue.includes('.')) return null;
+  const [id, rawToken] = tokenValue.split('.');
+  if (!id || !rawToken) return null;
+
+  const token = await prisma.clientPasswordResetToken.findUnique({ where: { id }, include: { clientAccount: true } });
+  if (!token) return null;
+
+  if (token.expiresAt < new Date()) {
+    await prisma.clientPasswordResetToken.delete({ where: { id } }).catch(() => {});
+    return null;
+  }
+
+  const expectedHash = Buffer.from(token.tokenHash, 'hex');
+  const actualHash = Buffer.from(sha256(rawToken), 'hex');
+  if (expectedHash.length !== actualHash.length || !crypto.timingSafeEqual(expectedHash, actualHash)) {
+    return null;
+  }
+
+  await prisma.clientPasswordResetToken.delete({ where: { id } }).catch(() => {});
+  return token.clientAccount;
+}

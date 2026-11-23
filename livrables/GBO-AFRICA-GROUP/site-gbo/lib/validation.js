@@ -178,6 +178,15 @@ const strongPassword = z
   .regex(/[A-Z]/, 'Le mot de passe doit contenir au moins une majuscule')
   .regex(/[0-9]/, 'Le mot de passe doit contenir au moins un chiffre');
 
+// --- Mot de passe oublié (admin/partenaire nutrition, client, coach) -----------------
+export const forgotPasswordSchema = z.object({ email });
+export const resetPasswordSchema = z.object({
+  token: z.string().trim().min(1, 'Lien invalide').max(300),
+  newPassword: strongPassword,
+});
+
+// Réutilisé tel quel par le partenaire nutrition (même forme, aucun champ spécifique au
+// client) — voir app/api/partner/nutrition/change-password/route.js.
 export const clientChangePasswordSchema = z
   .object({
     currentPassword: z.string().min(1, 'Mot de passe actuel requis').max(200),
@@ -187,6 +196,14 @@ export const clientChangePasswordSchema = z
     message: 'Le nouveau mot de passe doit être différent de l’actuel.',
     path: ['newPassword'],
   });
+
+// Le partenaire nutrition est seul à connaître et pouvoir changer son identifiant de
+// connexion (décision de Cyrille du 23/11/2026) — l'e-mail de contact éventuel reste
+// géré ailleurs, ceci ne touche que l'identifiant de l'espace /partenaires/nutrition.
+export const partnerChangeEmailSchema = z.object({
+  currentPassword: z.string().min(1, 'Mot de passe actuel requis').max(200),
+  newEmail: email,
+});
 
 export const createClientAccountSchema = z.object({
   leadId: z.number().int().positive(),
