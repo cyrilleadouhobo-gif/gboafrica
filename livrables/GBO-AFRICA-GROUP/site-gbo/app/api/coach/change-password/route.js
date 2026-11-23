@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../../lib/db.js';
 import { coachChangePasswordSchema, parseOrError } from '../../../../lib/validation.js';
-import { isSameOrigin } from '../../../../lib/security.js';
+import { getClientIp, isSameOrigin } from '../../../../lib/security.js';
 import { verifyPassword, hashPassword, logAudit } from '../../../../lib/auth.js';
-import { getCurrentCoach } from '../../../../lib/coachAuth.js';
+import { getCurrentCoach, createCoachSession, coachSessionCookieOptions, COACH_SESSION_COOKIE } from '../../../../lib/coachAuth.js';
 
 export async function POST(request) {
   if (!isSameOrigin(request)) return NextResponse.json({ error: 'Origine non autorisée.' }, { status: 403 });
@@ -20,7 +20,14 @@ export async function POST(request) {
 
   const passwordHash = await hashPassword(parsed.data.newPassword);
   await prisma.coachAccount.update({ where: { id: coach.id }, data: { passwordHash, mustChangePassword: false } });
+
+  // Révoque toute autre session active sur ce compte, voir app/api/client/change-password/route.js.
+  await prisma.coachSession.deleteMany({ where: { coachAccountId: coach.id } });
+  const { cookieValue, expiresAt } = await createCoachSession(coach.id, { userAgent: request.headers.get('user-agent'), ip: getClientIp(request) });
+
   await logAudit({ adminUserId: null, action: 'coach_password_changed', targetType: 'CoachAccount', targetId: coach.id });
 
-  return NextResponse.json({ ok: true });
+  const response = NextResponse.json({ ok: true });
+  response.cookies.set(COACH_SESSION_COOKIE, cookieValue, coachSessionCookieOptions(expiresAt));
+  return response;
 }

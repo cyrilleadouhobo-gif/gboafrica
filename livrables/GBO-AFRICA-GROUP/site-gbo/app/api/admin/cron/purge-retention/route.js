@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { purgeExpiredLeads } from '../../../../../lib/retention.js';
 import { getCurrentStaffAdmin, logAudit } from '../../../../../lib/auth.js';
@@ -7,9 +8,19 @@ import { getCurrentStaffAdmin, logAudit } from '../../../../../lib/auth.js';
 // pouvoir déclencher une purge. Reste aussi joignable par un admin connecté (bouton
 // "Lancer la purge maintenant" côté back-office), pour vérifier le mécanisme sans attendre
 // la prochaine exécution planifiée.
+function isValidCronSecret(authHeader) {
+  if (!process.env.CRON_SECRET || !authHeader) return false;
+  // Comparaison en temps constant, même principe que pour les tokens de session
+  // (lib/auth.js verifySessionCookie) — une comparaison `===` fuiterait la longueur du
+  // préfixe correct via le temps de réponse.
+  const expected = Buffer.from(`Bearer ${process.env.CRON_SECRET}`);
+  const actual = Buffer.from(authHeader);
+  return expected.length === actual.length && crypto.timingSafeEqual(expected, actual);
+}
+
 export async function GET(request) {
   const authHeader = request.headers.get('authorization');
-  const isCron = Boolean(process.env.CRON_SECRET) && authHeader === `Bearer ${process.env.CRON_SECRET}`;
+  const isCron = isValidCronSecret(authHeader);
 
   const admin = isCron ? null : await getCurrentStaffAdmin();
   if (!isCron && !admin) return NextResponse.json({ error: 'Authentification requise.' }, { status: 401 });
