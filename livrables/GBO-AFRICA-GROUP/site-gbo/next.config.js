@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    // Marque l'origine de la mise à niveau 16.4.3 -> 16.4.6 (faille de sécurité connue).
+    agentUpgrade: 'security',
+  },
   async redirects() {
     return [
       // Page fusionnée dans /devenir-salle-partenaire (avantages + réseau + candidature réunis).
