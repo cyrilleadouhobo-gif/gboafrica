@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { css } from '../../../lib/css.js';
 import { leadBadge, tabStyle, formatSeanceDateTime } from '../../../lib/styleHelpers.js';
@@ -30,9 +30,10 @@ export default function AdminPage() {
   const [recentLeads, setRecentLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(null);
+  const hasLoadedOnceRef = useRef(false);
 
   const loadAll = useCallback(async () => {
-    setLoadError(null);
+    if (!hasLoadedOnceRef.current) setLoadError(null);
     try {
       const [meRes, leadsRes, coachesRes, statsRes, reviewsRes, gymPartnersRes, formulesRes, seancesRes] = await Promise.all([
         fetch('/api/auth/me'),
@@ -76,16 +77,30 @@ export default function AdminPage() {
       setFormules(formulesData.formules || []);
       setSeances(seancesData.seances || []);
       setLoading(false);
+      hasLoadedOnceRef.current = true;
     } catch (err) {
       // Sans ce catch, un seul des appels qui échoue (coupure réseau, Turso qui met du
       // temps à répondre...) laissait loading bloqué à true pour toujours : écran
-      // "Chargement…" infini, sans aucune indication de ce qui s'est passé.
-      setLoadError(err.message || 'Une erreur est survenue.');
+      // "Chargement…" infini, sans aucune indication de ce qui s'est passé. Mais une fois
+      // le premier chargement réussi, un rafraîchissement périodique (voir plus bas) qui
+      // échoue ne doit pas remplacer tout le tableau de bord par cet écran d'erreur : on
+      // garde silencieusement les dernières données affichées et on retentera au prochain tick.
+      if (!hasLoadedOnceRef.current) setLoadError(err.message || 'Une erreur est survenue.');
     }
   }, [router]);
 
   useEffect(() => {
     loadAll();
+  }, [loadAll]);
+
+  // Rafraîchit en arrière-plan (ex. une réattribution de coach acceptée côté client/coach)
+  // sans jamais repasser par l'écran "Chargement…" — loadAll() ne touche setLoading qu'à
+  // false. En pause quand l'onglet n'est pas visible pour ne pas appeler l'API pour rien.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (document.visibilityState === 'visible') loadAll();
+    }, 30000);
+    return () => clearInterval(interval);
   }, [loadAll]);
 
   if (loadError) {

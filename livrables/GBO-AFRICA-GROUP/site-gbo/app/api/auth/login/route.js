@@ -42,7 +42,9 @@ export async function POST(request) {
   await prisma.adminUser.update({ where: { id: admin.id }, data: { lastLoginAt: new Date() } });
   await logAudit({ adminUserId: admin.id, action: 'login_success', targetType: 'AdminUser', targetId: admin.id, detail: { ipHash: hashIp(ip) } });
 
-  const response = NextResponse.json({ ok: true });
+  // role renvoyé pour que les deux pages de connexion partagées (admin et partenaire
+  // nutrition) puissent rediriger vers le bon espace — voir app/admin/login/page.js.
+  const response = NextResponse.json({ ok: true, role: admin.role });
   response.cookies.set(SESSION_COOKIE, cookieValue, sessionCookieOptions(expiresAt));
   return response;
 }

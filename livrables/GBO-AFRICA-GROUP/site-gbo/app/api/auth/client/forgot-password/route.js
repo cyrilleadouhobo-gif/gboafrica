@@ -35,6 +35,10 @@ export async function POST(request) {
     });
 
     await logAudit({ adminUserId: null, action: 'client_password_reset_requested', targetType: 'ClientAccount', targetId: client.id });
+  } else {
+    // Camoufle le temps de réponse d'une adresse inconnue/inactive par le même travail de
+    // base de données que la branche ci-dessus — voir app/api/auth/forgot-password/route.js.
+    await createClientPasswordResetToken(-1).catch(() => {});
   }
 
   return NextResponse.json({ ok: true });

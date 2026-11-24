@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '../../../../../lib/db.js';
 import { clientChangePasswordSchema as changePasswordSchema, parseOrError } from '../../../../../lib/validation.js';
 import { getClientIp, isSameOrigin } from '../../../../../lib/security.js';
-import { verifyPassword, hashPassword, createSession, sessionCookieOptions, SESSION_COOKIE, logAudit } from '../../../../../lib/auth.js';
-import { getCurrentNutritionPartner } from '../../../../../lib/auth.js';
+import { verifyPassword, hashPassword, createSession, sessionCookieOptions, SESSION_COOKIE, logAudit, getCurrentNutritionPartner } from '../../../../../lib/auth.js';
 
 // Le partenaire nutrition est seul à connaître son mot de passe (décision de Cyrille du
 // 23/11/2026) : GBÔ ne peut pas se connecter à son espace. Même logique de révocation des

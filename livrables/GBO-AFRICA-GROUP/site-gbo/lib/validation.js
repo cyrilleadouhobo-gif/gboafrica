@@ -51,7 +51,9 @@ export const companyLeadSchema = z.object({
 });
 
 export const waitlistSchema = z.object({
+  name: shortText('Nom et prénom'),
   email,
+  phone: phone.optional().or(z.literal('')),
   pole: shortText('Pôle', 60),
   website: honeypot,
 });

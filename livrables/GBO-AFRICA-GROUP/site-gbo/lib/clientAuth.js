@@ -102,5 +102,6 @@ export async function consumeClientPasswordResetToken(tokenValue) {
   }
 
   await prisma.clientPasswordResetToken.delete({ where: { id } }).catch(() => {});
+  if (!token.clientAccount.actif) return null;
   return token.clientAccount;
 }

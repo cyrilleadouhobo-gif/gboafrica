@@ -28,7 +28,10 @@ export default function AdminLoginPage() {
         setError(data.error || 'Identifiants incorrects.');
         return;
       }
-      router.replace('/admin');
+      // Un partenaire nutrition peut arriver ici (ex. depuis le lien de réinitialisation
+      // partagé) — on le renvoie vers son propre espace plutôt que vers /admin, qui le
+      // rejetterait immédiatement (rôle vérifié par app/admin/(dashboard)/layout.js).
+      router.replace(data.role === 'nutrition_partner' ? '/partenaires/nutrition' : '/admin');
       router.refresh();
     } catch {
       setError('Connexion impossible. Vérifiez votre réseau et réessayez.');

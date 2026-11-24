@@ -96,5 +96,6 @@ export async function consumeCoachPasswordResetToken(tokenValue) {
   }
 
   await prisma.coachPasswordResetToken.delete({ where: { id } }).catch(() => {});
+  if (!token.coachAccount.actif) return null;
   return token.coachAccount;
 }

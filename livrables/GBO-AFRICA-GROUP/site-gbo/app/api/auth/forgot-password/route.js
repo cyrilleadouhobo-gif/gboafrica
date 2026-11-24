@@ -39,6 +39,13 @@ export async function POST(request) {
     });
 
     await logAudit({ adminUserId: admin.id, action: 'password_reset_requested', targetType: 'AdminUser', targetId: admin.id });
+  } else {
+    // Même travail de base de données que la branche ci-dessus (un DELETE puis un INSERT
+    // sur la même table), pour qu'une adresse inconnue ne réponde pas mesurablement plus
+    // vite qu'une adresse existante — trouvé lors de l'audit du 23/11/2026 : sans ce
+    // travail "factice", le temps de réponse à lui seul révélait si le compte existait,
+    // même si le corps de la réponse reste toujours identique.
+    await createPasswordResetToken(-1).catch(() => {});
   }
 
   return NextResponse.json({ ok: true });

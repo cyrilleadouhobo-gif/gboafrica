@@ -5,6 +5,12 @@
 // lib/db.js), then this script copies every CREATE TABLE/INDEX statement from that file onto
 // the real Turso database. Run after any schema.prisma change:
 // npx prisma db push && node scripts/push-schema-to-turso.mjs
+//
+// prisma/migrations/ is NOT part of this workflow — `prisma migrate deploy` is never run
+// against Turso, so that folder is documentation only (a snapshot of schema.prisma, kept via
+// `prisma migrate dev --create-only`), not a record of what was actually executed. Regenerate
+// it (delete the folder, rerun that command) whenever it drifts noticeably from schema.prisma;
+// it does not need to be kept perfectly in sync after every change.
 import { createClient } from '@libsql/client';
 import { readFileSync, existsSync, unlinkSync } from 'node:fs';
 

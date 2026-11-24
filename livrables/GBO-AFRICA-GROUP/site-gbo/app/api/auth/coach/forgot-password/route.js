@@ -35,6 +35,10 @@ export async function POST(request) {
     });
 
     await logAudit({ adminUserId: null, action: 'coach_password_reset_requested', targetType: 'CoachAccount', targetId: coach.id });
+  } else {
+    // Camoufle le temps de réponse d'une adresse inconnue/inactive par le même travail de
+    // base de données que la branche ci-dessus — voir app/api/auth/forgot-password/route.js.
+    await createCoachPasswordResetToken(-1).catch(() => {});
   }
 
   return NextResponse.json({ ok: true });

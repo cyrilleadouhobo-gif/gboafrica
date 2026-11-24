@@ -62,13 +62,6 @@ const ICONS = {
       <circle cx="12" cy="12" r="1" />
     </>
   ),
-  cart: (
-    <>
-      <circle cx="9" cy="20" r="1.5" />
-      <circle cx="18" cy="20" r="1.5" />
-      <path d="M2 3h2l2.6 13.2a2 2 0 002 1.8h8.8a2 2 0 002-1.6L21 7H6" />
-    </>
-  ),
 };
 
 export const POLE_DETAIL = {
@@ -111,19 +104,6 @@ export const POLE_DETAIL = {
       { label: 'Un sport plus dynamique en Afrique', icon: ICONS.globe },
     ],
   },
-  shop: {
-    name: 'GBÔ Shop',
-    headline: ['DES PRODUITS PENSÉS', 'POUR VOTRE', 'PRATIQUE SPORTIVE.'],
-    heroText:
-      "GBÔ Shop proposera une sélection rigoureuse de produits de nutrition, d'équipements et de textile sportif, choisie par nos coachs.",
-    photo: stockPhotoUrl('gymInterior', 'shop-hero'),
-    features: [
-      { label: 'Nutrition sportive', icon: ICONS.cart },
-      { label: "Équipements d'entraînement", icon: ICONS.gear },
-      { label: 'Textile & accessoires GBÔ', icon: ICONS.trophy },
-      { label: 'Sélection experte par nos coachs', icon: ICONS.people },
-    ],
-  },
   security: {
     name: 'GBÔ Security',
     headline: ['DES SOLUTIONS', 'DE SÉCURITÉ POUR', 'UN SPORT PLUS SÛR.'],
@@ -141,11 +121,10 @@ export const POLE_DETAIL = {
 };
 
 // Petit relais local vers stockPhoto() pour les pôles sans photo Pexels dédiée déjà
-// vérifiée (Talent, Shop) — évite d'importer stockPhoto ici juste pour deux entrées.
+// vérifiée (Talent) — évite d'importer stockPhoto ici juste pour une entrée.
 function stockPhotoUrl(category, seed) {
   const BANK = {
     team: ['photo-1573164574511-73c773193279', 'photo-1573164574397-dd250bc8a598', 'photo-1584365132623-e273491c69d2'],
-    gymInterior: ['photo-1534438327276-14e5300c3a48'],
   };
   const pool = BANK[category] || BANK.team;
   let h = 0;
